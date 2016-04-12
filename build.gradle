@@ -1,0 +1,20 @@
+apply plugin: 'java'
+
+ext {
+    PUBLISH_GROUP_ID = 'io.moj.java'
+    PUBLISH_VERSION = '0.0.1'
+    SOURCE_COMPATIBILITY = 1.7
+}
+
+group PUBLISH_GROUP_ID
+version PUBLISH_VERSION
+
+sourceCompatibility = SOURCE_COMPATIBILITY
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
