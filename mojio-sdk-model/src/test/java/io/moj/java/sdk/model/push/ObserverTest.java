@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static com.google.common.truth.Truth.assertThat;
 import static junit.framework.Assert.*;
 
 public class ObserverTest {
@@ -147,6 +148,73 @@ public class ObserverTest {
 
         o.setTransports(new ArrayList<Transport>());
         assertNull(o.getTransport());
+    }
+
+    @Test
+    public void testRequestSerialization() {
+        String key = "key";
+        String subject = "subject";
+        Observer.Type type = Observer.Type.MOJIO;
+        Transport transport = Transport.forAndroid("gcmRegId");
+        String[] fields = new String[] { "LastContactTime", "LastContactTime" };
+
+        Observer.Request o = new Observer.Builder(key)
+                .subject(subject)
+                .type(type)
+                .transport(transport)
+                .condition(Condition.onPropertyChanged("Property"))
+                .condition(Condition.onThreshold("Property", Condition.Position.ABOVE, 1d, 2d))
+                .condition(Condition.throttle("Speed.Value", "0.00:01:00.0000"))
+                .condition(Condition.debounce(1, 2, 3, 4, 5))
+                .field(fields[0])
+                .field(fields[1])
+                .build();
+
+        String json = new Gson().toJson(o, Observer.Request.class);
+        assertEquals(TestJson.OBSERVER_REQUEST, json);
+    }
+
+    @Test
+    public void testRequestSerialization_minimal() {
+        String key = "key";
+        Observer.Type type = Observer.Type.MOJIO;
+
+        Observer.Request request = new Observer.Builder(key)
+                .type(type).build();
+        assertThat(request).isNotNull();
+
+        String json = new Gson().toJson(request, Observer.Request.class);
+        assertThat(json).isEqualTo("{\"Key\":\"key\",\"Type\":\"mojio\"}");
+    }
+
+    @Test
+    public void testBuild_unique() {
+        String key = "key";
+        String subject = "subject";
+        Observer.Type type = Observer.Type.MOJIO;
+        Transport transport = Transport.forAndroid("gcmRegId");
+        String[] fields = new String[] { "LastContactTime", "LastContactTime" };
+
+        Observer.Builder builder = new Observer.Builder(key)
+                .subject(subject)
+                .type(type)
+                .transport(transport)
+                .condition(Condition.onPropertyChanged("Property"))
+                .condition(Condition.onThreshold("Property", Condition.Position.ABOVE, 1d, 2d))
+                .condition(Condition.throttle("Speed.Value", "0.00:01:00.0000"))
+                .condition(Condition.debounce(1, 2, 3, 4, 5))
+                .field(fields[0])
+                .field(fields[1]);
+
+        Observer.Request requestA = builder.build();
+        Observer.Request requestB = builder.build();
+        assertFalse(requestA == requestB);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testBuild_empty() {
+        String key = "key";
+        new Observer.Builder(key).build();
     }
 
 }
