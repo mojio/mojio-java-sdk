@@ -2,8 +2,8 @@ package io.moj.java.sdk.model.values;
 
 import org.junit.Test;
 
-import static io.moj.mobile.android.sdk.test.TestUtils.assertAccess;
-import static io.moj.mobile.android.sdk.test.TestUtils.assertToStringContainsAllFields;
+import static io.moj.java.sdk.test.TestUtils.assertAccess;
+import static io.moj.java.sdk.test.TestUtils.assertToStringContainsAllFields;
 
 /**
  * Created by skidson on 16-02-23.

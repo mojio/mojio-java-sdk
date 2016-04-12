@@ -1,4 +1,4 @@
-package io.moj.mobile.android.sdk.test;
+package io.moj.java.sdk.test;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
