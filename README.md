@@ -1,6 +1,6 @@
 ![](static/banner_mojio.png)
 # Mojio Java SDK #
-![](http://ci.moj.io/app/rest/builds/buildType:(id:Mobile_MojioSDK_Android_Development)/statusIcon)
+![](http://ci.moj.io/app/rest/builds/buildType:(id:Mobile_MojioSDK_Java_Development)/statusIcon)
 
 Java SDK for integrating with the Mojio platform.
 
@@ -15,7 +15,7 @@ For more information please see the [developer website](http://developer.moj.io/
 ## Download ##
 ```gradle
 compile 'io.moj.java:mojio-sdk-model:0.0.1'
-compile 'io.moj.java:mojio-sdk-push:0.0.1'
+compile 'io.moj.java:mojio-sdk-rest:0.0.1'
 ```
 
 ## Structure ##
@@ -28,10 +28,11 @@ have opted to annotate these classes using [GSON](https://github.com/google/gson
 
 ### [mojio-sdk-model](https://github.com/mojio/mojio-java-sdk/tree/develop/mojio-sdk-model) ###
   Model classes for use with the Mojio REST API. These objects are annotated for serialization with
-  GSON.
+  GSON. The Model SDK can be plugged into your existing REST-client framework.
 
 ### [mojio-sdk-rest](https://github.com/mojio/mojio-java-sdk/tree/develop/mojio-sdk-rest) ###
-  COMING SOON. Client for getting up and running with calls to the Mojio API quickly.
+  Client for getting up and running making calls to the Mojio API quickly. The client is highly-configurable
+  and handles basic authentication.
 
 ### [mojio-sdk-test](https://github.com/mojio/mojio-java-sdk/tree/develop/mojio-sdk-test) ###
   A module purely for common functionality used for each module's tests. You probably only care

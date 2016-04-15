@@ -1,7 +1,7 @@
 # Mojio Java Model SDK #
 
 Model classes for use with the Mojio REST API. These objects are annotated for serialization with
-GSON.
+  GSON. The Model SDK can be plugged into your existing REST-client framework.
 
 ## Disclaimer ##
 **UNDER ACTIVE DEVELOPMENT**
@@ -16,8 +16,12 @@ compile 'io.moj.java:mojio-sdk-model:0.0.1'
 
 ## Instructions ##
 
-The easiest way to use Mojio's Model SDK is with [Retrofit](http://square.github.io/retrofit/). The
-following is an example Retrofit interface for some common usecases.
+The Model SDK is a collection of POJOs matching the entities in the Mojio API. If you're starting from scratch, consider
+using the [mojio-sdk-rest](https://github.com/mojio/mojio-java-sdk/tree/develop/mojio-sdk-rest) module for both the
+model objects and a basic client. If you have existing an REST-client framework or need finer control, however, this
+module can stand on it's own.
+
+Below is an example of integrating the mojio-sdk-model with [Retrofit](http://square.github.io/retrofit/)
 
 ```java
 package io.moj.example;
@@ -66,22 +70,22 @@ OkHttpClient httpClient = new OkHttpClient.Builder()
                 if (!TextUtils.isEmpty(accessToken)) {
                     request = request.newBuilder()
                             .header("Authorization", "Bearer " + accessToken)
-                            .header("Accept", "application/json")
                             .build();
                 }
                 return chain.proceed(request);
             }
         })
         .build();
-mojioApi = new Retrofit.Builder()
-        .baseUrl("https://api.moj.io/")
+MojioApi mojioApi = new Retrofit.Builder()
+        .baseUrl(MojioEnvironment.getDefault().getApiUrl())
         .addConverterFactory(GsonConverterFactory.create())
         .client(httpClient)
         .build().create(MojioApi.class);
 ```
 
 Even if you're not using Retrofit, the mojio-sdk-model module can be plugged into your existing
-architecture. Currently, however, we have a dependency on [Gson](https://github.com/google/gson).
+architecture. Currently, however, we have a dependency on [Gson](https://github.com/google/gson). If
+this is an issue for you, let us know with a [feature request](https://github.com/mojio/mojio-java-sdk/issues)!
 
 ### Persisting model objects ###
 Each Mojio entity (not including enums or units) such as Vehicle, Mojio, and User extends

@@ -14,6 +14,7 @@ import retrofit2.Response;
 
 import java.util.UUID;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -45,6 +46,7 @@ public class MojioClientTest {
         String expectedClientSecret = "expectedClientSecret";
         Authenticator expectedAuthenticator = mock(Authenticator.class);
         Executor expectedExecutor = mock(Executor.class);
+        ExecutorService expectedRequestExecutor = mock(ExecutorService.class);
         Gson expectedGson = new Gson();
         boolean expectedLoggingEnabled = true;
         Environment expectedEnvironment = MojioEnvironment.STAGING;
@@ -54,7 +56,7 @@ public class MojioClientTest {
                 .environment(expectedEnvironment)
                 .gson(expectedGson)
                 .logging(expectedLoggingEnabled)
-                .executor(expectedExecutor)
+                .callbackExecutor(expectedExecutor)
                 .build();
 
         assertThat(client.rest()).isNotNull();
@@ -65,7 +67,7 @@ public class MojioClientTest {
         assertThat(client.getAuthenticator()).isEqualTo(expectedAuthenticator);
         assertThat(client.getEnvironment()).isEqualTo(expectedEnvironment);
         assertThat(client.getGson()).isEqualTo(expectedGson);
-        assertThat(client.getExecutor()).isEqualTo(expectedExecutor);
+        assertThat(client.getCallbackExecutor()).isEqualTo(expectedExecutor);
         assertThat(client.isLoggingEnabled()).isEqualTo(expectedLoggingEnabled);
     }
 

@@ -10,6 +10,8 @@ import io.moj.java.sdk.auth.OnAccessTokenExpiredListener;
 import io.moj.java.sdk.logging.LoggingInterceptor;
 import io.moj.java.sdk.model.User;
 import io.moj.java.sdk.model.response.AuthResponse;
+import okhttp3.Dispatcher;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Call;
@@ -19,8 +21,11 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 /**
  * Client for authenticating and making calls against the Mojio API.
@@ -31,7 +36,8 @@ public class MojioClient {
     private static final String TAG = "Mojio";
 
     private final Environment environment;
-    private final Executor executor;
+    private final Executor callbackExecutor;
+    private final ExecutorService requestExecutor;
     private final Gson gson;
     private final Client client;
     private final boolean loggingEnabled;
@@ -42,12 +48,13 @@ public class MojioClient {
     private AuthInterceptor authInterceptor;
 
     private MojioClient(Environment environment, Client client, Gson gson, Authenticator authenticator,
-                        Executor executor, boolean logging) {
+                        ExecutorService requestExecutor, Executor callbackExecutor, boolean logging) {
         this.environment = environment == null ? MojioEnvironment.getDefault() : environment;
         this.gson = gson == null ? new Gson() : gson;
         this.client = client;
         this.loggingEnabled = logging;
-        this.executor = executor;
+        this.callbackExecutor = callbackExecutor;
+        this.requestExecutor = requestExecutor;
 
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
         GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create(this.gson);
@@ -57,8 +64,12 @@ public class MojioClient {
 
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
                 .addConverterFactory(gsonConverterFactory);
-        if (executor != null) {
-            retrofitBuilder.callbackExecutor(executor);
+        if (callbackExecutor != null) {
+            retrofitBuilder.callbackExecutor(callbackExecutor);
+        }
+
+        if (requestExecutor != null) {
+            httpClientBuilder.dispatcher(new Dispatcher(requestExecutor));
         }
 
         authApi = retrofitBuilder
@@ -134,11 +145,19 @@ public class MojioClient {
     }
 
     /**
-     * Returns the {@link java.util.concurrent.Executor} this client is configured with.
+     * Returns the callback executor this client is configured with.
      * @return
      */
-    protected Executor getExecutor() {
-        return executor;
+    protected Executor getCallbackExecutor() {
+        return callbackExecutor;
+    }
+
+    /**
+     * Returns the request executor this client is configured with.
+     * @return
+     */
+    protected ExecutorService getRequestExecutor() {
+        return requestExecutor;
     }
 
     /**
@@ -165,7 +184,8 @@ public class MojioClient {
         private Environment environment;
         private Authenticator authenticator;
         private Client client;
-        private Executor executor;
+        private Executor callbackExecutor;
+        private ExecutorService requestExecutor;
         private Gson gson;
         private boolean logging = false;
 
@@ -202,16 +222,6 @@ public class MojioClient {
         }
 
         /**
-         * Configures the client to execute callbacks on the specified {@link java.util.concurrent.Executor}.
-         * @param executor
-         * @return
-         */
-        public Builder executor(Executor executor) {
-            this.executor = executor;
-            return this;
-        }
-
-        /**
          * Configures whether requests and responses should be logged. Specific log destinations should be configured
          * using the {@link io.moj.java.sdk.logging.Log} class. Logging is disabled by default.
          * @param enabled
@@ -236,11 +246,31 @@ public class MojioClient {
         }
 
         /**
+         * Configures the client to execute callbacks on the specified {@link java.util.concurrent.Executor}.
+         * @param executor
+         * @return
+         */
+        public Builder callbackExecutor(Executor executor) {
+            this.callbackExecutor = executor;
+            return this;
+        }
+
+        /**
+         * Configures the client to execute requests on the specified {@link java.util.concurrent.ExecutorService}.
+         * @param executor
+         * @return
+         */
+        public Builder requestExecutor(ExecutorService executor) {
+            this.requestExecutor = executor;
+            return this;
+        }
+
+        /**
          * Constructs a {@link io.moj.java.sdk.MojioClient} instance with the provided configuration.
          * @return
          */
         public MojioClient build() {
-            return new MojioClient(environment, client, gson, authenticator, executor, logging);
+            return new MojioClient(environment, client, gson, authenticator, requestExecutor, callbackExecutor, logging);
         }
     }
 

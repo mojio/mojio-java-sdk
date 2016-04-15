@@ -1,7 +1,8 @@
 package io.moj.java.sdk.model.response;
 
 /**
- * Model object for a response that only contains a message string.
+ * Model object for a response that only contains a message string. The Mojio API usually returns this for DELETE
+ * operations or error scenarios.
  * Created by skidson on 2016-04-13.
  */
 public class MessageResponse {
