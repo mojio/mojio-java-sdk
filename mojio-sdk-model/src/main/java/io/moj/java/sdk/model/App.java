@@ -21,7 +21,7 @@ public class App extends AbstractMojioObject {
     private String Description;
     private Integer Downloads;
     private String[] RedirectUris;
-    private io.moj.java.sdk.model.values.Image Image;
+    private Image Image;
     private String[] Tags;
 
     public String getDescription() {

@@ -1,5 +1,6 @@
 package io.moj.java.sdk.model;
 
+import io.moj.java.sdk.model.response.ListResponse;
 import org.junit.Test;
 
 import static io.moj.java.sdk.test.TestUtils.assertAccess;

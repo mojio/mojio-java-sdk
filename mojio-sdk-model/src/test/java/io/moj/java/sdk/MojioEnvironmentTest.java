@@ -11,13 +11,13 @@ import static junit.framework.Assert.assertEquals;
 /**
  * Created by skidson on 2016-04-12.
  */
-public class EnvironmentTest {
+public class MojioEnvironmentTest {
 
     private static final String SCHEME = "https://";
 
     @Test
     public void testUrlLocales() {
-        Environment e = Environment.getDefault();
+        MojioEnvironment e = MojioEnvironment.getDefault();
         Locale.setDefault(Locale.US);
         String apiUrl = e.getApiUrl();
         String pushUrl = e.getPushUrl();
@@ -39,7 +39,7 @@ public class EnvironmentTest {
      */
     @Test
     public void testPrefixes() {
-        for (Environment environment : Environment.values()) {
+        for (MojioEnvironment environment : MojioEnvironment.values()) {
             String prefix = environment.getPrefix();
 
             String[] uris = new String[] {
@@ -67,16 +67,16 @@ public class EnvironmentTest {
     @Test
     public void testGetDefault() {
         // sanity check to make sure we don't ever accidentally release pointing anywhere but prod
-        assertThat(Environment.PROD).isEqualTo(Environment.getDefault());
+        assertThat(MojioEnvironment.PROD).isEqualTo(MojioEnvironment.getDefault());
     }
 
     @Test
     public void testTypeFromKey() {
-        for (Environment environment : Environment.values()) {
-            Environment environmentFromPrefix = Environment.fromPrefix(environment.getPrefix());
+        for (MojioEnvironment environment : MojioEnvironment.values()) {
+            MojioEnvironment environmentFromPrefix = MojioEnvironment.fromPrefix(environment.getPrefix());
             assertEquals(environment, environmentFromPrefix);
         }
-        assertThat(Environment.fromPrefix("NotARealPrefix")).isNull();
+        assertThat(MojioEnvironment.fromPrefix("NotARealPrefix")).isNull();
     }
 
 

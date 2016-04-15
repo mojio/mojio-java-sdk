@@ -1,6 +1,10 @@
 package io.moj.java.sdk.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Model object for a Group.
@@ -58,5 +62,55 @@ public class Group extends AbstractMojioObject {
                 ", Users=" + Arrays.toString(Users) +
                 ", Tags=" + Arrays.toString(Tags) +
                 "} " + super.toString();
+    }
+
+    public static class Builder {
+        private String name;
+        private String description;
+        private List<String> userIds;
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public Builder user(String userId) {
+            if (userIds == null) {
+                userIds = new LinkedList<>();
+            }
+            userIds.add(description);
+            return this;
+        }
+
+        public Builder users(Collection<String> userIds) {
+            this.userIds = null;
+            if (userIds != null) {
+                for (String userId : userIds) {
+                    user(userId);
+                }
+            }
+            return this;
+        }
+
+        public Request build() {
+            return new Request(name, description, userIds);
+        }
+    }
+
+    public static class Request {
+        private String Name;
+        private String Description;
+        private List<String> Users;
+
+        public Request(String name, String description, List<String> users) {
+            Name = name;
+            Description = description;
+            Users = users;
+        }
     }
 }

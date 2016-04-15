@@ -25,7 +25,7 @@ public class User extends AbstractMojioObject {
     private String UserName;
     private Email[] Emails;
     private PhoneNumber[] PhoneNumbers;
-    private io.moj.java.sdk.model.values.Image Image;
+    private Image Image;
     private String[] Tags;
 
     public Email[] getEmails() {

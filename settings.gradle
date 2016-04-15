@@ -1,4 +1,5 @@
 rootProject.name = 'mojio-java-sdk'
 include 'mojio-sdk-model'
 include 'mojio-sdk-test'
+include 'mojio-sdk-rest'
 

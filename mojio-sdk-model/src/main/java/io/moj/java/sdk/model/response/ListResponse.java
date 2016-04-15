@@ -1,4 +1,4 @@
-package io.moj.java.sdk.model;
+package io.moj.java.sdk.model.response;
 
 import java.util.List;
 

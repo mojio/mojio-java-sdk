@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'jacoco'
 
 group PUBLISH_GROUP_ID
 version PUBLISH_VERSION

@@ -1,5 +1,7 @@
 package io.moj.java.sdk.model;
 
+import io.moj.java.sdk.model.values.Location;
+
 import java.util.Arrays;
 
 /**
@@ -13,6 +15,7 @@ public class Mojio extends AbstractMojioObject {
     public static final String VEHICLE_ID = "VehicleId";
     public static final String LAST_CONTACT_TIME = "LastContactTime";
     public static final String GATEWAY_TIME = "GatewayTime";
+    public static final String LOCATION = "Location";
     public static final String TAGS = "Tags";
 
     private String Name;
@@ -20,7 +23,14 @@ public class Mojio extends AbstractMojioObject {
     private String VehicleId;
     private String LastContactTime;
     private String GatewayTime;
+    private Location Location;
     private String[] Tags;
+
+    public Mojio() {}
+
+    public Mojio(String imei) {
+        this.IMEI = imei;
+    }
 
     /**
      * @return the time the server received the message from the device
@@ -73,14 +83,23 @@ public class Mojio extends AbstractMojioObject {
         Tags = tags;
     }
 
+    public Location getLocation() {
+        return Location;
+    }
+
+    public void setLocation(Location location) {
+        Location = location;
+    }
+
     @Override
     public String toString() {
         return "Mojio{" +
-                "VehicleId='" + VehicleId + '\'' +
-                ", GatewayTime='" + GatewayTime + '\'' +
+                "Name='" + Name + '\'' +
                 ", IMEI='" + IMEI + '\'' +
+                ", VehicleId='" + VehicleId + '\'' +
                 ", LastContactTime='" + LastContactTime + '\'' +
-                ", Name='" + Name + '\'' +
+                ", GatewayTime='" + GatewayTime + '\'' +
+                ", Location=" + Location +
                 ", Tags=" + Arrays.toString(Tags) +
                 "} " + super.toString();
     }

@@ -132,8 +132,8 @@ public class ValueTests {
 
     @Test
     public void testPermission() throws IllegalAccessException {
-        assertToStringContainsAllFields(new Permission());
-        assertAccess(new Permission());
+        assertToStringContainsAllFields(new AccessModel());
+        assertAccess(new AccessModel());
     }
 
     @Test

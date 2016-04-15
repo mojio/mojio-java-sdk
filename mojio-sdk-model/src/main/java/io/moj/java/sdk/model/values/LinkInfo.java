@@ -91,8 +91,8 @@ public class LinkInfo {
     @Override
     public String toString() {
         return "LinkInfo{" +
-                "First='" + First + '\'' +
-                ", Self='" + Self + '\'' +
+                "Self='" + Self + '\'' +
+                ", First='" + First + '\'' +
                 ", Next='" + Next + '\'' +
                 ", Vehicle='" + Vehicle + '\'' +
                 ", Mojio='" + Mojio + '\'' +

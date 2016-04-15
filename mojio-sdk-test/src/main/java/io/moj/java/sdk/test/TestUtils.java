@@ -1,6 +1,8 @@
 package io.moj.java.sdk.test;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import java.lang.reflect.Array;
@@ -61,7 +63,15 @@ public final class TestUtils {
         assertAccess(pojo, getAllMethods(pojo));
     }
 
+    public static void assertAccess(Object pojo, boolean mutable) {
+        assertAccess(pojo, getAllMethods(pojo), mutable);
+    }
+
     public static void assertAccess(Object pojo, List<Method> methods) {
+        assertAccess(pojo, methods, true);
+    }
+
+    public static void assertAccess(Object pojo, List<Method> methods, boolean mutable) {
         Set<String> methodNames =
                 new HashSet<>(Lists.transform(methods, FUNCTION_EXTRACT_METHOD_NAMES));
 
@@ -84,7 +94,13 @@ public final class TestUtils {
             // we don't use "is" because all boolean should be Boolean objects and this test will
             // catch that too
             assertThat(methodNames).contains("get" + captializedFieldName);
-            assertThat(methodNames).contains("set" + captializedFieldName);
+
+            String setterName = "set" + captializedFieldName;
+            if (mutable) {
+                assertThat(methodNames).contains(setterName);
+            } else {
+                assertThat(methodNames).doesNotContain(setterName);
+            }
         }
 
         for (Method method : methods) {
@@ -124,6 +140,21 @@ public final class TestUtils {
             parentClass = parentClass.getSuperclass();
         }
         return fields;
+    }
+
+    /**
+     * Returns fields on the object that match the given class.
+     * @param object
+     * @param type
+     * @return
+     */
+    public static List<Field> getFieldsByType(final Object object, final Class<?> type) {
+        return Lists.newArrayList(Iterables.filter(TestUtils.getAllFields(object), new Predicate<Field>() {
+            @Override
+            public boolean apply(@Nullable Field input) {
+                return input != null && input.getType().equals(type);
+            }
+        }));
     }
 
     /**
