@@ -22,14 +22,14 @@ asynchronously at the caller's choice.
 
 To get started with the REST SDK you first need to create an app on our [Developer Website](http://developer.moj.io/).
 
-1. First instantiate your MojioClient:
+### 1. First instantiate your MojioClient: ###
 ```java
 MojioClient mojioClient = new MojioClient.Builder("yourAppId", "yourAppSecret").build();
 ```
 
 See *Advanced* below for advanced client configuration.
 
-2. Authenticate with user credentials
+### 2. Authenticate with user credentials ###
 ```java
 Call<User> loginCall = mojioClient.login("username", "password");
 call.enqueue(new Callback<User>() {
@@ -63,7 +63,7 @@ try {
 }
 ```
 
-3. Make API calls
+### 3. Make API calls ###
 ```java
 client.rest().getVehicles().enqueue(new Callback<ListResponse<Vehicle>>() {
         @Override

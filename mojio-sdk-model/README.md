@@ -19,7 +19,7 @@ compile 'io.moj.java:mojio-sdk-model:0.0.1'
 The Model SDK is a collection of POJOs matching the entities in the Mojio API. If you're starting from scratch, consider
 using the [mojio-sdk-rest](https://github.com/mojio/mojio-java-sdk/tree/develop/mojio-sdk-rest) module for both the
 model objects and a basic client. If you have existing an REST-client framework or need finer control, however, this
-module can stand on it's own.
+module can stand on its own.
 
 Below is an example of integrating the mojio-sdk-model with [Retrofit](http://square.github.io/retrofit/)
 
