@@ -1,14 +1,10 @@
+ext {
+    PUBLISH_ARTIFACT_ID = 'mojio-sdk-model'
+}
+
 apply plugin: 'java'
 apply plugin: 'jacoco'
-
-group PUBLISH_GROUP_ID
-version PUBLISH_VERSION
-
-sourceCompatibility = SOURCE_COMPATIBILITY
-
-repositories {
-    mavenCentral()
-}
+apply from: project.rootProject.file('maven.gradle')
 
 dependencies {
     compile 'com.google.code.gson:gson:2.6.2'
