@@ -22,7 +22,7 @@ public interface MojioAuthApi {
      * Endpoint for requesting an access token. Constructs the request body as follows:
      * "grant_type=password&password={password}&username={username}&client_id={client_id}&secret_key={secret_key}&scope=full",
      * see <a href="http://tools.ietf.org/html/rfc6749#section-4.3.2">RFC6749 - Section 4.3.2</a>
-     * <br/><br/>
+     * <br><br>
      * For refreshing: "grant_type=refresh_token&refresh_token={refresh_token}",
      * see <a href="http://tools.ietf.org/html/rfc6749#section-62">RFC6749 - Section 6</a>
      * @param grantType should be "password", use {@link #GRANT_TYPE_LOGIN}. Only required
@@ -48,6 +48,8 @@ public interface MojioAuthApi {
      * @param grantType should be "refresh_token", use {@link #GRANT_TYPE_REFRESH}. Only required
      *                  because https://github.com/square/retrofit/issues/951 hasn't been implemented
      * @param refreshToken the refresh token that was granted with the original access token
+     * @param clientId
+     * @param clientSecret
      * @return
      */
     @POST("/oauth2/token")
