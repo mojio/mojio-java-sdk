@@ -269,9 +269,10 @@ public class Observer {
         }
 
         /**
-         * The Type of entity that is being observed. Either {@link Observer#Type#MOJIO},
-         * {@link Observer#Type#VEHICLE}, or {@link Observer#Type#USER}. This is automatically set on creation and
-         * cannot be edited.
+         * The Type of entity that is being observed. Either {@link io.moj.java.sdk.model.push.Observer.Type#MOJIO},
+         * {@link io.moj.java.sdk.model.push.Observer.Type#MOJIO}, or
+         * {@link io.moj.java.sdk.model.push.Observer.Type#MOJIO}. This is automatically set on creation and cannot be
+         * edited.
          * @param type
          * @return
          */
