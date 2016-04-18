@@ -143,8 +143,8 @@ public class MojioClientTest {
         assertThat(argument.getValue().getRefreshToken()).isEqualTo(refreshToken);
 
         // since server returns expiresIn from when it generates the token, accept a variance
-        assertThat(argument.getValue().getExpirationTimestamp()).isAtMost(expectedExpirationTimestamp + 100);
-        assertThat(argument.getValue().getExpirationTimestamp()).isAtLeast(expectedExpirationTimestamp - 100);
+        assertThat(argument.getValue().getExpirationTimestamp()).isAtMost(expectedExpirationTimestamp + 1000);
+        assertThat(argument.getValue().getExpirationTimestamp()).isAtLeast(expectedExpirationTimestamp - 1000);
 
         assertThat(call.isExecuted()).isTrue();
     }

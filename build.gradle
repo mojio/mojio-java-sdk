@@ -9,7 +9,7 @@ ext {
         println "Version ${publishVersion}"
         PUBLISH_VERSION = publishVersion;
     } else {
-        PUBLISH_VERSION = '0.0.2'
+        PUBLISH_VERSION = 'SNAPSHOT'
     }
 }
 
