@@ -1,0 +1,19 @@
+ext {
+    PUBLISH_ARTIFACT_ID = 'mojio-sdk-rest'
+}
+
+apply plugin: 'java'
+apply plugin: 'jacoco'
+apply from: project.rootProject.file('maven.gradle')
+
+dependencies {
+    compile project(":mojio-sdk-model")
+
+    def retrofitVersion = '2.0.2'
+    compile "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    compile "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'com.squareup.okhttp3:mockwebserver:3.2.0'
+    testCompile project(":mojio-sdk-test")
+}

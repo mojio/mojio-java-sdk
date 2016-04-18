@@ -1,0 +1,14 @@
+ext {
+    PUBLISH_ARTIFACT_ID = 'mojio-sdk-model'
+}
+
+apply plugin: 'java'
+apply plugin: 'jacoco'
+apply from: project.rootProject.file('maven.gradle')
+
+dependencies {
+    compile 'com.google.code.gson:gson:2.6.2'
+
+    testCompile 'junit:junit:4.12'
+    testCompile project(":mojio-sdk-test")
+}
