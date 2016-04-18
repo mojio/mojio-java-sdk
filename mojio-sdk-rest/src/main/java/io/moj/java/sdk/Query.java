@@ -1,13 +1,12 @@
 package io.moj.java.sdk;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Convenience class for building query parameters.
  * Created by skidson on 2016-04-15.
  */
-public class Query {
+public class Query extends HashMap<String, String> {
 
     public static final String TOP = "top";
     public static final String SKIP = "skip";
@@ -15,15 +14,13 @@ public class Query {
     public static final String SELECT = "select";
     public static final String ORDER_BY = "orderby";
 
-    private Map<String, String> params = new HashMap<>();
-
     /**
      * The maximum number of records to return.
      * @param top
      * @return
      */
     public Query top(int top) {
-        params.put(TOP, String.valueOf(top));
+        put(TOP, String.valueOf(top));
         return this;
     }
 
@@ -33,7 +30,7 @@ public class Query {
      * @return
      */
     public Query skip(int skip) {
-        params.put(SKIP, String.valueOf(skip));
+        put(SKIP, String.valueOf(skip));
         return this;
     }
 
@@ -43,7 +40,7 @@ public class Query {
      * @return
      */
     public Query filter(String filter) {
-        params.put(FILTER, filter);
+        put(FILTER, filter);
         return this;
     }
 
@@ -54,7 +51,7 @@ public class Query {
      * @return
      */
     public Query select(String select) {
-        params.put(SELECT, select);
+        put(SELECT, select);
         return this;
     }
 
@@ -64,16 +61,8 @@ public class Query {
      * @return
      */
     public Query orderBy(String orderBy) {
-        params.put(ORDER_BY, orderBy);
+        put(ORDER_BY, orderBy);
         return this;
-    }
-
-    /**
-     * Constructs the Map to be used as the query parameters argument.
-     * @return
-     */
-    public Map<String, String> build() {
-        return new HashMap<>(params);
     }
 
 }

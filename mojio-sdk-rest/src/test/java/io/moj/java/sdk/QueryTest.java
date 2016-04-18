@@ -23,8 +23,7 @@ public class QueryTest {
                 .skip(skip)
                 .filter(filter)
                 .select(select)
-                .orderBy(orderBy)
-                .build();
+                .orderBy(orderBy);
 
         assertThat(query.size()).isEqualTo(5);
         assertThat(query.get(Query.TOP)).isEqualTo(String.valueOf(top));
@@ -36,24 +35,8 @@ public class QueryTest {
 
     @Test
     public void testBuild_empty() {
-        Map<String, String> query = new Query().build();
+        Map<String, String> query = new Query();
         assertThat(query).isEmpty();
-    }
-
-    /**
-     * Verify subsequent invocations of {@link io.moj.java.sdk.Query#build()} create two unique objects. Further
-     * modification of one should not modify the other).
-     */
-    @Test
-    public void testBuild_unique() {
-        String expectedSelect = "select";
-        Query query = new Query().select(expectedSelect);
-        Map<String, String> queryMapA = query.build();
-        Map<String, String> queryMapB = query.build();
-        assertThat(queryMapA).isNotSameAs(queryMapB);
-
-        queryMapA.put(Query.SELECT, "modified");
-        assertThat(queryMapB.get(Query.SELECT)).isEqualTo(expectedSelect);
     }
 
 }

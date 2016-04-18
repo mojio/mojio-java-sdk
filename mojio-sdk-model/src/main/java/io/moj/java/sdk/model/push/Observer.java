@@ -3,9 +3,7 @@ package io.moj.java.sdk.model.push;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Model object for an observer.

@@ -1,4 +1,4 @@
-package io.moj.java.sdk.model;
+package io.moj.java.sdk.model.values;
 
 import io.moj.java.sdk.model.enums.FuelEfficiencyCalculationMethod;
 import io.moj.java.sdk.model.enums.FuelType;
@@ -51,14 +51,14 @@ public class VehicleMeasure {
     public static final String ODOMETER = "Odometer";
     public static final String TIME = "Time";
 
-    private io.moj.java.sdk.model.values.Acceleration Acceleration;
+    private Acceleration Acceleration;
     private Accelerometer Accelerometer;
     private BooleanState AccidentState;
     private Battery Battery;
     private String CurrentTrip;
     private Acceleration Deceleration;
     private DiagnosticCode DiagnosticCodes;
-    private io.moj.java.sdk.model.values.FuelEfficiency FuelEfficiency;
+    private FuelEfficiency FuelEfficiency;
     private FuelEfficiencyCalculationMethod FuelEfficiencyCalculationMethod;
     private FuelLevel FuelLevel;
     private FuelType FuelType;
@@ -67,12 +67,12 @@ public class VehicleMeasure {
     private Heading Heading;
     private BooleanState IdleState;
     private BooleanState IgnitionState;
-    private io.moj.java.sdk.model.values.Location Location;
+    private Location Location;
     private Boolean MilStatus;
     private String MojioId;
     private BooleanState ParkedState;
     private Rpm RPM;
-    private io.moj.java.sdk.model.values.Speed Speed;
+    private Speed Speed;
     private BooleanState TowState;
     private String VIN;
     private VinDetails VinDetails;

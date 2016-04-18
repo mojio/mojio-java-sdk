@@ -1,6 +1,7 @@
 package io.moj.java.sdk.model;
 
 import io.moj.java.sdk.model.response.ListResponse;
+import io.moj.java.sdk.model.values.VehicleMeasure;
 import org.junit.Test;
 
 import static io.moj.java.sdk.test.TestUtils.assertAccess;
@@ -58,13 +59,6 @@ public class EntityTests {
         Vehicle vehicle = new Vehicle();
         assertToStringContainsAllFields(vehicle);
         assertAccess(vehicle);
-    }
-
-    @Test
-    public void testVehicleMeasure() throws IllegalAccessException {
-        VehicleMeasure vehicleMeasure = new VehicleMeasure();
-        assertToStringContainsAllFields(vehicleMeasure);
-        assertAccess(vehicleMeasure);
     }
 
 }

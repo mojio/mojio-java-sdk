@@ -197,6 +197,13 @@ public class ValueTests {
     }
 
     @Test
+    public void testVehicleMeasure() throws IllegalAccessException {
+        VehicleMeasure vehicleMeasure = new VehicleMeasure();
+        assertToStringContainsAllFields(vehicleMeasure);
+        assertAccess(vehicleMeasure);
+    }
+
+    @Test
     public void testVinDetails() throws IllegalAccessException {
         assertToStringContainsAllFields(new VinDetails());
         assertAccess(new VinDetails());

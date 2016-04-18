@@ -8,7 +8,7 @@ import io.moj.java.sdk.model.Mojio;
 import io.moj.java.sdk.model.Trip;
 import io.moj.java.sdk.model.User;
 import io.moj.java.sdk.model.Vehicle;
-import io.moj.java.sdk.model.VehicleMeasure;
+import io.moj.java.sdk.model.values.VehicleMeasure;
 import io.moj.java.sdk.model.values.AccessModel;
 import io.moj.java.sdk.model.values.Image;
 import io.moj.java.sdk.model.values.Location;
