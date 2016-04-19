@@ -1,13 +1,14 @@
-# Mojio Java Model SDK #
-
-Model classes for use with the Mojio REST API. These objects are annotated for serialization with
- GSON. The Model SDK can be plugged into your existing REST-client framework.
-
 ## Disclaimer ##
 **UNDER ACTIVE DEVELOPMENT**
+This SDK is built against the v2 APIs which are still in development and not ready for general consumption.
 
 * Methods may change without notice
 * Currently provided "AS IS"
+
+# Mojio Java Model SDK #
+
+Model classes for use with the Mojio REST API. These objects are annotated for serialization with GSON. The Model SDK
+can be plugged into your existing REST-client framework.
 
 ## Download ##
 ```gradle
