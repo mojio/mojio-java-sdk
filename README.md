@@ -1,3 +1,10 @@
+### Disclaimer ###
+**UNDER ACTIVE DEVELOPMENT**
+This SDK is built against the v2 APIs which are still in development and not ready for general consumption.
+
+* Methods may change without notice
+* Currently provided "AS IS"
+
 ![](static/banner_mojio.png)
 # Mojio Java SDK #
 ![](http://ci.moj.io/app/rest/builds/buildType:(id:Mobile_MojioSDK_Java_Development)/statusIcon)
@@ -5,12 +12,6 @@
 Java SDK for integrating with the Mojio platform.
 
 For more information please see the [developer website](http://developer.moj.io/).
-
-### Disclaimer ###
-**UNDER ACTIVE DEVELOPMENT**
-
-* Methods may change without notice
-* Currently provided "AS IS"
 
 ## Download ##
 ```gradle
