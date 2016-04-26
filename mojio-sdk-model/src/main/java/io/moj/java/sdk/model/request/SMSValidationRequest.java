@@ -7,16 +7,7 @@ package io.moj.java.sdk.model.request;
 public class SMSValidationRequest {
 
     private String MobileNumber;
-    private String Email;
     private String Pin;
-    private String Password;
-
-    public SMSValidationRequest(String mobileNumber, String pin, String email, String password) {
-        MobileNumber = mobileNumber;
-        Pin = pin;
-        Email = email;
-        Password = password;
-    }
 
     public String getMobileNumber() {
         return MobileNumber;
@@ -24,14 +15,6 @@ public class SMSValidationRequest {
 
     public void setMobileNumber(String mobileNumber) {
         MobileNumber = mobileNumber;
-    }
-
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String email) {
-        Email = email;
     }
 
     public String getPin() {
@@ -42,21 +25,11 @@ public class SMSValidationRequest {
         Pin = pin;
     }
 
-    public String getPassword() {
-        return Password;
-    }
-
-    public void setPassword(String password) {
-        Password = password;
-    }
-
     @Override
     public String toString() {
         return "SMSValidationRequest{" +
                 "MobileNumber='" + MobileNumber + '\'' +
-                ", Email='" + Email + '\'' +
                 ", Pin='" + Pin + '\'' +
-                ", Password='" + Password + '\'' +
                 '}';
     }
 }
