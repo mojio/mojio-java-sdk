@@ -6,6 +6,7 @@ package io.moj.java.sdk;
 import io.moj.java.sdk.model.request.SMSRegistrationRequest;
 import io.moj.java.sdk.model.request.SMSValidationRequest;
 import io.moj.java.sdk.model.response.AuthResponse;
+import io.moj.java.sdk.model.response.RegistrationResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -71,7 +72,7 @@ public interface MojioAuthApi {
      * @return
      */
     @POST("api/register")
-    Call<Void> register(@Body SMSRegistrationRequest request);
+    Call<RegistrationResponse> register(@Body SMSRegistrationRequest request);
 
     /**
      * Endpoint for completing registration of a user via SMS using a 4-digit PIN sent from a previous call to

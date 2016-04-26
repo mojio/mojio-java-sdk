@@ -9,6 +9,11 @@ public class SMSValidationRequest {
     private String MobileNumber;
     private String Pin;
 
+    public SMSValidationRequest(String mobileNumber, String pin) {
+        MobileNumber = mobileNumber;
+        Pin = pin;
+    }
+
     public String getMobileNumber() {
         return MobileNumber;
     }
