@@ -3,14 +3,16 @@ package io.moj.java.sdk;
 /**
  * Created by skidson on 2016-04-13.
  */
-import io.moj.java.sdk.model.request.SMSRegistrationRequest;
-import io.moj.java.sdk.model.request.SMSValidationRequest;
+
+import io.moj.java.sdk.model.request.RegistrationRequest;
 import io.moj.java.sdk.model.response.AuthResponse;
 import io.moj.java.sdk.model.response.RegistrationResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 
@@ -22,6 +24,7 @@ public interface MojioAuthApi {
 
     String GRANT_TYPE_LOGIN = "password";
     String GRANT_TYPE_REFRESH = "refresh_token";
+    String GRANT_TYPE_PHONE = "phone";
 
     /**
      * Endpoint for requesting an access token. Constructs the request body as follows:
@@ -67,20 +70,31 @@ public interface MojioAuthApi {
     /**
      * Endpoint for registering a user via phone number. Calling this endpoint will send a 4-digit PIN to the specified
      * phone number. This PIN should then be included in a follow-up call to
-     * {@link #validate(io.moj.java.sdk.model.request.SMSValidationRequest)}.
+     * {@link #validate(String, String, String, String, String)}
+     * @param auth a base-64 encoded String of "client_id:client_secret"
      * @param request
      * @return
      */
-    @POST("api/register")
-    Call<RegistrationResponse> register(@Body SMSRegistrationRequest request);
+    @POST("account/register")
+    @Headers("Authorization: Basic {auth}")
+    Call<RegistrationResponse> register(@Header("auth") String auth, @Body RegistrationRequest request);
 
     /**
      * Endpoint for completing registration of a user via SMS using a 4-digit PIN sent from a previous call to
-     * {@link #register(io.moj.java.sdk.model.request.SMSRegistrationRequest)}
-     * @param request
+     * {@link #register(String, io.moj.java.sdk.model.request.RegistrationRequest)}.
+     * @param grantType should be "refresh_token", use {@link #GRANT_TYPE_PHONE}. Only required
+     *                  because https://github.com/square/retrofit/issues/951 hasn't been implemented
+     * @param clientId
+     * @param clientSecret
+     * @param phoneNumber the user's phone number, should be all digits (all + and - symbols stripped)
+     * @param pin the 4-digit PIN sent to the user's mobile device
      * @return
      */
-    @PUT("api/register")
-    Call<AuthResponse> validate(@Body SMSValidationRequest request);
+    @PUT("oauth2/token")
+    Call<AuthResponse> validate(@Field("grant_type") String grantType,
+                                @Field("client_id") String clientId,
+                                @Field("client_secret") String clientSecret,
+                                @Field("phone_number") String phoneNumber,
+                                @Field("pin") String pin);
 
 }
