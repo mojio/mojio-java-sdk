@@ -14,7 +14,6 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
 
 /**
  * Retrofit interface for the Mojio authentication API.
@@ -22,7 +21,7 @@ import retrofit2.http.PUT;
  */
 public interface MojioAuthApi {
 
-    String GRANT_TYPE_LOGIN = "password";
+    String GRANT_TYPE_PASSWORD = "password";
     String GRANT_TYPE_REFRESH = "refresh_token";
     String GRANT_TYPE_PHONE = "phone";
 
@@ -33,7 +32,7 @@ public interface MojioAuthApi {
      * <br><br>
      * For refreshing: "grant_type=refresh_token&refresh_token={refresh_token}",
      * see <a href="http://tools.ietf.org/html/rfc6749#section-62">RFC6749 - Section 6</a>
-     * @param grantType should be "password", use {@link #GRANT_TYPE_LOGIN}. Only required
+     * @param grantType should be "password", use {@link #GRANT_TYPE_PASSWORD}. Only required
      *                  because https://github.com/square/retrofit/issues/951 hasn't been implemented
      * @param username
      * @param password
@@ -70,7 +69,7 @@ public interface MojioAuthApi {
     /**
      * Endpoint for registering a user via phone number. Calling this endpoint will send a 4-digit PIN to the specified
      * phone number. This PIN should then be included in a follow-up call to
-     * {@link #validate(String, String, String, String, String)}
+     * {@link #login(String, String, String, String, String)} with username = phone number, password = pin
      * @param auth a base-64 encoded String of "client_id:client_secret"
      * @param request
      * @return
@@ -78,23 +77,5 @@ public interface MojioAuthApi {
     @POST("account/register")
     @Headers("Authorization: Basic {auth}")
     Call<RegistrationResponse> register(@Header("auth") String auth, @Body RegistrationRequest request);
-
-    /**
-     * Endpoint for completing registration of a user via SMS using a 4-digit PIN sent from a previous call to
-     * {@link #register(String, io.moj.java.sdk.model.request.RegistrationRequest)}.
-     * @param grantType should be "refresh_token", use {@link #GRANT_TYPE_PHONE}. Only required
-     *                  because https://github.com/square/retrofit/issues/951 hasn't been implemented
-     * @param clientId
-     * @param clientSecret
-     * @param phoneNumber the user's phone number, should be all digits (all + and - symbols stripped)
-     * @param pin the 4-digit PIN sent to the user's mobile device
-     * @return
-     */
-    @PUT("oauth2/token")
-    Call<AuthResponse> validate(@Field("grant_type") String grantType,
-                                @Field("client_id") String clientId,
-                                @Field("client_secret") String clientSecret,
-                                @Field("phone_number") String phoneNumber,
-                                @Field("pin") String pin);
 
 }
