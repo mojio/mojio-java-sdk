@@ -49,6 +49,30 @@ public interface MojioAuthApi {
                              @Field("client_secret") String clientSecret);
 
     /**
+     * Endpoint for requesting an access token. Constructs the request body as follows:
+     * "grant_type=phone&pin={pin}&phone_number={phone_number}&client_id={client_id}&secret_key={secret_key}&scope=full".
+     * This is a custom extension of the OAuth spec (see
+     * <a href="http://tools.ietf.org/html/rfc6749#section-62">RFC6749 - Section 6</a>)
+     * <br><br>
+     * For refreshing: "grant_type=refresh_token&refresh_token={refresh_token}",
+     * see <a href="http://tools.ietf.org/html/rfc6749#section-62">RFC6749 - Section 6</a>
+     * @param grantType should be "phone", use {@link #GRANT_TYPE_PHONE}. Only required
+     *                  because https://github.com/square/retrofit/issues/951 hasn't been implemented
+     * @param phoneNumber
+     * @param pin
+     * @param clientId
+     * @param clientSecret
+     * @return
+     */
+    @POST("oauth2/token")
+    @FormUrlEncoded
+    Call<AuthResponse> loginWithPin(@Field("grant_type") String grantType,
+                                    @Field("phone_number") String phoneNumber,
+                                    @Field("pin") String pin,
+                                    @Field("client_id") String clientId,
+                                    @Field("client_secret") String clientSecret);
+
+    /**
      * Endpoint for refreshing an access token. Constructs the request body as follows:
      * "grant_type=refresh_token&refresh_token={refresh_token}",
      * see <a href="http://tools.ietf.org/html/rfc6749#section-62">RFC6749 - Section 6</a>
@@ -70,15 +94,12 @@ public interface MojioAuthApi {
      * Endpoint for registering a user via phone number. Calling this endpoint will send a 4-digit PIN to the specified
      * phone number. This PIN should then be included in a follow-up call to
      * {@link #login(String, String, String, String, String)} with username = phone number, password = pin
-     * @param auth a base-64 encoded String of "client_id:client_secret"
+     * @param auth String in the format 'Basic {Base64-Encoded "client_id:client_secret"}'
      * @param request
      * @return
      */
     @POST("account/register")
-    @Headers({
-            "Authorization: Basic {auth}",
-            "Content-Type: application/json"
-    })
-    Call<RegistrationResponse> register(@Header("auth") String auth, @Body RegistrationRequest request);
+    @Headers("Content-Type: application/json")
+    Call<RegistrationResponse> register(@Header("Authorization") String auth, @Body RegistrationRequest request);
 
 }

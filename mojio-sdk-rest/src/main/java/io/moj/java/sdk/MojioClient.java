@@ -98,7 +98,7 @@ public class MojioClient {
      * @return
      */
     public Call<User> login(String username, String password) {
-        return new LoginCall(username, password, MojioAuthApi.GRANT_TYPE_PASSWORD, client);
+        return new LoginCall(username, password, client);
     }
 
     /**
@@ -109,7 +109,7 @@ public class MojioClient {
      * @return
      */
     public Call<User> loginWithPin(String phoneNumber, String pin) {
-        return new LoginCall(phoneNumber, pin, MojioAuthApi.GRANT_TYPE_PHONE, client);
+        return new LoginCall(phoneNumber, pin, true, client);
     }
 
     /**
@@ -289,19 +289,25 @@ public class MojioClient {
     private class LoginCall implements Call<User> {
         private String id;
         private String password;
-        private String grantType;
+        private boolean usingPin;
 
         private Client client;
         private Call<User> userCall;
         private Call<AuthResponse> authCall;
 
-        public LoginCall(String id, String password, String grantType, Client client) {
+        public LoginCall(String id, String password, Client client) {
+            this(id, password, false, client);
+        }
+
+        public LoginCall(String id, String password, boolean usingPin, Client client) {
             this.id = id;
             this.password = password;
-            this.grantType = grantType;
+            this.usingPin = usingPin;
             this.client = client;
-            this.authCall = auth()
-                    .login(grantType, id, password, client.getKey(), client.getSecret());
+
+            this.authCall = usingPin
+                    ? auth().loginWithPin(MojioAuthApi.GRANT_TYPE_PASSWORD, id, password, client.getKey(), client.getSecret())
+                    : auth().login(MojioAuthApi.GRANT_TYPE_PHONE, id, password, client.getKey(), client.getSecret());
         }
 
         @Override
@@ -358,7 +364,7 @@ public class MojioClient {
 
         @Override
         public Call<User> clone() {
-            return new LoginCall(id, password, grantType, client);
+            return new LoginCall(id, password, usingPin, client);
         }
 
         @Override
