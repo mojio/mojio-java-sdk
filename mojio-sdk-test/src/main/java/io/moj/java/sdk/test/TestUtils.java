@@ -72,10 +72,13 @@ public final class TestUtils {
     }
 
     public static void assertAccess(Object pojo, List<Method> methods, boolean mutable) {
+        assertAccess(pojo, methods, getAllFields(pojo), mutable);
+    }
+
+    public static void assertAccess(Object pojo, List<Method> methods, List<Field> fields, boolean mutable) {
         Set<String> methodNames =
                 new HashSet<>(Lists.transform(methods, FUNCTION_EXTRACT_METHOD_NAMES));
 
-        List<Field> fields = getAllFields(pojo);
         for (Field field : fields) {
             if (Modifier.isStatic(field.getModifiers()))
                 continue;
