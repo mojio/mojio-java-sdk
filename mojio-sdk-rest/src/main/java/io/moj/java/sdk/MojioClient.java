@@ -306,8 +306,8 @@ public class MojioClient {
             this.client = client;
 
             this.authCall = usingPin
-                    ? auth().loginWithPin(MojioAuthApi.GRANT_TYPE_PASSWORD, id, password, client.getKey(), client.getSecret())
-                    : auth().login(MojioAuthApi.GRANT_TYPE_PHONE, id, password, client.getKey(), client.getSecret());
+                    ? auth().loginWithPin(MojioAuthApi.GRANT_TYPE_PHONE, id, password, client.getKey(), client.getSecret())
+                    : auth().login(MojioAuthApi.GRANT_TYPE_PASSWORD, id, password, client.getKey(), client.getSecret());
         }
 
         @Override
