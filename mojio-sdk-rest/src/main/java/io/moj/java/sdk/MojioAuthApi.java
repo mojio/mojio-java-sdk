@@ -75,7 +75,10 @@ public interface MojioAuthApi {
      * @return
      */
     @POST("account/register")
-    @Headers("Authorization: Basic {auth}")
+    @Headers({
+            "Authorization: Basic {auth}",
+            "Content-Type: application/json"
+    })
     Call<RegistrationResponse> register(@Header("auth") String auth, @Body RegistrationRequest request);
 
 }

@@ -31,11 +31,12 @@ public class AuthInterceptor implements Interceptor {
 
         // set the access token in the header if we have it
         AccessToken accessToken = authenticator.getAccessToken();
+        Request.Builder requestBuilder = request.newBuilder();
         if (accessToken != null) {
-            request = request.newBuilder()
-                    .header("Authorization", "Bearer " + accessToken.getAccessToken())
-                    .build();
+            requestBuilder.header("Authorization", "Bearer " + accessToken.getAccessToken());
         }
+        requestBuilder.addHeader("Content-Type", "application/json");
+        request = requestBuilder.build();
 
         Response response = chain.proceed(request);
         if (response.code() == HttpURLConnection.HTTP_UNAUTHORIZED) {
