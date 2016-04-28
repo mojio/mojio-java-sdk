@@ -99,7 +99,10 @@ public interface MojioAuthApi {
      * @return
      */
     @POST("account/register")
-    @Headers("Content-Type: application/json")
+    @Headers({
+            "Content-Type: application/json",
+            "Accept: application/json"
+    })
     Call<RegistrationResponse> register(@Header("Authorization") String auth, @Body RegistrationRequest request);
 
 }
