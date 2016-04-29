@@ -9,26 +9,26 @@ import java.lang.reflect.Method;
 
 import static junit.framework.Assert.*;
 
-public class ConditionTest {
+public class OldConditionTest {
 
     /* PropertyChanged Tests - Tests for the various different builder methods for PropertyChanged conditions  */
     @Test
     public void testOnPropertyChanged() {
         String property = "Speed.Value";
-        Condition c = Condition.onPropertyChanged(property);
-        assertEquals(Condition.Type.PROPERTY_CHANGED, c.getType());
+        OldCondition c = OldCondition.onPropertyChanged(property);
+        assertEquals(OldCondition.Type.PROPERTY_CHANGED, c.getType());
         assertEquals(property, c.getProperty());
     }
 
     @Test
     public void testOnThreshold() {
         String property = "Speed.Value";
-        Condition.Position position = Condition.Position.ABOVE;
+        OldCondition.Position position = OldCondition.Position.ABOVE;
         double min = 0;
         double max = 123.456;
 
-        Condition c = Condition.onThreshold(property, position, min, max);
-        assertEquals(Condition.Type.THRESHOLD, c.getType());
+        OldCondition c = OldCondition.onThreshold(property, position, min, max);
+        assertEquals(OldCondition.Type.THRESHOLD, c.getType());
         assertEquals(min, c.getMin());
         assertEquals(max, c.getMax());
     }
@@ -39,8 +39,8 @@ public class ConditionTest {
         int minDataPoints = 4;
         String delay = "0.19:20:34.0000";
 
-        Condition c = Condition.debounce(minDataPoints, delay);
-        assertEquals(Condition.Type.DEBOUNCE, c.getType());
+        OldCondition c = OldCondition.debounce(minDataPoints, delay);
+        assertEquals(OldCondition.Type.DEBOUNCE, c.getType());
         assertEquals(minDataPoints, (int) c.getMinDataPoints());
         assertEquals(delay, c.getDelay());
     }
@@ -54,8 +54,8 @@ public class ConditionTest {
         int seconds = 0;
         String expectedDelay = "0.04:20:00.0000";
 
-        Condition c = Condition.debounce(minDataPoints, days, hours, minutes, seconds);
-        assertEquals(Condition.Type.DEBOUNCE, c.getType());
+        OldCondition c = OldCondition.debounce(minDataPoints, days, hours, minutes, seconds);
+        assertEquals(OldCondition.Type.DEBOUNCE, c.getType());
         assertEquals(minDataPoints, (int) c.getMinDataPoints());
         assertEquals(expectedDelay, c.getDelay());
     }
@@ -64,8 +64,8 @@ public class ConditionTest {
     public void testMinDataPoints() {
         int minDataPoints = 1337;
 
-        Condition c = Condition.minDataPoints(minDataPoints);
-        assertEquals(Condition.Type.DEBOUNCE, c.getType());
+        OldCondition c = OldCondition.minDataPoints(minDataPoints);
+        assertEquals(OldCondition.Type.DEBOUNCE, c.getType());
         assertEquals(minDataPoints, (int) c.getMinDataPoints());
         assertNull(c.getDelay());
     }
@@ -74,8 +74,8 @@ public class ConditionTest {
     public void testDelay_string() {
         String delay = "0.05:00:00.0000";
 
-        Condition c = Condition.delay(delay);
-        assertEquals(Condition.Type.DEBOUNCE, c.getType());
+        OldCondition c = OldCondition.delay(delay);
+        assertEquals(OldCondition.Type.DEBOUNCE, c.getType());
         assertEquals(delay, c.getDelay());
         assertNull(c.getMinDataPoints());
     }
@@ -88,8 +88,8 @@ public class ConditionTest {
         int seconds = 42;
         String expectedDelay = "2.00:04:42.0000";
 
-        Condition c = Condition.delay(days, hours, minutes, seconds);
-        assertEquals(Condition.Type.DEBOUNCE, c.getType());
+        OldCondition c = OldCondition.delay(days, hours, minutes, seconds);
+        assertEquals(OldCondition.Type.DEBOUNCE, c.getType());
         assertEquals(expectedDelay, c.getDelay());
         assertNull(c.getMinDataPoints());
     }
@@ -100,8 +100,8 @@ public class ConditionTest {
         String timeProperty = "LastContactTime";
         String window = "0.06:00:00.1234";
 
-        Condition c = Condition.throttle(timeProperty, window);
-        assertEquals(Condition.Type.THROTTLE, c.getType());
+        OldCondition c = OldCondition.throttle(timeProperty, window);
+        assertEquals(OldCondition.Type.THROTTLE, c.getType());
         assertEquals(timeProperty, c.getTimeProperty());
         assertEquals(window, c.getWindow());
     }
@@ -115,8 +115,8 @@ public class ConditionTest {
         int seconds = 4;
         String expectedWindow = "1.02:03:04.0000";
 
-        Condition c = Condition.throttle(timeProperty, days, hours, minutes, seconds);
-        assertEquals(Condition.Type.THROTTLE, c.getType());
+        OldCondition c = OldCondition.throttle(timeProperty, days, hours, minutes, seconds);
+        assertEquals(OldCondition.Type.THROTTLE, c.getType());
         assertEquals(timeProperty, c.getTimeProperty());
         assertEquals(expectedWindow, c.getWindow());
     }
@@ -129,37 +129,37 @@ public class ConditionTest {
         int seconds = 4;
         String expectedWindow = "1.02:03:04.0000";
 
-        Condition c = Condition.throttle(days, hours, minutes, seconds);
-        assertEquals(Condition.Type.THROTTLE, c.getType());
+        OldCondition c = OldCondition.throttle(days, hours, minutes, seconds);
+        assertEquals(OldCondition.Type.THROTTLE, c.getType());
         assertEquals(expectedWindow, c.getWindow());
         assertNull(c.getTimeProperty());
     }
 
     @Test
     public void testTypeFromKey() {
-        for (Condition.Type type : Condition.Type.values()) {
-            Condition.Type typeFromKey = Condition.Type.fromKey(type.getKey());
+        for (OldCondition.Type type : OldCondition.Type.values()) {
+            OldCondition.Type typeFromKey = OldCondition.Type.fromKey(type.getKey());
             assertEquals(type, typeFromKey);
         }
-        assertNull(Condition.Type.fromKey("NotARealKey"));
+        assertNull(OldCondition.Type.fromKey("NotARealKey"));
     }
 
     @Test
     public void testPositionFromKey() {
-        for (Condition.Position position : Condition.Position.values()) {
-            Condition.Position positionFromKey = Condition.Position.fromKey(position.getKey());
+        for (OldCondition.Position position : OldCondition.Position.values()) {
+            OldCondition.Position positionFromKey = OldCondition.Position.fromKey(position.getKey());
             assertEquals(position, positionFromKey);
         }
-        assertNull(Condition.Position.fromKey("NotARealKey"));
+        assertNull(OldCondition.Position.fromKey("NotARealKey"));
     }
 
     @Test
     public void testEquality() throws IllegalAccessException {
-        Condition c1 = buildTestCondition();
-        Condition c2 = buildTestCondition();
+        OldCondition c1 = buildTestCondition();
+        OldCondition c2 = buildTestCondition();
         new EqualsTester().addEqualityGroup(c1, c2).testEquals();
 
-        for (Method method : Condition.class.getMethods()) {
+        for (Method method : OldCondition.class.getMethods()) {
             c2 = buildTestCondition();
             if (method.getName().startsWith("set")) {
                 try {
@@ -188,7 +188,7 @@ public class ConditionTest {
 
     @Test
     public void testDeserialization() {
-        Condition condition = new Gson().fromJson(TestJson.CONDITION, Condition.class);
+        OldCondition condition = new Gson().fromJson(TestJson.CONDITION, OldCondition.class);
 
         assertNotNull(condition);
         assertEquals("window", condition.getWindow());
@@ -197,21 +197,21 @@ public class ConditionTest {
         assertEquals(4, (int) condition.getMinDataPoints());
         assertEquals(120d, condition.getMin());
         assertEquals(200d, condition.getMax());
-        assertEquals(Condition.Position.ABOVE, condition.getPosition());
+        assertEquals(OldCondition.Position.ABOVE, condition.getPosition());
         assertEquals("property", condition.getProperty());
 
         new EqualsTester().addEqualityGroup(condition, buildTestCondition()).testEquals();
     }
 
-    private static Condition buildTestCondition() {
-        Condition condition = new Condition();
+    private static OldCondition buildTestCondition() {
+        OldCondition condition = new OldCondition();
         condition.setWindow("window");
         condition.setTimeProperty("timeProperty");
         condition.setDelay("delay");
         condition.setMinDataPoints(4);
         condition.setMin(120d);
         condition.setMax(200d);
-        condition.setPosition(Condition.Position.ABOVE);
+        condition.setPosition(OldCondition.Position.ABOVE);
         condition.setProperty("property");
         return condition;
     }

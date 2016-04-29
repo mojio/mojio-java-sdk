@@ -64,12 +64,12 @@ public class ObserverTest {
     @Test
     public void testSerialization() {
         Gson gson = new Gson();
-        Condition condition1 = Condition.debounce(1, 2, 3, 4, 5);
-        Condition condition2 = Condition.delay(6, 7, 8, 9);
-        Condition condition3 = Condition.onPropertyChanged("Property");
-        Condition condition4 = Condition.throttle(0, 3, 6, 9);
+        OldCondition condition1 = OldCondition.debounce(1, 2, 3, 4, 5);
+        OldCondition condition2 = OldCondition.delay(6, 7, 8, 9);
+        OldCondition condition3 = OldCondition.onPropertyChanged("Property");
+        OldCondition condition4 = OldCondition.throttle(0, 3, 6, 9);
 
-        List<Condition> conditions = Lists.newArrayList(
+        List<OldCondition> conditions = Lists.newArrayList(
                 condition1,
                 condition2,
                 condition3,
@@ -96,12 +96,12 @@ public class ObserverTest {
         Gson gson = new Gson();
         Observer o = gson.fromJson(TestJson.OBSERVER, Observer.class);
         Transport t = gson.fromJson(TestJson.TRANSPORT, Transport.class);
-        Condition condition1 = Condition.debounce(1, 2, 3, 4, 5);
-        Condition condition2 = Condition.delay(6, 7, 8, 9);
-        Condition condition3 = Condition.onPropertyChanged("Property");
-        Condition condition4 = Condition.throttle(0, 3, 6, 9);
+        OldCondition condition1 = OldCondition.debounce(1, 2, 3, 4, 5);
+        OldCondition condition2 = OldCondition.delay(6, 7, 8, 9);
+        OldCondition condition3 = OldCondition.onPropertyChanged("Property");
+        OldCondition condition4 = OldCondition.throttle(0, 3, 6, 9);
 
-        List<Condition> conditions = Lists.newArrayList(
+        List<OldCondition> conditions = Lists.newArrayList(
                 condition1,
                 condition2,
                 condition3,
@@ -162,10 +162,10 @@ public class ObserverTest {
                 .subject(subject)
                 .type(type)
                 .transport(transport)
-                .condition(Condition.onPropertyChanged("Property"))
-                .condition(Condition.onThreshold("Property", Condition.Position.ABOVE, 1d, 2d))
-                .condition(Condition.throttle("Speed.Value", "0.00:01:00.0000"))
-                .condition(Condition.debounce(1, 2, 3, 4, 5))
+                .condition(OldCondition.onPropertyChanged("Property"))
+                .condition(OldCondition.onThreshold("Property", OldCondition.Position.ABOVE, 1d, 2d))
+                .condition(OldCondition.throttle("Speed.Value", "0.00:01:00.0000"))
+                .condition(OldCondition.debounce(1, 2, 3, 4, 5))
                 .field(fields[0])
                 .field(fields[1])
                 .build();
@@ -199,10 +199,10 @@ public class ObserverTest {
                 .subject(subject)
                 .type(type)
                 .transport(transport)
-                .condition(Condition.onPropertyChanged("Property"))
-                .condition(Condition.onThreshold("Property", Condition.Position.ABOVE, 1d, 2d))
-                .condition(Condition.throttle("Speed.Value", "0.00:01:00.0000"))
-                .condition(Condition.debounce(1, 2, 3, 4, 5))
+                .condition(OldCondition.onPropertyChanged("Property"))
+                .condition(OldCondition.onThreshold("Property", OldCondition.Position.ABOVE, 1d, 2d))
+                .condition(OldCondition.throttle("Speed.Value", "0.00:01:00.0000"))
+                .condition(OldCondition.debounce(1, 2, 3, 4, 5))
                 .field(fields[0])
                 .field(fields[1]);
 

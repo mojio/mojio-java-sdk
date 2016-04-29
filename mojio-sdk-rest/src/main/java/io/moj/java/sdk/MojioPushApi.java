@@ -60,7 +60,7 @@ public interface MojioPushApi {
      * @return
      * @see io.moj.java.sdk.Resource#getPath()
      */
-    @POST("{resource}")
+    @PUT("{resource}")
     Call<Observer> createObserver(@Path("resource") String resource, @Body Observer.Request observer);
 
     /**
@@ -72,7 +72,7 @@ public interface MojioPushApi {
      * @return
      * @see io.moj.java.sdk.Resource#getPath()
      */
-    @POST("{resource}/{id}")
+    @PUT("{resource}/{id}")
     Call<Observer> createObserver(@Path("resource") String resource, @Path("id") String resourceId,
                                   @Body Observer.Request observer);
 

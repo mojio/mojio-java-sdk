@@ -8,10 +8,9 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Transport {
 
-    public static final String TYPE = "TransportType";
+    public static final String TYPE = "Type";
     public static final String DEVICE_REGISTRATION_ID = "DeviceRegistrationId";
     public static final String DEVICE_TOKEN = "DeviceToken";
-    public static final String APP_ID = "AppId";
     public static final String ALERT_BODY = "AlertBody";
     public static final String ALERT_SOUND = "AlertSound";
     public static final String ALERT_CATEGORY = "AlertCategory";
@@ -29,14 +28,14 @@ public class Transport {
     public static final String USER_NAME = "UserName";
     public static final String PASSWORD = "Password";
 
-    private Type TransportType;
+    @SerializedName("Type")
+    private Type type;
 
     // Android
     private String DeviceRegistrationId;
 
     // Apple
     private String DeviceToken;
-    private String AppId;
     private String AlertBody;
     private String AlertSound;
     private String AlertCategory;
@@ -67,7 +66,7 @@ public class Transport {
     public Transport() {}
 
     public Transport(Type type) {
-        this.TransportType = type;
+        this.type = type;
     }
 
     public String getAddress() {
@@ -84,10 +83,6 @@ public class Transport {
 
     public String getAlertSound() {
         return AlertSound;
-    }
-
-    public String getAppId() {
-        return AppId;
     }
 
     public int getBadge() {
@@ -143,7 +138,7 @@ public class Transport {
     }
 
     public Type getType() {
-        return TransportType;
+        return type;
     }
 
     public String getUserName() {
@@ -164,10 +159,6 @@ public class Transport {
 
     public void setAlertSound(String alertSound) {
         AlertSound = alertSound;
-    }
-
-    public void setAppId(String appId) {
-        AppId = appId;
     }
 
     public void setBadge(int badge) {
@@ -222,8 +213,8 @@ public class Transport {
         Topic = topic;
     }
 
-    public void setType(Type transportType) {
-        TransportType = transportType;
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public void setUserName(String userName) {
@@ -234,10 +225,9 @@ public class Transport {
     public String toString() {
         return "Transport{" +
                 "Address='" + Address + '\'' +
-                ", TransportType=" + TransportType +
+                ", type=" + type +
                 ", DeviceRegistrationId='" + DeviceRegistrationId + '\'' +
                 ", DeviceToken='" + DeviceToken + '\'' +
-                ", AppId='" + AppId + '\'' +
                 ", AlertBody='" + AlertBody + '\'' +
                 ", AlertSound='" + AlertSound + '\'' +
                 ", AlertCategory='" + AlertCategory + '\'' +
@@ -256,73 +246,6 @@ public class Transport {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Transport transport = (Transport) o;
-
-        if (TransportType != transport.TransportType) return false;
-        if (DeviceRegistrationId != null ? !DeviceRegistrationId.equals(transport.DeviceRegistrationId) : transport.DeviceRegistrationId != null)
-            return false;
-        if (DeviceToken != null ? !DeviceToken.equals(transport.DeviceToken) : transport.DeviceToken != null)
-            return false;
-        if (AppId != null ? !AppId.equals(transport.AppId) : transport.AppId != null) return false;
-        if (AlertBody != null ? !AlertBody.equals(transport.AlertBody) : transport.AlertBody != null)
-            return false;
-        if (AlertSound != null ? !AlertSound.equals(transport.AlertSound) : transport.AlertSound != null)
-            return false;
-        if (AlertCategory != null ? !AlertCategory.equals(transport.AlertCategory) : transport.AlertCategory != null)
-            return false;
-        if (Badge != null ? !Badge.equals(transport.Badge) : transport.Badge != null) return false;
-        if (Address != null ? !Address.equals(transport.Address) : transport.Address != null)
-            return false;
-        if (HostName != null ? !HostName.equals(transport.HostName) : transport.HostName != null)
-            return false;
-        if (Topic != null ? !Topic.equals(transport.Topic) : transport.Topic != null) return false;
-        if (Port != null ? !Port.equals(transport.Port) : transport.Port != null) return false;
-        if (ConnectionString != null ? !ConnectionString.equals(transport.ConnectionString) : transport.ConnectionString != null)
-            return false;
-        if (CollectionName != null ? !CollectionName.equals(transport.CollectionName) : transport.CollectionName != null)
-            return false;
-        if (Identifier != transport.Identifier) return false;
-        if (HubName != null ? !HubName.equals(transport.HubName) : transport.HubName != null)
-            return false;
-        if (Callback != null ? !Callback.equals(transport.Callback) : transport.Callback != null)
-            return false;
-        if (ClientId != null ? !ClientId.equals(transport.ClientId) : transport.ClientId != null)
-            return false;
-        if (UserName != null ? !UserName.equals(transport.UserName) : transport.UserName != null)
-            return false;
-        return Password != null ? Password.equals(transport.Password) : transport.Password == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = TransportType != null ? TransportType.hashCode() : 0;
-        result = 31 * result + (DeviceRegistrationId != null ? DeviceRegistrationId.hashCode() : 0);
-        result = 31 * result + (DeviceToken != null ? DeviceToken.hashCode() : 0);
-        result = 31 * result + (AppId != null ? AppId.hashCode() : 0);
-        result = 31 * result + (AlertBody != null ? AlertBody.hashCode() : 0);
-        result = 31 * result + (AlertSound != null ? AlertSound.hashCode() : 0);
-        result = 31 * result + (AlertCategory != null ? AlertCategory.hashCode() : 0);
-        result = 31 * result + (Badge != null ? Badge.hashCode() : 0);
-        result = 31 * result + (Address != null ? Address.hashCode() : 0);
-        result = 31 * result + (HostName != null ? HostName.hashCode() : 0);
-        result = 31 * result + (Topic != null ? Topic.hashCode() : 0);
-        result = 31 * result + (Port != null ? Port.hashCode() : 0);
-        result = 31 * result + (ConnectionString != null ? ConnectionString.hashCode() : 0);
-        result = 31 * result + (CollectionName != null ? CollectionName.hashCode() : 0);
-        result = 31 * result + (Identifier != null ? Identifier.hashCode() : 0);
-        result = 31 * result + (HubName != null ? HubName.hashCode() : 0);
-        result = 31 * result + (Callback != null ? Callback.hashCode() : 0);
-        result = 31 * result + (ClientId != null ? ClientId.hashCode() : 0);
-        result = 31 * result + (UserName != null ? UserName.hashCode() : 0);
-        result = 31 * result + (Password != null ? Password.hashCode() : 0);
-        return result;
-    }
 
     public static Transport forAndroid(String deviceRegistrationId) {
         Transport t = new Transport(Type.ANDROID);
@@ -372,7 +295,7 @@ public class Transport {
         }
 
         public static Type fromKey(String key) {
-            for (Type type : Type.values()) {
+            for (Type type : values()) {
                 if (type.getKey().equals(key))
                     return type;
             }

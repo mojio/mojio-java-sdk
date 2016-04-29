@@ -35,7 +35,7 @@ public class Observer {
     private Type Type;
     private List<String> Fields;
     private List<Transport> Transports;
-    private List<Condition> Conditions;
+    private List<OldCondition> Conditions;
 
     public Observer() {}
 
@@ -136,11 +136,11 @@ public class Observer {
         Transports = transports;
     }
 
-    public List<Condition> getConditions() {
+    public List<OldCondition> getConditions() {
         return Conditions;
     }
 
-    public void setConditions(List<Condition> conditions) {
+    public void setConditions(List<OldCondition> conditions) {
         this.Conditions = conditions;
     }
 
@@ -211,9 +211,9 @@ public class Observer {
         private String Subject;
         private List<String> Fields;
         private String PropertyChanged;
-        private Condition Threshold;
-        private Condition Debounce;
-        private Condition Throttle;
+        private OldCondition Threshold;
+        private OldCondition Debounce;
+        private OldCondition Throttle;
         private Transport Transport;
         private Observer.Type Type;
 
@@ -221,7 +221,7 @@ public class Observer {
 
         private Request(String key, Observer.Type type, String subject,
                         Transport transport, String propertyChanged,
-                        Condition threshold, Condition debounce, Condition throttle,
+                        OldCondition threshold, OldCondition debounce, OldCondition throttle,
                         List<String> fields) {
             this.Key = key;
             this.Subject = subject;
@@ -241,9 +241,8 @@ public class Observer {
         private Observer.Type type;
         private Transport transport;
         private String propertyChanged;
-        private Condition threshold;
-        private Condition debounce;
-        private Condition throttle;
+        private OldCondition debounce;
+        private OldCondition throttle;
         private List<String> fields;
 
         /**
@@ -300,7 +299,7 @@ public class Observer {
          * @param condition
          * @return
          */
-        public Builder condition(Condition condition) {
+        public Builder condition(OldCondition condition) {
             switch (condition.getType()) {
                 case PROPERTY_CHANGED:
                     this.propertyChanged = condition.getProperty();
