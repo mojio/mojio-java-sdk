@@ -58,9 +58,6 @@ public class AuthInterceptorTest {
         Response actualResponse = interceptor.intercept(mock.chain);
         assertThat(actualResponse).isEqualTo(mock.response);
 
-        // verify we do not attempt to modify the original request
-        verify(mock.request, never()).newBuilder();
-
         // verify we did not trigger the OnAccessTokenExpiredListener
         verify(listener, never()).onAccessTokenExpired();
     }
