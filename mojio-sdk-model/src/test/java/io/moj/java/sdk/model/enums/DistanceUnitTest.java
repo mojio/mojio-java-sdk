@@ -86,4 +86,11 @@ public class DistanceUnitTest extends EnumTest<DistanceUnit> {
             }
         }
     }
+
+    @Test
+    public void testConversionToSelf() {
+        for (DistanceUnit unit : DistanceUnit.values()) {
+            assertThat(unit.to(unit).convert(1337)).isWithin(0.00000000001f).of(1337);
+        }
+    }
 }
