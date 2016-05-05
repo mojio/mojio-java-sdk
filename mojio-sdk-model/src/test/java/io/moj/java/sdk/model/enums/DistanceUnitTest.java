@@ -2,6 +2,7 @@ package io.moj.java.sdk.model.enums;
 
 import com.google.common.collect.ImmutableMap;
 
+import io.moj.java.sdk.math.UnitConverter;
 import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
@@ -74,5 +75,15 @@ public class DistanceUnitTest extends EnumTest<DistanceUnit> {
         assertThat(KILOMETERS.to(MILES).convert(80000)).isWithin(1f).of(49709);
         assertThat(KILOMETERS.to(MILES).convert(120000)).isWithin(1f).of(74564);
         assertThat(KILOMETERS.to(MILES).convert(300000)).isWithin(1f).of(186411f);
+    }
+
+    @Test
+    public void testAllConversionsExist() {
+        for (DistanceUnit unit : DistanceUnit.values()) {
+            for (DistanceUnit other : DistanceUnit.values()) {
+                UnitConverter converter = unit.to(other);
+                assertThat(converter).isNotNull();
+            }
+        }
     }
 }
