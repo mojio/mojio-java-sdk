@@ -6,6 +6,9 @@ apply plugin: 'java'
 apply plugin: 'jacoco'
 apply from: project.rootProject.file('maven.gradle')
 
+sourceCompatibility = SOURCE_COMPATIBILITY
+targetCompatibility = SOURCE_COMPATIBILITY
+
 dependencies {
     compile 'com.google.code.gson:gson:2.6.2'
 
