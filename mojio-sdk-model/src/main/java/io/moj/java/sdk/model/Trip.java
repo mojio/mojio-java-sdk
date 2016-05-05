@@ -52,7 +52,7 @@ public class Trip extends AbstractMojioObject {
     private Rpm MaxRPM;
     private Acceleration MaxAcceleration;
     private Acceleration MaxDeceleration;
-    private io.moj.java.sdk.model.values.FuelEfficiency FuelEfficiency;
+    private FuelEfficiency FuelEfficiency;
     private FuelLevel StartFuelLevel;
     private FuelLevel EndFuelLevel;
 
