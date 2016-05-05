@@ -27,8 +27,8 @@ public enum DistanceUnit {
     @SerializedName("MilliMeter")
     MILLIMETERS("MilliMeter", new float[] { 1000000f, 0.000000621371f, 0.000000539957f, 0.001f, 0.1f, 1f });
 
-    private String key;
-    private float[] conversions;
+    private final String key;
+    private final float[] conversions;
 
     DistanceUnit(String key, float[] conversions) {
         this.key = key;
