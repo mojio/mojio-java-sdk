@@ -57,7 +57,7 @@ public class VehicleMeasure {
     private Battery Battery;
     private String CurrentTrip;
     private Acceleration Deceleration;
-    private DiagnosticCode DiagnosticCodes;
+    private DiagnosticCode[] DiagnosticCodes;
     private FuelEfficiency FuelEfficiency;
     private FuelEfficiencyCalculationMethod FuelEfficiencyCalculationMethod;
     private FuelLevel FuelLevel;
@@ -128,11 +128,11 @@ public class VehicleMeasure {
         Deceleration = deceleration;
     }
 
-    public DiagnosticCode getDiagnosticCodes() {
+    public DiagnosticCode[] getDiagnosticCodes() {
         return DiagnosticCodes;
     }
 
-    public void setDiagnosticCodes(DiagnosticCode diagnosticCodes) {
+    public void setDiagnosticCodes(DiagnosticCode[] diagnosticCodes) {
         DiagnosticCodes = diagnosticCodes;
     }
 
