@@ -18,6 +18,7 @@ import io.moj.java.sdk.model.values.Odometer;
 import io.moj.java.sdk.model.values.Rpm;
 import io.moj.java.sdk.model.values.Speed;
 import io.moj.java.sdk.model.values.VehicleDetails;
+import io.moj.java.sdk.utils.TimeUtils;
 
 /**
  * Model object for an Vehicle.
@@ -62,17 +63,17 @@ public class Vehicle extends AbstractMojioObject {
     private String VIN;
     private String CurrentTrip;
     private String MojioId;
-    private io.moj.java.sdk.model.values.Image Image;
+    private Image Image;
     private Boolean MilStatus;
     private String LastContactTime;
     private DiagnosticCode[] DiagnosticCodes;
     private Accelerometer Accelerometer;
-    private io.moj.java.sdk.model.values.Acceleration Acceleration;
+    private Acceleration Acceleration;
     private Acceleration Deceleration;
-    private io.moj.java.sdk.model.values.Speed Speed;
+    private Speed Speed;
     private Odometer Odometer;
     private Rpm RPM;
-    private io.moj.java.sdk.model.values.FuelEfficiency FuelEfficiency;
+    private FuelEfficiency FuelEfficiency;
     private FuelEfficiencyCalculationMethod FuelEfficiencyCalculationMethod;
     private FuelLevel FuelLevel;
     private FuelType FuelType;
@@ -236,12 +237,12 @@ public class Vehicle extends AbstractMojioObject {
         Image = image;
     }
 
-    public String getLastContactTime() {
-        return LastContactTime;
+    public Long getLastContactTime() {
+        return TimeUtils.convertTimestampToMillis(LastContactTime);
     }
 
-    public void setLastContactTime(String lastContactTime) {
-        LastContactTime = lastContactTime;
+    public void setLastContactTime(Long lastContactTime) {
+        LastContactTime = TimeUtils.convertMillisToTimestamp(lastContactTime);
     }
 
     public String getLicensePlate() {

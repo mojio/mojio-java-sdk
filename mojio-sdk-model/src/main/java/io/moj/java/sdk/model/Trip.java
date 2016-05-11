@@ -9,6 +9,7 @@ import io.moj.java.sdk.model.values.Speed;
 import io.moj.java.sdk.model.values.FuelLevel;
 import io.moj.java.sdk.model.values.Odometer;
 import io.moj.java.sdk.model.values.Rpm;
+import io.moj.java.sdk.utils.TimeUtils;
 
 /**
  * Model object for a Trip.
@@ -64,12 +65,12 @@ public class Trip extends AbstractMojioObject {
         Completed = completed;
     }
 
-    public String getDuration() {
-        return Duration;
+    public Long getDuration() {
+        return TimeUtils.convertTimespanToMillis(Duration);
     }
 
-    public void setDuration(String duration) {
-        Duration = duration;
+    public void setDuration(Long duration) {
+        Duration = TimeUtils.convertMillisToTimespan(duration);
     }
 
     public FuelLevel getEndFuelLevel() {
@@ -96,12 +97,12 @@ public class Trip extends AbstractMojioObject {
         EndOdometer = endOdometer;
     }
 
-    public String getEndTimestamp() {
-        return EndTimestamp;
+    public Long getEndTimestamp() {
+        return TimeUtils.convertTimestampToMillis(EndTimestamp);
     }
 
-    public void setEndTimestamp(String endTimestamp) {
-        EndTimestamp = endTimestamp;
+    public void setEndTimestamp(Long endTimestamp) {
+        EndTimestamp = TimeUtils.convertMillisToTimestamp(endTimestamp);
     }
 
     public FuelEfficiency getFuelEfficiency() {
@@ -184,12 +185,12 @@ public class Trip extends AbstractMojioObject {
         StartOdometer = startOdometer;
     }
 
-    public String getStartTimestamp() {
-        return StartTimestamp;
+    public Long getStartTimestamp() {
+        return TimeUtils.convertTimestampToMillis(StartTimestamp);
     }
 
-    public void setStartTimestamp(String startTimestamp) {
-        StartTimestamp = startTimestamp;
+    public void setStartTimestamp(Long startTimestamp) {
+        StartTimestamp = TimeUtils.convertMillisToTimestamp(startTimestamp);
     }
 
     public String[] getTags() {
