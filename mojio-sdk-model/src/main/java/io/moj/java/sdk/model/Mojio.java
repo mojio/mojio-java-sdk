@@ -1,6 +1,7 @@
 package io.moj.java.sdk.model;
 
 import io.moj.java.sdk.model.values.Location;
+import io.moj.java.sdk.utils.TimeUtils;
 
 import java.util.Arrays;
 
@@ -35,12 +36,12 @@ public class Mojio extends AbstractMojioObject {
     /**
      * @return the time the server received the message from the device
      */
-    public String getGatewayTime() {
-        return GatewayTime;
+    public Long getGatewayTime() {
+        return TimeUtils.convertTimestampToMillis(GatewayTime);
     }
 
-    public void setGatewayTime(String gatewayTime) {
-        GatewayTime = gatewayTime;
+    public void setGatewayTime(Long gatewayTime) {
+        GatewayTime = TimeUtils.convertMillisToTimestamp(gatewayTime);
     }
 
     public String getIMEI() {
@@ -59,12 +60,12 @@ public class Mojio extends AbstractMojioObject {
         VehicleId = vehicleId;
     }
 
-    public String getLastContactTime() {
-        return LastContactTime;
+    public Long getLastContactTime() {
+        return TimeUtils.convertTimestampToMillis(LastContactTime);
     }
 
-    public void setLastContactTime(String lastContactTime) {
-        LastContactTime = lastContactTime;
+    public void setLastContactTime(Long lastContactTime) {
+        LastContactTime = TimeUtils.convertMillisToTimestamp(lastContactTime);
     }
 
     public String getName() {
