@@ -13,7 +13,7 @@ public class UnitConverterTest {
 
     @Test
     public void testConvert() {
-        UnitConverter converter = new UnitConverter(0.01f);
+        Multiplier converter = new Multiplier(0.01f);
         assertThat(converter.convert(0)).isWithin(TOLERANCE).of(0f);
         assertThat(converter.convert(5)).isWithin(TOLERANCE).of(0.05f);
         assertThat(converter.convert(0.05f)).isWithin(TOLERANCE).of(0.0005f);
