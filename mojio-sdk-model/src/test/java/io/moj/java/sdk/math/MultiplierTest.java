@@ -7,7 +7,7 @@ import static com.google.common.truth.Truth.assertThat;
 /**
  * Created by skidson on 2016-05-05.
  */
-public class UnitConverterTest {
+public class MultiplierTest {
 
     private static final float TOLERANCE = 0.00000001f;
 
