@@ -88,14 +88,26 @@ public interface MojioRestApi {
     @GET("trips/{id}/history/states")
     Call<ListResponse<VehicleMeasure>> getTripStates(@Path("id") String tripId);
 
+    @GET("trips/{id}/history/states")
+    Call<ListResponse<VehicleMeasure>> getTripStates(@Path("id") String tripId, @QueryMap Map<String, String> params);
+
     @GET("trips/{id}/history/locations")
     Call<ListResponse<Location>> getTripLocations(@Path("id") String tripId);
+
+    @GET("trips/{id}/history/locations")
+    Call<ListResponse<Location>> getTripLocations(@Path("id") String tripId, @QueryMap Map<String, String> params);
 
     @GET("vehicles/{id}/history/states")
     Call<ListResponse<VehicleMeasure>> getVehicleStates(@Path("id") String vehicleId);
 
+    @GET("vehicles/{id}/history/states")
+    Call<ListResponse<VehicleMeasure>> getVehicleStates(@Path("id") String vehicleId, @QueryMap Map<String, String> params);
+
     @GET("vehicles/{id}/history/locations")
     Call<ListResponse<Location>> getVehicleLocations(@Path("id") String vehicleId);
+
+    @GET("vehicles/{id}/history/locations")
+    Call<ListResponse<Location>> getVehicleLocations(@Path("id") String vehicleId, @QueryMap Map<String, String> params);
     // endregion
 
     // region Images
