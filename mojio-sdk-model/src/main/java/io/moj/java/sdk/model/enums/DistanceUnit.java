@@ -1,6 +1,7 @@
 package io.moj.java.sdk.model.enums;
 
 import com.google.gson.annotations.SerializedName;
+import io.moj.java.sdk.math.Multiplier;
 import io.moj.java.sdk.math.UnitConverter;
 
 /**
@@ -43,7 +44,7 @@ public enum DistanceUnit {
         DistanceUnit[] values = values();
         for (int i = 0; i < values.length; i++) {
             if (values[i] == unit) {
-                return new UnitConverter(conversions[i]);
+                return new Multiplier(conversions[i]);
             }
         }
         throw new IllegalArgumentException("Cannot convert " + this + " to " + unit);
