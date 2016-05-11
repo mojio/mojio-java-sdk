@@ -1,5 +1,6 @@
 package io.moj.java.sdk.utils;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,10 +17,14 @@ public final class TimeUtils {
 
     private static final String FORMAT_TIMESPAN = "%02d.%02d:%02d:%02d.%s";
     private static final Pattern PATTERN_TIMESPAN = Pattern.compile("(\\d+)?\\.?(\\d{2}):(\\d{2}):(\\d{2})\\.(\\d+)");
-    private static final SimpleDateFormat FORMATTER = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
-    static {
-        FORMATTER.setTimeZone(TimeZone.getTimeZone("GMT"));
-    }
+    private static final ThreadLocal<DateFormat> DATE_FORMAT = new ThreadLocal<DateFormat>() {
+        @Override
+        protected DateFormat initialValue() {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
+            dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+            return dateFormat;
+        }
+    };
 
     private static final int GROUP_DAYS = 1;
     private static final int GROUP_HOURS = 2;
@@ -127,14 +132,14 @@ public final class TimeUtils {
      * @param timestamp
      * @return
      */
-    public static synchronized Long convertTimestampToMillis(String timestamp) {
+    public static Long convertTimestampToMillis(String timestamp) {
         if (timestamp == null || timestamp.length() == 0)
             return null;
 
         timestamp = timestamp.replaceFirst("\\+.*", "Z");
 
         try {
-            return FORMATTER.parse(timestamp).getTime();
+            return DATE_FORMAT.get().parse(timestamp).getTime();
         } catch (ParseException e) {
             return 0L;
         }
@@ -145,11 +150,11 @@ public final class TimeUtils {
      * @param timestamp
      * @return
      */
-    public static synchronized String convertMillisToTimestamp(Long timestamp) {
+    public static String convertMillisToTimestamp(Long timestamp) {
         if (timestamp == null)
             return null;
 
-        return FORMATTER.format(new Date(timestamp));
+        return DATE_FORMAT.get().format(new Date(timestamp));
     }
 
 }
