@@ -75,7 +75,7 @@ public class VehicleMeasure {
     private Speed Speed;
     private BooleanState TowState;
     private String VIN;
-    private VinDetails VinDetails;
+    private VehicleDetails VinDetails;
     private Odometer VirtualOdometer;
     private Odometer Odometer;
     private String Time;
@@ -291,11 +291,11 @@ public class VehicleMeasure {
         this.VIN = VIN;
     }
 
-    public VinDetails getVinDetails() {
+    public VehicleDetails getVinDetails() {
         return VinDetails;
     }
 
-    public void setVinDetails(VinDetails vinDetails) {
+    public void setVinDetails(VehicleDetails vinDetails) {
         VinDetails = vinDetails;
     }
 
