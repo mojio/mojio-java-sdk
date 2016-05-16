@@ -56,6 +56,24 @@ public class TimeUtilsTest {
         );
     }
 
+    /**
+     * Assert a timespan is still parseable even if milliseconds are not included.
+     */
+    @Test
+    public void testConvertTimespanToMillis_noMillis() {
+        assertThat(TimeUtils.convertTimespanToMillis("00:00:00")).isEqualTo(0);
+
+        assertThat(TimeUtils.convertTimespanToMillis("01:00:00")).isEqualTo(HOURS_TO_MS);
+        assertThat(TimeUtils.convertTimespanToMillis("00:01:00")).isEqualTo(MINUTES_TO_MS);
+        assertThat(TimeUtils.convertTimespanToMillis("00:00:01")).isEqualTo(SECONDS_TO_MS);
+
+        assertThat(TimeUtils.convertTimespanToMillis("02:03:04")).isEqualTo(
+                HOURS_TO_MS * 2 +
+                MINUTES_TO_MS * 3 +
+                SECONDS_TO_MS * 4
+        );
+    }
+
     @Test
     public void testConvertTimespanToMillis_null() {
         assertThat(TimeUtils.convertTimespanToMillis(null)).isNull();
@@ -91,6 +109,17 @@ public class TimeUtilsTest {
     public void testConvertTimestampToMillis() {
         assertThat(TimeUtils.convertTimestampToMillis("1970-01-01T00:00:00.000Z")).isEqualTo(0L);
         assertThat(TimeUtils.convertTimestampToMillis("2016-03-19T00:35:16.264Z")).isEqualTo(1458347716264L);
+    }
+
+    @Test
+    public void testConvertTimestampToMillis_noMillis() {
+        assertThat(TimeUtils.convertTimestampToMillis("1970-01-01T00:00:00Z")).isEqualTo(0L);
+        assertThat(TimeUtils.convertTimestampToMillis("2016-03-19T00:35:16Z")).isEqualTo(1458347716000L);
+    }
+
+    @Test
+    public void testConvertTimestampToMillis_noMillis_invalidSuffix() {
+        assertThat(TimeUtils.convertTimestampToMillis("2016-03-19T00:35:16+00:00")).isEqualTo(1458347716000L);
     }
 
     @Test

@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 public final class TimeUtils {
 
     private static final String FORMAT_TIMESPAN = "%02d.%02d:%02d:%02d.%s";
-    private static final Pattern PATTERN_TIMESPAN = Pattern.compile("(\\d+)?\\.?(\\d{2}):(\\d{2}):(\\d{2})\\.(\\d+)");
+    private static final Pattern PATTERN_TIMESPAN = Pattern.compile("(\\d+)?\\.?(\\d{2}):(\\d{2}):(\\d{2})\\.?(\\d+)?");
     private static final ThreadLocal<DateFormat> DATE_FORMAT = new ThreadLocal<DateFormat>() {
         @Override
         protected DateFormat initialValue() {
@@ -25,6 +25,9 @@ public final class TimeUtils {
             return dateFormat;
         }
     };
+
+    private static final String SUFFIX_TIMEZONE = "Z";
+    private static final String SUFFIX_TIMEZONE_MS = ".000" + SUFFIX_TIMEZONE;
 
     private static final int GROUP_DAYS = 1;
     private static final int GROUP_HOURS = 2;
@@ -136,7 +139,10 @@ public final class TimeUtils {
         if (timestamp == null || timestamp.length() == 0)
             return null;
 
-        timestamp = timestamp.replaceFirst("\\+.*", "Z");
+        timestamp = timestamp.replaceFirst("\\+.*", SUFFIX_TIMEZONE);
+        if (!timestamp.contains(".")) {
+            timestamp = timestamp.replaceFirst(SUFFIX_TIMEZONE, SUFFIX_TIMEZONE_MS);
+        }
 
         try {
             return DATE_FORMAT.get().parse(timestamp).getTime();
