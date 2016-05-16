@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 public final class TimeUtils {
 
     private static final String FORMAT_TIMESPAN = "%02d.%02d:%02d:%02d.%s";
-    private static final Pattern PATTERN_TIMESPAN = Pattern.compile("(\\d+)?\\.?(\\d{2}):(\\d{2}):(\\d{2})\\.(\\d+)");
+    private static final Pattern PATTERN_TIMESPAN = Pattern.compile("(\\d+)?\\.?(\\d{2}):(\\d{2}):(\\d{2})\\.?(\\d+)?");
     private static final ThreadLocal<DateFormat> DATE_FORMAT = new ThreadLocal<DateFormat>() {
         @Override
         protected DateFormat initialValue() {

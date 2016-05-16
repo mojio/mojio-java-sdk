@@ -56,6 +56,24 @@ public class TimeUtilsTest {
         );
     }
 
+    /**
+     * Assert a timespan is still parseable even if milliseconds are not included.
+     */
+    @Test
+    public void testConvertTimespanToMillis_noMillis() {
+        assertThat(TimeUtils.convertTimespanToMillis("00:00:00")).isEqualTo(0);
+
+        assertThat(TimeUtils.convertTimespanToMillis("01:00:00")).isEqualTo(HOURS_TO_MS);
+        assertThat(TimeUtils.convertTimespanToMillis("00:01:00")).isEqualTo(MINUTES_TO_MS);
+        assertThat(TimeUtils.convertTimespanToMillis("00:00:01")).isEqualTo(SECONDS_TO_MS);
+
+        assertThat(TimeUtils.convertTimespanToMillis("02:03:04")).isEqualTo(
+                HOURS_TO_MS * 2 +
+                MINUTES_TO_MS * 3 +
+                SECONDS_TO_MS * 4
+        );
+    }
+
     @Test
     public void testConvertTimespanToMillis_null() {
         assertThat(TimeUtils.convertTimespanToMillis(null)).isNull();
