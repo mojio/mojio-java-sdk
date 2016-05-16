@@ -26,6 +26,9 @@ public final class TimeUtils {
         }
     };
 
+    private static final String SUFFIX_TIMEZONE = "Z";
+    private static final String SUFFIX_TIMEZONE_MS = ".000Z";
+
     private static final int GROUP_DAYS = 1;
     private static final int GROUP_HOURS = 2;
     private static final int GROUP_MINS = 3;
@@ -136,7 +139,10 @@ public final class TimeUtils {
         if (timestamp == null || timestamp.length() == 0)
             return null;
 
-        timestamp = timestamp.replaceFirst("\\+.*", "Z");
+        timestamp = timestamp.replaceFirst("\\+.*", SUFFIX_TIMEZONE);
+        if (!timestamp.contains(".")) {
+            timestamp = timestamp.replaceFirst(SUFFIX_TIMEZONE, SUFFIX_TIMEZONE_MS);
+        }
 
         try {
             return DATE_FORMAT.get().parse(timestamp).getTime();

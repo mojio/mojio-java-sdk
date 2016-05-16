@@ -112,6 +112,17 @@ public class TimeUtilsTest {
     }
 
     @Test
+    public void testConvertTimestampToMillis_noMillis() {
+        assertThat(TimeUtils.convertTimestampToMillis("1970-01-01T00:00:00Z")).isEqualTo(0L);
+        assertThat(TimeUtils.convertTimestampToMillis("2016-03-19T00:35:16Z")).isEqualTo(1458347716000L);
+    }
+
+    @Test
+    public void testConvertTimestampToMillis_noMillis_invalidSuffix() {
+        assertThat(TimeUtils.convertTimestampToMillis("2016-03-19T00:35:16+00:00")).isEqualTo(1458347716000L);
+    }
+
+    @Test
     public void testConvertTimestampToMillis_null() {
         assertThat(TimeUtils.convertTimestampToMillis(null)).isNull();
     }
