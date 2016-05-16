@@ -27,7 +27,7 @@ public final class TimeUtils {
     };
 
     private static final String SUFFIX_TIMEZONE = "Z";
-    private static final String SUFFIX_TIMEZONE_MS = ".000Z";
+    private static final String SUFFIX_TIMEZONE_MS = ".000" + SUFFIX_TIMEZONE;
 
     private static final int GROUP_DAYS = 1;
     private static final int GROUP_HOURS = 2;
