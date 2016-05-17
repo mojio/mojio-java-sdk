@@ -8,11 +8,11 @@ import java.util.HashMap;
  */
 public class Query extends HashMap<String, String> {
 
-    public static final String TOP = "top";
-    public static final String SKIP = "skip";
-    public static final String FILTER = "filter";
-    public static final String SELECT = "select";
-    public static final String ORDER_BY = "orderby";
+    public static final String TOP = "$top";
+    public static final String SKIP = "$skip";
+    public static final String FILTER = "$filter";
+    public static final String SELECT = "$select";
+    public static final String ORDER_BY = "$orderby";
 
     /**
      * The maximum number of records to return.
