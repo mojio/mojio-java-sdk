@@ -106,19 +106,4 @@ public interface MojioAuthApi {
     })
     Call<RegistrationResponse> register(@Header("Authorization") String auth, @Body RegistrationRequest request);
 
-    /**
-     * Endpoint for registering a user via phone number. Calling this endpoint will send a 4-digit PIN to the specified
-     * phone number. This PIN should then be included in a follow-up call to
-     * {@link #login(String, String, String, String, String)} with username = phone number, password = pin
-     * @param auth String in the format 'Basic {Base64-Encoded "client_id:client_secret"}'
-     * @param request
-     * @return
-     */
-    @POST("account/signin/phone")
-    @Headers({
-            "Content-Type: application/json",
-            "Accept: application/json"
-    })
-    Call<RegistrationResponse> requestPin(@Header("Authorization") String auth, @Body PinRequest request);
-
 }
