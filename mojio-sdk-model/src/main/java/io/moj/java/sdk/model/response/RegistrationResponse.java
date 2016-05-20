@@ -1,61 +1,70 @@
 package io.moj.java.sdk.model.response;
 
-import java.util.List;
+import java.util.Arrays;
 
 /**
- * Model object for a response that includes account registration information, namely ValidationErrors if registration
+ * Model object for a response that includes account registration information, namely errors if registration
  * was unsuccessful.
  * Created by skidson on 2016-04-26.
  */
 public class RegistrationResponse extends MessageResponse {
 
-    private List<ValidationError> ValidationErrors;
+    private String Status;
+    private String[] Errors;
 
-    public List<ValidationError> getValidationErrors() {
-        return ValidationErrors;
+    public RegistrationResponse() {
     }
 
-    public void setValidationErrors(List<ValidationError> validationErrors) {
-        ValidationErrors = validationErrors;
+    public String getStatus() {
+        return Status;
     }
 
-    public static class ValidationError {
-        private String Username;
-        private String EmailAddress;
-        private String PhoneNumber;
-        private String Password;
+    public void setStatus(String status) {
+        Status = status;
+    }
 
-        public String getUsername() {
-            return Username;
-        }
+    public String[] getErrors() {
+        return Errors;
+    }
 
-        public String getEmailAddress() {
-            return EmailAddress;
-        }
-
-        public String getPhoneNumber() {
-            return PhoneNumber;
-        }
-
-        public String getPassword() {
-            return Password;
-        }
-
-        @Override
-        public String toString() {
-            return "ValidationError{" +
-                    "Username='" + Username + '\'' +
-                    ", EmailAddress='" + EmailAddress + '\'' +
-                    ", PhoneNumber='" + PhoneNumber + '\'' +
-                    ", Password='" + Password + '\'' +
-                    '}';
-        }
+    public void setErrors(String[] errors) {
+        Errors = errors;
     }
 
     @Override
     public String toString() {
         return "RegistrationResponse{" +
-                "ValidationErrors=" + ValidationErrors +
-                "} " + super.toString();
+                "Status='" + Status + '\'' +
+                ", Errors=" + Arrays.toString(Errors) +
+                '}';
+    }
+
+    private static class Error {
+        private String Code;
+        private String Message;
+
+        public String getCode() {
+            return Code;
+        }
+
+        public void setCode(String code) {
+            Code = code;
+        }
+
+        public String getMessage() {
+            return Message;
+        }
+
+        public void setMessage(String message) {
+            Message = message;
+        }
+
+        @Override
+        public String toString() {
+            return "Error{" +
+                    "Code='" + Code + '\'' +
+                    ", Message='" + Message + '\'' +
+                    '}';
+        }
     }
 }
