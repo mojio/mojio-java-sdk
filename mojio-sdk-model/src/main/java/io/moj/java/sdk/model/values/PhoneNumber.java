@@ -13,6 +13,7 @@ public class PhoneNumber {
     private Integer AreaCode;
     private Integer Number;
     private Integer Ext;
+    private String PhoneNumber;
     private Boolean Verified;
 
     public Integer getAreaCode() {
@@ -55,6 +56,14 @@ public class PhoneNumber {
         Type = type;
     }
 
+    public String getPhoneNumber() {
+        return PhoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        PhoneNumber = phoneNumber;
+    }
+
     public Boolean getVerified() {
         return Verified;
     }
@@ -71,6 +80,7 @@ public class PhoneNumber {
                 ", AreaCode=" + AreaCode +
                 ", Number=" + Number +
                 ", Ext=" + Ext +
+                ", PhoneNumber='" + PhoneNumber + '\'' +
                 ", Verified=" + Verified +
                 '}';
     }
