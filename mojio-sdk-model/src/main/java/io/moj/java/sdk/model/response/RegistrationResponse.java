@@ -43,9 +43,6 @@ public class RegistrationResponse extends MessageResponse {
         private String Code;
         private String Message;
 
-        public Error() {
-        }
-
         public String getCode() {
             return Code;
         }
