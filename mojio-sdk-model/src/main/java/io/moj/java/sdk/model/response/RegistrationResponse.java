@@ -1,6 +1,7 @@
 package io.moj.java.sdk.model.response;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Model object for a response that includes account registration information, namely errors if registration
@@ -10,7 +11,7 @@ import java.util.Arrays;
 public class RegistrationResponse extends MessageResponse {
 
     private String Status;
-    private String[] Errors;
+    private List<String> Errors;
 
     public RegistrationResponse() {
     }
@@ -23,11 +24,11 @@ public class RegistrationResponse extends MessageResponse {
         Status = status;
     }
 
-    public String[] getErrors() {
+    public List<String> getErrors() {
         return Errors;
     }
 
-    public void setErrors(String[] errors) {
+    public void setErrors(List<String> errors) {
         Errors = errors;
     }
 
@@ -35,8 +36,8 @@ public class RegistrationResponse extends MessageResponse {
     public String toString() {
         return "RegistrationResponse{" +
                 "Status='" + Status + '\'' +
-                ", Errors=" + Arrays.toString(Errors) +
-                '}';
+                ", Errors=" + Errors +
+                "} " + super.toString();
     }
 
     private static class Error {
