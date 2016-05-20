@@ -11,7 +11,7 @@ import java.util.List;
 public class RegistrationResponse extends MessageResponse {
 
     private String Status;
-    private List<String> Errors;
+    private List<Error> Errors;
 
     public RegistrationResponse() {
     }
@@ -24,11 +24,11 @@ public class RegistrationResponse extends MessageResponse {
         Status = status;
     }
 
-    public List<String> getErrors() {
+    public List<Error> getErrors() {
         return Errors;
     }
 
-    public void setErrors(List<String> errors) {
+    public void setErrors(List<Error> errors) {
         Errors = errors;
     }
 
