@@ -40,7 +40,7 @@ public class RegistrationResponse extends MessageResponse {
                 "} " + super.toString();
     }
 
-    private static class Error {
+    public static class Error {
         private String Code;
         private String Message;
 
