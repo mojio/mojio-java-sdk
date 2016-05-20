@@ -251,16 +251,16 @@ public interface MojioRestApi {
     @PUT("users/{id}")
     Call<User> updateUser(@Path("id") String userId, @Body User user);
 
-    @PUT("users/{id}/phonenumbers/{phone}?sendverification={sendCode}")
-    Call<PhoneNumber> updatePhone(@Path("id") String userId, @Path("phone") String phoneNumber,
-                                  @Path("sendCode") boolean sendCode);
+    @PUT("users/{id}/phonenumbers/{phone}")
+    Call<PhoneNumber> addUpdatePhone(@Path("id") String userId, @Path("phone") String phoneNumber,
+                                     @Query("sendverification") boolean sendCode);
 
     @DELETE("users/{id}/phonenumbers/{phone}")
     Call<PhoneNumber> deletePhone(@Path("id") String userId, @Path("phone") String phoneNumber);
 
-    @PUT("users/{id}/phonenumbers/{phone}?pin={pin}")
+    @PUT("users/{id}/phonenumbers/{phone}")
     Call<PhoneNumber> verifyPin(@Path("id") String userId, @Path("phone") String phoneNumber,
-                                           @Path("pin") String pin);
+                                @Query("pin") String pin);
     // endregion
 
     // region Vehicles
