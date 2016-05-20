@@ -1,18 +1,21 @@
 package io.moj.java.sdk;
 
+import java.util.Map;
+
 import io.moj.java.sdk.model.App;
 import io.moj.java.sdk.model.Group;
-import io.moj.java.sdk.model.response.ListResponse;
-import io.moj.java.sdk.model.response.MessageResponse;
 import io.moj.java.sdk.model.Mojio;
 import io.moj.java.sdk.model.Trip;
 import io.moj.java.sdk.model.User;
 import io.moj.java.sdk.model.Vehicle;
-import io.moj.java.sdk.model.values.VehicleMeasure;
+import io.moj.java.sdk.model.response.ListResponse;
+import io.moj.java.sdk.model.response.MessageResponse;
 import io.moj.java.sdk.model.values.AccessModel;
 import io.moj.java.sdk.model.values.Image;
 import io.moj.java.sdk.model.values.Location;
+import io.moj.java.sdk.model.values.PhoneNumber;
 import io.moj.java.sdk.model.values.ServiceSchedule;
+import io.moj.java.sdk.model.values.VehicleMeasure;
 import io.moj.java.sdk.model.values.VinDetails;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -24,12 +27,11 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
-import java.util.Map;
-
 /**
  * Retrofit interface for the Mojio REST API.
  * Created by skidson on 16-02-09.
  */
+@SuppressWarnings("unused")
 public interface MojioRestApi {
 
     // region Apps
@@ -248,6 +250,17 @@ public interface MojioRestApi {
 
     @PUT("users/{id}")
     Call<User> updateUser(@Path("id") String userId, @Body User user);
+
+    @PUT("users/{id}/phonenumbers/{phone}")
+    Call<PhoneNumber> addUpdatePhone(@Path("id") String userId, @Path("phone") String phoneNumber,
+                                     @Query("sendverification") boolean sendCode);
+
+    @DELETE("users/{id}/phonenumbers/{phone}")
+    Call<PhoneNumber> deletePhone(@Path("id") String userId, @Path("phone") String phoneNumber);
+
+    @PUT("users/{id}/phonenumbers/{phone}")
+    Call<PhoneNumber> verifyPin(@Path("id") String userId, @Path("phone") String phoneNumber,
+                                @Query("pin") String pin);
     // endregion
 
     // region Vehicles
