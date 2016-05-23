@@ -11,7 +11,6 @@ import io.moj.java.sdk.logging.LoggingInterceptor;
 import io.moj.java.sdk.model.User;
 import io.moj.java.sdk.model.response.AuthResponse;
 import okhttp3.Dispatcher;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Call;
@@ -21,11 +20,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 
 /**
  * Client for authenticating and making calls against the Mojio API.
@@ -102,6 +99,17 @@ public class MojioClient {
      */
     public Call<User> login(String username, String password) {
         return new LoginCall(username, password, client);
+    }
+
+    /**
+     * Authenticates a user, stores the access token in the client's configured
+     * {@link io.moj.java.sdk.auth.Authenticator}, and then returns the {@link io.moj.java.sdk.model.User} entity.
+     * @param phoneNumber
+     * @param pin
+     * @return
+     */
+    public Call<User> loginWithPin(String phoneNumber, String pin) {
+        return new LoginCall(phoneNumber, pin, true, client);
     }
 
     /**
@@ -279,18 +287,27 @@ public class MojioClient {
      * {@link io.moj.java.sdk.auth.Authenticator} and then follows with a call to get the current User.
      */
     private class LoginCall implements Call<User> {
-        private String username;
+        private String id;
         private String password;
+        private boolean usingPin;
+
         private Client client;
         private Call<User> userCall;
         private Call<AuthResponse> authCall;
 
-        public LoginCall(String username, String password, Client client) {
-            this.username = username;
+        public LoginCall(String id, String password, Client client) {
+            this(id, password, false, client);
+        }
+
+        public LoginCall(String id, String password, boolean usingPin, Client client) {
+            this.id = id;
             this.password = password;
+            this.usingPin = usingPin;
             this.client = client;
-            this.authCall = auth()
-                    .login(MojioAuthApi.GRANT_TYPE_LOGIN, username, password, client.getKey(), client.getSecret());
+
+            this.authCall = usingPin
+                    ? auth().loginWithPin(MojioAuthApi.GRANT_TYPE_PHONE, id, password, client.getKey(), client.getSecret())
+                    : auth().login(MojioAuthApi.GRANT_TYPE_PASSWORD, id, password, client.getKey(), client.getSecret());
         }
 
         @Override
@@ -347,7 +364,7 @@ public class MojioClient {
 
         @Override
         public Call<User> clone() {
-            return new LoginCall(username, password, client);
+            return new LoginCall(id, password, usingPin, client);
         }
 
         @Override

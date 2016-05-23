@@ -26,7 +26,15 @@ public class LoggingInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
-        String endpointSignature = "[" + request.method() + " " + request.url().encodedPath() + "]";
+
+        String query = request.url().encodedQuery();
+        if (query == null || query.isEmpty()) {
+            query = "";
+        } else {
+            query = "?" + query;
+        }
+
+        String endpointSignature = "[" + request.method() + " " + request.url().encodedPath() + query + "]";
         String requestMessage = "Request " + endpointSignature;
         if (request.body() != null) {
             try {

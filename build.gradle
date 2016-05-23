@@ -16,7 +16,6 @@ ext {
 allprojects {
     group PUBLISH_GROUP_ID
     version PUBLISH_VERSION
-    sourceCompatibility = SOURCE_COMPATIBILITY
 
     repositories {
         jcenter()

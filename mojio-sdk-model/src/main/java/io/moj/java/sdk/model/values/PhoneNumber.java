@@ -13,6 +13,8 @@ public class PhoneNumber {
     private Integer AreaCode;
     private Integer Number;
     private Integer Ext;
+    private String PhoneNumber;
+    private Boolean Verified;
 
     public Integer getAreaCode() {
         return AreaCode;
@@ -54,14 +56,32 @@ public class PhoneNumber {
         Type = type;
     }
 
+    public String getPhoneNumber() {
+        return PhoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        PhoneNumber = phoneNumber;
+    }
+
+    public Boolean getVerified() {
+        return Verified;
+    }
+
+    public void setVerified(Boolean verified) {
+        Verified = verified;
+    }
+
     @Override
     public String toString() {
         return "PhoneNumber{" +
-                "AreaCode=" + AreaCode +
-                ", Type=" + Type +
+                "Type=" + Type +
                 ", CountryCode=" + CountryCode +
+                ", AreaCode=" + AreaCode +
                 ", Number=" + Number +
                 ", Ext=" + Ext +
+                ", PhoneNumber='" + PhoneNumber + '\'' +
+                ", Verified=" + Verified +
                 '}';
     }
 }

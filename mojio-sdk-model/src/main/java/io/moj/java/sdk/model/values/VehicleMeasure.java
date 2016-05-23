@@ -57,7 +57,7 @@ public class VehicleMeasure {
     private Battery Battery;
     private String CurrentTrip;
     private Acceleration Deceleration;
-    private DiagnosticCode DiagnosticCodes;
+    private DiagnosticCode[] DiagnosticCodes;
     private FuelEfficiency FuelEfficiency;
     private FuelEfficiencyCalculationMethod FuelEfficiencyCalculationMethod;
     private FuelLevel FuelLevel;
@@ -75,7 +75,7 @@ public class VehicleMeasure {
     private Speed Speed;
     private BooleanState TowState;
     private String VIN;
-    private VinDetails VinDetails;
+    private VehicleDetails VinDetails;
     private Odometer VirtualOdometer;
     private Odometer Odometer;
     private String Time;
@@ -128,11 +128,11 @@ public class VehicleMeasure {
         Deceleration = deceleration;
     }
 
-    public DiagnosticCode getDiagnosticCodes() {
+    public DiagnosticCode[] getDiagnosticCodes() {
         return DiagnosticCodes;
     }
 
-    public void setDiagnosticCodes(DiagnosticCode diagnosticCodes) {
+    public void setDiagnosticCodes(DiagnosticCode[] diagnosticCodes) {
         DiagnosticCodes = diagnosticCodes;
     }
 
@@ -291,11 +291,11 @@ public class VehicleMeasure {
         this.VIN = VIN;
     }
 
-    public VinDetails getVinDetails() {
+    public VehicleDetails getVinDetails() {
         return VinDetails;
     }
 
-    public void setVinDetails(VinDetails vinDetails) {
+    public void setVinDetails(VehicleDetails vinDetails) {
         VinDetails = vinDetails;
     }
 

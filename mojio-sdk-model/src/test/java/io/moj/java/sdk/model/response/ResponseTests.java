@@ -28,4 +28,10 @@ public class ResponseTests {
         assertAccess(new MessageResponse());
     }
 
+    @Test
+    public void testRegistrationResponse() throws IllegalAccessException {
+        assertToStringContainsAllFields(new RegistrationResponse());
+        assertAccess(new RegistrationResponse());
+    }
+
 }
