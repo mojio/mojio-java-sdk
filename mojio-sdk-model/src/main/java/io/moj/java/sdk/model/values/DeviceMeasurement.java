@@ -6,6 +6,11 @@ package io.moj.java.sdk.model.values;
  */
 public abstract class DeviceMeasurement {
 
+    public static final String BASE_UNIT = "BaseUnit";
+    public static final String BASE_VALUE = "BaseUnit";
+    public static final String UNIT = "Unit";
+    public static final String VALUE = "Value";
+
     private String BaseUnit;
     private Float BaseValue;
     private String Unit;

@@ -61,7 +61,7 @@ public interface MojioPushApi {
      * @see io.moj.java.sdk.Resource#getPath()
      */
     @PUT("{resource}")
-    Call<Observer> createObserver(@Path("resource") String resource, @Body Observer.Request observer);
+    Call<Observer> createObserver(@Path("resource") String resource, @Body Observer observer);
 
     /**
      * Creates an observer for the specified resource. Note: only
@@ -74,7 +74,7 @@ public interface MojioPushApi {
      */
     @PUT("{resource}/{id}")
     Call<Observer> createObserver(@Path("resource") String resource, @Path("id") String resourceId,
-                                  @Body Observer.Request observer);
+                                  @Body Observer observer);
 
     /**
      * Updates the observer with the specified key. Note: only {@link io.moj.java.sdk.Resource#MOJIO},
@@ -86,7 +86,7 @@ public interface MojioPushApi {
      * @see io.moj.java.sdk.Resource#getPath()
      */
     @PUT("{resource}/{key}")
-    Call<Observer> createObserver(@Path("resource") String resource, @Path("key") String key, @Body Observer observer);
+    Call<Observer> updateObserver(@Path("resource") String resource, @Path("key") String key, @Body Observer observer);
 
     /**
      * Updates the observer with the specified key for the specified resource. Note: only

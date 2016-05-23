@@ -17,20 +17,20 @@ public enum Timing {
     /**
      * The observer will fire when the condition evaluation changes (true to false, false to true).
      */
-    @SerializedName("Change")
-    CHANGE("Change"),
+    @SerializedName("Edge")
+    EDGE("Edge"),
 
     /**
      * The observer will only fire when the condition changes from false to true.
      */
-    @SerializedName("Enter")
-    ENTER("Enter"),
+    @SerializedName("Leading")
+    LEADING("Leading"),
 
     /**
      * The observer will only fire when the condition changes from true to false.
      */
-    @SerializedName("Exit")
-    EXIT("Exit");
+    @SerializedName("Trailing")
+    TRAILING("Trailing");
 
     private final String key;
 
