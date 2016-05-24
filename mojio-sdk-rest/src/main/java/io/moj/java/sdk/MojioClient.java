@@ -41,6 +41,7 @@ public class MojioClient {
 
     private final MojioRestApi restApi;
     private final MojioAuthApi authApi;
+    private final MojioPushApi pushApi;
     private Authenticator authenticator;
     private AuthInterceptor authInterceptor;
 
@@ -82,12 +83,16 @@ public class MojioClient {
         this.authenticator = authenticator;
         authInterceptor = new AuthInterceptor(authenticator);
         httpClientBuilder.addInterceptor(authInterceptor);
+        retrofitBuilder.client(httpClientBuilder.build());
 
         restApi = retrofitBuilder
                 .baseUrl(this.environment.getApiUrl() + "/")
-                .client(httpClientBuilder.build())
                 .build()
                 .create(MojioRestApi.class);
+        pushApi = retrofitBuilder
+                .baseUrl(this.environment.getPushUrl() + "/")
+                .build()
+                .create(MojioPushApi.class);
     }
 
     /**
@@ -113,6 +118,14 @@ public class MojioClient {
     }
 
     /**
+     * Returns the {@link io.moj.java.sdk.MojioAuthApi} interface for making direct calls to the Mojio AUTH API.
+     * @return
+     */
+    public MojioAuthApi auth() {
+        return authApi;
+    }
+
+    /**
      * Returns the {@link io.moj.java.sdk.MojioRestApi} interface for making direct calls to the Mojio REST API.
      * @return
      */
@@ -121,11 +134,11 @@ public class MojioClient {
     }
 
     /**
-     * Returns the {@link io.moj.java.sdk.MojioAuthApi} interface for making direct calls to the Mojio AUTH API.
+     * Returns the {@link io.moj.java.sdk.MojioPushApi} interface for making direct calls to the Mojio PUSH API.
      * @return
      */
-    public MojioAuthApi auth() {
-        return authApi;
+    public MojioPushApi push() {
+        return pushApi;
     }
 
     /**

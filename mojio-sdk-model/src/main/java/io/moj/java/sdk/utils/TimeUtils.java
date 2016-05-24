@@ -130,6 +130,42 @@ public final class TimeUtils {
     }
 
     /**
+     * Contructs a timespan string given a specified number of days, hours, minutes, and seconds.
+     * @param days
+     * @param hours
+     * @param minutes
+     * @param seconds
+     * @return
+     */
+    public static String buildTimespan(int days, int hours, int minutes, int seconds) {
+        if (days < 0)
+            throw new IllegalArgumentException("Days must be greater than or equal to zero");
+        if (hours < 0)
+            throw new IllegalArgumentException("Hours must be greater than or equal to zero");
+        if (minutes < 0)
+            throw new IllegalArgumentException("Minutes must be greater than or equal to zero");
+        if (seconds < 0)
+            throw new IllegalArgumentException("Seconds must be greater than or equal to zero");
+        return String.format(Locale.US, FORMAT_TIMESPAN, days, hours, minutes, seconds, 0).replace(' ', '0');
+    }
+
+    /**
+     * Returns the number of milliseconds given a specified number of days, hours, minutes, and seconds.
+     * @param days
+     * @param hours
+     * @param minutes
+     * @param seconds
+     * @return
+     */
+    public static long convertToMillis(int days, int hours, int minutes, int seconds) {
+        long ms = days * (HOUR_PER_DAY * MIN_PER_HOUR * SEC_PER_MIN * MS_PER_SEC);
+        ms += hours * (MIN_PER_HOUR * SEC_PER_MIN * MS_PER_SEC);
+        ms += minutes * (SEC_PER_MIN * MS_PER_SEC);
+        ms += seconds * MS_PER_SEC;
+        return ms;
+    }
+
+    /**
      * Converts an ISO-8601 timestamp to a long representing the number of milliseconds since epoch. This implementation
      * assumes timezone is always UTC.
      * @param timestamp

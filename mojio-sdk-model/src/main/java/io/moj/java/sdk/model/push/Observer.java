@@ -1,6 +1,7 @@
 package io.moj.java.sdk.model.push;
 
 import com.google.gson.annotations.SerializedName;
+import io.moj.java.sdk.utils.TimeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +19,14 @@ public class Observer {
     public static final String EXPIRY_DATE = "ExpiryDate";
     public static final String NAME = "Name";
     public static final String SUBJECT = "Subject";
+    public static final String CONDITIONS = "Conditions";
     public static final String TYPE = "Type";
+    public static final String TIMING = "Timing";
     public static final String FIELDS = "Fields";
     public static final String TRANSPORTS = "Transports";
-    public static final String CONDITIONS = "Conditions";
+    public static final String DEBOUNCE = "Debounce";
+    public static final String THROTTLE = "Throttle";
+    public static final String TIME_TO_LIVE = "TimeToLive";
 
     // local _id for storage in SQLite databases
     private Long _id;
@@ -32,10 +37,14 @@ public class Observer {
     private String ExpiryDate;
     private String Name;
     private String Subject;
+    private String Conditions;
     private Type Type;
+    private Timing Timing;
     private List<String> Fields;
     private List<Transport> Transports;
-    private List<Condition> Conditions;
+    private Integer Debounce;
+    private String Throttle;
+    private String TimeToLive;
 
     public Observer() {}
 
@@ -108,40 +117,52 @@ public class Observer {
         this._id = id;
     }
 
-    public Transport getTransport() {
-        if (Transports != null && !Transports.isEmpty())
-            return Transports.get(0);
-        return null;
+    public Timing getTiming() {
+        return Timing;
+    }
+
+    public void setTiming(Timing timing) {
+        Timing = timing;
+    }
+
+    public Integer getDebounce() {
+        return Debounce;
+    }
+
+    public void setDebounce(Integer debounce) {
+        Debounce = debounce;
+    }
+
+    public Long getThrottle() {
+        return TimeUtils.convertTimestampToMillis(Throttle);
+    }
+
+    public void setThrottle(Long throttle) {
+        Throttle = TimeUtils.convertMillisToTimestamp(throttle);
+    }
+
+    public Long getTimeToLive() {
+        return TimeUtils.convertTimestampToMillis(TimeToLive);
+    }
+
+    public void setTimeToLive(Long timeToLive) {
+        TimeToLive = TimeUtils.convertMillisToTimestamp(timeToLive);
     }
 
     public List<Transport> getTransports() {
         return Transports;
     }
 
-    public void setTransport(Transport transport) {
-        if (transport == null) {
-            this.Transports = null;
-            return;
-        }
-
-        if (this.Transports == null) {
-            this.Transports = new ArrayList<>();
-        } else {
-            this.Transports.clear();
-        }
-        this.Transports.add(transport);
-    }
-
     public void setTransports(List<Transport> transports) {
         Transports = transports;
     }
 
-    public List<Condition> getConditions() {
+    public String getConditions() {
         return Conditions;
     }
 
-    public void setConditions(List<Condition> conditions) {
-        this.Conditions = conditions;
+    public void setConditions(Condition condition) {
+        this.Conditions = condition == null ? null : condition.compile();
     }
 
     public Observer.Type getType() {
@@ -162,10 +183,14 @@ public class Observer {
                 ", ExpiryDate='" + ExpiryDate + '\'' +
                 ", Name='" + Name + '\'' +
                 ", Subject='" + Subject + '\'' +
+                ", Conditions='" + Conditions + '\'' +
                 ", Type=" + Type +
+                ", Timing=" + Timing +
                 ", Fields=" + Fields +
                 ", Transports=" + Transports +
-                ", Conditions=" + Conditions +
+                ", Debounce=" + Debounce +
+                ", Throttle='" + Throttle + '\'' +
+                ", TimeToLive='" + TimeToLive + '\'' +
                 '}';
     }
 
@@ -202,49 +227,17 @@ public class Observer {
         }
     }
 
-    public static class Request {
-        private String Key;
-        private String CreatedOn;
-        private String LastModified;
-        private String ExpiryDate;
-        private String Name;
-        private String Subject;
-        private List<String> Fields;
-        private String PropertyChanged;
-        private Condition Threshold;
-        private Condition Debounce;
-        private Condition Throttle;
-        private Transport Transport;
-        private Observer.Type Type;
-
-        public Request() {}
-
-        private Request(String key, Observer.Type type, String subject,
-                        Transport transport, String propertyChanged,
-                        Condition threshold, Condition debounce, Condition throttle,
-                        List<String> fields) {
-            this.Key = key;
-            this.Subject = subject;
-            this.Type = type;
-            this.Transport = transport;
-            this.PropertyChanged = propertyChanged;
-            this.Threshold = threshold;
-            this.Debounce = debounce;
-            this.Throttle = throttle;
-            this.Fields = fields;
-        }
-    }
-
     public static class Builder {
         private String key;
         private String subject;
         private Observer.Type type;
-        private Transport transport;
-        private String propertyChanged;
-        private Condition threshold;
-        private Condition debounce;
-        private Condition throttle;
+        private Timing timing;
+        private List<Transport> transports;
         private List<String> fields;
+        private Condition condition;
+        private Integer debounce;
+        private Long throttle;
+        private Long timeToLive;
 
         /**
          * Constructs an Observer builder.
@@ -289,7 +282,17 @@ public class Observer {
          * @return
          */
         public Builder transport(Transport transport) {
-            this.transport = transport;
+            if (transport == null) {
+                this.transports = null;
+                return this;
+            }
+
+            if (this.transports == null) {
+                this.transports = new ArrayList<>();
+            } else {
+                this.transports.clear();
+            }
+            this.transports.add(transport);
             return this;
         }
 
@@ -297,24 +300,23 @@ public class Observer {
          * Limits the behavior of an Observer. An Observer can have up to 4 Conditions, one of each
          * type. If none of these are set the Observer will broadcast a message anytime the entity
          * changes in any way.
-         * @param condition
+         * @param conditions
          * @return
          */
-        public Builder condition(Condition condition) {
-            switch (condition.getType()) {
-                case PROPERTY_CHANGED:
-                    this.propertyChanged = condition.getProperty();
-                    break;
-                case THRESHOLD:
-                    this.threshold = condition;
-                    break;
-                case DEBOUNCE:
-                    this.debounce = condition;
-                    break;
-                case THROTTLE:
-                    this.throttle = condition;
-                    break;
-            }
+        public Builder conditions(Condition conditions) {
+            this.condition = conditions;
+            return this;
+        }
+
+        /**
+         * Limits the behavior of an Observer. An Observer can have up to 4 Conditions, one of each
+         * type. If none of these are set the Observer will broadcast a message anytime the entity
+         * changes in any way.
+         * @param conditions
+         * @return
+         */
+        public Builder conditions(String conditions) {
+            this.condition = new RawCondition(conditions);
             return this;
         }
 
@@ -333,14 +335,100 @@ public class Observer {
         }
 
         /**
+         * Sets the timing to be used, based on the evaluation of the conditions, to determine if a notification should
+         * be sent.
+         * @param timing
+         * @return
+         */
+        public Builder timing(Timing timing) {
+            this.timing = timing;
+            return this;
+        }
+
+        /**
+         * Sets the number of consecutive data points, where the condition and timing is met, that are required before
+         * a notification will be sent.
+         * @param debounce
+         * @return
+         */
+        public Builder debounce(Integer debounce) {
+            this.debounce = debounce;
+            return this;
+        }
+
+        /**
+         * Sets the amount of time after one notification before another one should be fired.
+         * @param days the number of days the condition must be maintained for before it can be broadcast. Added with
+         *             the other time properties.
+         * @param hours the number of hours the condition must be maintained for before it can be broadcast. Added with
+         *              the other time properties.
+         * @param minutes the number of minutes the condition must be maintained for before it can be broadcast. Added
+         *                with the other time properties.
+         * @param seconds the number of seconds the condition must be maintained for before it can be broadcast. Added
+         *                with the other time properties.
+         * @return
+         */
+        public Builder throttle(int days, int hours, int minutes, int seconds) {
+            this.throttle = TimeUtils.convertToMillis(days, hours, minutes, seconds);
+            return this;
+        }
+
+        /**
+         * Sets the amount of time after one notification before another one should be fired.
+         * @param millis the number of milliseconds the condition must be maintained for before it can be broadcast.
+         * @return
+         */
+        public Builder throttle(Long millis) {
+            this.throttle = millis;
+            return this;
+        }
+
+        /**
+         * Sets how long between when a condition occurred and when it was processed before a notification will be
+         * dropped. This should be used to ensure only notifications that make sense at the specific time they occurred
+         * don't get triggered if the message was delayed (e.g. the vehicle was in an area of poor connectivity).
+         * @param days the number of days. Added with the other time properties.
+         * @param hours the number of hours. Added with the other time properties.
+         * @param minutes the number of minutes. Added with the other time properties.
+         * @param seconds the number of seconds. Added with the other time properties.
+         * @return
+         */
+        public Builder timeToLive(int days, int hours, int minutes, int seconds) {
+            this.timeToLive = TimeUtils.convertToMillis(days, hours, minutes, seconds);
+            return this;
+        }
+
+        /**
+         * Sets how long between when a condition occurred and when it was processed before a notification will be
+         * dropped. This should be used to ensure only notifications that make sense at the specific time they occurred
+         * don't get triggered if the message was delayed (e.g. the vehicle was in an area of poor connectivity).
+         * @param millis the number of milliseconds
+         * @return
+         */
+        public Builder timeToLive(Long millis) {
+            this.timeToLive = millis;
+            return this;
+        }
+
+        /**
          * Constructs the {@link Observer}.
          * @return
          */
-        public Request build() {
+        public Observer build() {
             if (type == null)
                 throw new IllegalStateException("Type must not be null");
-            return new Request(key, type, subject, transport, propertyChanged,
-                    threshold, debounce, throttle, fields == null ? null : new ArrayList<>(fields));
+
+            Observer observer = new Observer(key);
+            observer.setType(type);
+            observer.setSubject(subject);
+            observer.setTransports(transports == null ? null : new ArrayList<>(transports));
+            observer.setFields(fields == null ? null : new ArrayList<>(fields));
+            observer.setTiming(timing);
+            observer.setDebounce(debounce);
+            observer.setThrottle(throttle);
+            observer.setTimeToLive(timeToLive);
+            observer.setConditions(condition);
+            return observer;
         }
     }
 
