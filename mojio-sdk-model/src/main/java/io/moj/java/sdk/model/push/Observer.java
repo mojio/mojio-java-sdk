@@ -309,6 +309,18 @@ public class Observer {
         }
 
         /**
+         * Limits the behavior of an Observer. An Observer can have up to 4 Conditions, one of each
+         * type. If none of these are set the Observer will broadcast a message anytime the entity
+         * changes in any way.
+         * @param conditions
+         * @return
+         */
+        public Builder conditions(String conditions) {
+            this.condition = new RawCondition(conditions);
+            return this;
+        }
+
+        /**
          * Specifies what fields of the entity will be broadcast when a change occurs. When creating
          * or updating an Observer passing in an empty array or null will default to all fields the
          * user has permission for.
