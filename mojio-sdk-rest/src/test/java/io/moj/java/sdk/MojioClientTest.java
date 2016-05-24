@@ -37,6 +37,9 @@ public class MojioClientTest {
         assertThat(client.auth()).isNotNull();
         assertThat(client.auth().getClass()).isAssignableTo(MojioAuthApi.class);
 
+        assertThat(client.push()).isNotNull();
+        assertThat(client.push().getClass()).isAssignableTo(MojioPushApi.class);
+
         assertThat(client.getEnvironment()).isEqualTo(MojioEnvironment.getDefault());
     }
 
@@ -63,6 +66,8 @@ public class MojioClientTest {
         assertThat(client.rest().getClass()).isAssignableTo(MojioRestApi.class);
         assertThat(client.auth()).isNotNull();
         assertThat(client.auth().getClass()).isAssignableTo(MojioAuthApi.class);
+        assertThat(client.push()).isNotNull();
+        assertThat(client.push().getClass()).isAssignableTo(MojioPushApi.class);
 
         assertThat(client.getAuthenticator()).isEqualTo(expectedAuthenticator);
         assertThat(client.getEnvironment()).isEqualTo(expectedEnvironment);
@@ -100,6 +105,7 @@ public class MojioClientTest {
         Environment environment = mock(Environment.class);
         String serverUrl = mockServer.url("").toString();
         when(environment.getApiUrl()).thenReturn(serverUrl);
+        when(environment.getPushUrl()).thenReturn(serverUrl);
         when(environment.getAccountsUrl()).thenReturn(serverUrl);
 
         String expectedClientKey = "expectedClientKey";
