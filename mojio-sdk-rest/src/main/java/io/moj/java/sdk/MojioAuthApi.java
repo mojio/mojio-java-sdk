@@ -4,8 +4,10 @@ package io.moj.java.sdk;
  * Created by skidson on 2016-04-13.
  */
 
+import io.moj.java.sdk.model.request.ForgotPasswordRequest;
 import io.moj.java.sdk.model.request.PinRequest;
 import io.moj.java.sdk.model.request.RegistrationRequest;
+import io.moj.java.sdk.model.request.ResetPasswordRequest;
 import io.moj.java.sdk.model.response.AuthResponse;
 import io.moj.java.sdk.model.response.RegistrationResponse;
 import retrofit2.Call;
@@ -106,4 +108,28 @@ public interface MojioAuthApi {
     })
     Call<RegistrationResponse> register(@Header("Authorization") String auth, @Body RegistrationRequest request);
 
+    /**
+     * Endpoint for requesting a password reset token.
+     * @param request
+     * @return
+     */
+    @POST("account/forgot-password")
+    @Headers({
+            "Content-Type: application/json",
+            "Accept: application/json"
+    })
+    Call<RegistrationResponse> forgotPassword(@Body ForgotPasswordRequest request);
+
+    /**
+     * Endpoint for resetting the password
+     * @param auth String in the format 'Basic {Base64-Encoded "client_id:client_secret"}'
+     * @param request
+     * @return
+     */
+    @POST("account/reset-password")
+    @Headers({
+            "Content-Type: application/json",
+            "Accept: application/json"
+    })
+    Call<RegistrationResponse> resetPassword(@Header("Authorization") String auth, @Body ResetPasswordRequest request);
 }
