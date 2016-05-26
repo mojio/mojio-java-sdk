@@ -105,6 +105,7 @@ public class MojioClientTest {
         Environment environment = mock(Environment.class);
         String serverUrl = mockServer.url("").toString();
         when(environment.getApiUrl()).thenReturn(serverUrl);
+        when(environment.getApiUrl(1)).thenReturn(serverUrl);
         when(environment.getPushUrl()).thenReturn(serverUrl);
         when(environment.getAccountsUrl()).thenReturn(serverUrl);
 
