@@ -4,7 +4,6 @@ package io.moj.java.sdk;
  * Created by skidson on 2016-04-13.
  */
 
-import io.moj.java.sdk.model.request.PinRequest;
 import io.moj.java.sdk.model.request.RegistrationRequest;
 import io.moj.java.sdk.model.response.AuthResponse;
 import io.moj.java.sdk.model.response.RegistrationResponse;
