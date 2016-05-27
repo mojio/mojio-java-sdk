@@ -1,6 +1,7 @@
 package io.moj.java.sdk.model.values;
 
 import io.moj.java.sdk.model.enums.GPSStatus;
+import io.moj.java.sdk.utils.TimeUtils;
 
 /**
  * Model object for a Location.
@@ -16,7 +17,6 @@ public class Location {
     private Float Dilution;
     private Float Altitude;
     private String GeoHash;
-    private String Time;
 
     public Address getAddress() {
         return Address;
@@ -74,23 +74,12 @@ public class Location {
         Status = status;
     }
 
-    public String getTime() {
-        return Time;
+    public Long getTimestamp() {
+        return TimeUtils.convertTimestampToMillis(Timestamp);
     }
 
-    public void setTime(String time) {
-        Time = time;
-    }
-
-    /**
-     * @return the same value returned by the {@link #getTime() getTime} method but in UTC.
-     */
-    public String getTimestamp() {
-        return Timestamp;
-    }
-
-    public void setTimestamp(String timestamp) {
-        Timestamp = timestamp;
+    public void setTimestamp(Long timestamp) {
+        Timestamp = TimeUtils.convertMillisToTimestamp(timestamp);
     }
 
     @Override
@@ -104,7 +93,6 @@ public class Location {
                 ", Dilution=" + Dilution +
                 ", Altitude=" + Altitude +
                 ", GeoHash='" + GeoHash + '\'' +
-                ", Time='" + Time + '\'' +
                 "} " + super.toString();
     }
 }
