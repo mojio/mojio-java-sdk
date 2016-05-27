@@ -1,22 +1,6 @@
 package io.moj.java.sdk;
 
 import java.util.Map;
-
-import io.moj.java.sdk.model.App;
-import io.moj.java.sdk.model.Group;
-import io.moj.java.sdk.model.Mojio;
-import io.moj.java.sdk.model.Trip;
-import io.moj.java.sdk.model.User;
-import io.moj.java.sdk.model.Vehicle;
-import io.moj.java.sdk.model.response.ListResponse;
-import io.moj.java.sdk.model.response.MessageResponse;
-import io.moj.java.sdk.model.values.AccessModel;
-import io.moj.java.sdk.model.values.Image;
-import io.moj.java.sdk.model.values.Location;
-import io.moj.java.sdk.model.values.PhoneNumber;
-import io.moj.java.sdk.model.values.ServiceSchedule;
-import io.moj.java.sdk.model.values.VehicleMeasure;
-import io.moj.java.sdk.model.values.VinDetails;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -24,7 +8,6 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
 /**
