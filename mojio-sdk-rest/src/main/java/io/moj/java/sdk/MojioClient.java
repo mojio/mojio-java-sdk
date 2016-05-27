@@ -42,6 +42,7 @@ public class MojioClient {
     private final MojioRestApi restApi;
     private final MojioAuthApi authApi;
     private final MojioPushApi pushApi;
+    private final MojioStorageApi storageApi;
     private Authenticator authenticator;
     private AuthInterceptor authInterceptor;
 
@@ -93,6 +94,10 @@ public class MojioClient {
                 .baseUrl(this.environment.getPushUrl() + "/")
                 .build()
                 .create(MojioPushApi.class);
+        storageApi = retrofitBuilder
+                .baseUrl(this.environment.getApiUrl(1) + "/")
+                .build()
+                .create(MojioStorageApi.class);
     }
 
     /**
