@@ -1,6 +1,5 @@
 package io.moj.java.sdk.model.values;
 
-import io.moj.java.sdk.model.enums.GPSStatus;
 import io.moj.java.sdk.utils.TimeUtils;
 
 /**
@@ -13,7 +12,7 @@ public class Location {
     private String Timestamp;
     private Float Lat;
     private Float Lng;
-    private GPSStatus Status;
+    private String Status;
     private Float Dilution;
     private Float Altitude;
     private String GeoHash;
@@ -66,20 +65,20 @@ public class Location {
         Lng = lng;
     }
 
-    public GPSStatus getStatus() {
-        return Status;
-    }
-
-    public void setStatus(GPSStatus status) {
-        Status = status;
-    }
-
     public Long getTimestamp() {
         return TimeUtils.convertTimestampToMillis(Timestamp);
     }
 
     public void setTimestamp(Long timestamp) {
         Timestamp = TimeUtils.convertMillisToTimestamp(timestamp);
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
     }
 
     @Override
@@ -89,10 +88,10 @@ public class Location {
                 ", Timestamp='" + Timestamp + '\'' +
                 ", Lat=" + Lat +
                 ", Lng=" + Lng +
-                ", Status=" + Status +
+                ", Status='" + Status + '\'' +
                 ", Dilution=" + Dilution +
                 ", Altitude=" + Altitude +
                 ", GeoHash='" + GeoHash + '\'' +
-                "} " + super.toString();
+                '}';
     }
 }
