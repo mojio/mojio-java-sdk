@@ -11,6 +11,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -61,6 +62,31 @@ public final class TestUtils {
 
     public static void assertAccess(Object pojo) {
         assertAccess(pojo, getAllMethods(pojo));
+    }
+
+    public static void assertAccess(Object pojo, String... excludes) {
+        List<Method> methods = TestUtils.getAllMethods(pojo);
+        Iterator<Method> methodIterator = methods.iterator();
+        while (methodIterator.hasNext()) {
+            Method method = methodIterator.next();
+            for (String exclusion : excludes) {
+                if (method.getName().endsWith(exclusion)) {
+                    methodIterator.remove();
+                }
+            }
+        }
+
+        List<Field> fields = TestUtils.getAllFields(pojo);
+        Iterator<Field> fieldIterator = fields.iterator();
+        while (fieldIterator.hasNext()) {
+            Field field = fieldIterator.next();
+            for (String exclusion : excludes) {
+                if (field.getName().equals(exclusion)) {
+                    fieldIterator.remove();
+                }
+            }
+        }
+        assertAccess(pojo, methods, fields, true);
     }
 
     public static void assertAccess(Object pojo, boolean mutable) {

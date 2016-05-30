@@ -12,6 +12,15 @@ import java.util.List;
  */
 public class Location {
 
+    public static final String ADDRESS = "Address";
+    public static final String TIMESTAMP = "Timestamp";
+    public static final String LAT = "Lat";
+    public static final String LNG = "Lng";
+    public static final String STATUS = "Status";
+    public static final String DILUTION = "Dilution";
+    public static final String ALTITUDE = "Altitude";
+    public static final String GEOHASH = "GeoHash";
+
     private Address Address;
     private String Timestamp;
     private Float Lat;
