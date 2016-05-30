@@ -1,6 +1,10 @@
 package io.moj.java.sdk.model.values;
 
+import io.moj.java.sdk.model.enums.GPSStatus;
 import io.moj.java.sdk.utils.TimeUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Model object for a Location.
@@ -73,12 +77,34 @@ public class Location {
         Timestamp = TimeUtils.convertMillisToTimestamp(timestamp);
     }
 
-    public String getStatus() {
-        return Status;
+    public List<GPSStatus> getStatus() {
+        if (Status == null || Status.isEmpty()) {
+            return null;
+        }
+
+        List<GPSStatus> statuses = new ArrayList<>();
+        for (GPSStatus status : GPSStatus.values()) {
+            if (Status.contains(status.getKey())) {
+                statuses.add(status);
+            }
+        }
+        return statuses;
     }
 
-    public void setStatus(String status) {
-        Status = status;
+    public void setStatus(List<GPSStatus> statuses) {
+        if (statuses == null) {
+            Status = null;
+            return;
+        }
+
+        StringBuilder statusBuilder = new StringBuilder();
+        for (int i = 0; i < statuses.size(); i++) {
+            statusBuilder.append(statuses.get(i).getKey());
+            if (i != statuses.size() - 1) {
+                statusBuilder.append(", ");
+            }
+        }
+        Status = statusBuilder.toString();
     }
 
     @Override
