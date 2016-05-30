@@ -5,7 +5,6 @@ package io.moj.java.sdk;
  */
 
 import io.moj.java.sdk.model.request.ForgotPasswordRequest;
-import io.moj.java.sdk.model.request.PinRequest;
 import io.moj.java.sdk.model.request.RegistrationRequest;
 import io.moj.java.sdk.model.request.ResetPasswordRequest;
 import io.moj.java.sdk.model.response.AuthResponse;

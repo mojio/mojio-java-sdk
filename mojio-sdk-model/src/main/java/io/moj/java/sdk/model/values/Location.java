@@ -1,6 +1,10 @@
 package io.moj.java.sdk.model.values;
 
 import io.moj.java.sdk.model.enums.GPSStatus;
+import io.moj.java.sdk.utils.TimeUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Model object for a Location.
@@ -8,15 +12,23 @@ import io.moj.java.sdk.model.enums.GPSStatus;
  */
 public class Location {
 
+    public static final String ADDRESS = "Address";
+    public static final String TIMESTAMP = "Timestamp";
+    public static final String LAT = "Lat";
+    public static final String LNG = "Lng";
+    public static final String STATUS = "Status";
+    public static final String DILUTION = "Dilution";
+    public static final String ALTITUDE = "Altitude";
+    public static final String GEOHASH = "GeoHash";
+
     private Address Address;
     private String Timestamp;
     private Float Lat;
     private Float Lng;
-    private GPSStatus Status;
+    private String Status;
     private Float Dilution;
     private Float Altitude;
     private String GeoHash;
-    private String Time;
 
     public Address getAddress() {
         return Address;
@@ -66,31 +78,42 @@ public class Location {
         Lng = lng;
     }
 
-    public GPSStatus getStatus() {
-        return Status;
+    public Long getTimestamp() {
+        return TimeUtils.convertTimestampToMillis(Timestamp);
     }
 
-    public void setStatus(GPSStatus status) {
-        Status = status;
+    public void setTimestamp(Long timestamp) {
+        Timestamp = TimeUtils.convertMillisToTimestamp(timestamp);
     }
 
-    public String getTime() {
-        return Time;
+    public List<GPSStatus> getStatus() {
+        if (Status == null || Status.isEmpty()) {
+            return null;
+        }
+
+        List<GPSStatus> statuses = new ArrayList<>();
+        for (GPSStatus status : GPSStatus.values()) {
+            if (Status.contains(status.getKey())) {
+                statuses.add(status);
+            }
+        }
+        return statuses;
     }
 
-    public void setTime(String time) {
-        Time = time;
-    }
+    public void setStatus(List<GPSStatus> statuses) {
+        if (statuses == null) {
+            Status = null;
+            return;
+        }
 
-    /**
-     * @return the same value returned by the {@link #getTime() getTime} method but in UTC.
-     */
-    public String getTimestamp() {
-        return Timestamp;
-    }
-
-    public void setTimestamp(String timestamp) {
-        Timestamp = timestamp;
+        StringBuilder statusBuilder = new StringBuilder();
+        for (int i = 0; i < statuses.size(); i++) {
+            statusBuilder.append(statuses.get(i).getKey());
+            if (i != statuses.size() - 1) {
+                statusBuilder.append(", ");
+            }
+        }
+        Status = statusBuilder.toString();
     }
 
     @Override
@@ -100,11 +123,10 @@ public class Location {
                 ", Timestamp='" + Timestamp + '\'' +
                 ", Lat=" + Lat +
                 ", Lng=" + Lng +
-                ", Status=" + Status +
+                ", Status='" + Status + '\'' +
                 ", Dilution=" + Dilution +
                 ", Altitude=" + Altitude +
                 ", GeoHash='" + GeoHash + '\'' +
-                ", Time='" + Time + '\'' +
-                "} " + super.toString();
+                '}';
     }
 }

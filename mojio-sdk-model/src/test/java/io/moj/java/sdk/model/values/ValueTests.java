@@ -1,6 +1,12 @@
 package io.moj.java.sdk.model.values;
 
+import io.moj.java.sdk.test.TestUtils;
 import org.junit.Test;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.Iterator;
+import java.util.List;
 
 import static io.moj.java.sdk.test.TestUtils.assertAccess;
 import static io.moj.java.sdk.test.TestUtils.assertToStringContainsAllFields;
@@ -103,7 +109,7 @@ public class ValueTests {
     @Test
     public void testLocation() throws IllegalAccessException {
         assertToStringContainsAllFields(new Location());
-        assertAccess(new Location());
+        assertAccess(new Location(), Location.STATUS);
     }
 
     @Test
