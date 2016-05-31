@@ -105,7 +105,8 @@ public interface MojioPushApi {
 
     /**
      * Deletes all instances of a transport from all observers (for this application).
-     * @param transportId the transport ID. This ID is a URI constructed based on the Transport type.
+     * @param transportId the transport ID. This ID is a URI constructed based on the Transport type. See
+     * {@link io.moj.java.sdk.model.push.Transport.Type#getIdentifier(String...)}.
      * @return
      */
     @DELETE("transports")

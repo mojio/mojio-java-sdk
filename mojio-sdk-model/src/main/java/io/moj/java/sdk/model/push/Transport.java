@@ -2,6 +2,8 @@ package io.moj.java.sdk.model.push;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Locale;
+
 /**
  * Model object for an observer transport.
  * Created by skidson on 16-02-16.
@@ -388,31 +390,38 @@ public class Transport {
 
     public enum Type {
         @SerializedName("Android")
-        ANDROID("Android"),
+        ANDROID("Android", "gcm://%s"),
 
+        // TODO update the idFormat of the other transports pending Connery's documentation
         @SerializedName("Apple")
-        APPLE("Apple"),
+        APPLE("Apple", "apn://%s"),
 
         @SerializedName("HttpPost")
-        HTTP_POST("HttpPost"),
+        HTTP_POST("HttpPost", "%s"),
 
         @SerializedName("MongoDB")
-        MONGO_DB("MongoDB"),
+        MONGO_DB("MongoDB", "%s"),
 
         @SerializedName("Mqtt")
-        MQTT("Mqtt"),
+        MQTT("Mqtt", "%s"),
 
         @SerializedName("SignalR")
-        SIGNAL_R("SignalR");
+        SIGNAL_R("SignalR", "%s");
 
         private final String key;
+        private final String idFormat;
 
-        Type(String key) {
+        Type(String key, String idFormat) {
             this.key = key;
+            this.idFormat = idFormat;
         }
 
         public String getKey() {
             return key;
+        }
+
+        public String getIdentifier(String... args) {
+            return String.format(Locale.US, idFormat, args);
         }
 
         public static Type fromKey(String key) {
