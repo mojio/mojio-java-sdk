@@ -9,7 +9,7 @@ import io.moj.java.sdk.model.enums.RiskSeverity;
 public class Battery extends Voltage {
 
     private Boolean Connected;
-    private io.moj.java.sdk.model.enums.RiskSeverity RiskSeverity;
+    private RiskSeverity RiskSeverity;
     private Duration LowVoltageDuration;
     private Duration HighVoltageDuration;
 
