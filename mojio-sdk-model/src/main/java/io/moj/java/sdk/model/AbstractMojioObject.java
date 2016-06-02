@@ -1,6 +1,7 @@
 package io.moj.java.sdk.model;
 
 import io.moj.java.sdk.model.values.LinkInfo;
+import io.moj.java.sdk.utils.TimeUtils;
 
 /**
  * Base model for objects returned by the server.
@@ -21,12 +22,12 @@ public abstract class AbstractMojioObject implements MojioObject {
     private String LastModified;
     private LinkInfo Links;
 
-    public String getCreatedOn() {
-        return CreatedOn;
+    public Long getCreatedOn() {
+        return TimeUtils.convertTimestampToMillis(CreatedOn);
     }
 
-    public void setCreatedOn(String createdOn) {
-        CreatedOn = createdOn;
+    public void setCreatedOn(Long createdOn) {
+        CreatedOn = TimeUtils.convertMillisToTimestamp(createdOn);
     }
 
     @Override
@@ -38,12 +39,12 @@ public abstract class AbstractMojioObject implements MojioObject {
         Id = id;
     }
 
-    public String getLastModified() {
-        return LastModified;
+    public Long getLastModified() {
+        return TimeUtils.convertTimestampToMillis(LastModified);
     }
 
-    public void setLastModified(String lastModified) {
-        LastModified = lastModified;
+    public void setLastModified(Long lastModified) {
+        LastModified = TimeUtils.convertMillisToTimestamp(lastModified);
     }
 
     public Long getLocalId() {
