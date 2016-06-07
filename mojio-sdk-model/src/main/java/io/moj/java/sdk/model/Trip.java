@@ -3,6 +3,7 @@ package io.moj.java.sdk.model;
 import java.util.Arrays;
 
 import io.moj.java.sdk.model.values.Acceleration;
+import io.moj.java.sdk.model.values.Distance;
 import io.moj.java.sdk.model.values.FuelEfficiency;
 import io.moj.java.sdk.model.values.Location;
 import io.moj.java.sdk.model.values.Speed;
@@ -22,6 +23,7 @@ public class Trip extends AbstractMojioObject {
     public static final String TAGS = "Tags";
     public static final String MOJIO_ID = "MojioId";
     public static final String COMPLETED = "Completed";
+    public static final String DISTANCE = "Distance";
     public static final String DURATION = "Duration";
     public static final String START_TIMESTAMP = "StartTimestamp";
     public static final String END_TIMESTAMP = "EndTimestamp";
@@ -42,6 +44,7 @@ public class Trip extends AbstractMojioObject {
     private String[] Tags;
     private String MojioId;
     private Boolean Completed;
+    private Distance Distance;
     private String Duration;
     private String StartTimestamp;
     private String EndTimestamp;
@@ -209,14 +212,23 @@ public class Trip extends AbstractMojioObject {
         VehicleId = vehicleId;
     }
 
+    public Distance getDistance() {
+        return Distance;
+    }
+
+    public void setDistance(Distance distance) {
+        Distance = distance;
+    }
+
     @Override
     public String toString() {
         return "Trip{" +
-                "Completed=" + Completed +
-                ", VehicleId='" + VehicleId + '\'' +
+                "VehicleId='" + VehicleId + '\'' +
                 ", Name='" + Name + '\'' +
                 ", Tags=" + Arrays.toString(Tags) +
                 ", MojioId='" + MojioId + '\'' +
+                ", Completed=" + Completed +
+                ", Distance=" + Distance +
                 ", Duration='" + Duration + '\'' +
                 ", StartTimestamp='" + StartTimestamp + '\'' +
                 ", EndTimestamp='" + EndTimestamp + '\'' +
