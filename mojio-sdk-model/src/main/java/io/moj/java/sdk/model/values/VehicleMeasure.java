@@ -15,6 +15,7 @@ import io.moj.java.sdk.model.values.Odometer;
 import io.moj.java.sdk.model.values.Rpm;
 import io.moj.java.sdk.model.values.Speed;
 import io.moj.java.sdk.model.values.VinDetails;
+import io.moj.java.sdk.utils.TimeUtils;
 
 /**
  * Model object for an vehicle measurement at a given point in time.
@@ -171,12 +172,12 @@ public class VehicleMeasure {
     /**
      * @return the time the server received the message from the device
      */
-    public String getGatewayTime() {
-        return GatewayTime;
+    public Long getGatewayTime() {
+        return TimeUtils.convertTimestampToMillis(GatewayTime);
     }
 
-    public void setGatewayTime(String gatewayTime) {
-        GatewayTime = gatewayTime;
+    public void setGatewayTime(Long gatewayTime) {
+        GatewayTime = TimeUtils.convertMillisToTimestamp(gatewayTime);
     }
 
     public BooleanState getHarshEventState() {
@@ -267,12 +268,12 @@ public class VehicleMeasure {
         Speed = speed;
     }
 
-    public String getTime() {
-        return Time;
+    public Long getTime() {
+        return TimeUtils.convertTimestampToMillis(Time);
     }
 
-    public void setTime(String time) {
-        Time = time;
+    public void setTime(Long time) {
+        Time = TimeUtils.convertMillisToTimestamp(time);
     }
 
     public BooleanState getTowState() {
