@@ -13,6 +13,7 @@ import io.moj.java.sdk.model.response.MessageResponse;
 import io.moj.java.sdk.model.values.AccessModel;
 import io.moj.java.sdk.model.values.Image;
 import io.moj.java.sdk.model.values.Location;
+import io.moj.java.sdk.model.values.NextServiceSchedule;
 import io.moj.java.sdk.model.values.PhoneNumber;
 import io.moj.java.sdk.model.values.ServiceSchedule;
 import io.moj.java.sdk.model.values.VehicleMeasure;
@@ -292,10 +293,10 @@ public interface MojioRestApi {
     Call<ListResponse<ServiceSchedule>> getServiceSchedule(@Path("id") String vehicleId, @QueryMap Map<String, String> params);
 
     @GET("vehicles/{id}/serviceschedule/next")
-    Call<ListResponse<ServiceSchedule>> getNextServiceSchedule(@Path("id") String vehicleId);
+    Call<NextServiceSchedule> getNextServiceSchedule(@Path("id") String vehicleId);
 
     @GET("vehicles/{id}/serviceschedule/next")
-    Call<ListResponse<ServiceSchedule>> getNextServiceSchedule(@Path("id") String vehicleId,
+    Call<NextServiceSchedule> getNextServiceSchedule(@Path("id") String vehicleId,
                                                                @Query("odometerInKm") Double odometerKm,
                                                                @Query("ageInMonths") Integer ageMonths);
     @POST("vehicles")
