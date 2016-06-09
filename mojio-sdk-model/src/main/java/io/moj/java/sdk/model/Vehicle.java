@@ -40,6 +40,7 @@ public class Vehicle extends AbstractMojioObject {
     public static final String DECELERATION = "Deceleration";
     public static final String SPEED = "Speed";
     public static final String ODOMETER = "Odometer";
+    public static final String VIRTUAL_ODOMETER = "VirtualOdometer";
     public static final String RPM_VALUE = "RPM";
     public static final String FUEL_EFFICIENCY = "FuelEfficiency";
     public static final String FUEL_EFFICIENCY_CALCULATION_METHOD = "FuelEfficiencyCalculationMethod";
@@ -72,6 +73,7 @@ public class Vehicle extends AbstractMojioObject {
     private Acceleration Deceleration;
     private Speed Speed;
     private Odometer Odometer;
+    private Odometer VirtualOdometer;
     private Rpm RPM;
     private FuelEfficiency FuelEfficiency;
     private FuelEfficiencyCalculationMethod FuelEfficiencyCalculationMethod;
@@ -285,6 +287,14 @@ public class Vehicle extends AbstractMojioObject {
         Odometer = odometer;
     }
 
+    public Odometer getVirtualOdometer() {
+        return VirtualOdometer;
+    }
+
+    public void setVirtualOdometer(Odometer virtualOdometer) {
+        VirtualOdometer = virtualOdometer;
+    }
+
     public BooleanState getParkedState() {
         return ParkedState;
     }
@@ -344,8 +354,7 @@ public class Vehicle extends AbstractMojioObject {
     @Override
     public String toString() {
         return "Vehicle{" +
-                "Acceleration=" + Acceleration +
-                ", Name='" + Name + '\'' +
+                "Name='" + Name + '\'' +
                 ", LicensePlate='" + LicensePlate + '\'' +
                 ", VIN='" + VIN + '\'' +
                 ", CurrentTrip='" + CurrentTrip + '\'' +
@@ -355,9 +364,11 @@ public class Vehicle extends AbstractMojioObject {
                 ", LastContactTime='" + LastContactTime + '\'' +
                 ", DiagnosticCodes=" + Arrays.toString(DiagnosticCodes) +
                 ", Accelerometer=" + Accelerometer +
+                ", Acceleration=" + Acceleration +
                 ", Deceleration=" + Deceleration +
                 ", Speed=" + Speed +
                 ", Odometer=" + Odometer +
+                ", VirtualOdometer=" + VirtualOdometer +
                 ", RPM=" + RPM +
                 ", FuelEfficiency=" + FuelEfficiency +
                 ", FuelEfficiencyCalculationMethod=" + FuelEfficiencyCalculationMethod +
