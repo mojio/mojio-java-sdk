@@ -1,5 +1,8 @@
 package io.moj.java.sdk;
 
+import com.sun.deploy.util.StringUtils;
+
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -13,6 +16,8 @@ public class Query extends HashMap<String, String> {
     public static final String FILTER = "filter";
     public static final String SELECT = "select";
     public static final String ORDER_BY = "orderby";
+    public static final String INCLUDE_COUNT = "includeCount";
+    public static final String FIELDS = "fields";
 
     /**
      * The maximum number of records to return.
@@ -62,6 +67,28 @@ public class Query extends HashMap<String, String> {
      */
     public Query orderBy(String orderBy) {
         put(ORDER_BY, orderBy);
+        return this;
+    }
+
+    /**
+     * Determines whether to include the total row count.
+     * @param includeCount
+     * @return
+     */
+    public Query includeCount(boolean includeCount) {
+        put(INCLUDE_COUNT, String.valueOf(includeCount));
+        return this;
+    }
+
+    /**
+     * Determines the fields to be included in the result
+     * @param fields
+     * @return
+     */
+    public Query fields(String... fields) {
+        if (fields != null) {
+            put(FIELDS, String.valueOf(StringUtils.join(Arrays.asList(fields), ",")));
+        }
         return this;
     }
 

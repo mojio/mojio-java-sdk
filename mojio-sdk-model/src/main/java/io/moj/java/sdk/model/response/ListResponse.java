@@ -12,6 +12,7 @@ public class ListResponse<T> extends MessageResponse {
 
     private List<T> Data;
     private Integer Results;
+    private Integer TotalCount;
     private LinkInfo Links;
 
     public List<T> getData() {
@@ -38,11 +39,20 @@ public class ListResponse<T> extends MessageResponse {
         Results = results;
     }
 
+    public Integer getTotalCount() {
+        return TotalCount;
+    }
+
+    public void setTotalCount(Integer totalCount) {
+        TotalCount = totalCount;
+    }
+
     @Override
     public String toString() {
         return "ListResponse{" +
                 "Data=" + Data +
                 ", Results=" + Results +
+                ", TotalCount=" + TotalCount +
                 ", Links=" + Links +
                 "} " + super.toString();
     }
