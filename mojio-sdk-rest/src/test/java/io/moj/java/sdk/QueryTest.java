@@ -1,7 +1,10 @@
 package io.moj.java.sdk;
 
+import com.sun.deploy.util.StringUtils;
+
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -18,19 +21,25 @@ public class QueryTest {
         String filter = "filter";
         String select = "select";
         String orderBy = "orderby";
+        boolean includeCount = true;
+        String[] fields = new String[] { "abc", "def", "ghi" };
         Map<String, String> query = new Query()
                 .top(top)
                 .skip(skip)
                 .filter(filter)
                 .select(select)
-                .orderBy(orderBy);
+                .orderBy(orderBy)
+                .includeCount(includeCount)
+                .fields(fields);
 
-        assertThat(query.size()).isEqualTo(5);
+        assertThat(query.size()).isEqualTo(7);
         assertThat(query.get(Query.TOP)).isEqualTo(String.valueOf(top));
         assertThat(query.get(Query.SKIP)).isEqualTo(String.valueOf(skip));
         assertThat(query.get(Query.FILTER)).isEqualTo(filter);
         assertThat(query.get(Query.SELECT)).isEqualTo(select);
         assertThat(query.get(Query.ORDER_BY)).isEqualTo(orderBy);
+        assertThat(query.get(Query.INCLUDE_COUNT)).isEqualTo(String.valueOf(includeCount));
+        assertThat(query.get(Query.FIELDS)).isEqualTo(StringUtils.join(Arrays.asList(fields), ","));
     }
 
     @Test
