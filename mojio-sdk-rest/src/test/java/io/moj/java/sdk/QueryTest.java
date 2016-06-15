@@ -1,10 +1,7 @@
 package io.moj.java.sdk;
 
-import com.sun.deploy.util.StringUtils;
-
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.Map;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -39,7 +36,7 @@ public class QueryTest {
         assertThat(query.get(Query.SELECT)).isEqualTo(select);
         assertThat(query.get(Query.ORDER_BY)).isEqualTo(orderBy);
         assertThat(query.get(Query.INCLUDE_COUNT)).isEqualTo(String.valueOf(includeCount));
-        assertThat(query.get(Query.FIELDS)).isEqualTo(StringUtils.join(Arrays.asList(fields), ","));
+        assertThat(query.get(Query.FIELDS)).isEqualTo("abc,def,ghi");
     }
 
     @Test

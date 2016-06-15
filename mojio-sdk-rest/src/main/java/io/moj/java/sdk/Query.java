@@ -1,7 +1,5 @@
 package io.moj.java.sdk;
 
-import com.sun.deploy.util.StringUtils;
-
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -87,7 +85,14 @@ public class Query extends HashMap<String, String> {
      */
     public Query fields(String... fields) {
         if (fields != null) {
-            put(FIELDS, String.valueOf(StringUtils.join(Arrays.asList(fields), ",")));
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < fields.length; i++) {
+                builder.append(fields[i]);
+                if (i < fields.length - 1) {
+                    builder.append(",");
+                }
+            }
+            put(FIELDS, builder.toString());
         }
         return this;
     }
