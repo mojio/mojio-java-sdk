@@ -18,7 +18,6 @@ public class Observer {
     public static final String LAST_MODIFIED = "LastModified";
     public static final String EXPIRY_DATE = "ExpiryDate";
     public static final String NAME = "Name";
-    public static final String SUBJECT = "Subject";
     public static final String CONDITIONS = "Conditions";
     public static final String TYPE = "Type";
     public static final String TIMING = "Timing";
@@ -36,7 +35,6 @@ public class Observer {
     private String LastModified;
     private String ExpiryDate;
     private String Name;
-    private String Subject;
     private String Conditions;
     private Type Type;
     private Timing Timing;
@@ -76,11 +74,6 @@ public class Observer {
         return Name;
     }
 
-    public String getSubject() {
-        return Subject;
-    }
-
-
     public void setCreatedOn(String createdOn) {
         CreatedOn = createdOn;
     }
@@ -99,10 +92,6 @@ public class Observer {
 
     public void setName(String name) {
         Name = name;
-    }
-
-    public void setSubject(String subject) {
-        Subject = subject;
     }
 
     public void setFields(List<String> fields) {
@@ -182,7 +171,6 @@ public class Observer {
                 ", LastModified='" + LastModified + '\'' +
                 ", ExpiryDate='" + ExpiryDate + '\'' +
                 ", Name='" + Name + '\'' +
-                ", Subject='" + Subject + '\'' +
                 ", Conditions='" + Conditions + '\'' +
                 ", Type=" + Type +
                 ", Timing=" + Timing +
@@ -229,7 +217,6 @@ public class Observer {
 
     public static class Builder {
         private String key;
-        private String subject;
         private Observer.Type type;
         private Timing timing;
         private List<Transport> transports;
@@ -246,19 +233,6 @@ public class Observer {
          */
         public Builder(String key) {
             this.key = key;
-        }
-
-        /**
-         * The Id of the entity that is being observed. If an entity Id is not passed in when
-         * creating an observer it will broadcast changes for all entities of that type that the
-         * user has read permissions for. If an Id is passed in it becomes the Subject on the
-         * observer. This is automatically set on creation and cannot be edited.
-         * @param subject
-         * @return
-         */
-        public Builder subject(String subject) {
-            this.subject = subject;
-            return this;
         }
 
         /**
@@ -420,7 +394,6 @@ public class Observer {
 
             Observer observer = new Observer(key);
             observer.setType(type);
-            observer.setSubject(subject);
             observer.setTransports(transports == null ? null : new ArrayList<>(transports));
             observer.setFields(fields == null ? null : new ArrayList<>(fields));
             observer.setTiming(timing);

@@ -81,13 +81,11 @@ public class ObserverTest {
     @Test
     public void testSerialization() {
         String key = "key";
-        String subject = "subject";
         Observer.Type type = Observer.Type.MOJIO;
         Transport transport = Transport.forAndroid("gcmRegId");
         String[] fields = new String[] { "LastContactTime", "LastContactTime" };
 
         Observer o = new Observer.Builder(key)
-                .subject(subject)
                 .type(type)
                 .transport(transport)
                 .conditions(Condition.whenValue(Vehicle.SPEED).gt(50f))
@@ -114,13 +112,11 @@ public class ObserverTest {
     @Test
     public void testBuild_unique() {
         String key = "key";
-        String subject = "subject";
         Observer.Type type = Observer.Type.MOJIO;
         Transport transport = Transport.forAndroid("gcmRegId");
         String[] fields = new String[] { "LastContactTime", "LastContactTime" };
 
         Observer.Builder builder = new Observer.Builder(key)
-                .subject(subject)
                 .type(type)
                 .transport(transport)
                 .conditions(Condition.whenValue(Vehicle.SPEED).gt(50f))
