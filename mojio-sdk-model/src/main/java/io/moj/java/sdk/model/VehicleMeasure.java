@@ -1,5 +1,8 @@
-package io.moj.java.sdk.model.values;
+package io.moj.java.sdk.model;
 
+import java.util.Arrays;
+
+import io.moj.java.sdk.model.AbstractMojioObject;
 import io.moj.java.sdk.model.enums.FuelEfficiencyCalculationMethod;
 import io.moj.java.sdk.model.enums.FuelType;
 import io.moj.java.sdk.model.values.Acceleration;
@@ -14,6 +17,7 @@ import io.moj.java.sdk.model.values.Location;
 import io.moj.java.sdk.model.values.Odometer;
 import io.moj.java.sdk.model.values.Rpm;
 import io.moj.java.sdk.model.values.Speed;
+import io.moj.java.sdk.model.values.VehicleDetails;
 import io.moj.java.sdk.model.values.VinDetails;
 import io.moj.java.sdk.utils.TimeUtils;
 
@@ -21,7 +25,7 @@ import io.moj.java.sdk.utils.TimeUtils;
  * Model object for an vehicle measurement at a given point in time.
  * Created by mhorie on 2016-01-13.
  */
-public class VehicleMeasure {
+public class VehicleMeasure extends AbstractMojioObject {
 
     public static final String ACCELERATION = "Acceleration";
     public static final String ACCELEROMETER = "Accelerometer";
@@ -317,7 +321,7 @@ public class VehicleMeasure {
                 ", Battery=" + Battery +
                 ", CurrentTrip='" + CurrentTrip + '\'' +
                 ", Deceleration=" + Deceleration +
-                ", DiagnosticCodes=" + DiagnosticCodes +
+                ", DiagnosticCodes=" + Arrays.toString(DiagnosticCodes) +
                 ", FuelEfficiency=" + FuelEfficiency +
                 ", FuelEfficiencyCalculationMethod=" + FuelEfficiencyCalculationMethod +
                 ", FuelLevel=" + FuelLevel +
@@ -339,6 +343,6 @@ public class VehicleMeasure {
                 ", VirtualOdometer=" + VirtualOdometer +
                 ", Odometer=" + Odometer +
                 ", Time='" + Time + '\'' +
-                '}';
+                "} " + super.toString();
     }
 }
