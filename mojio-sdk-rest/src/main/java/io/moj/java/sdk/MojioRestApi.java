@@ -11,6 +11,7 @@ import io.moj.java.sdk.model.Vehicle;
 import io.moj.java.sdk.model.response.ListResponse;
 import io.moj.java.sdk.model.response.MessageResponse;
 import io.moj.java.sdk.model.values.AccessModel;
+import io.moj.java.sdk.model.values.Email;
 import io.moj.java.sdk.model.values.Image;
 import io.moj.java.sdk.model.values.Location;
 import io.moj.java.sdk.model.values.NextServiceSchedule;
@@ -124,15 +125,12 @@ public interface MojioRestApi {
     Call<Image> getVehicleImage(@Path("id") String vehicleId);
 
     // TODO verify the body is supposed to be a Base64 string, write helper from File class
-    @POST("apps/{id}/image")
     @PUT("apps/{id}/image")
     Call<Image> uploadAppImage(@Path("id") String appId, @Body String imageBase64);
 
-    @POST("users/{id}/image")
     @PUT("users/{id}/image")
     Call<Image> uploadUserImage(@Path("id") String userId, @Body String imageBase64);
 
-    @POST("vehicles/{id}/image")
     @PUT("vehicles/{id}/image")
     Call<Image> uploadVehicleImage(@Path("id") String vehicleId, @Body String imageBase64);
 
@@ -251,6 +249,9 @@ public interface MojioRestApi {
 
     @PUT("users/{id}")
     Call<User> updateUser(@Path("id") String userId, @Body User user);
+
+    @POST("users/{id}/emails")
+    Call<Email> addUserEmail(@Path("id") String userId, @Body String email);
 
     @PUT("users/{id}/phonenumbers/{phone}")
     Call<PhoneNumber> addUpdatePhone(@Path("id") String userId, @Path("phone") String phoneNumber,
