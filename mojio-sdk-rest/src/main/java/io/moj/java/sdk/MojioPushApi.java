@@ -28,7 +28,7 @@ public interface MojioPushApi {
      * @see io.moj.java.sdk.Resource#getPath()
      */
     @GET("{resource}")
-    Call<ListResponse<Observer>> getObservers(@Path("resource") String resource);
+    Call<Observer[]> getObservers(@Path("resource") String resource);
 
     /**
      * Creates an observer for the specified resource(s). Note: only
@@ -133,7 +133,7 @@ public interface MojioPushApi {
      * @return
      */
     @GET("{resource}/{key}/transports")
-    Call<ListResponse<Transport>> getTransports(@Path("resource") String resource, @Path("key") String key);
+    Call<Transport[]> getTransports(@Path("resource") String resource, @Path("key") String key);
 
     /**
      * Adds or updates a transport to an observer.
