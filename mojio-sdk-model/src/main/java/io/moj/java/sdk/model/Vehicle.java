@@ -29,6 +29,8 @@ public class Vehicle extends AbstractMojioObject {
     public static final String NAME = "Name";
     public static final String LICENSE_PLATE = "LicensePlate";
     public static final String VIN_NUMBER = "VIN";
+    public static final String DETECTED_VIN = "DetectedVIN";
+    public static final String OVERRIDE_VIN = "OverrideVIN";
     public static final String CURRENT_TRIP = "CurrentTrip";
     public static final String MOJIO_ID = "MojioId";
     public static final String IMAGE = "Image";
@@ -62,6 +64,8 @@ public class Vehicle extends AbstractMojioObject {
     private String Name;
     private String LicensePlate;
     private String VIN;
+    private String DetectedVIN;
+    private String OverrideVIN;
     private String CurrentTrip;
     private String MojioId;
     private Image Image;
@@ -343,6 +347,22 @@ public class Vehicle extends AbstractMojioObject {
         this.VIN = VIN;
     }
 
+    public String getDetectedVIN() {
+        return DetectedVIN;
+    }
+
+    public void setDetectedVIN(String detectedVIN) {
+        DetectedVIN = detectedVIN;
+    }
+
+    public String getOverrideVIN() {
+        return OverrideVIN;
+    }
+
+    public void setOverrideVIN(String overrideVIN) {
+        OverrideVIN = overrideVIN;
+    }
+
     public VehicleDetails getVinDetails() {
         return VinDetails;
     }
@@ -357,6 +377,8 @@ public class Vehicle extends AbstractMojioObject {
                 "Name='" + Name + '\'' +
                 ", LicensePlate='" + LicensePlate + '\'' +
                 ", VIN='" + VIN + '\'' +
+                ", DetectedVIN='" + DetectedVIN + '\'' +
+                ", OverrideVIN='" + OverrideVIN + '\'' +
                 ", CurrentTrip='" + CurrentTrip + '\'' +
                 ", MojioId='" + MojioId + '\'' +
                 ", Image=" + Image +
