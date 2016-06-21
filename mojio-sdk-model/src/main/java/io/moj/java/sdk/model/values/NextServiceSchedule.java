@@ -1,6 +1,6 @@
 package io.moj.java.sdk.model.values;
 
-import java.util.List;
+import java.util.Arrays;
 
 /**
  * Model object for summary of service schedule items.
@@ -15,7 +15,7 @@ public class NextServiceSchedule {
     private Double TimeValue;
     private String DistanceUnits;
     private Double DistanceValue;
-    private List<ServiceSchedule> Services;
+    private ServiceSchedule[] Items;
 
     public Integer getAgeInMonths() {
         return AgeInMonths;
@@ -49,12 +49,12 @@ public class NextServiceSchedule {
         Odometer = odometer;
     }
 
-    public List<ServiceSchedule> getServices() {
-        return Services;
+    public ServiceSchedule[] getItems() {
+        return Items;
     }
 
-    public void setServices(List<ServiceSchedule> services) {
-        Services = services;
+    public void setItems(ServiceSchedule[] items) {
+        Items = items;
     }
 
     public String getTimeStamp() {
@@ -84,14 +84,14 @@ public class NextServiceSchedule {
     @Override
     public String toString() {
         return "NextServiceSchedule{" +
-                "AgeInMonths=" + AgeInMonths +
-                ", TimeStamp='" + TimeStamp + '\'' +
+                "TimeStamp='" + TimeStamp + '\'' +
                 ", Odometer=" + Odometer +
+                ", AgeInMonths=" + AgeInMonths +
                 ", TimeUnits='" + TimeUnits + '\'' +
                 ", TimeValue=" + TimeValue +
                 ", DistanceUnits='" + DistanceUnits + '\'' +
                 ", DistanceValue=" + DistanceValue +
-                ", Services=" + Services +
+                ", Items=" + Arrays.toString(Items) +
                 '}';
     }
 }
