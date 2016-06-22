@@ -95,11 +95,11 @@ public class Mojio extends AbstractMojioObject {
         Location = location;
     }
 
-    public io.moj.java.sdk.model.values.WifiRadio getWifiRadio() {
+    public WifiRadio getWifiRadio() {
         return WifiRadio;
     }
 
-    public void setWifiRadio(io.moj.java.sdk.model.values.WifiRadio wifiRadio) {
+    public void setWifiRadio(WifiRadio wifiRadio) {
         WifiRadio = wifiRadio;
     }
 
