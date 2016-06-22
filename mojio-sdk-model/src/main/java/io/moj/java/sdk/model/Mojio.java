@@ -1,6 +1,7 @@
 package io.moj.java.sdk.model;
 
 import io.moj.java.sdk.model.values.Location;
+import io.moj.java.sdk.model.values.WifiRadio;
 import io.moj.java.sdk.utils.TimeUtils;
 
 import java.util.Arrays;
@@ -18,6 +19,7 @@ public class Mojio extends AbstractMojioObject {
     public static final String GATEWAY_TIME = "GatewayTime";
     public static final String LOCATION = "Location";
     public static final String TAGS = "Tags";
+    public static final String WIFI_RADIO = "WifiRadio";
 
     private String Name;
     private String IMEI;
@@ -26,6 +28,7 @@ public class Mojio extends AbstractMojioObject {
     private String GatewayTime;
     private Location Location;
     private String[] Tags;
+    private WifiRadio WifiRadio;
 
     public Mojio() {}
 
@@ -92,6 +95,14 @@ public class Mojio extends AbstractMojioObject {
         Location = location;
     }
 
+    public WifiRadio getWifiRadio() {
+        return WifiRadio;
+    }
+
+    public void setWifiRadio(WifiRadio wifiRadio) {
+        WifiRadio = wifiRadio;
+    }
+
     @Override
     public String toString() {
         return "Mojio{" +
@@ -102,6 +113,7 @@ public class Mojio extends AbstractMojioObject {
                 ", GatewayTime='" + GatewayTime + '\'' +
                 ", Location=" + Location +
                 ", Tags=" + Arrays.toString(Tags) +
+                ", WifiRadio=" + WifiRadio +
                 "} " + super.toString();
     }
 }
