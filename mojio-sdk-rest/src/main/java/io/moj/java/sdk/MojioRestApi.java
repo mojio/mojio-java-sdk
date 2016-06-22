@@ -19,6 +19,7 @@ import io.moj.java.sdk.model.values.PhoneNumber;
 import io.moj.java.sdk.model.values.ServiceSchedule;
 import io.moj.java.sdk.model.values.VehicleMeasure;
 import io.moj.java.sdk.model.values.VinDetails;
+import io.moj.java.sdk.model.values.WifiRadio;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -163,6 +164,9 @@ public interface MojioRestApi {
 
     @DELETE("mojios/{id}")
     Call<Mojio> unclaimMojio(@Path("id") String mojioId);
+
+    @PUT("mojios/{id}/wifiradio")
+    Call<WifiRadio> updateMojioWifi(@Path("id") String mojioId, @Body WifiRadio wifiRadio);
     // endregion
 
     // region Permissions

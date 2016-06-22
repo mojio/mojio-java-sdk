@@ -12,9 +12,7 @@ public class WifiRadio {
     private String SSID;
     private String Password;
     private WifiRadio.Status Status;
-    private Boolean ConnectionState;
     private Boolean AllowRoaming;
-    private Integer Strength;
     private String Timestamp;
 
     public String getSSID() {
@@ -41,28 +39,12 @@ public class WifiRadio {
         Status = status;
     }
 
-    public Boolean getConnectionState() {
-        return ConnectionState;
-    }
-
-    public void setConnectionState(Boolean connectionState) {
-        ConnectionState = connectionState;
-    }
-
     public Boolean getAllowRoaming() {
         return AllowRoaming;
     }
 
     public void setAllowRoaming(Boolean allowRoaming) {
         AllowRoaming = allowRoaming;
-    }
-
-    public Integer getStrength() {
-        return Strength;
-    }
-
-    public void setStrength(Integer strength) {
-        Strength = strength;
     }
 
     public Long getTimestamp() {
@@ -79,9 +61,7 @@ public class WifiRadio {
                 "SSID='" + SSID + '\'' +
                 ", Password='" + Password + '\'' +
                 ", Status=" + Status +
-                ", ConnectionState=" + ConnectionState +
                 ", AllowRoaming=" + AllowRoaming +
-                ", Strength=" + Strength +
                 ", Timestamp='" + Timestamp + '\'' +
                 '}';
     }
