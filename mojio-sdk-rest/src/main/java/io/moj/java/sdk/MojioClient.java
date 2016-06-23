@@ -39,15 +39,15 @@ public class MojioClient {
     private final Client client;
     private final boolean loggingEnabled;
 
-    private final MojioRestApi restApi;
-    private final MojioAuthApi authApi;
-    private final MojioPushApi pushApi;
-    private final MojioStorageApi storageApi;
+    private MojioRestApi restApi;
+    private MojioAuthApi authApi;
+    private MojioPushApi pushApi;
+    private MojioStorageApi storageApi;
     private Authenticator authenticator;
     private AuthInterceptor authInterceptor;
 
-    private MojioClient(Environment environment, Client client, Gson gson, Authenticator authenticator,
-                        ExecutorService requestExecutor, Executor callbackExecutor, boolean logging) {
+    protected MojioClient(Environment environment, Client client, Gson gson, Authenticator authenticator,
+                          ExecutorService requestExecutor, Executor callbackExecutor, boolean logging) {
         this.environment = environment == null ? MojioEnvironment.getDefault() : environment;
         this.gson = gson == null ? new Gson() : gson;
         this.client = client;
@@ -85,7 +85,10 @@ public class MojioClient {
         authInterceptor = new AuthInterceptor(authenticator);
         httpClientBuilder.addInterceptor(authInterceptor);
         retrofitBuilder.client(httpClientBuilder.build());
+        initAuthenticatedApis(retrofitBuilder);
+    }
 
+    protected void initAuthenticatedApis(Retrofit.Builder retrofitBuilder) {
         restApi = retrofitBuilder
                 .baseUrl(this.environment.getApiUrl() + "/")
                 .build()
@@ -144,6 +147,14 @@ public class MojioClient {
      */
     public MojioPushApi push() {
         return pushApi;
+    }
+
+    /**
+     * Returns the {@link io.moj.java.sdk.MojioStorageApi} interface for making direct calls to the Mojio STORAGE API.
+     * @return
+     */
+    public MojioStorageApi storage() {
+        return storageApi;
     }
 
     /**
@@ -207,13 +218,13 @@ public class MojioClient {
      * Builder for a {@link io.moj.java.sdk.MojioClient}.
      */
     public static class Builder {
-        private Environment environment;
-        private Authenticator authenticator;
-        private Client client;
-        private Executor callbackExecutor;
-        private ExecutorService requestExecutor;
-        private Gson gson;
-        private boolean logging = false;
+        protected Environment environment;
+        protected Authenticator authenticator;
+        protected Client client;
+        protected Executor callbackExecutor;
+        protected ExecutorService requestExecutor;
+        protected Gson gson;
+        protected boolean logging = false;
 
         public Builder(String clientKey, String clientSecret) {
             if (clientKey == null || clientKey.isEmpty()) {
