@@ -97,6 +97,12 @@ public interface MojioRestApi {
     @GET("trips/{id}/history/states")
     Call<ListResponse<VehicleMeasure>> getTripStates(@Path("id") String tripId, @QueryMap Map<String, String> params);
 
+    @GET("trips/{id}/history/states/{stateId}")
+    Call<VehicleMeasure> getTripState(@Path("id") String tripId, @Path("stateId") String stateId);
+
+    @GET("trips/{id}/history/states/{stateId}")
+    Call<VehicleMeasure> getTripState(@Path("id") String tripId, @Path("stateId") String stateId, @QueryMap Map<String, String> params);
+
     @GET("trips/{id}/history/locations")
     Call<ListResponse<Location>> getTripLocations(@Path("id") String tripId);
 
@@ -108,6 +114,12 @@ public interface MojioRestApi {
 
     @GET("vehicles/{id}/history/states")
     Call<ListResponse<VehicleMeasure>> getVehicleStates(@Path("id") String vehicleId, @QueryMap Map<String, String> params);
+
+    @GET("vehicles/{id}/history/states/{stateId}")
+    Call<VehicleMeasure> getVehicleState(@Path("id") String vehicleId, @Path("stateId") String stateId);
+
+    @GET("vehicles/{id}/history/states/{stateId}")
+    Call<VehicleMeasure> getVehicleState(@Path("id") String vehicleId, @Path("stateId") String stateId, @QueryMap Map<String, String> params);
 
     @GET("vehicles/{id}/history/locations")
     Call<ListResponse<Location>> getVehicleLocations(@Path("id") String vehicleId);
