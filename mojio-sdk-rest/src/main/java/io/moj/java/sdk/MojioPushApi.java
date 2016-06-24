@@ -28,7 +28,7 @@ public interface MojioPushApi {
      * @see io.moj.java.sdk.Resource#getPath()
      */
     @GET("{resource}")
-    Call<ListResponse<Observer>> getObservers(@Path("resource") String resource);
+    Call<Observer[]> getObservers(@Path("resource") String resource);
 
     /**
      * Creates an observer for the specified resource(s). Note: only
@@ -40,6 +40,31 @@ public interface MojioPushApi {
      */
     @POST("{resource}")
     Call<Observer> createObserver(@Path("resource") String resource, @Body Observer observer);
+
+    /**
+     * Returns an observer for the specified resource that are accessible to the authenticated user. Note: only
+     * {@link io.moj.java.sdk.Resource#MOJIO}, {@link io.moj.java.sdk.Resource#USER}, and
+     * {@link io.moj.java.sdk.Resource#VEHICLE} resources can be observed.
+     * @param resource String path for the specified resource. See {@link io.moj.java.sdk.Resource#getPath()}.
+     * @param resourceId the ID of the specified resource
+     * @return
+     * @see io.moj.java.sdk.Resource#getPath()
+     */
+    @GET("{resource}/{id}")
+    Call<Observer[]> getObservers(@Path("resource") String resource, @Path("id") String resourceId);
+
+    /**
+     * Creates an observer for the specified resource. Note: only
+     * {@link io.moj.java.sdk.Resource#MOJIO}, {@link io.moj.java.sdk.Resource#USER}, and
+     * {@link io.moj.java.sdk.Resource#VEHICLE} resources can be observed.
+     * @param resource String path for the specified resource. See {@link io.moj.java.sdk.Resource#getPath()}.
+     * @param resourceId the ID of the specified resource
+     * @return
+     * @see io.moj.java.sdk.Resource#getPath()
+     */
+    @POST("{resource}/{id}")
+    Call<Observer> createObserver(@Path("resource") String resource, @Path("id") String resourceId,
+                                  @Body Observer observer);
 
     /**
      * Returns all observers for the specified resource that are accessible to the authenticated user. Note: only
@@ -75,13 +100,40 @@ public interface MojioPushApi {
     Call<MessageResponse> deleteObserver(@Path("resource") String resource, @Path("key") String key);
 
     /**
+     * Returns an observer for the specified resource, id and key that are accessible to the authenticated user. Note: only
+     * {@link io.moj.java.sdk.Resource#MOJIO}, {@link io.moj.java.sdk.Resource#USER}, and
+     * {@link io.moj.java.sdk.Resource#VEHICLE} resources can be observed.
+     * @param resource String path for the specified resource. See {@link io.moj.java.sdk.Resource#getPath()}.
+     * @param resourceId the ID of the specified resource
+     * @param key the key of the specified resource
+     * @return
+     * @see io.moj.java.sdk.Resource#getPath()
+     */
+    @GET("{resource}/{id}/{key}")
+    Call<Observer> getObserver(@Path("resource") String resource, @Path("id") String resourceId, @Path("key") String key);
+
+    /**
+     * Creates or Updates an observer for the specified resource and Id. Note: only
+     * {@link io.moj.java.sdk.Resource#MOJIO}, {@link io.moj.java.sdk.Resource#USER}, and
+     * {@link io.moj.java.sdk.Resource#VEHICLE} resources can be observed.
+     * @param resource String path for the specified resource. See {@link io.moj.java.sdk.Resource#getPath()}.
+     * @param resourceId the ID of the specified resource
+     * @param key the key of the specified resource
+     * @return
+     * @see io.moj.java.sdk.Resource#getPath()
+     */
+    @PUT("{resource}/{id}/{key}")
+    Call<Observer> updateObserver(@Path("resource") String resource, @Path("id") String resourceId, @Path("key") String key,
+                                  @Body Observer observer);
+
+    /**
      * Gets the transports for an observer.
      * @param resource String path for the specified resource. See {@link io.moj.java.sdk.Resource#getPath()}.
      * @param key the key of the observer
      * @return
      */
     @GET("{resource}/{key}/transports")
-    Call<ListResponse<Transport>> getTransports(@Path("resource") String resource, @Path("key") String key);
+    Call<Transport[]> getTransports(@Path("resource") String resource, @Path("key") String key);
 
     /**
      * Adds or updates a transport to an observer.

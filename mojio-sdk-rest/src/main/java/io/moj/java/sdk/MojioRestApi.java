@@ -11,13 +11,16 @@ import io.moj.java.sdk.model.Vehicle;
 import io.moj.java.sdk.model.VehicleMeasure;
 import io.moj.java.sdk.model.response.ListResponse;
 import io.moj.java.sdk.model.response.MessageResponse;
+import io.moj.java.sdk.model.stream.ActivityObject;
 import io.moj.java.sdk.model.values.AccessModel;
+import io.moj.java.sdk.model.values.Email;
 import io.moj.java.sdk.model.values.Image;
 import io.moj.java.sdk.model.values.Location;
 import io.moj.java.sdk.model.values.NextServiceSchedule;
 import io.moj.java.sdk.model.values.PhoneNumber;
 import io.moj.java.sdk.model.values.ServiceSchedule;
 import io.moj.java.sdk.model.values.VinDetails;
+import io.moj.java.sdk.model.values.WifiRadio;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -124,15 +127,12 @@ public interface MojioRestApi {
     Call<Image> getVehicleImage(@Path("id") String vehicleId);
 
     // TODO verify the body is supposed to be a Base64 string, write helper from File class
-    @POST("apps/{id}/image")
     @PUT("apps/{id}/image")
     Call<Image> uploadAppImage(@Path("id") String appId, @Body String imageBase64);
 
-    @POST("users/{id}/image")
     @PUT("users/{id}/image")
     Call<Image> uploadUserImage(@Path("id") String userId, @Body String imageBase64);
 
-    @POST("vehicles/{id}/image")
     @PUT("vehicles/{id}/image")
     Call<Image> uploadVehicleImage(@Path("id") String vehicleId, @Body String imageBase64);
 
@@ -165,6 +165,9 @@ public interface MojioRestApi {
 
     @DELETE("mojios/{id}")
     Call<Mojio> unclaimMojio(@Path("id") String mojioId);
+
+    @PUT("mojios/{id}/wifiradio")
+    Call<WifiRadio> updateMojioWifi(@Path("id") String mojioId, @Body WifiRadio wifiRadio);
     // endregion
 
     // region Permissions
@@ -252,6 +255,9 @@ public interface MojioRestApi {
     @PUT("users/{id}")
     Call<User> updateUser(@Path("id") String userId, @Body User user);
 
+    @POST("users/{id}/emails")
+    Call<Email> addUserEmail(@Path("id") String userId, @Body String email);
+
     @PUT("users/{id}/phonenumbers/{phone}")
     Call<PhoneNumber> addUpdatePhone(@Path("id") String userId, @Path("phone") String phoneNumber,
                                      @Query("sendverification") boolean sendCode);
@@ -310,6 +316,14 @@ public interface MojioRestApi {
 
     @DELETE("vehicles/{id}")
     Call<MessageResponse> mergeVehicle(@Path("id") String vehicleId, @Query("actual") String mergeVehicleId);
+    // endregion
+
+    // region Activity Streams
+    @GET("activities")
+    Call<ListResponse<ActivityObject>> getActivityStream();
+
+    @GET("activities")
+    Call<ListResponse<ActivityObject>> getActivityStream(@QueryMap Map<String, String> params);
     // endregion
 
 }
