@@ -71,19 +71,19 @@ public class ActivityObject extends BaseActivityObject {
         Summary = summary;
     }
 
-    public Long getStartTimeTimestamp() {
+    public Long getStartTime() {
         return TimeUtils.convertTimestampToMillis(StartTime);
     }
 
-    public void setStartTimeTimestamp(Long startTime) {
+    public void setStartTime(Long startTime) {
         StartTime = TimeUtils.convertMillisToTimestamp(startTime);
     }
 
-    public Long getEndTimeTimestamp() {
+    public Long getEndTime() {
         return TimeUtils.convertTimestampToMillis(EndTime);
     }
 
-    public void setEndTimeTimestamp(Long endTime) {
+    public void setEndTime(Long endTime) {
         EndTime = TimeUtils.convertMillisToTimestamp(endTime);
     }
 
@@ -95,19 +95,19 @@ public class ActivityObject extends BaseActivityObject {
         Duration = TimeUtils.convertMillisToTimespan(duration);
     }
 
-    public Long getPublishedTimestamp() {
+    public Long getPublished() {
         return TimeUtils.convertTimestampToMillis(Published);
     }
 
-    public void setPublishedTimestamp(Long published) {
+    public void setPublished(Long published) {
         Published = TimeUtils.convertMillisToTimestamp(published);
     }
 
-    public Long getUpdatedTimestamp() {
+    public Long getUpdated() {
         return TimeUtils.convertTimestampToMillis(Updated);
     }
 
-    public void setUpdatedTimestamp(Long updated) {
+    public void setUpdated(Long updated) {
         Updated = TimeUtils.convertMillisToTimestamp(updated);
     }
 
