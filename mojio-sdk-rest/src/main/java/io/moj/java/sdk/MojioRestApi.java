@@ -10,6 +10,7 @@ import io.moj.java.sdk.model.User;
 import io.moj.java.sdk.model.Vehicle;
 import io.moj.java.sdk.model.response.ListResponse;
 import io.moj.java.sdk.model.response.MessageResponse;
+import io.moj.java.sdk.model.stream.ActivityObject;
 import io.moj.java.sdk.model.values.AccessModel;
 import io.moj.java.sdk.model.values.Email;
 import io.moj.java.sdk.model.values.Image;
@@ -315,6 +316,14 @@ public interface MojioRestApi {
 
     @DELETE("vehicles/{id}")
     Call<MessageResponse> mergeVehicle(@Path("id") String vehicleId, @Query("actual") String mergeVehicleId);
+    // endregion
+
+    // region Activity Streams
+    @GET("activities")
+    Call<ListResponse<ActivityObject>> getActivityStream();
+
+    @GET("activities")
+    Call<ListResponse<ActivityObject>> getActivityStream(@QueryMap Map<String, String> params);
     // endregion
 
 }
