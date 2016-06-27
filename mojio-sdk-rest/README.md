@@ -13,7 +13,7 @@ and handles basic authentication.
 
 ## Download ##
 ```gradle
-compile 'io.moj.java:mojio-sdk-rest:0.0.1'
+compile 'io.moj.java:mojio-sdk-rest:0.0.69'
 ```
 
 ## Instructions ##
