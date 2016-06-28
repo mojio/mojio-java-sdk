@@ -331,11 +331,11 @@ public interface MojioRestApi {
     // endregion
 
     // region Activity Streams
-    @GET("activities")
-    Call<ListResponse<ActivityObject>> getActivityStream();
+    @GET("users/activities")
+    Call<ListResponse<ActivityObject>> getUserActivityStream();
 
-    @GET("activities")
-    Call<ListResponse<ActivityObject>> getActivityStream(@QueryMap Map<String, String> params);
+    @GET("users/activities")
+    Call<ListResponse<ActivityObject>> getUserActivityStream(@QueryMap Map<String, String> params);
     // endregion
 
 }
