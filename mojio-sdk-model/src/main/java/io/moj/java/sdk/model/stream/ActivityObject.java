@@ -13,10 +13,8 @@ public class ActivityObject extends BaseActivityObject {
     public static final String TARGET = "Target";
     public static final String RESULT = "Result";
     public static final String OBJECT = "Object";
-    public static final String SUMMARY = "Summary";
-    public static final String START_TIME = "StartTime";
-    public static final String END_TIME = "EndTime";
-    public static final String DURATION = "Duration";
+    public static final String SUMMARY_MAP = "SummaryMap";
+    public static final String NAME_MAP = "NameMap";
     public static final String PUBLISHED = "Published";
     public static final String UPDATED = "Updated";
 
@@ -24,10 +22,8 @@ public class ActivityObject extends BaseActivityObject {
     private BaseActivityObject Target;
     private BaseActivityObject Result;
     private BaseActivityObject Object;
-    private Map<String, String> Summary;
-    private String StartTime;
-    private String EndTime;
-    private String Duration;
+    private Map<String, String> SummaryMap;
+    private Map<String, String> NameMap;
     private String Published;
     private String Updated;
 
@@ -63,36 +59,20 @@ public class ActivityObject extends BaseActivityObject {
         Object = object;
     }
 
-    public Map<String, String> getSummary() {
-        return Summary;
+    public Map<String, String> getSummaryMap() {
+        return SummaryMap;
     }
 
-    public void setSummary(Map<String, String> summary) {
-        Summary = summary;
+    public void setSummaryMap(Map<String, String> summary) {
+        SummaryMap = summary;
     }
 
-    public Long getStartTime() {
-        return TimeUtils.convertTimestampToMillis(StartTime);
+    public Map<String, String> getNameMap() {
+        return NameMap;
     }
 
-    public void setStartTime(Long startTime) {
-        StartTime = TimeUtils.convertMillisToTimestamp(startTime);
-    }
-
-    public Long getEndTime() {
-        return TimeUtils.convertTimestampToMillis(EndTime);
-    }
-
-    public void setEndTime(Long endTime) {
-        EndTime = TimeUtils.convertMillisToTimestamp(endTime);
-    }
-
-    public Long getDuration() {
-        return TimeUtils.convertTimespanToMillis(Duration);
-    }
-
-    public void setDuration(Long duration) {
-        Duration = TimeUtils.convertMillisToTimespan(duration);
+    public void setNameMap(Map<String, String> nameMap) {
+        NameMap = nameMap;
     }
 
     public Long getPublished() {
@@ -118,10 +98,8 @@ public class ActivityObject extends BaseActivityObject {
                 ", Target=" + Target +
                 ", Result=" + Result +
                 ", Object=" + Object +
-                ", Summary=" + Summary +
-                ", StartTime='" + StartTime + '\'' +
-                ", EndTime='" + EndTime + '\'' +
-                ", Duration='" + Duration + '\'' +
+                ", SummaryMap=" + SummaryMap +
+                ", NameMap=" + NameMap +
                 ", Published='" + Published + '\'' +
                 ", Updated='" + Updated + '\'' +
                 "} " + super.toString();
