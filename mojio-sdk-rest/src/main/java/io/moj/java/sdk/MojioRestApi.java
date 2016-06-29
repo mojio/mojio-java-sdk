@@ -12,6 +12,7 @@ import io.moj.java.sdk.model.VehicleMeasure;
 import io.moj.java.sdk.model.response.ListResponse;
 import io.moj.java.sdk.model.response.MessageResponse;
 import io.moj.java.sdk.model.stream.ActivityObject;
+import io.moj.java.sdk.model.stream.Settings;
 import io.moj.java.sdk.model.values.AccessModel;
 import io.moj.java.sdk.model.values.Email;
 import io.moj.java.sdk.model.values.Image;
@@ -336,6 +337,15 @@ public interface MojioRestApi {
 
     @GET("users/activities")
     Call<ListResponse<ActivityObject>> getUserActivityStream(@QueryMap Map<String, String> params);
+
+    @GET("vehicles/{id}/activities/settings")
+    Call<Settings> getVehicleActivitySettings(@Path("id") String vehicleId);
+
+    @GET("vehicles/{id}/activities/settings")
+    Call<Settings> getVehicleActivitySettings(@Path("id") String vehicleId, @QueryMap Map<String, String> params);
+
+    @PUT("vehicles/{id}/activities/settings")
+    Call<MessageResponse> updateVehicleActivitySettings(@Path("id") String vehicleId, @Body Settings settings);
     // endregion
 
 }
