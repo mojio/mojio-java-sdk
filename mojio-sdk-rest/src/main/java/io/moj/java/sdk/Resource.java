@@ -7,6 +7,7 @@ import io.moj.java.sdk.model.MojioObject;
 import io.moj.java.sdk.model.Trip;
 import io.moj.java.sdk.model.User;
 import io.moj.java.sdk.model.Vehicle;
+import io.moj.java.sdk.model.stream.ActivityObject;
 
 /**
  * Enumeration of resources provided by the Mojio API.
@@ -19,7 +20,8 @@ public enum Resource {
     MOJIO("mojios", Mojio.class),
     TRIP("trips", Trip.class),
     USER("users", User.class),
-    VEHICLE("vehicles", Vehicle.class);
+    VEHICLE("vehicles", Vehicle.class),
+    ACTIVITIES("activities", ActivityObject.class);
 
     private final String path;
     private final Class<? extends MojioObject> model;
