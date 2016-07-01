@@ -276,7 +276,7 @@ public interface MojioRestApi {
                                      @Query("sendverification") boolean sendCode);
 
     @DELETE("users/{id}/phonenumbers/{phone}")
-    Call<PhoneNumber> deletePhone(@Path("id") String userId, @Path("phone") String phoneNumber);
+    Call<MessageResponse> deletePhone(@Path("id") String userId, @Path("phone") String phoneNumber);
 
     @PUT("users/{id}/phonenumbers/{phone}")
     Call<PhoneNumber> verifyPin(@Path("id") String userId, @Path("phone") String phoneNumber,
