@@ -1,5 +1,7 @@
 package io.moj.java.sdk;
 
+import io.moj.java.sdk.utils.TimeUtils;
+
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -14,6 +16,8 @@ public class Query extends HashMap<String, String> {
     public static final String FILTER = "filter";
     public static final String SELECT = "select";
     public static final String ORDER_BY = "orderby";
+    public static final String BEFORE = "before";
+    public static final String SINCE = "since";
     public static final String INCLUDE_COUNT = "includeCount";
     public static final String FIELDS = "fields";
 
@@ -66,6 +70,44 @@ public class Query extends HashMap<String, String> {
     public Query orderBy(String orderBy) {
         put(ORDER_BY, orderBy);
         return this;
+    }
+
+    /**
+     * Date to skip to, used for paging.
+     * @param before the timestamp in ISO-8601 UTC timestamp format (e.g. 2016-07-01T05:02:39Z)
+     * @return
+     */
+    public Query before(String before) {
+        put(BEFORE, before);
+        return this;
+    }
+
+    /**
+     * Date to skip to, used for paging.
+     * @param timestamp the timestamp, in milliseconds
+     * @return
+     */
+    public Query before(long timestamp) {
+        return before(TimeUtils.convertMillisToTimestamp(timestamp));
+    }
+
+    /**
+     * Return only records after this date
+     * @param since the timestamp in ISO-8601 UTC timestamp format (e.g. 2016-07-01T05:02:39Z)
+     * @return
+     */
+    public Query since(String since) {
+        put(SINCE, since);
+        return this;
+    }
+
+    /**
+     * Date to skip to, used for paging.
+     * @param timestamp the timestamp, in milliseconds
+     * @return
+     */
+    public Query since(long timestamp) {
+        return since(TimeUtils.convertMillisToTimestamp(timestamp));
     }
 
     /**

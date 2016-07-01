@@ -1,5 +1,6 @@
 package io.moj.java.sdk;
 
+import io.moj.java.sdk.utils.TimeUtils;
 import org.junit.Test;
 
 import java.util.Map;
@@ -13,6 +14,9 @@ public class QueryTest {
 
     @Test
     public void testBuild() {
+        long since = System.currentTimeMillis() - 1000;
+        long before = System.currentTimeMillis();
+
         int top = 1234;
         int skip = 5678;
         String filter = "filter";
@@ -26,15 +30,19 @@ public class QueryTest {
                 .filter(filter)
                 .select(select)
                 .orderBy(orderBy)
+                .since(since)
+                .before(before)
                 .includeCount(includeCount)
                 .fields(fields);
 
-        assertThat(query.size()).isEqualTo(7);
+        assertThat(query.size()).isEqualTo(9);
         assertThat(query.get(Query.TOP)).isEqualTo(String.valueOf(top));
         assertThat(query.get(Query.SKIP)).isEqualTo(String.valueOf(skip));
         assertThat(query.get(Query.FILTER)).isEqualTo(filter);
         assertThat(query.get(Query.SELECT)).isEqualTo(select);
         assertThat(query.get(Query.ORDER_BY)).isEqualTo(orderBy);
+        assertThat(query.get(Query.SINCE)).isEqualTo(TimeUtils.convertMillisToTimestamp(since));
+        assertThat(query.get(Query.BEFORE)).isEqualTo(TimeUtils.convertMillisToTimestamp(before));
         assertThat(query.get(Query.INCLUDE_COUNT)).isEqualTo(String.valueOf(includeCount));
         assertThat(query.get(Query.FIELDS)).isEqualTo("abc,def,ghi");
     }
