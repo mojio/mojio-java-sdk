@@ -8,6 +8,8 @@ import io.moj.java.sdk.model.MojioObject;
 import io.moj.java.sdk.model.Trip;
 import io.moj.java.sdk.model.User;
 import io.moj.java.sdk.model.Vehicle;
+import io.moj.java.sdk.model.stream.ActivityObject;
+
 import org.junit.Test;
 
 import java.util.Map;
@@ -26,6 +28,7 @@ public class ResourceTest {
             .put(Resource.TRIP, "trips")
             .put(Resource.USER, "users")
             .put(Resource.VEHICLE, "vehicles")
+            .put(Resource.ACTIVITIES, "activities")
             .build();
 
     private Map<Resource, Class<? extends MojioObject>> MODEL_MAP =
@@ -36,6 +39,7 @@ public class ResourceTest {
             .put(Resource.TRIP, Trip.class)
             .put(Resource.USER, User.class)
             .put(Resource.VEHICLE, Vehicle.class)
+            .put(Resource.ACTIVITIES, ActivityObject.class)
             .build();
 
     /**
