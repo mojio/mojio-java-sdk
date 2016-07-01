@@ -1,7 +1,5 @@
 package io.moj.java.sdk.model.stream;
 
-import java.util.Map;
-
 import io.moj.java.sdk.utils.TimeUtils;
 
 /**
@@ -13,8 +11,6 @@ public class ActivityObject extends BaseActivityObject {
     public static final String TARGET = "Target";
     public static final String RESULT = "Result";
     public static final String OBJECT = "Object";
-    public static final String SUMMARY_MAP = "SummaryMap";
-    public static final String NAME_MAP = "NameMap";
     public static final String PUBLISHED = "Published";
     public static final String UPDATED = "Updated";
 
@@ -22,8 +18,6 @@ public class ActivityObject extends BaseActivityObject {
     private BaseActivityObject Target;
     private BaseActivityObject Result;
     private BaseActivityObject Object;
-    private Map<String, String> SummaryMap;
-    private Map<String, String> NameMap;
     private String Published;
     private String Updated;
 
@@ -59,22 +53,6 @@ public class ActivityObject extends BaseActivityObject {
         Object = object;
     }
 
-    public Map<String, String> getSummaryMap() {
-        return SummaryMap;
-    }
-
-    public void setSummaryMap(Map<String, String> summary) {
-        SummaryMap = summary;
-    }
-
-    public Map<String, String> getNameMap() {
-        return NameMap;
-    }
-
-    public void setNameMap(Map<String, String> nameMap) {
-        NameMap = nameMap;
-    }
-
     public Long getPublished() {
         return TimeUtils.convertTimestampToMillis(Published);
     }
@@ -98,8 +76,6 @@ public class ActivityObject extends BaseActivityObject {
                 ", Target=" + Target +
                 ", Result=" + Result +
                 ", Object=" + Object +
-                ", SummaryMap=" + SummaryMap +
-                ", NameMap=" + NameMap +
                 ", Published='" + Published + '\'' +
                 ", Updated='" + Updated + '\'' +
                 "} " + super.toString();

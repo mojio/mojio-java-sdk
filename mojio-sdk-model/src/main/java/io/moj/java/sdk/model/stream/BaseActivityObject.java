@@ -1,5 +1,7 @@
 package io.moj.java.sdk.model.stream;
 
+import java.util.Map;
+
 import io.moj.java.sdk.model.MojioObject;
 import io.moj.java.sdk.utils.TimeUtils;
 
@@ -17,6 +19,8 @@ public class BaseActivityObject implements MojioObject {
     public static final String END_TIME = "EndTime";
     public static final String DURATION = "Duration";
     public static final String ORIGIN = "Origin";
+    public static final String SUMMARY_MAP = "SummaryMap";
+    public static final String NAME_MAP = "NameMap";
 
     private String Id;
     private String HRef;
@@ -28,6 +32,8 @@ public class BaseActivityObject implements MojioObject {
     private String EndTime;
     private String Duration;
     private Link Origin;
+    private Map<String, String> SummaryMap;
+    private Map<String, String> NameMap;
 
     public String getId() {
         return Id;
@@ -109,6 +115,22 @@ public class BaseActivityObject implements MojioObject {
         Origin = origin;
     }
 
+    public Map<String, String> getSummaryMap() {
+        return SummaryMap;
+    }
+
+    public void setSummaryMap(Map<String, String> summary) {
+        SummaryMap = summary;
+    }
+
+    public Map<String, String> getNameMap() {
+        return NameMap;
+    }
+
+    public void setNameMap(Map<String, String> nameMap) {
+        NameMap = nameMap;
+    }
+
     @Override
     public String toString() {
         return "BaseActivityObject{" +
@@ -122,6 +144,8 @@ public class BaseActivityObject implements MojioObject {
                 ", EndTime='" + EndTime + '\'' +
                 ", Duration='" + Duration + '\'' +
                 ", Origin=" + Origin +
+                ", SummaryMap=" + SummaryMap +
+                ", NameMap=" + NameMap +
                 '}';
     }
 }
