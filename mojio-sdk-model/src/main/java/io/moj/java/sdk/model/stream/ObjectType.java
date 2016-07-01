@@ -5,7 +5,8 @@ package io.moj.java.sdk.model.stream;
  * Created by Mauro on 2016-07-01.
  */
 public enum ObjectType {
-    SPEED_LIMIT("SpeedLimit");
+    SPEED_LIMIT("SpeedLimit"),
+    DTC("DiagnosticTroubleCode");
 
     private String key;
 
