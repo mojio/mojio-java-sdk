@@ -194,7 +194,10 @@ public class Observer {
         VEHICLE("vehicle"),
 
         @SerializedName("user")
-        USER("user");
+        USER("user"),
+
+        @SerializedName("activity")
+        ACTIVITY("activity");
 
         private final String key;
 
