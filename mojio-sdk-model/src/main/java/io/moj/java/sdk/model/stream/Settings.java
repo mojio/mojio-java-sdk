@@ -17,8 +17,12 @@ public class Settings {
     public static final String ENABLE_DTC = "EnableDtcActivity";
     public static final String ENABLE_CHECK_ENGINE = "EnableCheckEngineActivity";
     public static final String ENABLE_TOW = "EnableTowActivity";
+    public static final String ENABLE_MAINTENANCE = "EnableMaintenanceActivity";
     public static final String ENABLE_RECALL = "EnableRecallActivity";
     public static final String ENABLE_SERVICE_BULLETIN = "EnableServiceBulletinActivity";
+    public static final String ENABLE_DISTURBANCE = "EnableDisturbanceActivity";
+    public static final String ENABLE_ACCIDENT = "EnableAccidentActivity";
+    public static final String ENABLE_DEVICE_UNPLUGGED = "EnableDeviceUnpluggedActivity";
 
     private Boolean EnableGeofenceActivity;
     private Boolean EnableTripStartActivity;
@@ -30,8 +34,12 @@ public class Settings {
     private Boolean EnableDtcActivity;
     private Boolean EnableCheckEngineActivity;
     private Boolean EnableTowActivity;
+    private Boolean EnableMaintenanceActivity;
     private Boolean EnableRecallActivity;
     private Boolean EnableServiceBulletinActivity;
+    private Boolean EnableDisturbanceActivity;
+    private Boolean EnableAccidentActivity;
+    private Boolean EnableDeviceUnpluggedActivity;
 
     public Boolean getEnableGeofenceActivity() {
         return EnableGeofenceActivity;
@@ -129,6 +137,38 @@ public class Settings {
         EnableServiceBulletinActivity = enableServiceBulletinActivity;
     }
 
+    public Boolean getEnableMaintenanceActivity() {
+        return EnableMaintenanceActivity;
+    }
+
+    public void setEnableMaintenanceActivity(Boolean enableMaintenanceActivity) {
+        EnableMaintenanceActivity = enableMaintenanceActivity;
+    }
+
+    public Boolean getEnableDisturbanceActivity() {
+        return EnableDisturbanceActivity;
+    }
+
+    public void setEnableDisturbanceActivity(Boolean enableDisturbanceActivity) {
+        EnableDisturbanceActivity = enableDisturbanceActivity;
+    }
+
+    public Boolean getEnableAccidentActivity() {
+        return EnableAccidentActivity;
+    }
+
+    public void setEnableAccidentActivity(Boolean enableAccidentActivity) {
+        EnableAccidentActivity = enableAccidentActivity;
+    }
+
+    public Boolean getEnableDeviceUnpluggedActivity() {
+        return EnableDeviceUnpluggedActivity;
+    }
+
+    public void setEnableDeviceUnpluggedActivity(Boolean enableDeviceUnpluggedActivity) {
+        EnableDeviceUnpluggedActivity = enableDeviceUnpluggedActivity;
+    }
+
     @Override
     public String toString() {
         return "Settings{" +
@@ -142,8 +182,12 @@ public class Settings {
                 ", EnableDtcActivity=" + EnableDtcActivity +
                 ", EnableCheckEngineActivity=" + EnableCheckEngineActivity +
                 ", EnableTowActivity=" + EnableTowActivity +
+                ", EnableMaintenanceActivity=" + EnableMaintenanceActivity +
                 ", EnableRecallActivity=" + EnableRecallActivity +
                 ", EnableServiceBulletinActivity=" + EnableServiceBulletinActivity +
+                ", EnableDisturbanceActivity=" + EnableDisturbanceActivity +
+                ", EnableAccidentActivity=" + EnableAccidentActivity +
+                ", EnableDeviceUnpluggedActivity=" + EnableDeviceUnpluggedActivity +
                 '}';
     }
 }
