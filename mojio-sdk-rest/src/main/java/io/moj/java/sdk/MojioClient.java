@@ -46,6 +46,8 @@ public class MojioClient {
     private Authenticator authenticator;
     private AuthInterceptor authInterceptor;
 
+    private OkHttpClient[] httpClients;
+
     protected MojioClient(Environment environment, Client client, Gson gson, Authenticator authenticator,
                           ExecutorService requestExecutor, Executor callbackExecutor, boolean logging) {
         this.environment = environment == null ? MojioEnvironment.getDefault() : environment;
@@ -71,9 +73,12 @@ public class MojioClient {
             httpClientBuilder.dispatcher(new Dispatcher(requestExecutor));
         }
 
+        httpClients = new OkHttpClient[2];
+        httpClients[0] = httpClientBuilder.build();
+
         authApi = retrofitBuilder
                 .baseUrl(this.environment.getAccountsUrl() + "/")
-                .client(httpClientBuilder.build())
+                .client(httpClients[0])
                 .build()
                 .create(MojioAuthApi.class);
 
@@ -84,7 +89,9 @@ public class MojioClient {
         this.authenticator = authenticator;
         authInterceptor = new AuthInterceptor(authenticator);
         httpClientBuilder.addInterceptor(authInterceptor);
-        retrofitBuilder.client(httpClientBuilder.build());
+        httpClients[1] = httpClientBuilder.build();
+        retrofitBuilder.client(httpClients[1]);
+
         initAuthenticatedApis(retrofitBuilder);
     }
 
@@ -212,6 +219,15 @@ public class MojioClient {
      */
     public void setOnAccessTokenExpiredListener(OnAccessTokenExpiredListener listener) {
         authInterceptor.setOnAccessTokenExpiredListener(listener);
+    }
+
+    /**
+     * Cancels all outstanding requests.
+     */
+    public void cancelAll() {
+        for (OkHttpClient httpClient : httpClients) {
+            httpClient.dispatcher().cancelAll();
+        }
     }
 
     /**
