@@ -138,4 +138,13 @@ public class TimeUtilsTest {
         assertThat(TimeUtils.convertMillisToTimestamp(1458347716264L)).isEqualTo("2016-03-19T00:35:16.264Z");
     }
 
+    @Test
+    public void testPrecision() {
+        String expectedTimestamp = "2016-07-01T19:00:48.986Z";
+        String actualTimestamp = "2016-07-01T19:00:48.9867879Z";
+        long millis = 1467399648986L;
+        assertThat(TimeUtils.convertTimestampToMillis(actualTimestamp)).isEqualTo(millis);
+        assertThat(TimeUtils.convertMillisToTimestamp(millis)).startsWith(expectedTimestamp);
+    }
+
 }

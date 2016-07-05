@@ -176,8 +176,13 @@ public final class TimeUtils {
             return null;
 
         timestamp = timestamp.replaceFirst("\\+.*", SUFFIX_TIMEZONE);
-        if (!timestamp.contains(".")) {
+        int periodIndex = timestamp.indexOf('.');
+        if (periodIndex == -1) {
+            // there are no millseconds, append ".000Z"
             timestamp = timestamp.replaceFirst(SUFFIX_TIMEZONE, SUFFIX_TIMEZONE_MS);
+        } else {
+            // if we have milliseconds, trim it down to 3 decimal places
+            timestamp = timestamp.substring(0, periodIndex + 4) + SUFFIX_TIMEZONE;
         }
 
         try {
