@@ -276,6 +276,10 @@ public class VehicleMeasure extends AbstractMojioObject {
         return TimeUtils.convertTimestampToMillis(Time);
     }
 
+    public String getTimeRaw() {
+        return Time;
+    }
+
     public void setTime(Long time) {
         Time = TimeUtils.convertMillisToTimestamp(time);
     }
