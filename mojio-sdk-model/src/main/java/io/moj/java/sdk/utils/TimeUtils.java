@@ -175,6 +175,23 @@ public final class TimeUtils {
         if (timestamp == null || timestamp.length() == 0)
             return null;
 
+        String normalizedTimestamp = normalizeTimestamp(timestamp);
+        try {
+            return DATE_FORMAT.get().parse(normalizedTimestamp).getTime();
+        } catch (ParseException e) {
+            return 0L;
+        }
+    }
+
+    /**
+     * Normalizes a timestamp to precisely the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z' so it can be sorted alphabetically.
+     * @param timestamp
+     * @return
+     */
+    public static String normalizeTimestamp(String timestamp) {
+        if (timestamp == null || timestamp.isEmpty())
+            return timestamp;
+
         StringBuilder builder = new StringBuilder(timestamp.replaceFirst("\\+.*", SUFFIX_TIMEZONE));
         int periodIndex = builder.indexOf(".");
         if (periodIndex == -1) {
@@ -192,12 +209,7 @@ public final class TimeUtils {
                 }
             }
         }
-
-        try {
-            return DATE_FORMAT.get().parse(builder.toString()).getTime();
-        } catch (ParseException e) {
-            return 0L;
-        }
+        return builder.toString();
     }
 
     /**
