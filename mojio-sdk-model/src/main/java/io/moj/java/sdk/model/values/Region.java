@@ -1,7 +1,6 @@
 package io.moj.java.sdk.model.values;
 
 import com.google.gson.annotations.SerializedName;
-import io.moj.java.sdk.model.enums.DistanceUnit;
 
 /**
  * Model object for a region.
@@ -12,7 +11,7 @@ public class Region {
     private Type Type;
     private Float Lat;
     private Float Lng;
-    private DistanceUnit Radius;
+    private Distance Radius;
 
     public Region.Type getType() {
         return Type;
@@ -38,11 +37,11 @@ public class Region {
         Lng = lng;
     }
 
-    public DistanceUnit getRadius() {
+    public Distance getRadius() {
         return Radius;
     }
 
-    public void setRadius(DistanceUnit radius) {
+    public void setRadius(Distance radius) {
         Radius = radius;
     }
 
