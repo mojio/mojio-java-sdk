@@ -19,6 +19,13 @@ public class EntityTests {
     }
 
     @Test
+    public void testGeofence() throws IllegalAccessException {
+        Geofence geofence = new Geofence();
+        assertToStringContainsAllFields(geofence);
+        assertAccess(geofence);
+    }
+
+    @Test
     public void testGroup() throws IllegalAccessException {
         Group group = new Group();
         assertToStringContainsAllFields(group);

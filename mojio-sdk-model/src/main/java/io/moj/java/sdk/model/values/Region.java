@@ -14,6 +14,48 @@ public class Region {
     private Float Lng;
     private DistanceUnit Radius;
 
+    public Region.Type getType() {
+        return Type;
+    }
+
+    public void setType(Region.Type type) {
+        Type = type;
+    }
+
+    public Float getLat() {
+        return Lat;
+    }
+
+    public void setLat(Float lat) {
+        Lat = lat;
+    }
+
+    public Float getLng() {
+        return Lng;
+    }
+
+    public void setLng(Float lng) {
+        Lng = lng;
+    }
+
+    public DistanceUnit getRadius() {
+        return Radius;
+    }
+
+    public void setRadius(DistanceUnit radius) {
+        Radius = radius;
+    }
+
+    @Override
+    public String toString() {
+        return "Region{" +
+                "Type=" + Type +
+                ", Lat=" + Lat +
+                ", Lng=" + Lng +
+                ", Radius=" + Radius +
+                '}';
+    }
+
     public enum Type {
         @SerializedName("Circle")
         CIRCLE("Circle");

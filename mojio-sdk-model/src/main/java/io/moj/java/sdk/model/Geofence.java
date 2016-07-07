@@ -2,6 +2,8 @@ package io.moj.java.sdk.model;
 
 import io.moj.java.sdk.model.values.Region;
 
+import java.util.Arrays;
+
 /**
  * Model object for a Geofence.
  * Created by skidson on 2016-07-07.
@@ -50,5 +52,24 @@ public class Geofence extends AbstractMojioObject {
 
     public void setTags(String[] tags) {
         Tags = tags;
+    }
+
+    public Region getRegion() {
+        return Region;
+    }
+
+    public void setRegion(Region region) {
+        Region = region;
+    }
+
+    @Override
+    public String toString() {
+        return "Geofence{" +
+                "Name='" + Name + '\'' +
+                ", Description='" + Description + '\'' +
+                ", Region=" + Region +
+                ", Enabled=" + Enabled +
+                ", Tags=" + Arrays.toString(Tags) +
+                "} " + super.toString();
     }
 }
