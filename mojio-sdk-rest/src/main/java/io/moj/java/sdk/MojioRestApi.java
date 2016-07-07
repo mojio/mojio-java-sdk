@@ -3,6 +3,7 @@ package io.moj.java.sdk;
 import java.util.Map;
 
 import io.moj.java.sdk.model.App;
+import io.moj.java.sdk.model.Geofence;
 import io.moj.java.sdk.model.Group;
 import io.moj.java.sdk.model.Mojio;
 import io.moj.java.sdk.model.Trip;
@@ -63,6 +64,26 @@ public interface MojioRestApi {
 
     @DELETE("apps/{id}/secret")
     Call<MessageResponse> deleteAppSecret(@Path("id") String appId);
+    // endregion
+
+    // region Geofences
+    @GET("geofences")
+    Call<ListResponse<Geofence>> getGeofences();
+
+    @GET("geofences")
+    Call<ListResponse<Geofence>> getGeofences(@QueryMap Map<String, String> params);
+
+    @GET("geofences/{id}")
+    Call<ListResponse<Geofence>> getGeofence(@Path("id") String geofenceId);
+
+    @POST("geofences")
+    Call<ListResponse<Geofence>> createGeofence(@Body Geofence geofence);
+
+    @PUT("geofences/{id}")
+    Call<ListResponse<Geofence>> updateGeofence(@Path("id") String geofenceId, @Body Geofence geofence);
+
+    @DELETE("geofences/{id}")
+    Call<MessageResponse> deleteGeofence(@Path("id") String geofenceId);
     // endregion
 
     // region Groups

@@ -161,6 +161,12 @@ public class ValueTests {
     }
 
     @Test
+    public void testRegion() throws IllegalAccessException {
+        assertToStringContainsAllFields(new Region());
+        assertAccess(new Region());
+    }
+
+    @Test
     public void testRpm() throws IllegalAccessException {
         assertToStringContainsAllFields(new Rpm());
         assertAccess(new Rpm());
