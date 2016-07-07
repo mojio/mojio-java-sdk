@@ -175,16 +175,41 @@ public final class TimeUtils {
         if (timestamp == null || timestamp.length() == 0)
             return null;
 
-        timestamp = timestamp.replaceFirst("\\+.*", SUFFIX_TIMEZONE);
-        if (!timestamp.contains(".")) {
-            timestamp = timestamp.replaceFirst(SUFFIX_TIMEZONE, SUFFIX_TIMEZONE_MS);
-        }
-
+        String normalizedTimestamp = normalizeTimestamp(timestamp);
         try {
-            return DATE_FORMAT.get().parse(timestamp).getTime();
+            return DATE_FORMAT.get().parse(normalizedTimestamp).getTime();
         } catch (ParseException e) {
             return 0L;
         }
+    }
+
+    /**
+     * Normalizes a timestamp to precisely the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z' so it can be sorted alphabetically.
+     * @param timestamp
+     * @return
+     */
+    public static String normalizeTimestamp(String timestamp) {
+        if (timestamp == null || timestamp.isEmpty())
+            return timestamp;
+
+        StringBuilder builder = new StringBuilder(timestamp.replaceFirst("\\+.*", SUFFIX_TIMEZONE));
+        int periodIndex = builder.indexOf(".");
+        if (periodIndex == -1) {
+            // there are no millseconds, append ".000Z"
+            builder.replace(builder.length() - 1, builder.length(), SUFFIX_TIMEZONE_MS);
+        } else {
+            if (timestamp.length() > periodIndex + 4) {
+                // if we have milliseconds, trim it down to 3 decimal places
+                builder.replace(periodIndex + 4, builder.length(), SUFFIX_TIMEZONE);
+            } else {
+                // pad the milliseconds with zeroes if less than 3
+                int padCount = 3 - (builder.length() - periodIndex - 2);
+                for (int i = 0; i < padCount; i++) {
+                    builder.insert(builder.length() - 1, "0");
+                }
+            }
+        }
+        return builder.toString();
     }
 
     /**
