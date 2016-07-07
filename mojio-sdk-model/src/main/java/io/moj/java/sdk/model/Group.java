@@ -1,6 +1,5 @@
 package io.moj.java.sdk.model;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
