@@ -20,6 +20,7 @@ public class ObjectTypeTest extends EnumTest<ObjectType> {
                 .put("TelematicDevice", ObjectType.TELEMATIC_DEVICE)
                 .put("Battery", ObjectType.BATTERY)
                 .put("FuelLevel", ObjectType.FUEL_LEVEL)
+                .put("CheckEngineLight", ObjectType.CHECK_ENGINE_LIGHT)
                 .build();
     }
 
