@@ -2,12 +2,14 @@ package io.moj.java.sdk.model.stream;
 
 import io.moj.java.sdk.model.values.Speed;
 
+import java.util.Arrays;
+
 /**
  * Activity stream settings model.
  * Created by Mauro on 2016-06-23.
  */
 public class Settings {
-    public static final String ENABLE_GEOFENCE = "EnableGeofenceActivity";
+
     public static final String ENABLE_TRIP_START = "EnableTripStartActivity";
     public static final String ENABLE_TRIP_COMPLETED = "EnableTripCompletedActivity";
     public static final String ENABLE_LOW_FUEL = "EnableLowFuelActivity";
@@ -23,8 +25,9 @@ public class Settings {
     public static final String ENABLE_DISTURBANCE = "EnableDisturbanceActivity";
     public static final String ENABLE_ACCIDENT = "EnableAccidentActivity";
     public static final String ENABLE_DEVICE_UNPLUGGED = "EnableDeviceUnpluggedActivity";
+    public static final String ENABLE_GEOFENCE = "EnableGeofenceActivity";
+    public static final String ENABLED_GEOFENCES = "EnabledGeofences";
 
-    private Boolean EnableGeofenceActivity;
     private Boolean EnableTripStartActivity;
     private Boolean EnableTripCompletedActivity;
     private Boolean EnableLowFuelActivity;
@@ -40,6 +43,8 @@ public class Settings {
     private Boolean EnableDisturbanceActivity;
     private Boolean EnableAccidentActivity;
     private Boolean EnableDeviceUnpluggedActivity;
+    private Boolean EnableGeofenceActivity;
+    private Geofence[] EnabledGeofences;
 
     public Boolean getEnableGeofenceActivity() {
         return EnableGeofenceActivity;
@@ -169,11 +174,18 @@ public class Settings {
         EnableDeviceUnpluggedActivity = enableDeviceUnpluggedActivity;
     }
 
+    public Geofence[] getEnabledGeofences() {
+        return EnabledGeofences;
+    }
+
+    public void setEnabledGeofences(Geofence[] enabledGeofences) {
+        EnabledGeofences = enabledGeofences;
+    }
+
     @Override
     public String toString() {
         return "Settings{" +
-                "EnableGeofenceActivity=" + EnableGeofenceActivity +
-                ", EnableTripStartActivity=" + EnableTripStartActivity +
+                "EnableTripStartActivity=" + EnableTripStartActivity +
                 ", EnableTripCompletedActivity=" + EnableTripCompletedActivity +
                 ", EnableLowFuelActivity=" + EnableLowFuelActivity +
                 ", EnableLowBatteryActivity=" + EnableLowBatteryActivity +
@@ -188,6 +200,47 @@ public class Settings {
                 ", EnableDisturbanceActivity=" + EnableDisturbanceActivity +
                 ", EnableAccidentActivity=" + EnableAccidentActivity +
                 ", EnableDeviceUnpluggedActivity=" + EnableDeviceUnpluggedActivity +
+                ", EnableGeofenceActivity=" + EnableGeofenceActivity +
+                ", EnabledGeofences=" + Arrays.toString(EnabledGeofences) +
                 '}';
+    }
+
+    public static class Geofence {
+        private String Id;
+        private Boolean EnableEnterActivity;
+        private Boolean EnableExitActivity;
+
+        public String getId() {
+            return Id;
+        }
+
+        public void setId(String id) {
+            Id = id;
+        }
+
+        public Boolean getEnableEnterActivity() {
+            return EnableEnterActivity;
+        }
+
+        public void setEnableEnterActivity(Boolean enableEnterActivity) {
+            EnableEnterActivity = enableEnterActivity;
+        }
+
+        public Boolean getEnableExitActivity() {
+            return EnableExitActivity;
+        }
+
+        public void setEnableExitActivity(Boolean enableExitActivity) {
+            EnableExitActivity = enableExitActivity;
+        }
+
+        @Override
+        public String toString() {
+            return "Geofence{" +
+                    "Id='" + Id + '\'' +
+                    ", EnableEnterActivity=" + EnableEnterActivity +
+                    ", EnableExitActivity=" + EnableExitActivity +
+                    '}';
+        }
     }
 }
