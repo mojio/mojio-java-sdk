@@ -74,7 +74,7 @@ public interface MojioRestApi {
     Call<ListResponse<Geofence>> getGeofences(@QueryMap Map<String, String> params);
 
     @GET("geofences/{id}")
-    Call<ListResponse<Geofence>> getGeofence(@Path("id") String geofenceId);
+    Call<Geofence> getGeofence(@Path("id") String geofenceId);
 
     @POST("geofences")
     Call<ListResponse<Geofence>> createGeofence(@Body Geofence geofence);
