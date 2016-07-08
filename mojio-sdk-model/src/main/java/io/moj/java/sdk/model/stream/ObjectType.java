@@ -6,7 +6,10 @@ package io.moj.java.sdk.model.stream;
  */
 public enum ObjectType {
     SPEED_LIMIT("SpeedLimit"),
-    DTC("DiagnosticTroubleCode");
+    DTC("DiagnosticTroubleCode"),
+    TELEMATIC_DEVICE("TelematicDevice"),
+    BATTERY("Battery"),
+    FUEL_LEVEL("FuelLevel");
 
     private String key;
 
