@@ -210,6 +210,12 @@ public class Settings {
         private Boolean EnableEnterActivity;
         private Boolean EnableExitActivity;
 
+        public Geofence() {}
+
+        public Geofence(String id) {
+            this.Id = id;
+        }
+
         public String getId() {
             return Id;
         }
