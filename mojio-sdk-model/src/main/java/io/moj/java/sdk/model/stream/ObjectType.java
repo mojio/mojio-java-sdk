@@ -9,6 +9,7 @@ public enum ObjectType {
     DTC("DiagnosticTroubleCode"),
     TELEMATIC_DEVICE("TelematicDevice"),
     BATTERY("Battery"),
+    CHECK_ENGINE_LIGHT("CheckEngineLight"),
     FUEL_LEVEL("FuelLevel");
 
     private String key;
