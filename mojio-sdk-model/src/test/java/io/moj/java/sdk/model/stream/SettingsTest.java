@@ -14,5 +14,9 @@ public class SettingsTest {
         Settings obj = new Settings();
         assertToStringContainsAllFields(obj);
         assertAccess(obj);
+
+        Settings.Geofence geofence = new Settings.Geofence();
+        assertToStringContainsAllFields(geofence);
+        assertAccess(geofence);
     }
 }
