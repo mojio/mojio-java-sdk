@@ -1,7 +1,5 @@
 package io.moj.java.sdk.model.stream;
 
-import com.google.gson.annotations.SerializedName;
-
 /**
  * Activity stream object types
  * Created by Mauro on 2016-07-01.
