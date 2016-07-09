@@ -31,7 +31,7 @@ public class BaseActivityObject implements MojioObject {
     private String StartTime;
     private String EndTime;
     private String Duration;
-    private Link Origin;
+    private BaseActivityObject Origin;
     private Map<String, String> SummaryMap;
     private Map<String, String> NameMap;
 
@@ -107,11 +107,11 @@ public class BaseActivityObject implements MojioObject {
         Duration = TimeUtils.convertMillisToTimespan(duration);
     }
 
-    public Link getOrigin() {
+    public BaseActivityObject getOrigin() {
         return Origin;
     }
 
-    public void setOrigin(Link origin) {
+    public void setOrigin(BaseActivityObject origin) {
         Origin = origin;
     }
 
