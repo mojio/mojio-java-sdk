@@ -74,13 +74,13 @@ public interface MojioRestApi {
     Call<ListResponse<Geofence>> getGeofences(@QueryMap Map<String, String> params);
 
     @GET("geofences/{id}")
-    Call<ListResponse<Geofence>> getGeofence(@Path("id") String geofenceId);
+    Call<Geofence> getGeofence(@Path("id") String geofenceId);
 
     @POST("geofences")
-    Call<ListResponse<Geofence>> createGeofence(@Body Geofence geofence);
+    Call<Geofence> createGeofence(@Body Geofence geofence);
 
     @PUT("geofences/{id}")
-    Call<ListResponse<Geofence>> updateGeofence(@Path("id") String geofenceId, @Body Geofence geofence);
+    Call<Geofence> updateGeofence(@Path("id") String geofenceId, @Body Geofence geofence);
 
     @DELETE("geofences/{id}")
     Call<MessageResponse> deleteGeofence(@Path("id") String geofenceId);
