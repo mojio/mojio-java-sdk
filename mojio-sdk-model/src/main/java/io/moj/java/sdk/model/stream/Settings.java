@@ -26,7 +26,7 @@ public class Settings {
     public static final String ENABLE_ACCIDENT = "EnableAccidentActivity";
     public static final String ENABLE_DEVICE_UNPLUGGED = "EnableDeviceUnpluggedActivity";
     public static final String ENABLE_GEOFENCE = "EnableGeofenceActivity";
-    public static final String ENABLED_GEOFENCES = "EnabledGeofences";
+    public static final String ENABLED_GEOFENCES = "Geofences";
 
     private Boolean EnableTripStartActivity;
     private Boolean EnableTripCompletedActivity;
@@ -44,7 +44,7 @@ public class Settings {
     private Boolean EnableAccidentActivity;
     private Boolean EnableDeviceUnpluggedActivity;
     private Boolean EnableGeofenceActivity;
-    private Geofence[] EnabledGeofences;
+    private Geofence[] Geofences;
 
     public Boolean getEnableGeofenceActivity() {
         return EnableGeofenceActivity;
@@ -174,12 +174,12 @@ public class Settings {
         EnableDeviceUnpluggedActivity = enableDeviceUnpluggedActivity;
     }
 
-    public Geofence[] getEnabledGeofences() {
-        return EnabledGeofences;
+    public Geofence[] getGeofences() {
+        return Geofences;
     }
 
-    public void setEnabledGeofences(Geofence[] enabledGeofences) {
-        EnabledGeofences = enabledGeofences;
+    public void setGeofences(Geofence[] geofences) {
+        Geofences = geofences;
     }
 
     @Override
@@ -201,7 +201,7 @@ public class Settings {
                 ", EnableAccidentActivity=" + EnableAccidentActivity +
                 ", EnableDeviceUnpluggedActivity=" + EnableDeviceUnpluggedActivity +
                 ", EnableGeofenceActivity=" + EnableGeofenceActivity +
-                ", EnabledGeofences=" + Arrays.toString(EnabledGeofences) +
+                ", Geofences=" + Arrays.toString(Geofences) +
                 '}';
     }
 
