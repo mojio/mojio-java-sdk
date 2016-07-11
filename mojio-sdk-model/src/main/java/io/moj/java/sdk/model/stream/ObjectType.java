@@ -10,7 +10,8 @@ public enum ObjectType {
     TELEMATIC_DEVICE("TelematicDevice"),
     BATTERY("Battery"),
     CHECK_ENGINE_LIGHT("CheckEngineLight"),
-    FUEL_LEVEL("FuelLevel");
+    FUEL_LEVEL("FuelLevel"),
+    GEOFENCE("Geofence");
 
     private String key;
 
