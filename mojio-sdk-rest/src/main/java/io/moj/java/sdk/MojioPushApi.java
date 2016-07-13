@@ -156,6 +156,18 @@ public interface MojioPushApi {
                                           @Query("id") String transportId);
 
     /**
+     * Deletes a transport from an observer.
+     * @param resource String path for the specified resource. See {@link io.moj.java.sdk.Resource#getPath()}.
+     * @param resourceId the ID of the specified resource
+     * @param key the key of the observer to update
+     * @param transportId the transport ID. This ID is a URI constructed based on the Transport type.
+     * @return
+     */
+    @DELETE("{resource}/{resourceId}/{key}/transports")
+    Call<MessageResponse> deleteTransport(@Path("resource") String resource, @Path("resourceId") String resourceId,
+                                          @Path("key") String key, @Query("id") String transportId);
+
+    /**
      * Deletes all instances of a transport from all observers (for this application).
      * @param transportId the transport ID. This ID is a URI constructed based on the Transport type. See
      * {@link io.moj.java.sdk.model.push.Transport.Type#getIdentifier(String...)}.
