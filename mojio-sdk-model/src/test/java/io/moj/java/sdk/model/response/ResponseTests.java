@@ -17,6 +17,12 @@ public class ResponseTests {
     }
 
     @Test
+    public void testDataResponse() throws IllegalAccessException {
+        assertToStringContainsAllFields(new DataResponse<>());
+        assertAccess(new ListResponse<>());
+    }
+
+    @Test
     public void testListResponse() throws IllegalAccessException {
         assertToStringContainsAllFields(new ListResponse<>());
         assertAccess(new ListResponse<>());

@@ -2,6 +2,7 @@ package io.moj.java.sdk;
 
 import java.util.Map;
 
+import io.moj.java.sdk.model.response.DataResponse;
 import io.moj.java.sdk.model.response.ListResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -22,7 +23,7 @@ public interface MojioStorageApi {
 
     // region Storage
     @GET("{resource}/{id}/store")
-    Call<ListResponse<Map<String, String>>> getStorage(@Path("resource") String resource, @Path("id") String id, @QueryMap Map<String, Integer> params);
+    Call<DataResponse<Map<String, String>>> getStorage(@Path("resource") String resource, @Path("id") String id, @QueryMap Map<String, Integer> params);
 
     @DELETE("{resource}/{id}/store/{key}")
     Call<String> deleteStorage(@Path("resource") String resource, @Path("id") String id, @Path("key") String key);
