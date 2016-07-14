@@ -1,0 +1,63 @@
+apply plugin: 'java'
+apply plugin: 'jacoco'
+
+ext {
+    PUBLISH_GROUP_ID = 'io.moj.java'
+    SOURCE_COMPATIBILITY = 1.7
+
+    if (project.hasProperty('publishVersion')) {
+        println "Version ${publishVersion}"
+        PUBLISH_VERSION = publishVersion;
+    } else {
+        PUBLISH_VERSION = 'SNAPSHOT'
+    }
+}
+
+allprojects {
+    group PUBLISH_GROUP_ID
+    version PUBLISH_VERSION
+
+    repositories {
+        jcenter()
+        mavenCentral()
+        mavenLocal()
+    }
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+}
+
+task jacocoRootReport(type: JacocoReport, group: 'Reporting') {
+    description = "Creates a unified Jacoco code coverage report with the execution data for each sub-project"
+
+    def sourceDirs = []
+    def classDirs = []
+    def executionFiles = []
+    subprojects.each {
+        sourceDirs += "${it.projectDir}/src/main"
+        classDirs += "${it.buildDir}/classes/main"
+        executionFiles += "${it.buildDir}/jacoco/test.exec"
+    }
+
+    sourceDirectories = files(sourceDirs)
+    additionalSourceDirs = files(sourceDirs)
+    classDirectories = files(classDirs)
+    executionData = files(executionFiles)
+
+    reports {
+        html.enabled = true
+        xml.enabled = true
+        csv.enabled = false
+    }
+
+    onlyIf = {
+        true
+    }
+
+    doFirst {
+        executionData = files(executionData.findAll {
+            it.exists()
+        })
+    }
+}
