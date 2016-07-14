@@ -3,7 +3,7 @@ package io.moj.java.sdk.model.response;
 import java.util.List;
 
 /**
- *
+ * List response that only contains data.
  * Created by Mauro on 2016-07-14.
  */
 public class DataResponse<T> extends MessageResponse {
