@@ -1,27 +1,16 @@
 package io.moj.java.sdk.model.response;
 
-import java.util.List;
-
 import io.moj.java.sdk.model.values.LinkInfo;
 
 /**
  * Model object for a response whose data is a List.
  * Created by skidson on 16-02-09.
  */
-public class ListResponse<T> extends MessageResponse {
+public class ListResponse<T> extends DataResponse<T> {
 
-    private List<T> Data;
     private Integer Results;
     private Integer TotalCount;
     private LinkInfo Links;
-
-    public List<T> getData() {
-        return Data;
-    }
-
-    public void setData(List<T> data) {
-        Data = data;
-    }
 
     public LinkInfo getLinks() {
         return Links;
@@ -50,8 +39,7 @@ public class ListResponse<T> extends MessageResponse {
     @Override
     public String toString() {
         return "ListResponse{" +
-                "Data=" + Data +
-                ", Results=" + Results +
+                "Results=" + Results +
                 ", TotalCount=" + TotalCount +
                 ", Links=" + Links +
                 "} " + super.toString();
