@@ -40,4 +40,10 @@ public class ResponseTests {
         assertAccess(new RegistrationResponse());
     }
 
+    @Test
+    public void testTransactionResponse() throws IllegalAccessException {
+        assertToStringContainsAllFields(new TransactionResponse());
+        assertAccess(new TransactionResponse());
+    }
+
 }

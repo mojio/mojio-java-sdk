@@ -14,6 +14,7 @@ public class WifiRadio {
     private WifiRadio.Status Status;
     private Boolean AllowRoaming;
     private String Timestamp;
+    private String TimeToLive;
 
     public String getSSID() {
         return SSID;
@@ -55,6 +56,14 @@ public class WifiRadio {
         Timestamp = TimeUtils.convertMillisToTimestamp(timestamp);
     }
 
+    public Long getTimeToLive() {
+        return TimeUtils.convertTimestampToMillis(TimeToLive);
+    }
+
+    public void setTimeToLive(Long timeToLive) {
+        TimeToLive = TimeUtils.convertMillisToTimestamp(timeToLive);
+    }
+
     @Override
     public String toString() {
         return "WifiRadio{" +
@@ -63,6 +72,7 @@ public class WifiRadio {
                 ", Status=" + Status +
                 ", AllowRoaming=" + AllowRoaming +
                 ", Timestamp='" + Timestamp + '\'' +
+                ", TimeToLive='" + TimeToLive + '\'' +
                 '}';
     }
 

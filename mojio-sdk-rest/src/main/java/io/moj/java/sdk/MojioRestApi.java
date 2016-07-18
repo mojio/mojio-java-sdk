@@ -6,12 +6,14 @@ import io.moj.java.sdk.model.App;
 import io.moj.java.sdk.model.Geofence;
 import io.moj.java.sdk.model.Group;
 import io.moj.java.sdk.model.Mojio;
+import io.moj.java.sdk.model.Transaction;
 import io.moj.java.sdk.model.Trip;
 import io.moj.java.sdk.model.User;
 import io.moj.java.sdk.model.Vehicle;
 import io.moj.java.sdk.model.VehicleMeasure;
 import io.moj.java.sdk.model.response.ListResponse;
 import io.moj.java.sdk.model.response.MessageResponse;
+import io.moj.java.sdk.model.response.TransactionResponse;
 import io.moj.java.sdk.model.stream.ActivityObject;
 import io.moj.java.sdk.model.stream.Settings;
 import io.moj.java.sdk.model.values.AccessModel;
@@ -201,7 +203,10 @@ public interface MojioRestApi {
     Call<Mojio> unclaimMojio(@Path("id") String mojioId);
 
     @PUT("mojios/{id}/wifiradio")
-    Call<WifiRadio> updateMojioWifi(@Path("id") String mojioId, @Body WifiRadio wifiRadio);
+    Call<TransactionResponse> updateMojioWifi(@Path("id") String mojioId, @Body WifiRadio wifiRadio);
+
+    @GET("mojios/{id}/transactions/{transactionId}")
+    Call<Transaction> getMojioTransaction(@Path("id") String mojioId, @Path("transactionId") String transactionId);
     // endregion
 
     // region Permissions

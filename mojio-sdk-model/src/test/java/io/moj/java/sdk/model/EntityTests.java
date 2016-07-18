@@ -47,6 +47,13 @@ public class EntityTests {
     }
 
     @Test
+    public void testTransaction() throws IllegalAccessException {
+        Transaction transaction = new Transaction();
+        assertToStringContainsAllFields(transaction);
+        assertAccess(transaction);
+    }
+
+    @Test
     public void testTrip() throws IllegalAccessException {
         Trip trip = new Trip();
         assertToStringContainsAllFields(trip);
