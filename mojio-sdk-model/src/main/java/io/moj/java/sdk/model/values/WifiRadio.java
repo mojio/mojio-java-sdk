@@ -57,11 +57,11 @@ public class WifiRadio {
     }
 
     public Long getTimeToLive() {
-        return TimeUtils.convertTimestampToMillis(TimeToLive);
+        return TimeUtils.convertTimespanToMillis(TimeToLive);
     }
 
     public void setTimeToLive(Long timeToLive) {
-        TimeToLive = TimeUtils.convertMillisToTimestamp(timeToLive);
+        TimeToLive = TimeUtils.convertMillisToTimespan(timeToLive);
     }
 
     @Override
