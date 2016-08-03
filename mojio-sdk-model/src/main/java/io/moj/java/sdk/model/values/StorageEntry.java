@@ -6,6 +6,9 @@ package io.moj.java.sdk.model.values;
  */
 public class StorageEntry {
 
+    public static final String KEY = "Key";
+    public static final String VALUE = "Value";
+
     private String Key;
     private String Value;
 
