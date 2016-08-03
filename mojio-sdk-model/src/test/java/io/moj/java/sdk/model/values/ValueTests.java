@@ -197,6 +197,12 @@ public class ValueTests {
     }
 
     @Test
+    public void testStorageEntry() throws IllegalAccessException {
+        assertToStringContainsAllFields(new StorageEntry());
+        assertAccess(new StorageEntry());
+    }
+
+    @Test
     public void testTransmission() throws IllegalAccessException {
         assertToStringContainsAllFields(new Transmission());
         assertAccess(new Transmission());
