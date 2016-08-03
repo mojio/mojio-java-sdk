@@ -4,6 +4,7 @@ import java.util.Map;
 
 import io.moj.java.sdk.model.response.DataResponse;
 import io.moj.java.sdk.model.response.ListResponse;
+import io.moj.java.sdk.model.values.StorageEntry;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -20,10 +21,13 @@ import retrofit2.http.QueryMap;
 @SuppressWarnings("unused")
 public interface MojioStorageApi {
 
-
     // region Storage
+    @GET("{resource}/{id}/store?limit=999")
+    Call<DataResponse<StorageEntry>> getStorage(@Path("resource") String resource, @Path("id") String id);
+
     @GET("{resource}/{id}/store")
-    Call<DataResponse<Map<String, String>>> getStorage(@Path("resource") String resource, @Path("id") String id, @QueryMap Map<String, Integer> params);
+    Call<DataResponse<StorageEntry>> getStorage(@Path("resource") String resource, @Path("id") String id,
+                                                @QueryMap Map<String, Integer> params);
 
     @DELETE("{resource}/{id}/store/{key}")
     Call<String> deleteStorage(@Path("resource") String resource, @Path("id") String id, @Path("key") String key);
@@ -33,11 +37,11 @@ public interface MojioStorageApi {
 
     @POST("{resource}/{id}/store/{key}")
     Call<String> createStorage(@Path("resource") String resource, @Path("id") String id, @Path("key") String key,
-                                        @Body String storageValue);
+                               @Body String storageValue);
 
     @PUT("{resource}/{id}/store/{key}")
     Call<String> updateStorage(@Path("resource") String resource, @Path("id") String id, @Path("key") String key,
-                                     @Body String storageValue);
+                               @Body String storageValue);
     // endregion
 
 }
