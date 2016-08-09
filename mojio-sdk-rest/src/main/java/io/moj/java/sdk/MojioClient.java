@@ -231,6 +231,19 @@ public class MojioClient {
     }
 
     /**
+     * Returns the number of calls pending execution (includes calls that are currently running or queued).
+     * @return the number of pending calls
+     */
+    public int getPendingCallCount() {
+        int count = 0;
+        for (OkHttpClient httpClient : httpClients) {
+            count += httpClient.dispatcher().runningCallsCount();
+            count += httpClient.dispatcher().queuedCallsCount();
+        }
+        return count;
+    }
+
+    /**
      * Builder for a {@link io.moj.java.sdk.MojioClient}.
      */
     public static class Builder {
