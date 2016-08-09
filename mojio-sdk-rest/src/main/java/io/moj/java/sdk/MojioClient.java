@@ -20,6 +20,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -228,6 +230,19 @@ public class MojioClient {
         for (OkHttpClient httpClient : httpClients) {
             httpClient.dispatcher().cancelAll();
         }
+    }
+
+    /**
+     * Returns the number of calls pending execution (includes calls that are currently running or queued).
+     * @return the number of pending calls
+     */
+    public int getPendingCallCount() {
+        int count = 0;
+        for (OkHttpClient httpClient : httpClients) {
+            count += httpClient.dispatcher().runningCallsCount();
+            count += httpClient.dispatcher().queuedCallsCount();
+        }
+        return count;
     }
 
     /**
