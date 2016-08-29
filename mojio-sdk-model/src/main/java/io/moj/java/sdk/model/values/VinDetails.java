@@ -1,5 +1,7 @@
 package io.moj.java.sdk.model.values;
 
+import io.moj.java.sdk.utils.TimeUtils;
+
 import java.util.List;
 
 /**
@@ -105,12 +107,12 @@ public class VinDetails {
         ServiceBulletins = serviceBulletins;
     }
 
-    public String getTimestamp() {
-        return Timestamp;
+    public Long getTimestamp() {
+        return TimeUtils.convertTimestampToMillis(Timestamp);
     }
 
-    public void setTimestamp(String timestamp) {
-        Timestamp = timestamp;
+    public void setTimestamp(Long timestamp) {
+        Timestamp = TimeUtils.convertMillisToTimestamp(timestamp);
     }
 
     public Transmission getTransmission() {
