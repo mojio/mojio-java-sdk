@@ -195,12 +195,12 @@ public class Vehicle extends AbstractMojioObject {
     /**
      * @return the time the server received the message from the device
      */
-    public String getGatewayTime() {
-        return GatewayTime;
+    public Long getGatewayTime() {
+        return TimeUtils.convertTimestampToMillis(GatewayTime);
     }
 
-    public void setGatewayTime(String gatewayTime) {
-        GatewayTime = gatewayTime;
+    public void setGatewayTime(Long gatewayTime) {
+        GatewayTime = TimeUtils.convertMillisToTimestamp(gatewayTime);
     }
 
     public BooleanState getHarshEventState() {
