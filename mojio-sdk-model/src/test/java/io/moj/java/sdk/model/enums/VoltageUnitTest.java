@@ -2,10 +2,15 @@ package io.moj.java.sdk.model.enums;
 
 import com.google.common.collect.ImmutableMap;
 
+import io.moj.java.sdk.math.UnitConverter;
 import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
+
+import static com.google.common.truth.Truth.assertThat;
+import static io.moj.java.sdk.model.enums.VoltageUnit.VOLTS;
+import static io.moj.java.sdk.model.enums.VoltageUnit.MILLIVOLTS;
 
 public class VoltageUnitTest extends EnumTest<VoltageUnit> {
 
@@ -51,5 +56,36 @@ public class VoltageUnitTest extends EnumTest<VoltageUnit> {
     @Override
     public void testValues() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         super.testValues();
+    }
+
+    @Test
+    public void testTo_voltsToMillivolts() {
+        assertThat(VOLTS.to(MILLIVOLTS).convert(1337)).isWithin(0.01f).of(1337000f);
+        assertThat(VOLTS.to(MILLIVOLTS).convert(1)).isWithin(0.0001f).of(1000f);
+        assertThat(VOLTS.to(MILLIVOLTS).convert(1000)).isWithin(0.0001f).of(1000000f);
+    }
+
+    @Test
+    public void testTo_millivoltsToVolts() {
+        assertThat(MILLIVOLTS.to(VOLTS).convert(1337000f)).isWithin(0.01f).of(1337f);
+        assertThat(MILLIVOLTS.to(VOLTS).convert(1)).isWithin(0.0001f).of(0.001f);
+        assertThat(MILLIVOLTS.to(VOLTS).convert(1000)).isWithin(0.0001f).of(1f);
+    }
+
+    @Test
+    public void testAllConversionsExist() {
+        for (VoltageUnit unit : VoltageUnit.values()) {
+            for (VoltageUnit other : VoltageUnit.values()) {
+                UnitConverter converter = unit.to(other);
+                assertThat(converter).isNotNull();
+            }
+        }
+    }
+
+    @Test
+    public void testConversionToSelf() {
+        for (VoltageUnit unit : VoltageUnit.values()) {
+            assertThat(unit.to(unit).convert(1337)).isWithin(0.00000000001f).of(1337);
+        }
     }
 }

@@ -1,6 +1,8 @@
 package io.moj.java.sdk.model.enums;
 
 import com.google.gson.annotations.SerializedName;
+import io.moj.java.sdk.math.Multiplier;
+import io.moj.java.sdk.math.UnitConverter;
 
 /**
  * Enum for VoltageUnit types.
@@ -9,19 +11,31 @@ import com.google.gson.annotations.SerializedName;
 public enum VoltageUnit {
 
     @SerializedName("Volts")
-    VOLTS("Volts"),
+    VOLTS("Volts", new float[] { 1f, 1000f }),
 
     @SerializedName("MilliVolts")
-    MILLIVOLTS("MilliVolts");
+    MILLIVOLTS("MilliVolts", new float[] { 0.001f, 1f });
 
-    private String key;
+    private final String key;
+    private final float[] conversions;
 
-    VoltageUnit(String key) {
+    VoltageUnit(String key, float[] conversions) {
         this.key = key;
+        this.conversions = conversions;
     }
 
     public String getKey() {
         return key;
+    }
+
+    public UnitConverter to(VoltageUnit unit) {
+        VoltageUnit[] values = values();
+        for (int i = 0; i < values.length; i++) {
+            if (values[i] == unit) {
+                return new Multiplier(conversions[i]);
+            }
+        }
+        throw new IllegalArgumentException("Cannot convert " + this + " to " + unit);
     }
 
     public static VoltageUnit fromKey(String key) {
