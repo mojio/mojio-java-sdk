@@ -13,6 +13,7 @@ public class DiagnosticCode {
     private String Timestamp;
     private RiskSeverity Severity;
     private String Instructions;
+    private Boolean Ignored;
 
     public String getCode() {
         return Code;
@@ -54,6 +55,14 @@ public class DiagnosticCode {
         Timestamp = timestamp;
     }
 
+    public Boolean getIgnored() {
+        return Ignored;
+    }
+
+    public void setIgnored(Boolean ignored) {
+        Ignored = ignored;
+    }
+
     @Override
     public String toString() {
         return "DiagnosticCode{" +
@@ -62,6 +71,7 @@ public class DiagnosticCode {
                 ", Timestamp='" + Timestamp + '\'' +
                 ", Severity=" + Severity +
                 ", Instructions='" + Instructions + '\'' +
+                ", Ignored=" + Ignored +
                 '}';
     }
 }

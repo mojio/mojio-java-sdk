@@ -232,4 +232,10 @@ public class ValueTests {
         assertAccess(new Warranty());
     }
 
+    @Test
+    public void testDtcStatusUpdate() throws IllegalAccessException {
+        assertToStringContainsAllFields(new DtcStatusUpdate());
+        assertAccess(new DtcStatusUpdate());
+    }
+
 }

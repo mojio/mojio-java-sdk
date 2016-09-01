@@ -17,6 +17,7 @@ import io.moj.java.sdk.model.response.TransactionResponse;
 import io.moj.java.sdk.model.stream.ActivityObject;
 import io.moj.java.sdk.model.stream.Settings;
 import io.moj.java.sdk.model.values.AccessModel;
+import io.moj.java.sdk.model.values.DtcStatusUpdate;
 import io.moj.java.sdk.model.values.Email;
 import io.moj.java.sdk.model.values.Image;
 import io.moj.java.sdk.model.values.Location;
@@ -355,6 +356,9 @@ public interface MojioRestApi {
 
     @DELETE("vehicles/{id}")
     Call<MessageResponse> mergeVehicle(@Path("id") String vehicleId, @Query("actual") String mergeVehicleId);
+
+    @PUT("vehicles/{id}/diagnosticcodes/{code}")
+    Call<MessageResponse> updateDtc(@Path("id") String vehicleId, @Path("code") String dtcCode, @Body DtcStatusUpdate newStatus);
     // endregion
 
     // region Activity Streams
