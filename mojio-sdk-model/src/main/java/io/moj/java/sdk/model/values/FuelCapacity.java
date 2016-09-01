@@ -1,6 +1,6 @@
 package io.moj.java.sdk.model.values;
 
-import io.moj.java.sdk.model.enums.FuelCapacityUnit;
+import io.moj.java.sdk.model.enums.VolumeUnit;
 
 /**
  * Model object for a FuelCapacity value.
@@ -8,19 +8,19 @@ import io.moj.java.sdk.model.enums.FuelCapacityUnit;
  */
 public class FuelCapacity extends DeviceMeasurement {
 
-    public FuelCapacityUnit getBaseFuelCapacityUnit() {
-        return FuelCapacityUnit.fromKey(getBaseUnit());
+    public VolumeUnit getBaseFuelCapacityUnit() {
+        return VolumeUnit.fromKey(getBaseUnit());
     }
 
-    public void setBaseFuelCapacityUnit(FuelCapacityUnit baseUnit) {
+    public void setBaseFuelCapacityUnit(VolumeUnit baseUnit) {
         setBaseUnit(baseUnit.getKey());
     }
 
-    public FuelCapacityUnit getFuelCapacityUnit() {
-        return FuelCapacityUnit.fromKey(getUnit());
+    public VolumeUnit getFuelCapacityUnit() {
+        return VolumeUnit.fromKey(getUnit());
     }
 
-    public void setFuelCapacityUnit(FuelCapacityUnit unit) {
+    public void setFuelCapacityUnit(VolumeUnit unit) {
         setUnit(unit.getKey());
     }
 
