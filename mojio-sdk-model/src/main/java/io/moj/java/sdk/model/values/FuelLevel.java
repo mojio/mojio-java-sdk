@@ -9,7 +9,7 @@ import io.moj.java.sdk.model.enums.RiskSeverity;
  */
 public class FuelLevel extends DeviceMeasurement {
 
-    private io.moj.java.sdk.model.enums.RiskSeverity RiskSeverity;
+    private RiskSeverity RiskSeverity;
 
     public FuelLevelUnit getBaseFuelLevelUnit() {
         return FuelLevelUnit.fromKey(getBaseUnit());

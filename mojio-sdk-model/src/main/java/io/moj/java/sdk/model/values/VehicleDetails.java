@@ -15,7 +15,7 @@ public class VehicleDetails {
     private String Model;
     private String Engine;
     private Integer Cyclinders;
-    private FuelCapacity TotalFuelCapacity;
+    private Volume TotalFuelCapacity;
     private FuelType FuelType;
     private Double CityFuelEfficiency;
     private Double HighwayFuelEfficiency;
@@ -94,11 +94,11 @@ public class VehicleDetails {
         Timestamp = timestamp;
     }
 
-    public FuelCapacity getTotalFuelCapacity() {
+    public Volume getTotalFuelCapacity() {
         return TotalFuelCapacity;
     }
 
-    public void setTotalFuelCapacity(FuelCapacity totalFuelCapacity) {
+    public void setTotalFuelCapacity(Volume totalFuelCapacity) {
         TotalFuelCapacity = totalFuelCapacity;
     }
 

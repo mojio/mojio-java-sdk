@@ -23,7 +23,7 @@ import io.moj.java.sdk.model.values.Image;
 import io.moj.java.sdk.model.values.Location;
 import io.moj.java.sdk.model.values.NextServiceSchedule;
 import io.moj.java.sdk.model.values.PhoneNumber;
-import io.moj.java.sdk.model.values.ServiceSchedule;
+import io.moj.java.sdk.model.values.ServiceScheduleList;
 import io.moj.java.sdk.model.values.VinDetails;
 import io.moj.java.sdk.model.values.WifiRadio;
 import retrofit2.Call;
@@ -333,10 +333,10 @@ public interface MojioRestApi {
     Call<VinDetails> getVehicleVinDetails(@Path("id") String vehicleId);
 
     @GET("vehicles/{id}/serviceschedule")
-    Call<ListResponse<ServiceSchedule>> getServiceSchedule(@Path("id") String vehicleId);
+    Call<ServiceScheduleList> getServiceSchedule(@Path("id") String vehicleId);
 
     @GET("vehicles/{id}/serviceschedule")
-    Call<ListResponse<ServiceSchedule>> getServiceSchedule(@Path("id") String vehicleId, @QueryMap Map<String, String> params);
+    Call<ServiceScheduleList> getServiceSchedule(@Path("id") String vehicleId, @QueryMap Map<String, String> params);
 
     @GET("vehicles/{id}/serviceschedule/next")
     Call<NextServiceSchedule> getNextServiceSchedule(@Path("id") String vehicleId);

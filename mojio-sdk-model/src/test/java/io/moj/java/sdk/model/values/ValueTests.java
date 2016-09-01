@@ -1,12 +1,6 @@
 package io.moj.java.sdk.model.values;
 
-import io.moj.java.sdk.test.TestUtils;
 import org.junit.Test;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.Iterator;
-import java.util.List;
 
 import static io.moj.java.sdk.test.TestUtils.assertAccess;
 import static io.moj.java.sdk.test.TestUtils.assertToStringContainsAllFields;
@@ -74,12 +68,6 @@ public class ValueTests {
     public void testEngine() throws IllegalAccessException {
         assertToStringContainsAllFields(new Engine());
         assertAccess(new Engine());
-    }
-
-    @Test
-    public void testFuelCapacity() throws IllegalAccessException {
-        assertToStringContainsAllFields(new FuelCapacity());
-        assertAccess(new FuelCapacity());
     }
 
     @Test
@@ -227,6 +215,12 @@ public class ValueTests {
     }
 
     @Test
+    public void testVolume() throws IllegalAccessException {
+        assertToStringContainsAllFields(new Volume());
+        assertAccess(new Volume());
+    }
+
+    @Test
     public void testWarranty() throws IllegalAccessException {
         assertToStringContainsAllFields(new Warranty());
         assertAccess(new Warranty());
@@ -236,6 +230,18 @@ public class ValueTests {
     public void testDtcStatusUpdate() throws IllegalAccessException {
         assertToStringContainsAllFields(new DtcStatusUpdate());
         assertAccess(new DtcStatusUpdate());
+    }
+
+    @Test
+    public void testServiceScheduleList() throws IllegalAccessException {
+        assertToStringContainsAllFields(new ServiceScheduleList());
+        assertAccess(new ServiceScheduleList());
+    }
+
+    @Test
+    public void testInterval() throws IllegalAccessException {
+        assertToStringContainsAllFields(new Interval());
+        assertAccess(new Interval());
     }
 
 }
