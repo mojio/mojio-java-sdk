@@ -1,12 +1,6 @@
 package io.moj.java.sdk.model.values;
 
-import io.moj.java.sdk.test.TestUtils;
 import org.junit.Test;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.Iterator;
-import java.util.List;
 
 import static io.moj.java.sdk.test.TestUtils.assertAccess;
 import static io.moj.java.sdk.test.TestUtils.assertToStringContainsAllFields;
@@ -74,12 +68,6 @@ public class ValueTests {
     public void testEngine() throws IllegalAccessException {
         assertToStringContainsAllFields(new Engine());
         assertAccess(new Engine());
-    }
-
-    @Test
-    public void testFuelCapacity() throws IllegalAccessException {
-        assertToStringContainsAllFields(new FuelCapacity());
-        assertAccess(new FuelCapacity());
     }
 
     @Test
@@ -224,6 +212,12 @@ public class ValueTests {
     public void testVoltage() throws IllegalAccessException {
         assertToStringContainsAllFields(new Voltage());
         assertAccess(new Voltage());
+    }
+
+    @Test
+    public void testVolume() throws IllegalAccessException {
+        assertToStringContainsAllFields(new Volume());
+        assertAccess(new Volume());
     }
 
     @Test
