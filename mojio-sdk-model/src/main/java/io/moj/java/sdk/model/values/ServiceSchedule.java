@@ -1,5 +1,7 @@
 package io.moj.java.sdk.model.values;
 
+import java.util.Arrays;
+
 /**
  * Model object for a vehicle service schedule item.
  * Created by skidson on 16-03-10.
@@ -9,32 +11,11 @@ public class ServiceSchedule {
     private String MaintenanceCategory;
     private String MaintenanceName;
     private String MaintenanceNotes;
-    private String OperatingParameter;
-    private String OperatingParameterNotes;
     private String ScheduleDescription;
     private String ScheduleName;
     private String ServiceEvent;
     private String TransNotes;
-    private String Units;
-    private Double Value;
-    private Double InitialValue;
-    private String IntervalType;
-
-    public Double getInitialValue() {
-        return InitialValue;
-    }
-
-    public void setInitialValue(Double initialValue) {
-        InitialValue = initialValue;
-    }
-
-    public String getIntervalType() {
-        return IntervalType;
-    }
-
-    public void setIntervalType(String intervalType) {
-        IntervalType = intervalType;
-    }
+    private Interval[] Intervals;
 
     public String getMaintenanceCategory() {
         return MaintenanceCategory;
@@ -58,22 +39,6 @@ public class ServiceSchedule {
 
     public void setMaintenanceNotes(String maintenanceNotes) {
         MaintenanceNotes = maintenanceNotes;
-    }
-
-    public String getOperatingParameter() {
-        return OperatingParameter;
-    }
-
-    public void setOperatingParameter(String operatingParameter) {
-        OperatingParameter = operatingParameter;
-    }
-
-    public String getOperatingParameterNotes() {
-        return OperatingParameterNotes;
-    }
-
-    public void setOperatingParameterNotes(String operatingParameterNotes) {
-        OperatingParameterNotes = operatingParameterNotes;
     }
 
     public String getScheduleDescription() {
@@ -108,38 +73,25 @@ public class ServiceSchedule {
         TransNotes = transNotes;
     }
 
-    public String getUnits() {
-        return Units;
+    public Interval[] getIntervals() {
+        return Intervals;
     }
 
-    public void setUnits(String units) {
-        Units = units;
-    }
-
-    public Double getValue() {
-        return Value;
-    }
-
-    public void setValue(Double value) {
-        Value = value;
+    public void setIntervals(Interval[] intervals) {
+        Intervals = intervals;
     }
 
     @Override
     public String toString() {
         return "ServiceSchedule{" +
-                "InitialValue=" + InitialValue +
-                ", MaintenanceCategory='" + MaintenanceCategory + '\'' +
+                "MaintenanceCategory='" + MaintenanceCategory + '\'' +
                 ", MaintenanceName='" + MaintenanceName + '\'' +
                 ", MaintenanceNotes='" + MaintenanceNotes + '\'' +
-                ", OperatingParameter='" + OperatingParameter + '\'' +
-                ", OperatingParameterNotes='" + OperatingParameterNotes + '\'' +
                 ", ScheduleDescription='" + ScheduleDescription + '\'' +
                 ", ScheduleName='" + ScheduleName + '\'' +
                 ", ServiceEvent='" + ServiceEvent + '\'' +
                 ", TransNotes='" + TransNotes + '\'' +
-                ", Units='" + Units + '\'' +
-                ", Value=" + Value +
-                ", IntervalType='" + IntervalType + '\'' +
+                ", Intervals=" + Arrays.toString(Intervals) +
                 '}';
     }
 }

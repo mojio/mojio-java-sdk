@@ -226,4 +226,16 @@ public class ValueTests {
         assertAccess(new Warranty());
     }
 
+    @Test
+    public void testServiceScheduleList() throws IllegalAccessException {
+        assertToStringContainsAllFields(new ServiceScheduleList());
+        assertAccess(new ServiceScheduleList());
+    }
+
+    @Test
+    public void testInterval() throws IllegalAccessException {
+        assertToStringContainsAllFields(new Interval());
+        assertAccess(new Interval());
+    }
+
 }
