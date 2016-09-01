@@ -227,6 +227,12 @@ public class ValueTests {
     }
 
     @Test
+    public void testDtcStatusUpdate() throws IllegalAccessException {
+        assertToStringContainsAllFields(new DtcStatusUpdate());
+        assertAccess(new DtcStatusUpdate());
+    }
+
+    @Test
     public void testServiceScheduleList() throws IllegalAccessException {
         assertToStringContainsAllFields(new ServiceScheduleList());
         assertAccess(new ServiceScheduleList());
