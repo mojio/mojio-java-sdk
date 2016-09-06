@@ -1,5 +1,7 @@
 package io.moj.java.sdk.model.values;
 
+import io.moj.java.sdk.utils.TimeUtils;
+
 /**
  * Model class for a data aggregate. This is essentially a "bucket" of data for a given
  * {@link io.moj.java.sdk.model.values.DeviceMeasurement} over time.
@@ -53,12 +55,12 @@ public class Aggregate {
         Units = units;
     }
 
-    public String getDate() {
-        return Date;
+    public Long getDate() {
+        return TimeUtils.convertTimestampToMillis(Date);
     }
 
-    public void setDate(String date) {
-        Date = date;
+    public void setDate(Long date) {
+        Date = TimeUtils.convertMillisToTimestamp(date);
     }
 
     public Integer getCount() {
