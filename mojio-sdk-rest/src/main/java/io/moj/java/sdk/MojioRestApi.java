@@ -17,6 +17,7 @@ import io.moj.java.sdk.model.response.TransactionResponse;
 import io.moj.java.sdk.model.stream.ActivityObject;
 import io.moj.java.sdk.model.stream.Settings;
 import io.moj.java.sdk.model.values.AccessModel;
+import io.moj.java.sdk.model.values.Aggregate;
 import io.moj.java.sdk.model.values.DiagnosticCode;
 import io.moj.java.sdk.model.values.DtcStatusUpdate;
 import io.moj.java.sdk.model.values.Email;
@@ -25,6 +26,7 @@ import io.moj.java.sdk.model.values.Location;
 import io.moj.java.sdk.model.values.NextServiceSchedule;
 import io.moj.java.sdk.model.values.PhoneNumber;
 import io.moj.java.sdk.model.values.ServiceScheduleList;
+import io.moj.java.sdk.model.values.VehicleStatistics;
 import io.moj.java.sdk.model.values.VinDetails;
 import io.moj.java.sdk.model.values.WifiRadio;
 import retrofit2.Call;
@@ -377,6 +379,27 @@ public interface MojioRestApi {
 
     @PUT("vehicles/{id}/activities/settings")
     Call<MessageResponse> updateVehicleActivitySettings(@Path("id") String vehicleId, @Body Settings settings);
+    // endregion
+
+    // region Aggregates & Statistics
+    /**
+     * Returns the values for the specified vehicle {@code measure} bucketed into a number of
+     * {@link io.moj.java.sdk.model.values.Aggregate}s based on the {@link io.moj.java.sdk.Query#TOP} parameter.
+     * @param vehicleId the ID of the vehicle to aggregate data for.
+     * @param measure the vehicle measure to aggregate (e.g. {@link Vehicle#FUEL_EFFICIENCY}.
+     * @param params the query parameter - this call requires the {@link io.moj.java.sdk.Query#top(int)} and
+     *               {@link io.moj.java.sdk.Query#since(long)} parameters be specified.
+     * @return
+     */
+    @GET("vehicles/{id}/aggregates/{measure}")
+    Call<ListResponse<Aggregate>> getAggregate(@Path("id") String vehicleId, @Path("measure") String measure,
+                                               @QueryMap Map<String, String> params);
+
+    @GET("vehicles/{id}/statistics")
+    Call<VehicleStatistics> getStatistics(@Path("id") String vehicleId);
+
+    @GET("vehicles/{id}/statistics")
+    Call<VehicleStatistics> getStatistics(@Path("id") String vehicleId, @QueryMap Map<String, String> params);
     // endregion
 
 }

@@ -21,7 +21,7 @@ import io.moj.java.sdk.model.values.VehicleDetails;
 import io.moj.java.sdk.utils.TimeUtils;
 
 /**
- * Model object for an Vehicle.
+ * Model object for a Vehicle.
  * Created by mhorie on 2016-01-13.
  */
 public class Vehicle extends AbstractMojioObject {
