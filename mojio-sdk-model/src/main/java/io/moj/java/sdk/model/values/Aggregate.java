@@ -77,7 +77,7 @@ public class Aggregate {
                 "Average=" + Average +
                 ", Max=" + Max +
                 ", Min=" + Min +
-                ", Units=" + Units +
+                ", Units='" + Units + '\'' +
                 ", Date='" + Date + '\'' +
                 ", Count=" + Count +
                 '}';
