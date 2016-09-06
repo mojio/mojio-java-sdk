@@ -29,6 +29,12 @@ public class ValueTests {
     }
 
     @Test
+    public void testAggregate() throws IllegalAccessException {
+        assertToStringContainsAllFields(new Aggregate());
+        assertAccess(new Aggregate());
+    }
+
+    @Test
     public void testBattery() throws IllegalAccessException {
         assertToStringContainsAllFields(new Battery());
         assertAccess(new Battery());
@@ -200,6 +206,12 @@ public class ValueTests {
     public void testVehicleDetails() throws IllegalAccessException {
         assertToStringContainsAllFields(new VehicleDetails());
         assertAccess(new VehicleDetails());
+    }
+
+    @Test
+    public void testVehicleStatistics() throws IllegalAccessException {
+        assertToStringContainsAllFields(new VehicleStatistics());
+        assertAccess(new VehicleStatistics());
     }
 
     @Test
