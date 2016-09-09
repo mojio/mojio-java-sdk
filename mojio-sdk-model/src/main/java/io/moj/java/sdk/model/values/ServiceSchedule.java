@@ -16,6 +16,7 @@ public class ServiceSchedule {
     private String ServiceEvent;
     private String TransNotes;
     private Interval[] Intervals;
+    private ServiceScheduleEvent[] Events;
 
     public String getMaintenanceCategory() {
         return MaintenanceCategory;
@@ -81,6 +82,14 @@ public class ServiceSchedule {
         Intervals = intervals;
     }
 
+    public ServiceScheduleEvent[] getEvents() {
+        return Events;
+    }
+
+    public void setEvents(ServiceScheduleEvent[] events) {
+        Events = events;
+    }
+
     @Override
     public String toString() {
         return "ServiceSchedule{" +
@@ -92,6 +101,7 @@ public class ServiceSchedule {
                 ", ServiceEvent='" + ServiceEvent + '\'' +
                 ", TransNotes='" + TransNotes + '\'' +
                 ", Intervals=" + Arrays.toString(Intervals) +
+                ", Events=" + Arrays.toString(Events) +
                 '}';
     }
 }
