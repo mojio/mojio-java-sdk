@@ -256,4 +256,10 @@ public class ValueTests {
         assertAccess(new Interval());
     }
 
+    @Test
+    public void testServiceScheduleEvent() throws IllegalAccessException {
+        assertToStringContainsAllFields(new ServiceScheduleEvent());
+        assertAccess(new ServiceScheduleEvent());
+    }
+
 }
