@@ -15,6 +15,7 @@ public class Aggregate {
     public static final String TOTAL = "Total";
     public static final String UNITS = "Units";
     public static final String DATE = "Date";
+    public static final String END_DATE = "EndDate";
     public static final String COUNT = "Count";
     public static final String TRIP_COUNT = "TripCount";
 
@@ -24,6 +25,7 @@ public class Aggregate {
     private Float Total;
     private String Units;
     private String Date;
+    private String EndDate;
     private Integer Count;
     private Integer TripCount;
 
@@ -67,6 +69,14 @@ public class Aggregate {
         Units = units;
     }
 
+    public Long getEndDate() {
+        return TimeUtils.convertTimestampToMillis(EndDate);
+    }
+
+    public void setEndDate(Long date) {
+        EndDate = TimeUtils.convertMillisToTimestamp(date);
+    }
+
     public Long getDate() {
         return TimeUtils.convertTimestampToMillis(Date);
     }
@@ -100,6 +110,7 @@ public class Aggregate {
                 ", Total=" + Total +
                 ", Units='" + Units + '\'' +
                 ", Date='" + Date + '\'' +
+                ", EndDate='" + EndDate + '\'' +
                 ", Count=" + Count +
                 ", TripCount=" + TripCount +
                 '}';
