@@ -12,7 +12,7 @@ targetCompatibility = SOURCE_COMPATIBILITY
 dependencies {
     compile project(":mojio-sdk-model")
 
-    def retrofitVersion = '2.0.2'
+    def retrofitVersion = '2.1.0'
     compile "com.squareup.retrofit2:retrofit:${retrofitVersion}"
     compile "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
 
