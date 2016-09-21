@@ -262,4 +262,10 @@ public class ValueTests {
         assertAccess(new ServiceScheduleEvent());
     }
 
+    @Test
+    public void testHarshEventState() throws IllegalAccessException {
+        assertToStringContainsAllFields(new HarshEventState());
+        assertAccess(new HarshEventState());
+    }
+
 }
