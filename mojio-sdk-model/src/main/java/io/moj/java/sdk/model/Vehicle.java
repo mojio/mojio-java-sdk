@@ -11,6 +11,7 @@ import io.moj.java.sdk.model.values.BooleanState;
 import io.moj.java.sdk.model.values.DiagnosticCode;
 import io.moj.java.sdk.model.values.FuelEfficiency;
 import io.moj.java.sdk.model.values.FuelLevel;
+import io.moj.java.sdk.model.values.HarshEventState;
 import io.moj.java.sdk.model.values.Heading;
 import io.moj.java.sdk.model.values.Image;
 import io.moj.java.sdk.model.values.Location;
@@ -84,7 +85,7 @@ public class Vehicle extends AbstractMojioObject {
     private FuelLevel FuelLevel;
     private FuelType FuelType;
     private String GatewayTime;
-    private BooleanState HarshEventState;
+    private HarshEventState HarshEventState;
     private BooleanState IdleState;
     private BooleanState IgnitionState;
     private Battery Battery;
@@ -203,11 +204,11 @@ public class Vehicle extends AbstractMojioObject {
         GatewayTime = TimeUtils.convertMillisToTimestamp(gatewayTime);
     }
 
-    public BooleanState getHarshEventState() {
+    public HarshEventState getHarshEventState() {
         return HarshEventState;
     }
 
-    public void setHarshEventState(BooleanState harshEventState) {
+    public void setHarshEventState(HarshEventState harshEventState) {
         HarshEventState = harshEventState;
     }
 
