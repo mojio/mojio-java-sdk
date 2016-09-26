@@ -5,16 +5,18 @@ import io.moj.java.sdk.auth.AccessToken;
 import io.moj.java.sdk.auth.Authenticator;
 import io.moj.java.sdk.model.User;
 import io.moj.java.sdk.model.response.AuthResponse;
+import okhttp3.Interceptor;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import retrofit2.Call;
 import retrofit2.Response;
 
 import java.util.UUID;
 import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -49,7 +51,6 @@ public class MojioClientTest {
         String expectedClientSecret = "expectedClientSecret";
         Authenticator expectedAuthenticator = mock(Authenticator.class);
         Executor expectedExecutor = mock(Executor.class);
-        ExecutorService expectedRequestExecutor = mock(ExecutorService.class);
         Gson expectedGson = new Gson();
         boolean expectedLoggingEnabled = true;
         Environment expectedEnvironment = MojioEnvironment.STAGING;
@@ -109,11 +110,21 @@ public class MojioClientTest {
         when(environment.getPushUrl()).thenReturn(serverUrl);
         when(environment.getAccountsUrl()).thenReturn(serverUrl);
 
+        Interceptor mockInterceptor = mock(Interceptor.class);
+        when(mockInterceptor.intercept((any(Interceptor.Chain.class)))).thenAnswer(new Answer<okhttp3.Response>() {
+            @Override
+            public okhttp3.Response answer(InvocationOnMock invocation) throws Throwable {
+                Interceptor.Chain chain = (Interceptor.Chain) invocation.getArguments()[0];
+                return chain.proceed(chain.request());
+            }
+        });
+
         String expectedClientKey = "expectedClientKey";
         String expectedClientSecret = "expectedClientSecret";
         MojioClient client = new MojioClient.Builder(expectedClientKey, expectedClientSecret)
                 .environment(environment)
                 .authenticator(mockAuthenticator)
+                .interceptor(mockInterceptor)
                 .build();
 
         String username = "username";
@@ -142,6 +153,9 @@ public class MojioClientTest {
         // verify the response has the correct user
         Response<User> response = call.execute();
         assertThat(response.body().getId()).isEqualTo(user.getId());
+
+        // verify our mock interceptor was called (twice - 1 for the login, 2 for the GET /me)
+        verify(mockInterceptor, times(2)).intercept(any(Interceptor.Chain.class));
 
         // verify the login call stored the correct access token
         ArgumentCaptor<AccessToken> argument = ArgumentCaptor.forClass(AccessToken.class);

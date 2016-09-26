@@ -11,6 +11,7 @@ import io.moj.java.sdk.logging.LoggingInterceptor;
 import io.moj.java.sdk.model.User;
 import io.moj.java.sdk.model.response.AuthResponse;
 import okhttp3.Dispatcher;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Call;
@@ -49,7 +50,8 @@ public class MojioClient {
     private OkHttpClient[] httpClients;
 
     protected MojioClient(Environment environment, Client client, Gson gson, Authenticator authenticator,
-                          ExecutorService requestExecutor, Executor callbackExecutor, boolean logging) {
+                          Interceptor interceptor, ExecutorService requestExecutor, Executor callbackExecutor,
+                          boolean logging) {
         this.environment = environment == null ? MojioEnvironment.getDefault() : environment;
         this.gson = gson == null ? new Gson() : gson;
         this.client = client;
@@ -61,6 +63,10 @@ public class MojioClient {
         GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create(this.gson);
         if (logging) {
             httpClientBuilder.addInterceptor(new LoggingInterceptor(TAG));
+        }
+
+        if (interceptor != null) {
+            httpClientBuilder.addInterceptor(interceptor);
         }
 
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
@@ -249,6 +255,7 @@ public class MojioClient {
     public static class Builder {
         protected Environment environment;
         protected Authenticator authenticator;
+        protected Interceptor interceptor;
         protected Client client;
         protected Executor callbackExecutor;
         protected ExecutorService requestExecutor;
@@ -284,6 +291,18 @@ public class MojioClient {
          */
         public Builder authenticator(Authenticator authenticator) {
             this.authenticator = authenticator;
+            return this;
+        }
+
+        /**
+         * Configures an interceptor for each request and response. It is recommended to configure read-only
+         * interceptors only as modifying outgoing requests or incoming responses may interfere with the SDK's
+         * functionality.
+         * @param interceptor
+         * @return
+         */
+        public Builder interceptor(Interceptor interceptor) {
+            this.interceptor = interceptor;
             return this;
         }
 
@@ -336,7 +355,7 @@ public class MojioClient {
          * @return
          */
         public MojioClient build() {
-            return new MojioClient(environment, client, gson, authenticator, requestExecutor, callbackExecutor, logging);
+            return new MojioClient(environment, client, gson, authenticator, interceptor, requestExecutor, callbackExecutor, logging);
         }
     }
 
