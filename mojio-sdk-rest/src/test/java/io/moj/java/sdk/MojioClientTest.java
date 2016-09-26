@@ -5,6 +5,7 @@ import io.moj.java.sdk.auth.AccessToken;
 import io.moj.java.sdk.auth.Authenticator;
 import io.moj.java.sdk.model.User;
 import io.moj.java.sdk.model.response.AuthResponse;
+import okhttp3.Interceptor;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import org.junit.Test;
@@ -49,7 +50,6 @@ public class MojioClientTest {
         String expectedClientSecret = "expectedClientSecret";
         Authenticator expectedAuthenticator = mock(Authenticator.class);
         Executor expectedExecutor = mock(Executor.class);
-        ExecutorService expectedRequestExecutor = mock(ExecutorService.class);
         Gson expectedGson = new Gson();
         boolean expectedLoggingEnabled = true;
         Environment expectedEnvironment = MojioEnvironment.STAGING;
