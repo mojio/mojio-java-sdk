@@ -11,7 +11,8 @@ public enum ObjectType {
     BATTERY("Battery"),
     CHECK_ENGINE_LIGHT("CheckEngineLight"),
     FUEL_LEVEL("FuelLevel"),
-    GEOFENCE("Geofence");
+    GEOFENCE("Geofence"),
+    RECALL("Recall");
 
     private String key;
 
