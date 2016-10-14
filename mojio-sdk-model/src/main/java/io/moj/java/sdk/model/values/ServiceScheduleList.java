@@ -13,7 +13,7 @@ public class ServiceScheduleList {
     public static final String ITEMS = "Items";
 
     private String VIN;
-    private boolean IsDefault;
+    private Boolean IsDefault;
     private ServiceSchedule[] Items;
 
     public String getVIN() {
@@ -24,11 +24,11 @@ public class ServiceScheduleList {
         this.VIN = VIN;
     }
 
-    public boolean getIsDefault() {
+    public Boolean getIsDefault() {
         return IsDefault;
     }
 
-    public void setDefault(boolean aDefault) {
+    public void setIsDefault(Boolean aDefault) {
         IsDefault = aDefault;
     }
 
