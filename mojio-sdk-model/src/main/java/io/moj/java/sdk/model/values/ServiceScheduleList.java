@@ -24,7 +24,7 @@ public class ServiceScheduleList {
         this.VIN = VIN;
     }
 
-    public boolean isDefault() {
+    public boolean getIsDefault() {
         return IsDefault;
     }
 
