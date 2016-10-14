@@ -9,9 +9,11 @@ import java.util.Arrays;
 public class ServiceScheduleList {
 
     public static final String VIN_NUMBER = "VIN";
+    public static final String IS_DEFAULT = "IsDefault";
     public static final String ITEMS = "Items";
 
     private String VIN;
+    private boolean IsDefault;
     private ServiceSchedule[] Items;
 
     public String getVIN() {
@@ -20,6 +22,14 @@ public class ServiceScheduleList {
 
     public void setVIN(String VIN) {
         this.VIN = VIN;
+    }
+
+    public boolean isDefault() {
+        return IsDefault;
+    }
+
+    public void setDefault(boolean aDefault) {
+        IsDefault = aDefault;
     }
 
     public ServiceSchedule[] getItems() {
@@ -34,6 +44,7 @@ public class ServiceScheduleList {
     public String toString() {
         return "ServiceScheduleList{" +
                 "VIN='" + VIN + '\'' +
+                ", IsDefault=" + IsDefault +
                 ", Items=" + Arrays.toString(Items) +
                 '}';
     }
