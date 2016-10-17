@@ -38,6 +38,9 @@ public class Trip extends AbstractMojioObject {
     public static final String FUEL_EFFICIENCY = "FuelEfficiency";
     public static final String START_FUEL_LEVEL = "StartFuelLevel";
     public static final String END_FUEL_LEVEL = "EndFuelLevel";
+    public static final String IDLING_COUNT = "IdlingCount";
+    public static final String HARSH_ACCL_COUNT = "HarshAcclCount";
+    public static final String HARSH_DECEL_COUNT = "HarshDecelCount";
 
     private String VehicleId;
     private String Name;
@@ -59,6 +62,9 @@ public class Trip extends AbstractMojioObject {
     private FuelEfficiency FuelEfficiency;
     private FuelLevel StartFuelLevel;
     private FuelLevel EndFuelLevel;
+    private Integer IdlingCount;
+    private Integer HarshAcclCount;
+    private Integer HarshDecelCount;
 
     public Boolean getCompleted() {
         return Completed;
@@ -218,6 +224,30 @@ public class Trip extends AbstractMojioObject {
 
     public void setDistance(Distance distance) {
         Distance = distance;
+    }
+
+    public Integer getIdlingCount() {
+        return IdlingCount;
+    }
+
+    public void setIdlingCount(Integer idleCount) {
+        IdlingCount = idleCount;
+    }
+
+    public Integer getHarshDecelCount() {
+        return HarshDecelCount;
+    }
+
+    public void setHarshDecelCount(Integer harshDecelCount) {
+        HarshDecelCount = harshDecelCount;
+    }
+
+    public Integer getHarshAcclCount() {
+        return HarshAcclCount;
+    }
+
+    public void setHarshAcclCount(Integer harshAcclCount) {
+        HarshAcclCount = harshAcclCount;
     }
 
     @Override
