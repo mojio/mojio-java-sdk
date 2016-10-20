@@ -273,6 +273,9 @@ public class Trip extends AbstractMojioObject {
                 ", FuelEfficiency=" + FuelEfficiency +
                 ", StartFuelLevel=" + StartFuelLevel +
                 ", EndFuelLevel=" + EndFuelLevel +
+                ", IdlingCount=" + IdlingCount +
+                ", HarshAcclCount=" + HarshAcclCount +
+                ", HarshDecelCount=" + HarshDecelCount +
                 "} " + super.toString();
     }
 }
