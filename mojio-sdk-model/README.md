@@ -13,7 +13,7 @@ can be plugged into your existing REST-client framework.
 
 ## Download ##
 ```gradle
-compile 'io.moj.java:mojio-sdk-model:0.0.1'
+compile 'io.moj.java:mojio-sdk-model:0.0.124'
 ```
 
 ## Instructions ##
