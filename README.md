@@ -16,8 +16,8 @@ For more information please see the [developer website](http://developer.moj.io/
 
 ## Download ##
 ```gradle
-compile 'io.moj.java:mojio-sdk-model:0.0.1'
-compile 'io.moj.java:mojio-sdk-rest:0.0.1'
+compile 'io.moj.java:mojio-sdk-model:0.0.124'
+compile 'io.moj.java:mojio-sdk-rest:0.0.124'
 ```
 
 ## Structure ##
