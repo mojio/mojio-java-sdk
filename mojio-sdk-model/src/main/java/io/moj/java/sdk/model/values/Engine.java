@@ -84,7 +84,7 @@ public class Engine {
         return "Engine{" +
                 "Cylinders='" + Cylinders + '\'' +
                 ", Name='" + Name + '\'' +
-                ", Displacement=" + Displacement +
+                ", Displacement='" + Displacement + '\'' +
                 ", FuelInduction='" + FuelInduction + '\'' +
                 ", FuelQuality='" + FuelQuality + '\'' +
                 ", FuelType='" + FuelType + '\'' +
