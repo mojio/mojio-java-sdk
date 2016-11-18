@@ -8,7 +8,7 @@ public class Engine {
 
     private String Name;
     private String Cylinders;
-    private Double Displacement;
+    private String Displacement;
     private String FuelInduction;
     private String FuelQuality;
     private String FuelType;
@@ -23,11 +23,11 @@ public class Engine {
         Cylinders = cylinders;
     }
 
-    public Double getDisplacement() {
+    public String getDisplacement() {
         return Displacement;
     }
 
-    public void setDisplacement(Double displacement) {
+    public void setDisplacement(String displacement) {
         Displacement = displacement;
     }
 
