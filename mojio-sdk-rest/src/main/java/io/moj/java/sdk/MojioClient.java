@@ -196,7 +196,7 @@ public class MojioClient {
     }
 
     /**
-     * Returns whether logging is enabled or not.
+     * Returns the timeout, if set.
      * @return
      */
     public Integer getTimeout() {
