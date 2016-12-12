@@ -1,6 +1,12 @@
 package io.moj.java.sdk;
 
 import com.google.gson.Gson;
+
+import java.io.IOException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import io.moj.java.sdk.auth.AccessToken;
 import io.moj.java.sdk.auth.AuthInterceptor;
 import io.moj.java.sdk.auth.Authenticator;
@@ -19,11 +25,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import java.io.IOException;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Client for authenticating and making calls against the Mojio API.
@@ -51,7 +52,7 @@ public class MojioClient {
 
     protected MojioClient(Environment environment, Client client, Gson gson, Authenticator authenticator,
                           Interceptor interceptor, ExecutorService requestExecutor, Executor callbackExecutor,
-                          boolean logging) {
+                          boolean logging, Integer timeout) {
         this.environment = environment == null ? MojioEnvironment.getDefault() : environment;
         this.gson = gson == null ? new Gson() : gson;
         this.client = client;
@@ -77,6 +78,12 @@ public class MojioClient {
 
         if (requestExecutor != null) {
             httpClientBuilder.dispatcher(new Dispatcher(requestExecutor));
+        }
+
+        if (timeout != null) {
+            httpClientBuilder.connectTimeout(timeout, TimeUnit.MILLISECONDS);
+            httpClientBuilder.readTimeout(timeout, TimeUnit.MILLISECONDS);
+            httpClientBuilder.writeTimeout(timeout, TimeUnit.MILLISECONDS);
         }
 
         httpClients = new OkHttpClient[2];
@@ -260,6 +267,7 @@ public class MojioClient {
         protected Executor callbackExecutor;
         protected ExecutorService requestExecutor;
         protected Gson gson;
+        protected Integer timeout;
         protected boolean logging = false;
 
         public Builder(String clientKey, String clientSecret) {
@@ -331,6 +339,16 @@ public class MojioClient {
         }
 
         /**
+         * Configures the connection, read, and write timeout in milliseconds.
+         * @param timeout
+         * @return
+         */
+        public Builder timeout(Integer timeout) {
+            this.timeout = timeout;
+            return this;
+        }
+
+        /**
          * Configures the client to execute callbacks on the specified {@link java.util.concurrent.Executor}.
          * @param executor
          * @return
@@ -355,7 +373,7 @@ public class MojioClient {
          * @return
          */
         public MojioClient build() {
-            return new MojioClient(environment, client, gson, authenticator, interceptor, requestExecutor, callbackExecutor, logging);
+            return new MojioClient(environment, client, gson, authenticator, interceptor, requestExecutor, callbackExecutor, logging, timeout);
         }
     }
 
