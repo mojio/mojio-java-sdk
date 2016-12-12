@@ -40,6 +40,7 @@ public class MojioClient {
     private final Gson gson;
     private final Client client;
     private final boolean loggingEnabled;
+    private final Integer timeout;
 
     private MojioRestApi restApi;
     private MojioAuthApi authApi;
@@ -59,6 +60,7 @@ public class MojioClient {
         this.loggingEnabled = logging;
         this.callbackExecutor = callbackExecutor;
         this.requestExecutor = requestExecutor;
+        this.timeout = timeout;
 
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
         GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create(this.gson);
@@ -191,6 +193,14 @@ public class MojioClient {
      */
     public boolean isLoggingEnabled() {
         return loggingEnabled;
+    }
+
+    /**
+     * Returns whether logging is enabled or not.
+     * @return
+     */
+    public Integer getTimeout() {
+        return timeout;
     }
 
     /**

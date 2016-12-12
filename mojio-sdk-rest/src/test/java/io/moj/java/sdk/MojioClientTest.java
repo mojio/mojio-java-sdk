@@ -1,6 +1,16 @@
 package io.moj.java.sdk;
 
 import com.google.gson.Gson;
+
+import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
+
+import java.util.UUID;
+import java.util.concurrent.Executor;
+import java.util.concurrent.TimeUnit;
+
 import io.moj.java.sdk.auth.AccessToken;
 import io.moj.java.sdk.auth.Authenticator;
 import io.moj.java.sdk.model.User;
@@ -8,19 +18,15 @@ import io.moj.java.sdk.model.response.AuthResponse;
 import okhttp3.Interceptor;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
-import org.junit.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 import retrofit2.Call;
 import retrofit2.Response;
 
-import java.util.UUID;
-import java.util.concurrent.Executor;
-import java.util.concurrent.TimeUnit;
-
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by skidson on 2016-04-14.
@@ -60,6 +66,7 @@ public class MojioClientTest {
                 .environment(expectedEnvironment)
                 .gson(expectedGson)
                 .logging(expectedLoggingEnabled)
+                .timeout(10000)
                 .callbackExecutor(expectedExecutor)
                 .build();
 
@@ -75,6 +82,7 @@ public class MojioClientTest {
         assertThat(client.getGson()).isEqualTo(expectedGson);
         assertThat(client.getCallbackExecutor()).isEqualTo(expectedExecutor);
         assertThat(client.isLoggingEnabled()).isEqualTo(expectedLoggingEnabled);
+        assertThat(client.getTimeout()).isEqualTo(10000);
     }
 
     @Test(expected = IllegalArgumentException.class)
