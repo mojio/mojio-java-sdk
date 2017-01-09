@@ -9,11 +9,13 @@ public class Location {
     public static final String LATITUDE = "Latitude";
     public static final String LONGITUDE = "Longitude";
     public static final String RADIUS = "Radius";
+    public static final String NAME = "Name";
 
     private String Type;
     private Double Latitude;
     private Double Longitude;
     private Double Radius;
+    private String Name;
 
     public String getType() {
         return Type;
@@ -47,6 +49,14 @@ public class Location {
         Radius = radius;
     }
 
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
     @Override
     public String toString() {
         return "Location{" +
@@ -54,6 +64,7 @@ public class Location {
                 ", Latitude=" + Latitude +
                 ", Longitude=" + Longitude +
                 ", Radius=" + Radius +
+                ", Name='" + Name + '\'' +
                 '}';
     }
 }
