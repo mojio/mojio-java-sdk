@@ -23,6 +23,7 @@ public class ObjectTypeTest extends EnumTest<ObjectType> {
                 .put("CheckEngineLight", ObjectType.CHECK_ENGINE_LIGHT)
                 .put("Geofence", ObjectType.GEOFENCE)
                 .put("Recall", ObjectType.RECALL)
+                .put("Note", ObjectType.NOTE)
                 .build();
     }
 
