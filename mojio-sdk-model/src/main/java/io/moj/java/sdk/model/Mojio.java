@@ -1,10 +1,10 @@
 package io.moj.java.sdk.model;
 
+import java.util.Arrays;
+
 import io.moj.java.sdk.model.values.Location;
 import io.moj.java.sdk.model.values.WifiRadio;
 import io.moj.java.sdk.utils.TimeUtils;
-
-import java.util.Arrays;
 
 /**
  * Model object for an Mojio.
@@ -20,6 +20,7 @@ public class Mojio extends AbstractMojioObject {
     public static final String LOCATION = "Location";
     public static final String TAGS = "Tags";
     public static final String WIFI_RADIO = "WifiRadio";
+    public static final String MSISDN_PROP = "MSISDN";
 
     private String Name;
     private String IMEI;
@@ -29,6 +30,7 @@ public class Mojio extends AbstractMojioObject {
     private Location Location;
     private String[] Tags;
     private WifiRadio WifiRadio;
+    private String MSISDN;
 
     public Mojio() {}
 
@@ -103,6 +105,14 @@ public class Mojio extends AbstractMojioObject {
         WifiRadio = wifiRadio;
     }
 
+    public String getMSISDN() {
+        return MSISDN;
+    }
+
+    public void setMSISDN(String msisdn) {
+        this.MSISDN = msisdn;
+    }
+
     @Override
     public String toString() {
         return "Mojio{" +
@@ -114,6 +124,7 @@ public class Mojio extends AbstractMojioObject {
                 ", Location=" + Location +
                 ", Tags=" + Arrays.toString(Tags) +
                 ", WifiRadio=" + WifiRadio +
+                ", MSISDN='" + MSISDN + '\'' +
                 "} " + super.toString();
     }
 }
