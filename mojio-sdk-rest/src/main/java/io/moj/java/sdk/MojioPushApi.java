@@ -2,7 +2,6 @@ package io.moj.java.sdk;
 
 import io.moj.java.sdk.model.push.Observer;
 import io.moj.java.sdk.model.push.Transport;
-import io.moj.java.sdk.model.response.ListResponse;
 import io.moj.java.sdk.model.response.MessageResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -98,6 +97,16 @@ public interface MojioPushApi {
      */
     @DELETE("{resource}/{key}")
     Call<MessageResponse> deleteObserver(@Path("resource") String resource, @Path("key") String key);
+
+    /**
+     * Deletes an observer.
+     * @param resource String path for the specified resource. See {@link io.moj.java.sdk.Resource#getPath()}.
+     * @param id the resource ID
+     * @param key the key of the observer to update
+     * @return
+     */
+    @DELETE("{resource}/{id}/{key}")
+    Call<MessageResponse> deleteObserver(@Path("resource") String resource, @Path("id") String id, @Path("key") String key);
 
     /**
      * Returns an observer for the specified resource, id and key that are accessible to the authenticated user. Note: only
