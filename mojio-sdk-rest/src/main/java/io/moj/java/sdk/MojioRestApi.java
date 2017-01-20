@@ -301,6 +301,12 @@ public interface MojioRestApi {
     @POST("users/{id}/emails")
     Call<Email> addUserEmail(@Path("id") String userId, @Body String email);
 
+    @PUT("users/{id}/emails/{email}")
+    Call<Email> updateEmail(@Path("id") String userId, @Path("email") String email);
+
+    @DELETE("users/{id}/emails/{email}")
+    Call<MessageResponse> deleteEmail(@Path("id") String userId, @Path("email") String email);
+
     @PUT("users/{id}/phonenumbers/{phone}")
     Call<PhoneNumber> addUpdatePhone(@Path("id") String userId, @Path("phone") String phoneNumber,
                                      @Query("sendverification") boolean sendCode);
