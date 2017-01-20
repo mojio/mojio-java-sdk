@@ -16,8 +16,34 @@ For more information please see the [developer website](http://developer.moj.io/
 
 ## Download ##
 ```gradle
-compile 'io.moj.java:mojio-sdk-model:0.0.124'
-compile 'io.moj.java:mojio-sdk-rest:0.0.124'
+// for full SDK:
+compile 'io.moj.java:mojio-sdk-rest:0.0.133'
+
+// model objects only:
+compile 'io.moj.java:mojio-sdk-model:0.0.133'
+```
+
+The latest version can be found in [Bintray](https://bintray.com/mojio/maven/io.moj.java%3Amojio-sdk-rest)
+
+## In Gradle ##
+```gradle
+// in build.gradle
+...
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://dl.bintray.com/mojio/maven' }
+        ...
+    }
+}
+...
+
+// in app/build.gradle
+...
+dependencies {
+    compile "io.moj.java:mojio-sdk-rest:0.0.133"
+}
+...
 ```
 
 ## Structure ##
