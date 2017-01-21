@@ -1,0 +1,25 @@
+apply plugin: 'java'
+
+group PUBLISH_GROUP_ID
+version PUBLISH_VERSION
+
+sourceCompatibility = SOURCE_COMPATIBILITY
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'junit:junit:4.12'
+    compile 'com.google.truth:truth:0.28'
+
+    def guavaVersion = '19.0'
+    compile "com.google.guava:guava:${guavaVersion}"
+    compile "com.google.guava:guava-testlib:${guavaVersion}"
+
+    def powermockVersion = '1.6.4'
+    compile "org.powermock:powermock-module-junit4:${powermockVersion}"
+    compile "org.powermock:powermock-module-junit4-rule:${powermockVersion}"
+    compile "org.powermock:powermock-api-mockito:${powermockVersion}"
+    compile "org.powermock:powermock-classloading-xstream:${powermockVersion}"
+}

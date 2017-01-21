@@ -12,6 +12,7 @@ local.properties
 # User-specific IntelliJ files
 *.iml
 .idea/*
+.idea-backup/
 .idea/workspace.xml
 .idea/libraries
 .idea/tasks.xml
