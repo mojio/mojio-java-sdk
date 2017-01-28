@@ -19,6 +19,7 @@ public class BaseActivityObject implements MojioObject {
     public static final String END_TIME = "EndTime";
     public static final String DURATION = "Duration";
     public static final String ORIGIN = "Origin";
+    public static final String ATTRIBUTED_TO = "AttributedTo";
     public static final String SUMMARY_MAP = "SummaryMap";
     public static final String NAME_MAP = "NameMap";
 
@@ -32,6 +33,7 @@ public class BaseActivityObject implements MojioObject {
     private String EndTime;
     private String Duration;
     private BaseActivityObject Origin;
+    private BaseActivityObject AttributedTo;
     private Map<String, String> SummaryMap;
     private Map<String, String> NameMap;
 
@@ -115,6 +117,14 @@ public class BaseActivityObject implements MojioObject {
         Origin = origin;
     }
 
+    public BaseActivityObject getAttributedTo() {
+        return AttributedTo;
+    }
+
+    public void setAttributedTo(BaseActivityObject attributedTo) {
+        AttributedTo = attributedTo;
+    }
+
     public Map<String, String> getSummaryMap() {
         return SummaryMap;
     }
@@ -144,6 +154,7 @@ public class BaseActivityObject implements MojioObject {
                 ", EndTime='" + EndTime + '\'' +
                 ", Duration='" + Duration + '\'' +
                 ", Origin=" + Origin +
+                ", AttributedTo=" + AttributedTo +
                 ", SummaryMap=" + SummaryMap +
                 ", NameMap=" + NameMap +
                 '}';
