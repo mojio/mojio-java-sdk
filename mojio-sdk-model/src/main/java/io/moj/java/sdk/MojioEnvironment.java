@@ -12,12 +12,8 @@ import java.util.Map;
 public enum MojioEnvironment implements Environment {
 
     PROD(""),
-    TRIAL("trial"),
     STAGING("staging"),
-    EU_PROD("eu-production"),
-    EU_STAGING("eu-staging"),
-    NA_PROD("na-production"),
-    NA_STAGING("na-staging");
+    DEVELOP("develop");
 
     private static final int DEFAULT_VERSION = 2;
     private static final String SCHEME = "https://";
