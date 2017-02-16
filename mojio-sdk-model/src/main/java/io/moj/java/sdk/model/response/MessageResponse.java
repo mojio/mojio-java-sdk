@@ -1,5 +1,6 @@
 package io.moj.java.sdk.model.response;
 
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -11,6 +12,7 @@ public class MessageResponse {
 
     private String Message;
     private Map<String, String[]> ModelState;
+    private Error[] Errors;
 
     public String getMessage() {
         return Message;
@@ -28,11 +30,20 @@ public class MessageResponse {
         ModelState = modelState;
     }
 
+    public Error[] getErrors() {
+        return Errors;
+    }
+
+    public void setErrors(Error[] errors) {
+        Errors = errors;
+    }
+
     @Override
     public String toString() {
         return "MessageResponse{" +
                 "Message='" + Message + '\'' +
                 ", ModelState=" + ModelState +
+                ", Errors=" + Arrays.toString(Errors) +
                 '}';
     }
 }
