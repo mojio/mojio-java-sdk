@@ -16,15 +16,15 @@ public class Geofence extends AbstractMojioObject {
     public static final String DESCRIPTION = "Description";
     public static final String REGION = "Region";
     public static final String TAGS = "Tags";
-    public static final String VEHICLEIDS = "VehicleIds";
-    public static final String ENABLE_ACTIVITY_STREAM = "EnableActivityStream";
+    public static final String VEHICLE_IDS = "VehicleIds";
+    public static final String NOTIFICATION_SETTING = "NotificationSetting";
 
     private String Name;
     private String Description;
     private Region Region;
     private String[] Tags;
     private String[] VehicleIds;
-    private State EnableActivityStream;
+    private State NotificationSetting;
 
     public String getName() {
         return Name;
@@ -66,12 +66,12 @@ public class Geofence extends AbstractMojioObject {
         VehicleIds = vehicleIds;
     }
 
-    public State getEnableActivityStream() {
-        return EnableActivityStream;
+    public State getNotificationSetting() {
+        return NotificationSetting;
     }
 
-    public void setEnableActivityStream(State enableActivityStream) {
-        EnableActivityStream = enableActivityStream;
+    public void setNotificationSetting(State notificationSetting) {
+        NotificationSetting = notificationSetting;
     }
 
     @Override
@@ -82,7 +82,7 @@ public class Geofence extends AbstractMojioObject {
                 ", Region=" + Region +
                 ", Tags=" + Arrays.toString(Tags) +
                 ", VehicleIds=" + Arrays.toString(VehicleIds) +
-                ", EnabledActivityStream=" + EnableActivityStream +
+                ", NotificationSetting=" + NotificationSetting +
                 "} " + super.toString();
     }
 
