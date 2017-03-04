@@ -62,7 +62,7 @@ public class Geofence extends AbstractMojioObject {
         return VehicleIds;
     }
 
-    public void setVehicles(String[] vehicleIds) {
+    public void setVehicleIds(String[] vehicleIds) {
         VehicleIds = vehicleIds;
     }
 
