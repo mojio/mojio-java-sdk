@@ -13,7 +13,8 @@ public enum MojioEnvironment implements Environment {
 
     PROD(""),
     STAGING("staging"),
-    DEVELOP("develop");
+    DEVELOP("develop"),
+    LOAD("load");
 
     private static final int DEFAULT_VERSION = 2;
     private static final String SCHEME = "https://";
