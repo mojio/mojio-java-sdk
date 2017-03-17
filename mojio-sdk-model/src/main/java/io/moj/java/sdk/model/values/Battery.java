@@ -1,6 +1,7 @@
 package io.moj.java.sdk.model.values;
 
 import io.moj.java.sdk.model.enums.RiskSeverity;
+import io.moj.java.sdk.utils.TimeUtils;
 
 /**
  * Model object for a Battery.
@@ -12,6 +13,7 @@ public class Battery extends Voltage {
     private RiskSeverity RiskSeverity;
     private Duration LowVoltageDuration;
     private Duration HighVoltageDuration;
+    private String Timestamp;
 
     public Boolean getConnected() {
         return Connected;
@@ -45,6 +47,14 @@ public class Battery extends Voltage {
         RiskSeverity = riskSeverity;
     }
 
+    public Long getTimestamp() {
+        return TimeUtils.convertTimestampToMillis(Timestamp);
+    }
+
+    public void setTimestamp(Long startTimestamp) {
+        Timestamp = TimeUtils.convertMillisToTimestamp(startTimestamp);
+    }
+
     @Override
     public String toString() {
         return "Battery{" +
@@ -52,6 +62,7 @@ public class Battery extends Voltage {
                 ", RiskSeverity=" + RiskSeverity +
                 ", LowVoltageDuration=" + LowVoltageDuration +
                 ", HighVoltageDuration=" + HighVoltageDuration +
+                ", Timestamp='" + Timestamp + '\'' +
                 "} " + super.toString();
     }
 }
