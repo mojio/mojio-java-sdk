@@ -268,4 +268,10 @@ public class ValueTests {
         assertAccess(new HarshEventState());
     }
 
+    @Test
+    public void testPolyline() throws IllegalAccessException {
+        assertToStringContainsAllFields(new Polyline());
+        assertAccess(new Polyline());
+    }
+
 }
