@@ -25,6 +25,7 @@ import io.moj.java.sdk.model.values.Image;
 import io.moj.java.sdk.model.values.Location;
 import io.moj.java.sdk.model.values.NextServiceSchedule;
 import io.moj.java.sdk.model.values.PhoneNumber;
+import io.moj.java.sdk.model.values.Polyline;
 import io.moj.java.sdk.model.values.ServiceScheduleList;
 import io.moj.java.sdk.model.values.VehicleStatistics;
 import io.moj.java.sdk.model.values.VinDetails;
@@ -136,6 +137,12 @@ public interface MojioRestApi {
 
     @GET("trips/{id}/history/locations")
     Call<ListResponse<Location>> getTripLocations(@Path("id") String tripId, @QueryMap Map<String, String> params);
+
+    @GET("trips/{id}/history/locations/polyline")
+    Call<Polyline> getTripPolyline(@Path("id") String tripId);
+
+    @GET("trips/{id}/history/locations/polyline")
+    Call<Polyline> getTripPolyline(@Path("id") String tripId, @QueryMap Map<String, String> params);
 
     @GET("vehicles/{id}/history/states")
     Call<ListResponse<VehicleMeasure>> getVehicleStates(@Path("id") String vehicleId);
