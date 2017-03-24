@@ -391,7 +391,7 @@ public class Vehicle extends AbstractMojioObject {
                 ", VIN='" + VIN + '\'' +
                 ", DetectedVIN='" + DetectedVIN + '\'' +
                 ", OverrideVIN='" + OverrideVIN + '\'' +
-                ", CompatDetails='" + CompatDetails + '\'' +
+                ", CompatDetails=" + CompatDetails +
                 ", CurrentTrip='" + CurrentTrip + '\'' +
                 ", MojioId='" + MojioId + '\'' +
                 ", Image=" + Image +
