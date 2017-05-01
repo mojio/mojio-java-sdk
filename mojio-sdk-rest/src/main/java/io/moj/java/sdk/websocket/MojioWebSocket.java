@@ -6,34 +6,62 @@ import java.util.HashMap;
 import com.neovisionaries.ws.client.WebSocket;
 import com.neovisionaries.ws.client.WebSocketFactory;
 
+import io.moj.java.sdk.auth.Authenticator;
 import io.moj.java.sdk.logging.Log;
 
 /**
+ * A Wrapper for nv-websocket-client for Mojio-specific WebSocket calls.
  * Created by alexc on 2017-04-25.
  */
 
-public class MojioWebSocket {
-    private static WebSocketFactory factory;
+public class MojioWebSocket implements MojioWebSocketApi {
+    private WebSocketFactory factory;
+    private HashMap<MojioWebSocketListener, WebSocket> listenerWebSocketMap;
     private String baseUrl;
+    private Authenticator authenticator;
     private String accessToken;
-    private HashMap<MojioWebSocketListener, WebSocket> listenerWebSocketMap = new HashMap<>();
 
-    public MojioWebSocket(String baseUrl) {
-        if (factory == null) {
-            factory = new WebSocketFactory();
-            this.baseUrl = baseUrl;
+    public MojioWebSocket(String baseUrl, Authenticator authenticator) {
+        factory = new WebSocketFactory();
+        listenerWebSocketMap = new HashMap<>();
+        this.baseUrl = baseUrl;
+        this.authenticator = authenticator;
+        setAccessToken();
+    }
+
+    @Override
+    public void getVehicle(String id, MojioWebSocketListener listener) throws IOException {
+        connect(baseUrl + "/vehicle/" + id, listener);
+    }
+
+    @Override
+    public void getVehicles(MojioWebSocketListener listener) throws IOException {
+        connect(baseUrl + "/vehicles", listener);
+    }
+
+    @Override
+    public void getMojio(String id, MojioWebSocketListener listener) throws IOException {
+        connect(baseUrl + "/mojio/" + id, listener);
+    }
+
+    @Override
+    public void getMojios(MojioWebSocketListener listener) throws IOException {
+        connect(baseUrl + "/mojios", listener);
+    }
+
+    @Override
+    public void removeListener(MojioWebSocketListener listener) {
+        WebSocket ws = listenerWebSocketMap.remove(listener);
+        if (ws != null) {
+            ws.removeListener(listener);
+            if (!listenerWebSocketMap.containsValue(ws)) {
+                ws.disconnect();
+            }
         }
     }
 
-    public void setAccessToken(String token) {
-        accessToken = "Bearer " + token;
-    }
-
-    public void connect(String suffix, MojioWebSocketListener listener) throws IOException {
-        String url = baseUrl + suffix;
+    private void connect(String url, MojioWebSocketListener listener) throws IOException {
         WebSocket ws = getSocket(url);
-
-
         if (ws == null) {
             ws = factory.createSocket(url);
             ws.addHeader("Authorization", accessToken);
@@ -45,36 +73,6 @@ public class MojioWebSocket {
         listenerWebSocketMap.put(listener, ws);
     }
 
-    public void disconnect(MojioWebSocketListener listener) {
-        WebSocket ws = listenerWebSocketMap.remove(listener);
-        if (ws != null) {
-            ws.removeListener(listener);
-            if (!listenerWebSocketMap.containsValue(ws)) {
-                ws.disconnect();
-            }
-        }
-    }
-
-//    public void getVehicle(String id, MojioWebSocketListener listener) throws IOException {
-//        String url = baseUrl + "vehicle/" + id;
-//        connect(url, listener);
-//    }
-//
-//    public void getVehicles(MojioWebSocketListener listener) throws IOException {
-//        String url = baseUrl + "vehicles";
-//        connect(url, listener);
-//    }
-//
-//    public void getMojio(String id, MojioWebSocketListener listener) throws IOException {
-//        String url = baseUrl + "mojio/" + id;
-//        connect(url, listener);
-//    }
-//
-//    public void getMojios(MojioWebSocketListener listener) throws IOException {
-//        String url = baseUrl + "mojios";
-//        connect(url, listener);
-//    }
-
     private WebSocket getSocket(String url) {
         for (WebSocket ws : listenerWebSocketMap.values()) {
             if (ws.getURI().toString().equalsIgnoreCase(url)) {
@@ -82,5 +80,16 @@ public class MojioWebSocket {
             }
         }
         return null;
+    }
+
+    public void setAccessToken() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (authenticator.getAccessToken() != null) {
+                    accessToken = "Bearer " + authenticator.getAccessToken().getAccessToken();
+                }
+            }
+        }).start();
     }
 }
