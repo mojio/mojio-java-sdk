@@ -14,6 +14,7 @@ public enum MojioEnvironment implements Environment {
     PROD(""),
     STAGING("staging"),
     DEVELOP("develop"),
+    TRIAL("trial"),
     LOAD("load");
 
     private static final int DEFAULT_VERSION = 2;
