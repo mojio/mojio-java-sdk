@@ -494,7 +494,6 @@ public class MojioClient {
                 AccessToken accessToken = new AccessToken(authResponse.getAccessToken(), authResponse.getRefreshToken(),
                         startTime + TimeUnit.SECONDS.toMillis(authResponse.getExpiresIn()));
                 authenticator.setAccessToken(accessToken);
-                ((MojioWebSocket) wsApi).setAccessToken();
                 return true;
             }
             return false;
