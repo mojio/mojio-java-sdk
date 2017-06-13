@@ -120,6 +120,7 @@ public class TimeUtilsTest {
     @Test
     public void testConvertTimestampToMillis_noMillis_invalidSuffix() {
         assertThat(TimeUtils.convertTimestampToMillis("2016-03-19T00:35:16+00:00")).isEqualTo(1458347716000L);
+        assertThat(TimeUtils.convertTimestampToMillis("2016-03-19T00:35:16.0+00:00")).isEqualTo(1458347716000L);
     }
 
     @Test
