@@ -6,6 +6,8 @@ import io.moj.java.sdk.model.values.Acceleration;
 import io.moj.java.sdk.model.values.Distance;
 import io.moj.java.sdk.model.values.FuelEfficiency;
 import io.moj.java.sdk.model.values.FuelLevel;
+import io.moj.java.sdk.model.values.HarshEvent;
+import io.moj.java.sdk.model.values.IdleEvent;
 import io.moj.java.sdk.model.values.Location;
 import io.moj.java.sdk.model.values.Odometer;
 import io.moj.java.sdk.model.values.Rpm;
@@ -67,6 +69,8 @@ public class Trip extends AbstractMojioObject {
     private Integer IdlingCount;
     private Integer HarshAcclCount;
     private Integer HarshDecelCount;
+    private HarshEvent[] HarshEvents;
+    private IdleEvent[] IdleEvents;
 
     public Boolean getCompleted() {
         return Completed;
@@ -260,6 +264,22 @@ public class Trip extends AbstractMojioObject {
         HarshAcclCount = harshAcclCount;
     }
 
+    public HarshEvent[] getHarshEvents() {
+        return HarshEvents;
+    }
+
+    public void setHarshEvents(HarshEvent[] harshEvents) {
+        HarshEvents = harshEvents;
+    }
+
+    public IdleEvent[] getIdleEvents() {
+        return IdleEvents;
+    }
+
+    public void setIdleEvents(IdleEvent[] idleEvents) {
+        IdleEvents = idleEvents;
+    }
+
     @Override
     public String toString() {
         return "Trip{" +
@@ -287,6 +307,8 @@ public class Trip extends AbstractMojioObject {
                 ", IdlingCount=" + IdlingCount +
                 ", HarshAcclCount=" + HarshAcclCount +
                 ", HarshDecelCount=" + HarshDecelCount +
+                ", HarshEvents=" + Arrays.toString(HarshEvents) +
+                ", IdleEvents=" + Arrays.toString(IdleEvents) +
                 "} " + super.toString();
     }
 }

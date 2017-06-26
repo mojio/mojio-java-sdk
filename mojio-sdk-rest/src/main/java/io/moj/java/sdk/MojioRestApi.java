@@ -345,6 +345,9 @@ public interface MojioRestApi {
     @GET("vehicles/{id}/trips")
     Call<ListResponse<Trip>> getVehicleTrips(@Path("id") String vehicleId, @QueryMap Map<String, String> params);
 
+    @GET("vehicles/{id}/trips/{tripId}")
+    Call<Trip> getVehicleTrip(@Path("id") String vehicleId, @Path("tripId") String tripId);
+
     @GET("vehicles/{id}/vin")
     Call<VinDetails> getVehicleVinDetails(@Path("id") String vehicleId);
 
