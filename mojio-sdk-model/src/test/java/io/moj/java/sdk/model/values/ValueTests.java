@@ -89,9 +89,33 @@ public class ValueTests {
     }
 
     @Test
+    public void testHarshEvent() throws IllegalAccessException {
+        assertToStringContainsAllFields(new HarshEvent());
+        assertAccess(new HarshEvent());
+    }
+
+    @Test
+    public void testHarshEventState() throws IllegalAccessException {
+        assertToStringContainsAllFields(new HarshEventState());
+        assertAccess(new HarshEventState());
+    }
+
+    @Test
     public void testHeading() throws IllegalAccessException {
         assertToStringContainsAllFields(new Heading());
         assertAccess(new Heading());
+    }
+
+    @Test
+    public void testIdleEvent() throws IllegalAccessException {
+        assertToStringContainsAllFields(new IdleEvent());
+        assertAccess(new IdleEvent());
+    }
+
+    @Test
+    public void testIdleState() throws IllegalAccessException {
+        assertToStringContainsAllFields(new IdleEventState());
+        assertAccess(new IdleEventState());
     }
 
     @Test
@@ -260,12 +284,6 @@ public class ValueTests {
     public void testServiceScheduleEvent() throws IllegalAccessException {
         assertToStringContainsAllFields(new ServiceScheduleEvent());
         assertAccess(new ServiceScheduleEvent());
-    }
-
-    @Test
-    public void testHarshEventState() throws IllegalAccessException {
-        assertToStringContainsAllFields(new HarshEventState());
-        assertAccess(new HarshEventState());
     }
 
     @Test
