@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.neovisionaries.ws.client.WebSocket;
-import com.neovisionaries.ws.client.WebSocketException;
 import com.neovisionaries.ws.client.WebSocketFactory;
 import com.neovisionaries.ws.client.WebSocketState;
 
@@ -92,11 +91,7 @@ public class MojioWebSocket implements MojioWebSocketApi {
                 if (authenticator.getAccessToken() != null) {
                     accessToken = "Bearer " + authenticator.getAccessToken().getAccessToken();
                     webSocket.addHeader("Authorization", accessToken);
-                    try {
-                        webSocket.connect();
-                    } catch (WebSocketException e) {
-                        e.printStackTrace();
-                    }
+                    webSocket.connectAsynchronously();
                 }
             }
         }).start();

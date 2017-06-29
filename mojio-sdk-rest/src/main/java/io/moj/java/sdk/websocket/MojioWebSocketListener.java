@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * WebSocket listener class. Note that these methods will be called on a background thread and not
+ * the main thread.
  * Created by alexc on 2017-04-27.
  */
 
