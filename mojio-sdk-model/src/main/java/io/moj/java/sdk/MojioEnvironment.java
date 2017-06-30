@@ -18,11 +18,13 @@ public enum MojioEnvironment implements Environment {
     LOAD("load");
 
     private static final int DEFAULT_VERSION = 2;
-    private static final String SCHEME = "https://";
-    private static final String FORMAT_ACCOUNTS_HOSTNAME = SCHEME + "%saccounts.moj.io";
-    private static final String FORMAT_MY_MOJIO_HOSTNAME = SCHEME + "%smy.moj.io";
-    private static final String FORMAT_API_HOSTNAME = SCHEME + "%sapi.moj.io/v%d";
-    private static final String FORMAT_PUSH_HOSTNAME = SCHEME + "%spush.moj.io/v%d";
+    private static final String HTTPS = "https://";
+    private static final String WSS = "wss://";
+    private static final String FORMAT_ACCOUNTS_HOSTNAME = HTTPS + "%saccounts.moj.io";
+    private static final String FORMAT_MY_MOJIO_HOSTNAME = HTTPS + "%smy.moj.io";
+    private static final String FORMAT_HTTPS_API_HOSTNAME = HTTPS + "%sapi.moj.io/v%d";
+    private static final String FORMAT_WSS_API_HOSTNAME = WSS + "%sapi.moj.io/v%d";
+    private static final String FORMAT_PUSH_HOSTNAME = HTTPS + "%spush.moj.io/v%d";
     private static final String PATH_FORGOT_PASSWORD = "/account/forgot-password";
 
     private static final Map<String, MojioEnvironment> PREFIX_MAP;
@@ -56,7 +58,7 @@ public enum MojioEnvironment implements Environment {
 
     @Override
     public String getApiUrl(int version) {
-        return String.format(Locale.US, FORMAT_API_HOSTNAME, buildUrlPrefix(), version);
+        return String.format(Locale.US, FORMAT_HTTPS_API_HOSTNAME, buildUrlPrefix(), version);
     }
 
     @Override
@@ -72,6 +74,16 @@ public enum MojioEnvironment implements Environment {
     @Override
     public String getMyMojioUrl() {
         return String.format(Locale.US, FORMAT_MY_MOJIO_HOSTNAME, buildUrlPrefix());
+    }
+
+    @Override
+    public String getWsUrl() {
+        return getWsUrl(DEFAULT_VERSION);
+    }
+
+    @Override
+    public String getWsUrl(int version) {
+        return String.format(Locale.US, FORMAT_WSS_API_HOSTNAME, buildUrlPrefix(), version);
     }
 
     @Override

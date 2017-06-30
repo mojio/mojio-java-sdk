@@ -18,6 +18,10 @@ public interface Environment {
 
     String getPushUrl(int version);
 
+    String getWsUrl();
+
+    String getWsUrl(int version);
+
     String getMyMojioUrl();
 
     String getPrefix();

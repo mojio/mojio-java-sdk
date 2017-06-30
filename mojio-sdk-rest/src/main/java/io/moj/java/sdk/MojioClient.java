@@ -16,6 +16,8 @@ import io.moj.java.sdk.auth.OnAccessTokenExpiredListener;
 import io.moj.java.sdk.logging.LoggingInterceptor;
 import io.moj.java.sdk.model.User;
 import io.moj.java.sdk.model.response.AuthResponse;
+import io.moj.java.sdk.websocket.MojioWebSocket;
+import io.moj.java.sdk.websocket.MojioWebSocketApi;
 import okhttp3.Dispatcher;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -45,6 +47,7 @@ public class MojioClient {
     private MojioRestApi restApi;
     private MojioAuthApi authApi;
     private MojioPushApi pushApi;
+    private MojioWebSocketApi wsApi;
     private MojioStorageApi storageApi;
     private Authenticator authenticator;
     private AuthInterceptor authInterceptor;
@@ -123,6 +126,8 @@ public class MojioClient {
                 .baseUrl(this.environment.getApiUrl(1) + "/")
                 .build()
                 .create(MojioStorageApi.class);
+
+        wsApi = new MojioWebSocket(this.environment.getWsUrl(), authenticator);
     }
 
     /**
@@ -178,6 +183,8 @@ public class MojioClient {
     public MojioStorageApi storage() {
         return storageApi;
     }
+
+    public MojioWebSocketApi webSocket() { return wsApi; }
 
     /**
      * Returns the client's configured environment.
