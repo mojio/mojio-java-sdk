@@ -1,8 +1,17 @@
 package io.moj.java.sdk;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.apache.commons.codec.binary.Base64;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -16,12 +25,15 @@ import io.moj.java.sdk.auth.OnAccessTokenExpiredListener;
 import io.moj.java.sdk.logging.LoggingInterceptor;
 import io.moj.java.sdk.model.User;
 import io.moj.java.sdk.model.response.AuthResponse;
+import io.moj.java.sdk.model.response.RegistrationResponse;
 import io.moj.java.sdk.websocket.MojioWebSocket;
 import io.moj.java.sdk.websocket.MojioWebSocketApi;
 import okhttp3.Dispatcher;
 import okhttp3.Interceptor;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,6 +55,7 @@ public class MojioClient {
     private final Client client;
     private final boolean loggingEnabled;
     private final Integer timeout;
+    private final List<String> acceptedTenants;
 
     private MojioRestApi restApi;
     private MojioAuthApi authApi;
@@ -56,7 +69,7 @@ public class MojioClient {
 
     protected MojioClient(Environment environment, Client client, Gson gson, Authenticator authenticator,
                           Interceptor interceptor, ExecutorService requestExecutor, Executor callbackExecutor,
-                          boolean logging, Integer timeout) {
+                          boolean logging, Integer timeout, List<String> acceptedTenants) {
         this.environment = environment == null ? MojioEnvironment.getDefault() : environment;
         this.gson = gson == null ? new Gson() : gson;
         this.client = client;
@@ -64,6 +77,7 @@ public class MojioClient {
         this.callbackExecutor = callbackExecutor;
         this.requestExecutor = requestExecutor;
         this.timeout = timeout;
+        this.acceptedTenants = acceptedTenants;
 
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
         GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create(this.gson);
@@ -138,7 +152,7 @@ public class MojioClient {
      * @return
      */
     public Call<User> login(String username, String password) {
-        return new LoginCall(username, password, client);
+        return new LoginCall(username, password, client, acceptedTenants);
     }
 
     /**
@@ -149,7 +163,7 @@ public class MojioClient {
      * @return
      */
     public Call<User> loginWithPin(String phoneNumber, String pin) {
-        return new LoginCall(phoneNumber, pin, true, client);
+        return new LoginCall(phoneNumber, pin, true, client, acceptedTenants);
     }
 
     /**
@@ -286,6 +300,7 @@ public class MojioClient {
         protected Gson gson;
         protected Integer timeout;
         protected boolean logging = false;
+        protected List<String> acceptedTenants = new ArrayList<>();
 
         public Builder(String clientKey, String clientSecret) {
             if (clientKey == null || clientKey.isEmpty()) {
@@ -386,11 +401,25 @@ public class MojioClient {
         }
 
         /**
+         * Configures the list of tenant IDs that are accepted by the application. If not specified, the
+         * application will accept all tenant IDs.
+         * @param acceptedTenants
+         * @return
+         */
+        public Builder acceptedTenants(List<String> acceptedTenants) {
+            this.acceptedTenants.clear();
+            if (acceptedTenants != null) {
+                this.acceptedTenants.addAll(acceptedTenants);
+            }
+            return this;
+        }
+
+        /**
          * Constructs a {@link io.moj.java.sdk.MojioClient} instance with the provided configuration.
          * @return
          */
         public MojioClient build() {
-            return new MojioClient(environment, client, gson, authenticator, interceptor, requestExecutor, callbackExecutor, logging, timeout);
+            return new MojioClient(environment, client, gson, authenticator, interceptor, requestExecutor, callbackExecutor, logging, timeout, acceptedTenants);
         }
     }
 
@@ -402,20 +431,22 @@ public class MojioClient {
         private String id;
         private String password;
         private boolean usingPin;
+        private List<String> acceptedTenants;
 
         private Client client;
         private Call<User> userCall;
         private Call<AuthResponse> authCall;
 
-        public LoginCall(String id, String password, Client client) {
-            this(id, password, false, client);
+        public LoginCall(String id, String password, Client client, List<String> acceptedTenants) {
+            this(id, password, false, client, acceptedTenants);
         }
 
-        public LoginCall(String id, String password, boolean usingPin, Client client) {
+        public LoginCall(String id, String password, boolean usingPin, Client client, List<String> acceptedTenants) {
             this.id = id;
             this.password = password;
             this.usingPin = usingPin;
             this.client = client;
+            this.acceptedTenants = acceptedTenants;
 
             this.authCall = usingPin
                     ? auth().loginWithPin(MojioAuthApi.GRANT_TYPE_PHONE, id, password, client.getKey(), client.getSecret())
@@ -426,6 +457,9 @@ public class MojioClient {
         public Response<User> execute() throws IOException {
             long startTime = System.currentTimeMillis();
             Response<AuthResponse> response = authCall.execute();
+            if (!passesTenancyTest(response)) {
+                return getInvalidTenantErrorResponse();
+            }
             if (handleResponse(startTime, response)) {
                 userCall = rest().getUser();
                 return userCall.execute();
@@ -440,12 +474,16 @@ public class MojioClient {
             authCall.enqueue(new Callback<AuthResponse>() {
                 @Override
                 public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
+                    if (!passesTenancyTest(response)) {
+                        callback.onResponse(LoginCall.this, getInvalidTenantErrorResponse());
+                        return;
+                    }
                     try {
                         if (handleResponse(startTime, response)) {
                             userCall = rest().getUser();
                             userCall.enqueue(callback);
                         } else {
-                            callback.onResponse((Call) authCall, (Response) response);
+                            callback.onResponse(LoginCall.this, (Response) response);
                         }
                     } catch (IOException e) {
                         onFailure(call, e);
@@ -454,7 +492,7 @@ public class MojioClient {
 
                 @Override
                 public void onFailure(Call<AuthResponse> call, Throwable t) {
-                    callback.onFailure((Call) call, t);
+                    callback.onFailure(LoginCall.this, t);
                 }
             });
         }
@@ -476,7 +514,7 @@ public class MojioClient {
 
         @Override
         public Call<User> clone() {
-            return new LoginCall(id, password, usingPin, client);
+            return new LoginCall(id, password, usingPin, client, acceptedTenants);
         }
 
         @Override
@@ -486,6 +524,22 @@ public class MojioClient {
 
         private Call getCurrentCall() {
             return userCall == null ? authCall : userCall;
+        }
+
+        private boolean passesTenancyTest(Response<AuthResponse> response) {
+            if (acceptedTenants == null || acceptedTenants.isEmpty()) {
+                return true;
+            } else {
+                if (response != null && response.isSuccessful()) {
+                    AuthResponse authResponse = response.body();
+                    String token = authResponse.getAccessToken();
+                    String tenantId = getTenantId(token);
+                    if (tenantId != null && acceptedTenants.contains(tenantId)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
         }
 
         private boolean handleResponse(long startTime, Response<AuthResponse> response) throws IOException {
@@ -498,6 +552,37 @@ public class MojioClient {
             }
             return false;
         }
-    }
 
+        private Response<User> getInvalidTenantErrorResponse() {
+            RegistrationResponse.Error error = new RegistrationResponse.Error();
+            RegistrationResponse registrationResponse = new RegistrationResponse();
+            registrationResponse.setErrors(Collections.singletonList(error));
+            ResponseBody errorBody = ResponseBody.create(MediaType.parse("application/json"), gson.toJson(registrationResponse));
+            return Response.error(403, errorBody);
+        }
+
+        private String getTenantId(String token) {
+            if (token == null)
+                return null;
+
+            String[] parts = token.split("\\.");
+            if (parts.length < 2)
+                return null;
+
+            String payload = parts[1];
+            if (payload == null)
+                return null;
+
+            try {
+                byte[] bytes = payload.getBytes("UTF-8");
+                String decoded = new String(Base64.decodeBase64(bytes), "UTF-8");
+
+                Type type = new TypeToken<Map<String, Object>>(){}.getType();
+                Map<String, Object> jwtPayload = gson.fromJson(decoded, type);
+                return (String) jwtPayload.get("tenant");
+            } catch (UnsupportedEncodingException e) {
+                return null;
+            }
+        }
+    }
 }
