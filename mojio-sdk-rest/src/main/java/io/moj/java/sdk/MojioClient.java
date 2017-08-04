@@ -1,12 +1,10 @@
 package io.moj.java.sdk;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
-import org.apache.commons.codec.binary.Base64;
-
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,8 +22,10 @@ import io.moj.java.sdk.auth.DefaultAuthenticator;
 import io.moj.java.sdk.auth.OnAccessTokenExpiredListener;
 import io.moj.java.sdk.logging.LoggingInterceptor;
 import io.moj.java.sdk.model.User;
+import io.moj.java.sdk.model.interfaces.Base64Decoder;
 import io.moj.java.sdk.model.response.AuthResponse;
 import io.moj.java.sdk.model.response.RegistrationResponse;
+import io.moj.java.sdk.utils.DefaultBase64Decoder;
 import io.moj.java.sdk.websocket.MojioWebSocket;
 import io.moj.java.sdk.websocket.MojioWebSocketApi;
 import okhttp3.Dispatcher;
@@ -52,6 +52,7 @@ public class MojioClient {
     private final Executor callbackExecutor;
     private final ExecutorService requestExecutor;
     private final Gson gson;
+    private final Base64Decoder base64Decoder;
     private final Client client;
     private final boolean loggingEnabled;
     private final Integer timeout;
@@ -67,11 +68,12 @@ public class MojioClient {
 
     private OkHttpClient[] httpClients;
 
-    protected MojioClient(Environment environment, Client client, Gson gson, Authenticator authenticator,
+    protected MojioClient(Environment environment, Client client, Gson gson, Base64Decoder base64Decoder, Authenticator authenticator,
                           Interceptor interceptor, ExecutorService requestExecutor, Executor callbackExecutor,
                           boolean logging, Integer timeout, List<String> acceptedTenants) {
         this.environment = environment == null ? MojioEnvironment.getDefault() : environment;
         this.gson = gson == null ? new Gson() : gson;
+        this.base64Decoder = base64Decoder == null ? new DefaultBase64Decoder() : base64Decoder;
         this.client = client;
         this.loggingEnabled = logging;
         this.callbackExecutor = callbackExecutor;
@@ -298,6 +300,7 @@ public class MojioClient {
         protected Executor callbackExecutor;
         protected ExecutorService requestExecutor;
         protected Gson gson;
+        protected Base64Decoder base64Decoder;
         protected Integer timeout;
         protected boolean logging = false;
         protected List<String> acceptedTenants = new ArrayList<>();
@@ -370,6 +373,11 @@ public class MojioClient {
             return this;
         }
 
+        public Builder base64Decoder(Base64Decoder base64Decoder) {
+            this.base64Decoder = base64Decoder;
+            return this;
+        }
+
         /**
          * Configures the connection, read, and write timeout in milliseconds.
          * @param timeout
@@ -419,7 +427,8 @@ public class MojioClient {
          * @return
          */
         public MojioClient build() {
-            return new MojioClient(environment, client, gson, authenticator, interceptor, requestExecutor, callbackExecutor, logging, timeout, acceptedTenants);
+            return new MojioClient(environment, client, gson, base64Decoder, authenticator, interceptor,
+                    requestExecutor, callbackExecutor, logging, timeout, acceptedTenants);
         }
     }
 
@@ -573,14 +582,15 @@ public class MojioClient {
             if (payload == null)
                 return null;
 
-            try {
-                byte[] bytes = payload.getBytes("UTF-8");
-                String decoded = new String(Base64.decodeBase64(bytes), "UTF-8");
+            String decoded = base64Decoder.decodeBase64(payload);
+            if (decoded == null)
+                return null;
 
+            try {
                 Type type = new TypeToken<Map<String, Object>>(){}.getType();
                 Map<String, Object> jwtPayload = gson.fromJson(decoded, type);
                 return (String) jwtPayload.get("tenant");
-            } catch (UnsupportedEncodingException e) {
+            } catch (JsonSyntaxException ignored) {
                 return null;
             }
         }
