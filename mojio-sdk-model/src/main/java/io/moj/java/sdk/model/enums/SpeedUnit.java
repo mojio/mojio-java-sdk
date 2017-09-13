@@ -29,7 +29,7 @@ public enum SpeedUnit {
         return key;
     }
 
-    public UnitConverter to(SpeedUnit unit) {
+    public UnitConverter convertTo(SpeedUnit unit) {
         SpeedUnit[] values = values();
         for (int i = 0; i < values.length; i++) {
             if (values[i] == unit) {

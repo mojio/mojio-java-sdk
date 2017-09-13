@@ -28,7 +28,7 @@ public enum VoltageUnit {
         return key;
     }
 
-    public UnitConverter to(VoltageUnit unit) {
+    public UnitConverter convertTo(VoltageUnit unit) {
         VoltageUnit[] values = values();
         for (int i = 0; i < values.length; i++) {
             if (values[i] == unit) {

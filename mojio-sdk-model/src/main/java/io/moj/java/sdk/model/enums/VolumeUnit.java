@@ -28,7 +28,7 @@ public enum VolumeUnit {
         return key;
     }
 
-    public UnitConverter to(VolumeUnit unit) {
+    public UnitConverter convertTo(VolumeUnit unit) {
         VolumeUnit[] values = values();
         for (int i = 0; i < values.length; i++) {
             if (values[i] == unit) {
