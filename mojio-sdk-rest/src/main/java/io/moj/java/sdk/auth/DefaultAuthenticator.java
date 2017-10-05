@@ -78,6 +78,9 @@ public class DefaultAuthenticator implements Authenticator {
                 AuthResponse authResponse = response.body();
                 accessToken = new AccessToken(authResponse.getAccessToken(), authResponse.getRefreshToken(),
                         requestTimestamp + TimeUnit.SECONDS.toMillis(authResponse.getExpiresIn()));
+            } else {
+                // TODO log failure here?
+                return null;
             }
         } catch (IOException e) {
             Log.e(TAG, "Error trying to refresh access token", e);
