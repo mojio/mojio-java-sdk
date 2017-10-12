@@ -65,6 +65,7 @@ public class MojioClient {
     private MojioStorageApi storageApi;
     private Authenticator authenticator;
     private AuthInterceptor authInterceptor;
+    private Interceptor clientInterceptor;
 
     private OkHttpClient[] httpClients;
 
@@ -80,6 +81,7 @@ public class MojioClient {
         this.requestExecutor = requestExecutor;
         this.timeout = timeout;
         this.acceptedTenants = acceptedTenants;
+        this.clientInterceptor = interceptor;
 
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
         GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create(this.gson);
@@ -256,6 +258,14 @@ public class MojioClient {
      */
     protected Gson getGson() {
         return gson;
+    }
+
+    /**
+     * Returns the {@link okhttp3.Interceptor} this client is configured with.
+     * @return
+     */
+    protected Interceptor getClientInterceptor() {
+        return clientInterceptor;
     }
 
     /**
