@@ -10,6 +10,15 @@ public class Speed extends DeviceMeasurement {
 
     private Integer SpeedBandId;
     private Duration SpeedBandDuration;
+    private String Timestamp;
+
+    public String getTimestamp() {
+        return Timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        Timestamp = timestamp;
+    }
 
     public SpeedUnit getBaseSpeedUnit() {
         return SpeedUnit.fromKey(getBaseUnit());
@@ -46,8 +55,9 @@ public class Speed extends DeviceMeasurement {
     @Override
     public String toString() {
         return "Speed{" +
-                "SpeedBandDuration=" + SpeedBandDuration +
-                ", SpeedBandId=" + SpeedBandId +
+                "SpeedBandId=" + SpeedBandId +
+                ", SpeedBandDuration=" + SpeedBandDuration +
+                ", Timestamp='" + Timestamp + '\'' +
                 "} " + super.toString();
     }
 }
