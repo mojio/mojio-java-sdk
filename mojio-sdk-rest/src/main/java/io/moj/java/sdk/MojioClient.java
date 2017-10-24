@@ -156,7 +156,18 @@ public class MojioClient {
      * @return
      */
     public Call<User> login(String username, String password) {
-        return new LoginCall(username, password, client, acceptedTenants);
+        return new LoginCall(username, password, client, acceptedTenants, null);
+    }
+
+    /**
+     * Authenticates a user, stores the access token in the client's configured
+     * {@link io.moj.java.sdk.auth.Authenticator}, and then returns the {@link io.moj.java.sdk.model.User} entity.
+     * @param username
+     * @param password
+     * @return
+     */
+    public Call<User> login(String username, String password, String scope) {
+        return new LoginCall(username, password, client, acceptedTenants, scope);
     }
 
     /**
@@ -167,7 +178,7 @@ public class MojioClient {
      * @return
      */
     public Call<User> loginWithPin(String phoneNumber, String pin) {
-        return new LoginCall(phoneNumber, pin, true, client, acceptedTenants);
+        return new LoginCall(phoneNumber, pin, true, client, acceptedTenants, null);
     }
 
     /**
@@ -451,25 +462,27 @@ public class MojioClient {
         private String password;
         private boolean usingPin;
         private List<String> acceptedTenants;
+        private String scope;
 
         private Client client;
         private Call<User> userCall;
         private Call<AuthResponse> authCall;
 
-        public LoginCall(String id, String password, Client client, List<String> acceptedTenants) {
-            this(id, password, false, client, acceptedTenants);
+        public LoginCall(String id, String password, Client client, List<String> acceptedTenants, String scope) {
+            this(id, password, false, client, acceptedTenants, scope);
         }
 
-        public LoginCall(String id, String password, boolean usingPin, Client client, List<String> acceptedTenants) {
+        public LoginCall(String id, String password, boolean usingPin, Client client, List<String> acceptedTenants, String scope) {
             this.id = id;
             this.password = password;
             this.usingPin = usingPin;
             this.client = client;
             this.acceptedTenants = acceptedTenants;
+            this.scope = scope;
 
             this.authCall = usingPin
                     ? auth().loginWithPin(MojioAuthApi.GRANT_TYPE_PHONE, id, password, client.getKey(), client.getSecret())
-                    : auth().login(MojioAuthApi.GRANT_TYPE_PASSWORD, id, password, client.getKey(), client.getSecret());
+                    : auth().login(MojioAuthApi.GRANT_TYPE_PASSWORD, id, password, client.getKey(), client.getSecret(), scope);
         }
 
         @Override
@@ -533,7 +546,7 @@ public class MojioClient {
 
         @Override
         public Call<User> clone() {
-            return new LoginCall(id, password, usingPin, client, acceptedTenants);
+            return new LoginCall(id, password, usingPin, client, acceptedTenants, scope);
         }
 
         @Override
