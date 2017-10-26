@@ -71,7 +71,7 @@ public class MojioClient {
 
     protected MojioClient(Environment environment, Client client, Gson gson, Base64Decoder base64Decoder, Authenticator authenticator,
                           Interceptor interceptor, ExecutorService requestExecutor, Executor callbackExecutor,
-                          boolean logging, Integer timeout, List<String> acceptedTenants) {
+                          boolean logging, Integer timeout, List<String> acceptedTenants, String userAgent) {
         this.environment = environment == null ? MojioEnvironment.getDefault() : environment;
         this.gson = gson == null ? new Gson() : gson;
         this.base64Decoder = base64Decoder == null ? new DefaultBase64Decoder() : base64Decoder;
@@ -108,6 +108,8 @@ public class MojioClient {
             httpClientBuilder.readTimeout(timeout, TimeUnit.MILLISECONDS);
             httpClientBuilder.writeTimeout(timeout, TimeUnit.MILLISECONDS);
         }
+
+        httpClientBuilder.addInterceptor(new MojioInterceptor(userAgent));
 
         httpClients = new OkHttpClient[2];
         httpClients[0] = httpClientBuilder.build();
@@ -325,6 +327,7 @@ public class MojioClient {
         protected Integer timeout;
         protected boolean logging = false;
         protected List<String> acceptedTenants = new ArrayList<>();
+        protected String userAgent;
 
         public Builder(String clientKey, String clientSecret) {
             if (clientKey == null || clientKey.isEmpty()) {
@@ -444,12 +447,20 @@ public class MojioClient {
         }
 
         /**
+         * @param userAgent User-Agent header to be added to the requests
+         */
+        public Builder userAgent(String userAgent) {
+            this.userAgent = userAgent;
+            return this;
+        }
+
+        /**
          * Constructs a {@link io.moj.java.sdk.MojioClient} instance with the provided configuration.
          * @return
          */
         public MojioClient build() {
             return new MojioClient(environment, client, gson, base64Decoder, authenticator, interceptor,
-                    requestExecutor, callbackExecutor, logging, timeout, acceptedTenants);
+                    requestExecutor, callbackExecutor, logging, timeout, acceptedTenants, userAgent);
         }
     }
 
