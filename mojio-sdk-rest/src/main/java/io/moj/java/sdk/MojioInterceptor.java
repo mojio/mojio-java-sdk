@@ -1,6 +1,7 @@
 package io.moj.java.sdk;
 
 import java.io.IOException;
+import java.text.Normalizer;
 
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -22,12 +23,15 @@ public class MojioInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
         if (userAgent != null) {
+            String cleanUserAgent = Normalizer.normalize(userAgent, Normalizer.Form.NFD);
+            cleanUserAgent = cleanUserAgent.replaceAll("[^\\p{ASCII}]", "");
+
             Request.Builder requestBuilder = request.newBuilder();
 
             String userAgentHeader = request.header("User-Agent");
             userAgentHeader = userAgentHeader == null || userAgentHeader.equals("")
-                    ? userAgent
-                    : userAgent + " " + userAgentHeader;
+                    ? cleanUserAgent
+                    : cleanUserAgent + " " + userAgentHeader;
             requestBuilder.header("User-Agent", userAgentHeader);
 
             request = requestBuilder.build();
