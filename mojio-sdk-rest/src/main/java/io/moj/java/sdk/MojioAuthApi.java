@@ -74,7 +74,8 @@ public interface MojioAuthApi {
                                     @Field("phone_number") String phoneNumber,
                                     @Field("pin") String pin,
                                     @Field("client_id") String clientId,
-                                    @Field("client_secret") String clientSecret);
+                                    @Field("client_secret") String clientSecret,
+                                    @Field("scope") String scope);
 
     /**
      * Endpoint for refreshing an access token. Constructs the request body as follows:

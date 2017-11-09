@@ -469,6 +469,8 @@ public class MojioClient {
      * {@link io.moj.java.sdk.auth.Authenticator} and then follows with a call to get the current User.
      */
     private class LoginCall implements Call<User> {
+        private static final String DEFAULT_SCOPE = "full offline_access";
+
         private String id;
         private String password;
         private boolean usingPin;
@@ -489,11 +491,11 @@ public class MojioClient {
             this.usingPin = usingPin;
             this.client = client;
             this.acceptedTenants = acceptedTenants;
-            this.scope = scope;
+            this.scope = scope == null ? DEFAULT_SCOPE : scope;
 
             this.authCall = usingPin
-                    ? auth().loginWithPin(MojioAuthApi.GRANT_TYPE_PHONE, id, password, client.getKey(), client.getSecret())
-                    : auth().login(MojioAuthApi.GRANT_TYPE_PASSWORD, id, password, client.getKey(), client.getSecret(), scope);
+                    ? auth().loginWithPin(MojioAuthApi.GRANT_TYPE_PHONE, id, password, client.getKey(), client.getSecret(), this.scope)
+                    : auth().login(MojioAuthApi.GRANT_TYPE_PASSWORD, id, password, client.getKey(), client.getSecret(), this.scope);
         }
 
         @Override
