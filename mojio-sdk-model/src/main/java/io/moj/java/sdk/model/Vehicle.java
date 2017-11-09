@@ -8,6 +8,7 @@ import io.moj.java.sdk.model.values.Acceleration;
 import io.moj.java.sdk.model.values.Accelerometer;
 import io.moj.java.sdk.model.values.Battery;
 import io.moj.java.sdk.model.values.BooleanState;
+import io.moj.java.sdk.model.values.CompatDetails;
 import io.moj.java.sdk.model.values.DiagnosticCode;
 import io.moj.java.sdk.model.values.FuelEfficiency;
 import io.moj.java.sdk.model.values.FuelLevel;
@@ -32,6 +33,7 @@ public class Vehicle extends AbstractMojioObject {
     public static final String VIN_NUMBER = "VIN";
     public static final String DETECTED_VIN = "DetectedVIN";
     public static final String OVERRIDE_VIN = "OverrideVIN";
+    public static final String COMPAT_DETAILS = "CompatDetails";
     public static final String CURRENT_TRIP = "CurrentTrip";
     public static final String MOJIO_ID = "MojioId";
     public static final String IMAGE = "Image";
@@ -67,6 +69,7 @@ public class Vehicle extends AbstractMojioObject {
     private String VIN;
     private String DetectedVIN;
     private String OverrideVIN;
+    private CompatDetails CompatDetails;
     private String CurrentTrip;
     private String MojioId;
     private Image Image;
@@ -372,6 +375,14 @@ public class Vehicle extends AbstractMojioObject {
         VinDetails = vinDetails;
     }
 
+    public CompatDetails getCompatDetails() {
+        return CompatDetails;
+    }
+
+    public void setCompatDetails(CompatDetails compatDetails) {
+        CompatDetails = compatDetails;
+    }
+
     @Override
     public String toString() {
         return "Vehicle{" +
@@ -380,6 +391,7 @@ public class Vehicle extends AbstractMojioObject {
                 ", VIN='" + VIN + '\'' +
                 ", DetectedVIN='" + DetectedVIN + '\'' +
                 ", OverrideVIN='" + OverrideVIN + '\'' +
+                ", CompatDetails=" + CompatDetails +
                 ", CurrentTrip='" + CurrentTrip + '\'' +
                 ", MojioId='" + MojioId + '\'' +
                 ", Image=" + Image +

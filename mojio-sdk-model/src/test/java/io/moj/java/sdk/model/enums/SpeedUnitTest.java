@@ -61,24 +61,24 @@ public class SpeedUnitTest extends EnumTest<SpeedUnit> {
 
     @Test
     public void testTo_kmToMiles() {
-        assertThat(MILES_PER_HOUR.to(KILOMETERS_PER_HOUR).convert(1337)).isWithin(0.01f).of(2151.693f);
-        assertThat(KILOMETERS_PER_HOUR.to(MILES_PER_HOUR).convert(2151.693f)).isWithin(0.01f).of(1337f);
+        assertThat(MILES_PER_HOUR.convertTo(KILOMETERS_PER_HOUR).convert(1337)).isWithin(0.01f).of(2151.693f);
+        assertThat(KILOMETERS_PER_HOUR.convertTo(MILES_PER_HOUR).convert(2151.693f)).isWithin(0.01f).of(1337f);
 
         // test some realistic speed values
-        assertThat(KILOMETERS_PER_HOUR.to(MILES_PER_HOUR).convert(0)).isWithin(0.0001f).of(0);
-        assertThat(KILOMETERS_PER_HOUR.to(MILES_PER_HOUR).convert(20)).isWithin(0.0001f).of(12.4274f);
-        assertThat(KILOMETERS_PER_HOUR.to(MILES_PER_HOUR).convert(50)).isWithin(0.0001f).of(31.0686f);
-        assertThat(KILOMETERS_PER_HOUR.to(MILES_PER_HOUR).convert(80)).isWithin(0.0001f).of(49.7097f);
-        assertThat(KILOMETERS_PER_HOUR.to(MILES_PER_HOUR).convert(100)).isWithin(0.0001f).of(62.1371f);
-        assertThat(KILOMETERS_PER_HOUR.to(MILES_PER_HOUR).convert(120)).isWithin(0.0001f).of(74.5645f);
-        assertThat(KILOMETERS_PER_HOUR.to(MILES_PER_HOUR).convert(160)).isWithin(0.0001f).of(99.4194f);
+        assertThat(KILOMETERS_PER_HOUR.convertTo(MILES_PER_HOUR).convert(0)).isWithin(0.0001f).of(0);
+        assertThat(KILOMETERS_PER_HOUR.convertTo(MILES_PER_HOUR).convert(20)).isWithin(0.0001f).of(12.4274f);
+        assertThat(KILOMETERS_PER_HOUR.convertTo(MILES_PER_HOUR).convert(50)).isWithin(0.0001f).of(31.0686f);
+        assertThat(KILOMETERS_PER_HOUR.convertTo(MILES_PER_HOUR).convert(80)).isWithin(0.0001f).of(49.7097f);
+        assertThat(KILOMETERS_PER_HOUR.convertTo(MILES_PER_HOUR).convert(100)).isWithin(0.0001f).of(62.1371f);
+        assertThat(KILOMETERS_PER_HOUR.convertTo(MILES_PER_HOUR).convert(120)).isWithin(0.0001f).of(74.5645f);
+        assertThat(KILOMETERS_PER_HOUR.convertTo(MILES_PER_HOUR).convert(160)).isWithin(0.0001f).of(99.4194f);
     }
 
     @Test
     public void testAllConversionsExist() {
         for (DistanceUnit unit : DistanceUnit.values()) {
             for (DistanceUnit other : DistanceUnit.values()) {
-                UnitConverter converter = unit.to(other);
+                UnitConverter converter = unit.convertTo(other);
                 assertThat(converter).isNotNull();
             }
         }
@@ -87,7 +87,7 @@ public class SpeedUnitTest extends EnumTest<SpeedUnit> {
     @Test
     public void testConversionToSelf() {
         for (DistanceUnit unit : DistanceUnit.values()) {
-            assertThat(unit.to(unit).convert(1337)).isWithin(0.00000000001f).of(1337);
+            assertThat(unit.convertTo(unit).convert(1337)).isWithin(0.00000000001f).of(1337);
         }
     }
 }

@@ -32,7 +32,7 @@ public enum AccelerationUnit {
         return key;
     }
 
-    public UnitConverter to(AccelerationUnit unit) {
+    public UnitConverter convertTo(AccelerationUnit unit) {
         AccelerationUnit[] values = values();
         for (int i = 0; i < values.length; i++) {
             if (values[i] == unit) {

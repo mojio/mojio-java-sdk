@@ -192,7 +192,8 @@ public final class TimeUtils {
         if (timestamp == null || timestamp.isEmpty())
             return timestamp;
 
-        StringBuilder builder = new StringBuilder(timestamp.replaceFirst("\\+.*", SUFFIX_TIMEZONE));
+        timestamp = timestamp.replaceFirst("\\+.*", SUFFIX_TIMEZONE);
+        StringBuilder builder = new StringBuilder(timestamp);
         int periodIndex = builder.indexOf(".");
         if (periodIndex == -1) {
             // there are no millseconds, append ".000Z"

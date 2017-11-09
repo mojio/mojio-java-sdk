@@ -40,7 +40,7 @@ public enum DistanceUnit {
         return key;
     }
 
-    public UnitConverter to(DistanceUnit unit) {
+    public UnitConverter convertTo(DistanceUnit unit) {
         DistanceUnit[] values = values();
         for (int i = 0; i < values.length; i++) {
             if (values[i] == unit) {

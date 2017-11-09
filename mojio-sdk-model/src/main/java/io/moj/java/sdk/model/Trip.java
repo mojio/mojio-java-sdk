@@ -5,11 +5,13 @@ import java.util.Arrays;
 import io.moj.java.sdk.model.values.Acceleration;
 import io.moj.java.sdk.model.values.Distance;
 import io.moj.java.sdk.model.values.FuelEfficiency;
-import io.moj.java.sdk.model.values.Location;
-import io.moj.java.sdk.model.values.Speed;
 import io.moj.java.sdk.model.values.FuelLevel;
+import io.moj.java.sdk.model.values.HarshEvent;
+import io.moj.java.sdk.model.values.IdleEvent;
+import io.moj.java.sdk.model.values.Location;
 import io.moj.java.sdk.model.values.Odometer;
 import io.moj.java.sdk.model.values.Rpm;
+import io.moj.java.sdk.model.values.Speed;
 import io.moj.java.sdk.utils.TimeUtils;
 
 /**
@@ -35,6 +37,7 @@ public class Trip extends AbstractMojioObject {
     public static final String MAX_RPM = "MaxRPM";
     public static final String MAX_ACCELERATION = "MaxAcceleration";
     public static final String MAX_DECELERATION = "MaxDeceleration";
+    public static final String POLYLINE = "Polyline";
     public static final String FUEL_EFFICIENCY = "FuelEfficiency";
     public static final String START_FUEL_LEVEL = "StartFuelLevel";
     public static final String END_FUEL_LEVEL = "EndFuelLevel";
@@ -59,12 +62,15 @@ public class Trip extends AbstractMojioObject {
     private Rpm MaxRPM;
     private Acceleration MaxAcceleration;
     private Acceleration MaxDeceleration;
+    private String Polyline;
     private FuelEfficiency FuelEfficiency;
     private FuelLevel StartFuelLevel;
     private FuelLevel EndFuelLevel;
     private Integer IdlingCount;
     private Integer HarshAcclCount;
     private Integer HarshDecelCount;
+    private HarshEvent[] HarshEvents;
+    private IdleEvent[] IdleEvents;
 
     public Boolean getCompleted() {
         return Completed;
@@ -170,6 +176,14 @@ public class Trip extends AbstractMojioObject {
         Name = name;
     }
 
+    public String getPolyline() {
+        return Polyline;
+    }
+
+    public void setPolyline(String polyline) {
+        Polyline = polyline;
+    }
+
     public FuelLevel getStartFuelLevel() {
         return StartFuelLevel;
     }
@@ -250,6 +264,22 @@ public class Trip extends AbstractMojioObject {
         HarshAcclCount = harshAcclCount;
     }
 
+    public HarshEvent[] getHarshEvents() {
+        return HarshEvents;
+    }
+
+    public void setHarshEvents(HarshEvent[] harshEvents) {
+        HarshEvents = harshEvents;
+    }
+
+    public IdleEvent[] getIdleEvents() {
+        return IdleEvents;
+    }
+
+    public void setIdleEvents(IdleEvent[] idleEvents) {
+        IdleEvents = idleEvents;
+    }
+
     @Override
     public String toString() {
         return "Trip{" +
@@ -270,12 +300,15 @@ public class Trip extends AbstractMojioObject {
                 ", MaxRPM=" + MaxRPM +
                 ", MaxAcceleration=" + MaxAcceleration +
                 ", MaxDeceleration=" + MaxDeceleration +
+                ", Polyline='" + Polyline + '\'' +
                 ", FuelEfficiency=" + FuelEfficiency +
                 ", StartFuelLevel=" + StartFuelLevel +
                 ", EndFuelLevel=" + EndFuelLevel +
                 ", IdlingCount=" + IdlingCount +
                 ", HarshAcclCount=" + HarshAcclCount +
                 ", HarshDecelCount=" + HarshDecelCount +
+                ", HarshEvents=" + Arrays.toString(HarshEvents) +
+                ", IdleEvents=" + Arrays.toString(IdleEvents) +
                 "} " + super.toString();
     }
 }

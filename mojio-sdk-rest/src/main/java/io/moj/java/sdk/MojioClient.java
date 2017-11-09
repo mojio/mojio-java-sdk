@@ -1,8 +1,15 @@
 package io.moj.java.sdk;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -15,11 +22,18 @@ import io.moj.java.sdk.auth.DefaultAuthenticator;
 import io.moj.java.sdk.auth.OnAccessTokenExpiredListener;
 import io.moj.java.sdk.logging.LoggingInterceptor;
 import io.moj.java.sdk.model.User;
+import io.moj.java.sdk.model.interfaces.Base64Decoder;
 import io.moj.java.sdk.model.response.AuthResponse;
+import io.moj.java.sdk.model.response.RegistrationResponse;
+import io.moj.java.sdk.utils.DefaultBase64Decoder;
+import io.moj.java.sdk.websocket.MojioWebSocket;
+import io.moj.java.sdk.websocket.MojioWebSocketApi;
 import okhttp3.Dispatcher;
 import okhttp3.Interceptor;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,29 +52,36 @@ public class MojioClient {
     private final Executor callbackExecutor;
     private final ExecutorService requestExecutor;
     private final Gson gson;
+    private final Base64Decoder base64Decoder;
     private final Client client;
     private final boolean loggingEnabled;
     private final Integer timeout;
+    private final List<String> acceptedTenants;
 
     private MojioRestApi restApi;
     private MojioAuthApi authApi;
     private MojioPushApi pushApi;
+    private MojioWebSocketApi wsApi;
     private MojioStorageApi storageApi;
     private Authenticator authenticator;
     private AuthInterceptor authInterceptor;
+    private Interceptor clientInterceptor;
 
     private OkHttpClient[] httpClients;
 
-    protected MojioClient(Environment environment, Client client, Gson gson, Authenticator authenticator,
+    protected MojioClient(Environment environment, Client client, Gson gson, Base64Decoder base64Decoder, Authenticator authenticator,
                           Interceptor interceptor, ExecutorService requestExecutor, Executor callbackExecutor,
-                          boolean logging, Integer timeout) {
+                          boolean logging, Integer timeout, List<String> acceptedTenants, String userAgent) {
         this.environment = environment == null ? MojioEnvironment.getDefault() : environment;
         this.gson = gson == null ? new Gson() : gson;
+        this.base64Decoder = base64Decoder == null ? new DefaultBase64Decoder() : base64Decoder;
         this.client = client;
         this.loggingEnabled = logging;
         this.callbackExecutor = callbackExecutor;
         this.requestExecutor = requestExecutor;
         this.timeout = timeout;
+        this.acceptedTenants = acceptedTenants;
+        this.clientInterceptor = interceptor;
 
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
         GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create(this.gson);
@@ -87,6 +108,8 @@ public class MojioClient {
             httpClientBuilder.readTimeout(timeout, TimeUnit.MILLISECONDS);
             httpClientBuilder.writeTimeout(timeout, TimeUnit.MILLISECONDS);
         }
+
+        httpClientBuilder.addInterceptor(new MojioInterceptor(userAgent));
 
         httpClients = new OkHttpClient[2];
         httpClients[0] = httpClientBuilder.build();
@@ -123,6 +146,8 @@ public class MojioClient {
                 .baseUrl(this.environment.getApiUrl(1) + "/")
                 .build()
                 .create(MojioStorageApi.class);
+
+        wsApi = new MojioWebSocket(this.environment.getWsUrl(), authenticator);
     }
 
     /**
@@ -133,7 +158,18 @@ public class MojioClient {
      * @return
      */
     public Call<User> login(String username, String password) {
-        return new LoginCall(username, password, client);
+        return new LoginCall(username, password, client, acceptedTenants, null);
+    }
+
+    /**
+     * Authenticates a user, stores the access token in the client's configured
+     * {@link io.moj.java.sdk.auth.Authenticator}, and then returns the {@link io.moj.java.sdk.model.User} entity.
+     * @param username
+     * @param password
+     * @return
+     */
+    public Call<User> login(String username, String password, String scope) {
+        return new LoginCall(username, password, client, acceptedTenants, scope);
     }
 
     /**
@@ -144,7 +180,7 @@ public class MojioClient {
      * @return
      */
     public Call<User> loginWithPin(String phoneNumber, String pin) {
-        return new LoginCall(phoneNumber, pin, true, client);
+        return new LoginCall(phoneNumber, pin, true, client, acceptedTenants, null);
     }
 
     /**
@@ -178,6 +214,8 @@ public class MojioClient {
     public MojioStorageApi storage() {
         return storageApi;
     }
+
+    public MojioWebSocketApi webSocket() { return wsApi; }
 
     /**
      * Returns the client's configured environment.
@@ -236,6 +274,14 @@ public class MojioClient {
     }
 
     /**
+     * Returns the {@link okhttp3.Interceptor} this client is configured with.
+     * @return
+     */
+    protected Interceptor getClientInterceptor() {
+        return clientInterceptor;
+    }
+
+    /**
      * Sets a listener for authentication failure events. This is useful for handling authentication issues on a
      * cross-cutting basis (e.g. prompting the user to log in again).
      * @param listener
@@ -277,8 +323,11 @@ public class MojioClient {
         protected Executor callbackExecutor;
         protected ExecutorService requestExecutor;
         protected Gson gson;
+        protected Base64Decoder base64Decoder;
         protected Integer timeout;
         protected boolean logging = false;
+        protected List<String> acceptedTenants = new ArrayList<>();
+        protected String userAgent;
 
         public Builder(String clientKey, String clientSecret) {
             if (clientKey == null || clientKey.isEmpty()) {
@@ -348,6 +397,11 @@ public class MojioClient {
             return this;
         }
 
+        public Builder base64Decoder(Base64Decoder base64Decoder) {
+            this.base64Decoder = base64Decoder;
+            return this;
+        }
+
         /**
          * Configures the connection, read, and write timeout in milliseconds.
          * @param timeout
@@ -379,11 +433,34 @@ public class MojioClient {
         }
 
         /**
+         * Configures the list of tenant IDs that are accepted by the application. If not specified, the
+         * application will accept all tenant IDs.
+         * @param acceptedTenants
+         * @return
+         */
+        public Builder acceptedTenants(List<String> acceptedTenants) {
+            this.acceptedTenants.clear();
+            if (acceptedTenants != null) {
+                this.acceptedTenants.addAll(acceptedTenants);
+            }
+            return this;
+        }
+
+        /**
+         * @param userAgent User-Agent header to be added to the requests
+         */
+        public Builder userAgent(String userAgent) {
+            this.userAgent = userAgent;
+            return this;
+        }
+
+        /**
          * Constructs a {@link io.moj.java.sdk.MojioClient} instance with the provided configuration.
          * @return
          */
         public MojioClient build() {
-            return new MojioClient(environment, client, gson, authenticator, interceptor, requestExecutor, callbackExecutor, logging, timeout);
+            return new MojioClient(environment, client, gson, base64Decoder, authenticator, interceptor,
+                    requestExecutor, callbackExecutor, logging, timeout, acceptedTenants, userAgent);
         }
     }
 
@@ -392,33 +469,42 @@ public class MojioClient {
      * {@link io.moj.java.sdk.auth.Authenticator} and then follows with a call to get the current User.
      */
     private class LoginCall implements Call<User> {
+        private static final String DEFAULT_SCOPE = "full offline_access";
+
         private String id;
         private String password;
         private boolean usingPin;
+        private List<String> acceptedTenants;
+        private String scope;
 
         private Client client;
         private Call<User> userCall;
         private Call<AuthResponse> authCall;
 
-        public LoginCall(String id, String password, Client client) {
-            this(id, password, false, client);
+        public LoginCall(String id, String password, Client client, List<String> acceptedTenants, String scope) {
+            this(id, password, false, client, acceptedTenants, scope);
         }
 
-        public LoginCall(String id, String password, boolean usingPin, Client client) {
+        public LoginCall(String id, String password, boolean usingPin, Client client, List<String> acceptedTenants, String scope) {
             this.id = id;
             this.password = password;
             this.usingPin = usingPin;
             this.client = client;
+            this.acceptedTenants = acceptedTenants;
+            this.scope = scope == null ? DEFAULT_SCOPE : scope;
 
             this.authCall = usingPin
-                    ? auth().loginWithPin(MojioAuthApi.GRANT_TYPE_PHONE, id, password, client.getKey(), client.getSecret())
-                    : auth().login(MojioAuthApi.GRANT_TYPE_PASSWORD, id, password, client.getKey(), client.getSecret());
+                    ? auth().loginWithPin(MojioAuthApi.GRANT_TYPE_PHONE, id, password, client.getKey(), client.getSecret(), this.scope)
+                    : auth().login(MojioAuthApi.GRANT_TYPE_PASSWORD, id, password, client.getKey(), client.getSecret(), this.scope);
         }
 
         @Override
         public Response<User> execute() throws IOException {
             long startTime = System.currentTimeMillis();
             Response<AuthResponse> response = authCall.execute();
+            if (!passesTenancyTest(response)) {
+                return getInvalidTenantErrorResponse();
+            }
             if (handleResponse(startTime, response)) {
                 userCall = rest().getUser();
                 return userCall.execute();
@@ -433,12 +519,16 @@ public class MojioClient {
             authCall.enqueue(new Callback<AuthResponse>() {
                 @Override
                 public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
+                    if (!passesTenancyTest(response)) {
+                        callback.onResponse(LoginCall.this, getInvalidTenantErrorResponse());
+                        return;
+                    }
                     try {
                         if (handleResponse(startTime, response)) {
                             userCall = rest().getUser();
                             userCall.enqueue(callback);
                         } else {
-                            callback.onResponse((Call) authCall, (Response) response);
+                            callback.onResponse(LoginCall.this, (Response) response);
                         }
                     } catch (IOException e) {
                         onFailure(call, e);
@@ -447,7 +537,7 @@ public class MojioClient {
 
                 @Override
                 public void onFailure(Call<AuthResponse> call, Throwable t) {
-                    callback.onFailure((Call) call, t);
+                    callback.onFailure(LoginCall.this, t);
                 }
             });
         }
@@ -469,7 +559,7 @@ public class MojioClient {
 
         @Override
         public Call<User> clone() {
-            return new LoginCall(id, password, usingPin, client);
+            return new LoginCall(id, password, usingPin, client, acceptedTenants, scope);
         }
 
         @Override
@@ -479,6 +569,22 @@ public class MojioClient {
 
         private Call getCurrentCall() {
             return userCall == null ? authCall : userCall;
+        }
+
+        private boolean passesTenancyTest(Response<AuthResponse> response) {
+            if (acceptedTenants == null || acceptedTenants.isEmpty()) {
+                return true;
+            } else {
+                if (response != null && response.isSuccessful()) {
+                    AuthResponse authResponse = response.body();
+                    String token = authResponse.getAccessToken();
+                    String tenantId = getTenantId(token);
+                    if (tenantId != null && acceptedTenants.contains(tenantId)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
         }
 
         private boolean handleResponse(long startTime, Response<AuthResponse> response) throws IOException {
@@ -491,6 +597,38 @@ public class MojioClient {
             }
             return false;
         }
-    }
 
+        private Response<User> getInvalidTenantErrorResponse() {
+            RegistrationResponse.Error error = new RegistrationResponse.Error();
+            RegistrationResponse registrationResponse = new RegistrationResponse();
+            registrationResponse.setErrors(Collections.singletonList(error));
+            ResponseBody errorBody = ResponseBody.create(MediaType.parse("application/json"), gson.toJson(registrationResponse));
+            return Response.error(403, errorBody);
+        }
+
+        private String getTenantId(String token) {
+            if (token == null)
+                return null;
+
+            String[] parts = token.split("\\.");
+            if (parts.length < 2)
+                return null;
+
+            String payload = parts[1];
+            if (payload == null)
+                return null;
+
+            String decoded = base64Decoder.decodeBase64(payload);
+            if (decoded == null)
+                return null;
+
+            try {
+                Type type = new TypeToken<Map<String, Object>>(){}.getType();
+                Map<String, Object> jwtPayload = gson.fromJson(decoded, type);
+                return (String) jwtPayload.get("tenant");
+            } catch (JsonSyntaxException ignored) {
+                return null;
+            }
+        }
+    }
 }

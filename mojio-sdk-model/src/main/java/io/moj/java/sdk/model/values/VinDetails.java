@@ -1,8 +1,8 @@
 package io.moj.java.sdk.model.values;
 
-import io.moj.java.sdk.utils.TimeUtils;
-
 import java.util.List;
+
+import io.moj.java.sdk.utils.TimeUtils;
 
 /**
  * Model object for a vehicle's VIN record.
@@ -20,7 +20,7 @@ public class VinDetails {
     private String BodyType;
     private String DriveType;
     private Double FuelTankSize;
-    private Double EPAFuelEfficiency;
+    private String EPAFuelEfficiency;
     private Engine Engine;
     private Transmission Transmission;
     private List<Warranty> Warranties;
@@ -51,11 +51,11 @@ public class VinDetails {
         Engine = engine;
     }
 
-    public Double getEPAFuelEfficiency() {
+    public String getEPAFuelEfficiency() {
         return EPAFuelEfficiency;
     }
 
-    public void setEPAFuelEfficiency(Double EPAFuelEfficiency) {
+    public void setEPAFuelEfficiency(String EPAFuelEfficiency) {
         this.EPAFuelEfficiency = EPAFuelEfficiency;
     }
 
@@ -158,17 +158,17 @@ public class VinDetails {
     @Override
     public String toString() {
         return "VinDetails{" +
-                "BodyType='" + BodyType + '\'' +
-                ", VIN='" + VIN + '\'' +
+                "VIN='" + VIN + '\'' +
                 ", Timestamp='" + Timestamp + '\'' +
                 ", Market='" + Market + '\'' +
                 ", Year=" + Year +
                 ", Make='" + Make + '\'' +
                 ", Model='" + Model + '\'' +
                 ", VehicleType='" + VehicleType + '\'' +
+                ", BodyType='" + BodyType + '\'' +
                 ", DriveType='" + DriveType + '\'' +
                 ", FuelTankSize=" + FuelTankSize +
-                ", EPAFuelEfficiency=" + EPAFuelEfficiency +
+                ", EPAFuelEfficiency='" + EPAFuelEfficiency + '\'' +
                 ", Engine=" + Engine +
                 ", Transmission=" + Transmission +
                 ", Warranties=" + Warranties +

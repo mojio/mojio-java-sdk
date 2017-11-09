@@ -1,11 +1,13 @@
 package io.moj.java.sdk.model.enums;
 
 import com.google.common.collect.ImmutableMap;
-import io.moj.java.sdk.math.UnitConverter;
+
 import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
+
+import io.moj.java.sdk.math.UnitConverter;
 
 import static com.google.common.truth.Truth.assertThat;
 import static io.moj.java.sdk.model.enums.VolumeUnit.GALLONS;
@@ -59,23 +61,23 @@ public class VolumeUnitTest extends EnumTest<VolumeUnit> {
 
     @Test
     public void testTo_gallonsToLiters() {
-        assertThat(GALLONS.to(LITERS).convert(1)).isWithin(0.0001f).of(3.78541f);
-        assertThat(GALLONS.to(LITERS).convert(100)).isWithin(0.0001f).of(378.541f);
-        assertThat(GALLONS.to(LITERS).convert(1000)).isWithin(0.0001f).of(3785.41f);
+        assertThat(GALLONS.convertTo(LITERS).convert(1)).isWithin(0.0001f).of(3.78541f);
+        assertThat(GALLONS.convertTo(LITERS).convert(100)).isWithin(0.0001f).of(378.541f);
+        assertThat(GALLONS.convertTo(LITERS).convert(1000)).isWithin(0.0001f).of(3785.41f);
     }
 
     @Test
     public void testTo_litersToGallons() {
-        assertThat(LITERS.to(GALLONS).convert(1)).isWithin(0.0001f).of(0.264172f);
-        assertThat(LITERS.to(GALLONS).convert(100)).isWithin(0.0001f).of(26.4172f);
-        assertThat(LITERS.to(GALLONS).convert(1000)).isWithin(0.0001f).of(264.172f);
+        assertThat(LITERS.convertTo(GALLONS).convert(1)).isWithin(0.0001f).of(0.264172f);
+        assertThat(LITERS.convertTo(GALLONS).convert(100)).isWithin(0.0001f).of(26.4172f);
+        assertThat(LITERS.convertTo(GALLONS).convert(1000)).isWithin(0.0001f).of(264.172f);
     }
 
     @Test
     public void testAllConversionsExist() {
         for (VolumeUnit unit : VolumeUnit.values()) {
             for (VolumeUnit other : VolumeUnit.values()) {
-                UnitConverter converter = unit.to(other);
+                UnitConverter converter = unit.convertTo(other);
                 assertThat(converter).isNotNull();
             }
         }
@@ -84,7 +86,7 @@ public class VolumeUnitTest extends EnumTest<VolumeUnit> {
     @Test
     public void testConversionToSelf() {
         for (VolumeUnit unit : VolumeUnit.values()) {
-            assertThat(unit.to(unit).convert(1337)).isWithin(0.00000000001f).of(1337);
+            assertThat(unit.convertTo(unit).convert(1337)).isWithin(0.00000000001f).of(1337);
         }
     }
 }

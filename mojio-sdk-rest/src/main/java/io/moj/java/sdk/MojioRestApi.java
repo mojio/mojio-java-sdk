@@ -25,6 +25,7 @@ import io.moj.java.sdk.model.values.Image;
 import io.moj.java.sdk.model.values.Location;
 import io.moj.java.sdk.model.values.NextServiceSchedule;
 import io.moj.java.sdk.model.values.PhoneNumber;
+import io.moj.java.sdk.model.values.Polyline;
 import io.moj.java.sdk.model.values.ServiceScheduleList;
 import io.moj.java.sdk.model.values.VehicleStatistics;
 import io.moj.java.sdk.model.values.VinDetails;
@@ -136,6 +137,12 @@ public interface MojioRestApi {
 
     @GET("trips/{id}/history/locations")
     Call<ListResponse<Location>> getTripLocations(@Path("id") String tripId, @QueryMap Map<String, String> params);
+
+    @GET("trips/{id}/history/locations/polyline")
+    Call<Polyline> getTripPolyline(@Path("id") String tripId);
+
+    @GET("trips/{id}/history/locations/polyline")
+    Call<Polyline> getTripPolyline(@Path("id") String tripId, @QueryMap Map<String, String> params);
 
     @GET("vehicles/{id}/history/states")
     Call<ListResponse<VehicleMeasure>> getVehicleStates(@Path("id") String vehicleId);
@@ -301,6 +308,12 @@ public interface MojioRestApi {
     @POST("users/{id}/emails")
     Call<Email> addUserEmail(@Path("id") String userId, @Body String email);
 
+    @PUT("users/{id}/emails/{email}")
+    Call<Email> updateEmail(@Path("id") String userId, @Path("email") String email);
+
+    @DELETE("users/{id}/emails/{email}")
+    Call<MessageResponse> deleteEmail(@Path("id") String userId, @Path("email") String email);
+
     @PUT("users/{id}/phonenumbers/{phone}")
     Call<PhoneNumber> addUpdatePhone(@Path("id") String userId, @Path("phone") String phoneNumber,
                                      @Query("sendverification") boolean sendCode);
@@ -331,6 +344,9 @@ public interface MojioRestApi {
 
     @GET("vehicles/{id}/trips")
     Call<ListResponse<Trip>> getVehicleTrips(@Path("id") String vehicleId, @QueryMap Map<String, String> params);
+
+    @GET("vehicles/{id}/trips/{tripId}")
+    Call<Trip> getVehicleTrip(@Path("id") String vehicleId, @Path("tripId") String tripId);
 
     @GET("vehicles/{id}/vin")
     Call<VinDetails> getVehicleVinDetails(@Path("id") String vehicleId);

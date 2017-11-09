@@ -41,7 +41,7 @@ public enum FuelEfficiencyUnit {
         return key;
     }
 
-    public UnitConverter to(FuelEfficiencyUnit unit) {
+    public UnitConverter convertTo(FuelEfficiencyUnit unit) {
         FuelEfficiencyUnit[] values = values();
         for (int i = 0; i < values.length; i++) {
             if (values[i] == unit) {

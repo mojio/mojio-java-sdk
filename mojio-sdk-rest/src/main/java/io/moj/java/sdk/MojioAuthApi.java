@@ -40,6 +40,7 @@ public interface MojioAuthApi {
      * @param password
      * @param clientId
      * @param clientSecret
+     * @param scope
      * @return
      */
     @POST("oauth2/token")
@@ -48,7 +49,8 @@ public interface MojioAuthApi {
                              @Field("username") String username,
                              @Field("password") String password,
                              @Field("client_id") String clientId,
-                             @Field("client_secret") String clientSecret);
+                             @Field("client_secret") String clientSecret,
+                             @Field("scope") String scope);
 
     /**
      * Endpoint for requesting an access token. Constructs the request body as follows:
@@ -72,7 +74,8 @@ public interface MojioAuthApi {
                                     @Field("phone_number") String phoneNumber,
                                     @Field("pin") String pin,
                                     @Field("client_id") String clientId,
-                                    @Field("client_secret") String clientSecret);
+                                    @Field("client_secret") String clientSecret,
+                                    @Field("scope") String scope);
 
     /**
      * Endpoint for refreshing an access token. Constructs the request body as follows:
