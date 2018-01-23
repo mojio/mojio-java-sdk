@@ -20,6 +20,7 @@ public class ResourceTypeTest extends EnumTest<ResourceType> {
                 .put("Mojio", ResourceType.MOJIO)
                 .put("Trip", ResourceType.TRIP)
                 .put("VehicleState", ResourceType.VEHICLE_STATE)
+                .put("ParkingReservation", ResourceType.PARKING_RESERVATION)
                 .build();
     }
 
