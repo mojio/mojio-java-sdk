@@ -10,7 +10,10 @@ public enum ResourceType {
     MOJIO("Mojio"),
     TRIP("Trip"),
     VEHICLE_STATE("VehicleState"),
-    PARKING_RESERVATION("ParkingReservation");
+    PARKING_STARTING_SOON("ParkingStartingSoon"),
+    PARKING_STARTED("ParkingStarted"),
+    PARKING_ENDING_SOON("ParkingEndingSoon"),
+    PARKING_ENDED("ParkingEnded");
 
     private String key;
 
