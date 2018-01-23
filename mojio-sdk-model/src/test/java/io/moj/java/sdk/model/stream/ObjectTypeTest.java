@@ -24,7 +24,6 @@ public class ObjectTypeTest extends EnumTest<ObjectType> {
                 .put("Geofence", ObjectType.GEOFENCE)
                 .put("Recall", ObjectType.RECALL)
                 .put("Note", ObjectType.NOTE)
-                .put("ParkingReservation", ObjectType.PARKING_RESERVATION)
                 .build();
     }
 

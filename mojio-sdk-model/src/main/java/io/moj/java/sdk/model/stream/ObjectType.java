@@ -13,8 +13,7 @@ public enum ObjectType {
     FUEL_LEVEL("FuelLevel"),
     GEOFENCE("Geofence"),
     RECALL("Recall"),
-    NOTE("Note"),
-    PARKING_RESERVATION("ParkingReservation");
+    NOTE("Note");
 
     private String key;
 
