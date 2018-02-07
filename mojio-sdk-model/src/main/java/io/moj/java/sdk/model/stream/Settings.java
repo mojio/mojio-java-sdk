@@ -1,8 +1,8 @@
 package io.moj.java.sdk.model.stream;
 
-import io.moj.java.sdk.model.values.Speed;
-
 import java.util.Arrays;
+
+import io.moj.java.sdk.model.values.Speed;
 
 /**
  * Activity stream settings model.
@@ -23,6 +23,7 @@ public class Settings {
     public static final String ENABLE_RECALL = "EnableRecallActivity";
     public static final String ENABLE_SERVICE_BULLETIN = "EnableServiceBulletinActivity";
     public static final String ENABLE_DISTURBANCE = "EnableDisturbanceActivity";
+    public static final String DISTURBANCE_THRESHOLD = "DisturbanceThreshold";
     public static final String ENABLE_ACCIDENT = "EnableAccidentActivity";
     public static final String ENABLE_DEVICE_UNPLUGGED = "EnableDeviceUnpluggedActivity";
     public static final String ENABLE_VEHICLE_CONNECTED = "EnableVehicleConnectedActivity";
@@ -42,6 +43,7 @@ public class Settings {
     private Boolean EnableRecallActivity;
     private Boolean EnableServiceBulletinActivity;
     private Boolean EnableDisturbanceActivity;
+    private String DisturbanceThreshold;
     private Boolean EnableAccidentActivity;
     private Boolean EnableDeviceUnpluggedActivity;
     private Boolean EnableVehicleConnectedActivity;
@@ -160,6 +162,14 @@ public class Settings {
         EnableDisturbanceActivity = enableDisturbanceActivity;
     }
 
+    public DisturbanceSensitivity getDisturbanceThreshold() {
+        return DisturbanceSensitivity.fromKey(DisturbanceThreshold);
+    }
+
+    public void setDisturbanceThreshold(DisturbanceSensitivity disturbanceThreshold) {
+        DisturbanceThreshold = disturbanceThreshold.getKey();
+    }
+
     public Boolean getEnableAccidentActivity() {
         return EnableAccidentActivity;
     }
@@ -208,6 +218,7 @@ public class Settings {
                 ", EnableRecallActivity=" + EnableRecallActivity +
                 ", EnableServiceBulletinActivity=" + EnableServiceBulletinActivity +
                 ", EnableDisturbanceActivity=" + EnableDisturbanceActivity +
+                ", DisturbanceThreshold='" + DisturbanceThreshold + '\'' +
                 ", EnableAccidentActivity=" + EnableAccidentActivity +
                 ", EnableDeviceUnpluggedActivity=" + EnableDeviceUnpluggedActivity +
                 ", EnableVehicleConnectedActivity=" + EnableVehicleConnectedActivity +
@@ -258,6 +269,31 @@ public class Settings {
                     ", EnableEnterActivity=" + EnableEnterActivity +
                     ", EnableExitActivity=" + EnableExitActivity +
                     '}';
+        }
+    }
+
+    public enum DisturbanceSensitivity {
+        LOW("Low"),
+        MEDIUM("Medium"),
+        HIGH("High");
+
+        private String key;
+
+        DisturbanceSensitivity(String key) {
+            this.key = key;
+        }
+
+        public String getKey() {
+            return key;
+        }
+
+        public static DisturbanceSensitivity fromKey(String key) {
+            for (DisturbanceSensitivity disturbanceSensitivity : values()) {
+                if (disturbanceSensitivity.getKey().equals(key)) {
+                    return disturbanceSensitivity;
+                }
+            }
+            return null;
         }
     }
 }
