@@ -167,7 +167,7 @@ public class Settings {
     }
 
     public void setDisturbanceThreshold(DisturbanceSensitivity disturbanceThreshold) {
-        DisturbanceThreshold = disturbanceThreshold.getKey();
+        DisturbanceThreshold = disturbanceThreshold == null ? null : disturbanceThreshold.getKey();
     }
 
     public Boolean getEnableAccidentActivity() {
