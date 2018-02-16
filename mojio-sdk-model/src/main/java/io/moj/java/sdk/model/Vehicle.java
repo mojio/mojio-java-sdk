@@ -63,6 +63,7 @@ public class Vehicle extends AbstractMojioObject {
     public static final String TOW_STATE = "TowState";
     public static final String PARKED_STATE = "ParkedState";
     public static final String TAGS = "Tags";
+    public static final String DELETED = "Deleted";
 
     private String Name;
     private String LicensePlate;
@@ -99,6 +100,7 @@ public class Vehicle extends AbstractMojioObject {
     private BooleanState TowState;
     private BooleanState ParkedState;
     private String[] Tags;
+    private Boolean Deleted;
 
     public Acceleration getAcceleration() {
         return Acceleration;
@@ -383,6 +385,14 @@ public class Vehicle extends AbstractMojioObject {
         CompatDetails = compatDetails;
     }
 
+    public Boolean getDeleted() {
+        return Deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        Deleted = deleted;
+    }
+
     @Override
     public String toString() {
         return "Vehicle{" +
@@ -421,6 +431,7 @@ public class Vehicle extends AbstractMojioObject {
                 ", TowState=" + TowState +
                 ", ParkedState=" + ParkedState +
                 ", Tags=" + Arrays.toString(Tags) +
+                ", Deleted=" + Deleted +
                 "} " + super.toString();
     }
 }
