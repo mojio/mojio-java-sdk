@@ -21,6 +21,7 @@ public class Mojio extends AbstractMojioObject {
     public static final String TAGS = "Tags";
     public static final String WIFI_RADIO = "WifiRadio";
     public static final String MSISDN_PROP = "MSISDN";
+    public static final String DELETED = "Deleted";
 
     private String Name;
     private String IMEI;
@@ -31,6 +32,7 @@ public class Mojio extends AbstractMojioObject {
     private String[] Tags;
     private WifiRadio WifiRadio;
     private String MSISDN;
+    private Boolean Deleted;
 
     public Mojio() {}
 
@@ -113,6 +115,14 @@ public class Mojio extends AbstractMojioObject {
         this.MSISDN = msisdn;
     }
 
+    public Boolean getDeleted() {
+        return Deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        Deleted = deleted;
+    }
+
     @Override
     public String toString() {
         return "Mojio{" +
@@ -125,6 +135,7 @@ public class Mojio extends AbstractMojioObject {
                 ", Tags=" + Arrays.toString(Tags) +
                 ", WifiRadio=" + WifiRadio +
                 ", MSISDN='" + MSISDN + '\'' +
+                ", Deleted='" + Deleted + '\'' +
                 "} " + super.toString();
     }
 }
