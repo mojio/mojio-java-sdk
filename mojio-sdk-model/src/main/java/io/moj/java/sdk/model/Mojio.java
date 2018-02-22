@@ -135,7 +135,7 @@ public class Mojio extends AbstractMojioObject {
                 ", Tags=" + Arrays.toString(Tags) +
                 ", WifiRadio=" + WifiRadio +
                 ", MSISDN='" + MSISDN + '\'' +
-                ", Deleted='" + Deleted +
+                ", Deleted=" + Deleted +
                 "} " + super.toString();
     }
 }
