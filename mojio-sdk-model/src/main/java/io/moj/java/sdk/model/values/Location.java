@@ -96,7 +96,7 @@ public class Location {
 
         for (GPSStatus status : GPSStatus.values()) {
             for (String s : statusList) {
-                if (s != null && s.equals(status.getKey())) {
+                if (s != null && s.trim().equals(status.getKey())) {
                     statuses.add(status);
                     break;
                 }
