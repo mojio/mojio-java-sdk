@@ -1,10 +1,10 @@
 package io.moj.java.sdk.model.values;
 
-import io.moj.java.sdk.model.enums.GPSStatus;
-import io.moj.java.sdk.utils.TimeUtils;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import io.moj.java.sdk.model.enums.GPSStatus;
+import io.moj.java.sdk.utils.TimeUtils;
 
 /**
  * Model object for a Location.
@@ -90,11 +90,16 @@ public class Location {
         if (Status == null || Status.isEmpty()) {
             return null;
         }
+        String[] statusList = Status.split(",");
 
         List<GPSStatus> statuses = new ArrayList<>();
+
         for (GPSStatus status : GPSStatus.values()) {
-            if (Status.contains(status.getKey())) {
-                statuses.add(status);
+            for (String s : statusList) {
+                if (s != null && s.equals(status.getKey())) {
+                    statuses.add(status);
+                    break;
+                }
             }
         }
         return statuses;
