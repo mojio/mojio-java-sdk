@@ -18,6 +18,7 @@ import io.moj.java.sdk.model.stream.ActivityObject;
 import io.moj.java.sdk.model.stream.Settings;
 import io.moj.java.sdk.model.values.AccessModel;
 import io.moj.java.sdk.model.values.Aggregate;
+import io.moj.java.sdk.model.values.DeviceConfiguration;
 import io.moj.java.sdk.model.values.DiagnosticCode;
 import io.moj.java.sdk.model.values.DtcStatusUpdate;
 import io.moj.java.sdk.model.values.Email;
@@ -177,8 +178,14 @@ public interface MojioRestApi {
     @DELETE("mojios/{id}")
     Call<Mojio> unclaimMojio(@Path("id") String mojioId);
 
+    @GET("mojios/{id}/deviceconfiguration")
+    Call<DeviceConfiguration> getDeviceConfiguration(@Path("id") String mojioId);
+
     @PUT("mojios/{id}/wifiradio")
     Call<TransactionResponse> updateMojioWifi(@Path("id") String mojioId, @Body WifiRadio wifiRadio);
+
+    @PUT("mojios/{id}/deviceconfiguration")
+    Call<TransactionResponse> updateDeviceConfiguration(@Path("id") String mojioId, @Body DeviceConfiguration deviceConfiguration);
 
     @GET("mojios/{id}/transactions/{transactionId}")
     Call<Transaction> getMojioTransaction(@Path("id") String mojioId, @Path("transactionId") String transactionId);
