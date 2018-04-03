@@ -32,6 +32,10 @@ public class DeviceConfiguration {
         return DisturbanceThreshold.fromKey(Configurations.get(KEY_DISTURBANCE_THRESHOLD));
     }
 
+    public void setConfigurations(Map<String, String> configurations) {
+        Configurations = configurations;
+    }
+
     public void setDisturbanceThreshold(DisturbanceThreshold threshold) {
         Configurations.put(KEY_DISTURBANCE_THRESHOLD, threshold.getKey());
     }
