@@ -20,6 +20,10 @@ public class DeviceConfiguration {
         return Configurations;
     }
 
+    public void setConfigurations(Map<String, String> configurations) {
+        Configurations = configurations;
+    }
+
     public Long getTimeToLive() {
         return TimeUtils.convertTimespanToMillis(TimeToLive);
     }
@@ -30,10 +34,6 @@ public class DeviceConfiguration {
 
     public DisturbanceThreshold getDisturbanceThreshold() {
         return DisturbanceThreshold.fromKey(Configurations.get(KEY_DISTURBANCE_THRESHOLD));
-    }
-
-    public void setConfigurations(Map<String, String> configurations) {
-        Configurations = configurations;
     }
 
     public void setDisturbanceThreshold(DisturbanceThreshold threshold) {
