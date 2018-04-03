@@ -37,7 +37,7 @@ public class DeviceConfiguration {
     }
 
     public void setDisturbanceThreshold(DisturbanceThreshold threshold) {
-        Configurations.put(KEY_DISTURBANCE_THRESHOLD, threshold.getKey());
+        Configurations.put(KEY_DISTURBANCE_THRESHOLD, threshold == null ? null : threshold.getKey());
     }
 
     @Override
