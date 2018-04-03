@@ -1,6 +1,8 @@
 package io.moj.java.sdk.model.values;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import io.moj.java.sdk.utils.TimeUtils;
@@ -13,14 +15,14 @@ public class DeviceConfiguration {
 
     private static final String KEY_DISTURBANCE_THRESHOLD = "AcclWakeupThreshold";
 
-    private Map<String, String> Configurations = new HashMap<>();
+    private Map<String, List<String>> Configurations = new HashMap<>();
     private String TimeToLive;
 
-    public Map<String, String> getConfigurations() {
+    public Map<String, List<String>> getConfigurations() {
         return Configurations;
     }
 
-    public void setConfigurations(Map<String, String> configurations) {
+    public void setConfigurations(Map<String, List<String>> configurations) {
         Configurations = configurations;
     }
 
@@ -33,11 +35,21 @@ public class DeviceConfiguration {
     }
 
     public DisturbanceThreshold getDisturbanceThreshold() {
-        return DisturbanceThreshold.fromKey(Configurations.get(KEY_DISTURBANCE_THRESHOLD));
+        List<String> values = Configurations.get(KEY_DISTURBANCE_THRESHOLD);
+        if (values != null && !values.isEmpty()) {
+            return DisturbanceThreshold.fromKey(values.get(0));
+        }
+        return null;
     }
 
     public void setDisturbanceThreshold(DisturbanceThreshold threshold) {
-        Configurations.put(KEY_DISTURBANCE_THRESHOLD, threshold == null ? null : threshold.getKey());
+        List<String> values = Configurations.get(KEY_DISTURBANCE_THRESHOLD);
+        values = values == null ? new ArrayList<String>() : values;
+        values.clear();
+        if (threshold != null) {
+            values.add(threshold.getKey());
+        }
+        Configurations.put(KEY_DISTURBANCE_THRESHOLD, values);
     }
 
     @Override
