@@ -17,10 +17,10 @@ For more information please see the [developer website](http://developer.moj.io/
 ## Download ##
 ```gradle
 // for full SDK:
-compile 'io.moj.java:mojio-sdk-rest:0.0.133'
+compile 'io.moj.java:mojio-sdk-rest:0.0.180'
 
 // model objects only:
-compile 'io.moj.java:mojio-sdk-model:0.0.133'
+compile 'io.moj.java:mojio-sdk-model:0.0.180'
 ```
 
 The latest version can be found in [Bintray](https://bintray.com/mojio/maven/io.moj.java%3Amojio-sdk-rest)
@@ -41,7 +41,7 @@ allprojects {
 // in app/build.gradle
 ...
 dependencies {
-    compile "io.moj.java:mojio-sdk-rest:0.0.133"
+    compile "io.moj.java:mojio-sdk-rest:0.0.180"
 }
 ...
 ```
@@ -67,7 +67,7 @@ have opted to annotate these classes using [GSON](https://github.com/google/gson
   about this module if you are forking or building from scratch.
 
 ## License ##
-    Copyright 2016 Mojio, Inc
+    Copyright 2018 Mojio, Inc
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
