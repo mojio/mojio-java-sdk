@@ -292,10 +292,4 @@ public class ValueTests {
         assertAccess(new Polyline());
     }
 
-    @Test
-    public void testDeviceConfiguration() throws IllegalAccessException {
-        assertToStringContainsAllFields(new DeviceConfiguration());
-        assertAccess(new DeviceConfiguration());
-    }
-
 }
