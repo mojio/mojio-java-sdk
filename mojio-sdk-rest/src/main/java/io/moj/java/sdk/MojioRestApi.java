@@ -173,7 +173,7 @@ public interface MojioRestApi {
     Call<Mojio> claimMojio(@Body Mojio mojio);
 
     @PUT("mojios/{id}")
-    Call<Mojio> updateMojio(@Body Mojio mojio);
+    Call<Mojio> updateMojio(@Path("id") String mojioId, @Body Mojio mojio);
 
     @DELETE("mojios/{id}")
     Call<Mojio> unclaimMojio(@Path("id") String mojioId);
