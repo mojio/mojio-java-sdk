@@ -26,7 +26,7 @@ public class ResourceTypeTest extends EnumTest<ResourceType> {
                 .put("ParkingStarted", ResourceType.PARKING_STARTED)
                 .put("ParkingEndingSoon", ResourceType.PARKING_ENDING_SOON)
                 .put("ParkingEnded", ResourceType.PARKING_ENDED)
-                .put("RoadsideService", ResourceType.ROADSIDE_SERVICE)
+                .put("Roadside", ResourceType.ROADSIDE_SERVICE)
                 .build();
     }
 
