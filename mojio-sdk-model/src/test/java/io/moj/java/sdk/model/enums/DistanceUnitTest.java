@@ -25,6 +25,7 @@ public class DistanceUnitTest extends EnumTest<DistanceUnit> {
                 .put("Meters", DistanceUnit.METERS)
                 .put("CentiMeter", DistanceUnit.CENTIMETERS)
                 .put("MilliMeter", DistanceUnit.MILLIMETERS)
+                .put("Feet", DistanceUnit.FEET)
                 .build();
     }
 
