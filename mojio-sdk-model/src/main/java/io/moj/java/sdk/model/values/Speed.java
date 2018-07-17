@@ -1,5 +1,7 @@
 package io.moj.java.sdk.model.values;
 
+import com.google.gson.annotations.SerializedName;
+
 import io.moj.java.sdk.model.enums.SpeedUnit;
 
 /**
@@ -8,8 +10,11 @@ import io.moj.java.sdk.model.enums.SpeedUnit;
  */
 public class Speed extends DeviceMeasurement {
 
+    @SerializedName(value = "SpeedBandId", alternate = "speedBandId")
     private Integer SpeedBandId;
+    @SerializedName(value = "SpeedBandDuration", alternate = "speedBandDuration")
     private Duration SpeedBandDuration;
+    @SerializedName(value = "Timestamp", alternate = "timestamp")
     private String Timestamp;
 
     public String getTimestamp() {

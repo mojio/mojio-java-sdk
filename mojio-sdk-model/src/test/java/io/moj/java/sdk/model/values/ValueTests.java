@@ -89,6 +89,12 @@ public class ValueTests {
     }
 
     @Test
+    public void testDisplayDetails() throws IllegalAccessException {
+        assertToStringContainsAllFields(new DisplayDetails());
+        assertAccess(new DisplayDetails());
+    }
+
+    @Test
     public void testHarshEvent() throws IllegalAccessException {
         assertToStringContainsAllFields(new HarshEvent());
         assertAccess(new HarshEvent());
@@ -227,9 +233,27 @@ public class ValueTests {
     }
 
     @Test
+    public void testTripDetails() throws IllegalAccessException {
+        assertToStringContainsAllFields(new TripDetails());
+        assertAccess(new TripDetails());
+    }
+
+    @Test
+    public void testTripProperties() throws IllegalAccessException {
+        assertToStringContainsAllFields(new TripProperties());
+        assertAccess(new TripProperties());
+    }
+
+    @Test
     public void testVehicleDetails() throws IllegalAccessException {
         assertToStringContainsAllFields(new VehicleDetails());
         assertAccess(new VehicleDetails());
+    }
+
+    @Test
+    public void testVehicleProperties() throws IllegalAccessException {
+        assertToStringContainsAllFields(new VehicleProperties());
+        assertAccess(new VehicleProperties());
     }
 
     @Test

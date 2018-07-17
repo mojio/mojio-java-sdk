@@ -1,5 +1,7 @@
 package io.moj.java.sdk.model.values;
 
+import com.google.gson.annotations.SerializedName;
+
 import io.moj.java.sdk.model.enums.HeadingUnit;
 
 /**
@@ -8,7 +10,9 @@ import io.moj.java.sdk.model.enums.HeadingUnit;
  */
 public class Heading extends DeviceMeasurement {
 
+    @SerializedName(value = "Direction", alternate = "direction")
     private String Direction;
+    @SerializedName(value = "LeftTurn", alternate = "leftTurn")
     private Boolean LeftTurn;
 
     public HeadingUnit getBaseHeadingUnit() {
