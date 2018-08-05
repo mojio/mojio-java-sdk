@@ -217,6 +217,14 @@ public interface MojioRestApi {
 
     @DELETE("{resource}/{id}/tags/{tag}")
     Call<MessageResponse> deleteTag(@Path("resource") String resource, @Path("id") String id, @Path("tag") String tag);
+
+    @POST("{resource}/{id}/{subResource}/{subId}/tags/{tag}")
+    Call<String[]> addTag(@Path("resource") String resource, @Path("id") String id,
+                          @Path("subResource") String subResource, @Path("subId") String subId, @Path("tag") String tag);
+
+    @DELETE("{resource}/{id}/{subResource}/{subId}/tags/{tag}")
+    Call<MessageResponse> deleteTag(@Path("resource") String resource, @Path("id") String id,
+                                    @Path("subResource") String subResource, @Path("subId") String subId, @Path("tag") String tag);
     // endregion
 
     // region Trips
