@@ -19,7 +19,7 @@ public class VinDetails {
     private String VehicleType;
     private String BodyType;
     private String DriveType;
-    private Double FuelTankSize;
+    private String FuelTankSize;
     private String EPAFuelEfficiency;
     private Engine Engine;
     private Transmission Transmission;
@@ -59,11 +59,11 @@ public class VinDetails {
         this.EPAFuelEfficiency = EPAFuelEfficiency;
     }
 
-    public Double getFuelTankSize() {
+    public String getFuelTankSize() {
         return FuelTankSize;
     }
 
-    public void setFuelTankSize(Double fuelTankSize) {
+    public void setFuelTankSize(String fuelTankSize) {
         FuelTankSize = fuelTankSize;
     }
 
@@ -167,7 +167,7 @@ public class VinDetails {
                 ", VehicleType='" + VehicleType + '\'' +
                 ", BodyType='" + BodyType + '\'' +
                 ", DriveType='" + DriveType + '\'' +
-                ", FuelTankSize=" + FuelTankSize +
+                ", FuelTankSize='" + FuelTankSize + '\'' +
                 ", EPAFuelEfficiency='" + EPAFuelEfficiency + '\'' +
                 ", Engine=" + Engine +
                 ", Transmission=" + Transmission +
