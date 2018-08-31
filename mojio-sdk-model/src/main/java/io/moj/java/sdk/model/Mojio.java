@@ -21,6 +21,9 @@ public class Mojio extends AbstractMojioObject {
     public static final String TAGS = "Tags";
     public static final String WIFI_RADIO = "WifiRadio";
     public static final String MSISDN_PROP = "MSISDN";
+    public static final String HARDWARE_VERSION = "HardwareVersion";
+    public static final String FIRMWARE_VERSION = "FirmwareVersion";
+    public static final String VENDOR = "Vendor";
     public static final String DELETED = "Deleted";
 
     private String Name;
@@ -32,6 +35,9 @@ public class Mojio extends AbstractMojioObject {
     private String[] Tags;
     private WifiRadio WifiRadio;
     private String MSISDN;
+    private String HardwareVersion;
+    private String Vendor;
+    private String FirmwareVersion;
     private Boolean Deleted;
 
     public Mojio() {}
@@ -115,6 +121,30 @@ public class Mojio extends AbstractMojioObject {
         this.MSISDN = msisdn;
     }
 
+    public String getHardwareVersion() {
+        return HardwareVersion;
+    }
+
+    public void setHardwareVersion(String hardwareVersion) {
+        HardwareVersion = hardwareVersion;
+    }
+
+    public String getVendor() {
+        return Vendor;
+    }
+
+    public void setVendor(String vendor) {
+        Vendor = vendor;
+    }
+
+    public String getFirmwareVersion() {
+        return FirmwareVersion;
+    }
+
+    public void setFirmwareVersion(String firmwareVersion) {
+        FirmwareVersion = firmwareVersion;
+    }
+
     public Boolean getDeleted() {
         return Deleted;
     }
@@ -135,6 +165,9 @@ public class Mojio extends AbstractMojioObject {
                 ", Tags=" + Arrays.toString(Tags) +
                 ", WifiRadio=" + WifiRadio +
                 ", MSISDN='" + MSISDN + '\'' +
+                ", HardwareVersion='" + HardwareVersion + '\'' +
+                ", Vendor='" + Vendor + '\'' +
+                ", FirmwareVersion='" + FirmwareVersion + '\'' +
                 ", Deleted=" + Deleted +
                 "} " + super.toString();
     }
