@@ -12,6 +12,7 @@ import java.util.Map;
 public enum MojioEnvironment implements Environment {
 
     PROD(""),
+    PREPROD("preprod"),
     STAGING("staging"),
     DEVELOP("develop"),
     TRIAL("trial"),
