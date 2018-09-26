@@ -16,7 +16,8 @@ public enum MojioEnvironment implements Environment {
     STAGING("staging"),
     DEVELOP("develop"),
     TRIAL("trial"),
-    LOAD("load");
+    LOAD("load"),
+    CI("ci");
 
     private static final int DEFAULT_VERSION = 2;
     private static final String HTTPS = "https://";
