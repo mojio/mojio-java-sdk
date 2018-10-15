@@ -195,6 +195,6 @@ public class Mojio extends AbstractMojioObject {
                 ", FirmwareVersion='" + FirmwareVersion + '\'' +
                 ", MainFirmwareVersion='" + MainFirmwareVersion + '\'' +
                 ", Deleted=" + Deleted +
-                '}';
+                "} " + super.toString();
     }
 }
