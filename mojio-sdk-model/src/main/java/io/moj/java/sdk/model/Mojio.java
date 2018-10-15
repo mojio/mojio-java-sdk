@@ -2,6 +2,7 @@ package io.moj.java.sdk.model;
 
 import java.util.Arrays;
 
+import com.google.gson.annotations.SerializedName;
 import io.moj.java.sdk.model.values.Location;
 import io.moj.java.sdk.model.values.WifiRadio;
 import io.moj.java.sdk.utils.TimeUtils;
@@ -23,21 +24,37 @@ public class Mojio extends AbstractMojioObject {
     public static final String MSISDN_PROP = "MSISDN";
     public static final String HARDWARE_VERSION = "HardwareVersion";
     public static final String FIRMWARE_VERSION = "FirmwareVersion";
+    public static final String MCU_FIRMWARE_VERSION = "MainFirmware";
     public static final String VENDOR = "Vendor";
     public static final String DELETED = "Deleted";
 
+    @SerializedName(value = "Name", alternate = "name")
     private String Name;
+    @SerializedName(value = "IMEI", alternate = "imei")
     private String IMEI;
+    @SerializedName(value = "VehicleId", alternate = "vehicleId")
     private String VehicleId;
+    @SerializedName(value = "LastContactTime", alternate = "lastContactTime")
     private String LastContactTime;
+    @SerializedName(value = "GatewayTime", alternate = "gatewayTime")
     private String GatewayTime;
+    @SerializedName(value = "Location", alternate = "location")
     private Location Location;
+    @SerializedName(value = "Tags", alternate = "tags")
     private String[] Tags;
+    @SerializedName(value = "WifiRadio", alternate = "wifiRadio")
     private WifiRadio WifiRadio;
+    @SerializedName(value = "MSISDN", alternate = "msisdn")
     private String MSISDN;
+    @SerializedName(value = "HardwareVersion", alternate = "hardwareVersion")
     private String HardwareVersion;
+    @SerializedName(value = "Vendor", alternate = "vendor")
     private String Vendor;
+    @SerializedName(value = "FirmwareVersion", alternate = "firmwareVersion")
     private String FirmwareVersion;
+    @SerializedName(value = "MainFirmware", alternate = "mainFirmware")
+    private String MainFirmwareVersion;
+    @SerializedName(value = "Deleted", alternate = "deleted")
     private Boolean Deleted;
 
     public Mojio() {}
@@ -145,6 +162,14 @@ public class Mojio extends AbstractMojioObject {
         FirmwareVersion = firmwareVersion;
     }
 
+    public String getMainFirmwareVersion() {
+        return MainFirmwareVersion;
+    }
+
+    public void setMainFirmwareVersion(String mainFirmwareVersion) {
+        MainFirmwareVersion = mainFirmwareVersion;
+    }
+
     public Boolean getDeleted() {
         return Deleted;
     }
@@ -168,7 +193,8 @@ public class Mojio extends AbstractMojioObject {
                 ", HardwareVersion='" + HardwareVersion + '\'' +
                 ", Vendor='" + Vendor + '\'' +
                 ", FirmwareVersion='" + FirmwareVersion + '\'' +
+                ", MainFirmwareVersion='" + MainFirmwareVersion + '\'' +
                 ", Deleted=" + Deleted +
-                "} " + super.toString();
+                '}';
     }
 }
