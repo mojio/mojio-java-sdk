@@ -26,6 +26,7 @@ public interface MojioAuthApi {
     String GRANT_TYPE_PASSWORD = "password";
     String GRANT_TYPE_REFRESH = "refresh_token";
     String GRANT_TYPE_PHONE = "phone";
+    String GRANT_TYPE_THIRD_PARTY = "ext_idp";
 
     /**
      * Endpoint for requesting an access token. Constructs the request body as follows:
@@ -48,6 +49,31 @@ public interface MojioAuthApi {
     Call<AuthResponse> login(@Field("grant_type") String grantType,
                              @Field("username") String username,
                              @Field("password") String password,
+                             @Field("client_id") String clientId,
+                             @Field("client_secret") String clientSecret,
+                             @Field("scope") String scope);
+
+    /**
+     * Endpoint for requesting an access token. Constructs the request body as follows:
+     * "grant_type=password&password={password}&username={username}&client_id={client_id}&secret_key={secret_key}&scope=full",
+     * see <a href="http://tools.ietf.org/html/rfc6749#section-4.3.2">RFC6749 - Section 4.3.2</a>
+     * <br><br>
+     * For refreshing: "grant_type=refresh_token&refresh_token={refresh_token}",
+     * see <a href="http://tools.ietf.org/html/rfc6749#section-62">RFC6749 - Section 6</a>
+     * @param grantType should be "password", use {@link #GRANT_TYPE_PASSWORD}. Only required
+     *                  because https://github.com/square/retrofit/issues/951 hasn't been implemented
+     * @param provider
+     * @param token
+     * @param clientId
+     * @param clientSecret
+     * @param scope
+     * @return
+     */
+    @POST("oauth2/token")
+    @FormUrlEncoded
+    Call<AuthResponse> loginToThirdParty(@Field("grant_type") String grantType,
+                             @Field("provider") String provider,
+                             @Field("token") String token,
                              @Field("client_id") String clientId,
                              @Field("client_secret") String clientSecret,
                              @Field("scope") String scope);

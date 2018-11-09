@@ -175,6 +175,28 @@ public class MojioClient {
     /**
      * Authenticates a user, stores the access token in the client's configured
      * {@link io.moj.java.sdk.auth.Authenticator}, and then returns the {@link io.moj.java.sdk.model.User} entity.
+     * @param provider
+     * @param token
+     * @return
+     */
+    public Call<User> loginToThirdParty(String provider, String token) {
+        return new ThirdPartyLoginCall(provider, token, client, acceptedTenants, null);
+    }
+
+    /**
+     * Authenticates a user, stores the access token in the client's configured
+     * {@link io.moj.java.sdk.auth.Authenticator}, and then returns the {@link io.moj.java.sdk.model.User} entity.
+     * @param provider
+     * @param token
+     * @return
+     */
+    public Call<User> loginToThirdParty(String provider, String token, String scope) {
+        return new ThirdPartyLoginCall(provider, token, client, acceptedTenants, scope);
+    }
+
+    /**
+     * Authenticates a user, stores the access token in the client's configured
+     * {@link io.moj.java.sdk.auth.Authenticator}, and then returns the {@link io.moj.java.sdk.model.User} entity.
      * @param phoneNumber
      * @param pin
      * @return
@@ -468,7 +490,7 @@ public class MojioClient {
      * Wrapper for an authentication call that stores the access token in this client's
      * {@link io.moj.java.sdk.auth.Authenticator} and then follows with a call to get the current User.
      */
-    private class LoginCall implements Call<User> {
+    private class LoginCall extends BaseLoginCall {
         private static final String DEFAULT_SCOPE = "full offline_access";
 
         private String id;
@@ -476,26 +498,66 @@ public class MojioClient {
         private boolean usingPin;
         private List<String> acceptedTenants;
         private String scope;
-
         private Client client;
-        private Call<User> userCall;
-        private Call<AuthResponse> authCall;
 
         public LoginCall(String id, String password, Client client, List<String> acceptedTenants, String scope) {
             this(id, password, false, client, acceptedTenants, scope);
         }
 
         public LoginCall(String id, String password, boolean usingPin, Client client, List<String> acceptedTenants, String scope) {
+            super(acceptedTenants, usingPin
+                    ? auth().loginWithPin(MojioAuthApi.GRANT_TYPE_PHONE, id, password, client.getKey(), client.getSecret(), scope == null ? DEFAULT_SCOPE : scope)
+                    : auth().login(MojioAuthApi.GRANT_TYPE_PASSWORD, id, password, client.getKey(), client.getSecret(), scope == null ? DEFAULT_SCOPE : scope));
             this.id = id;
             this.password = password;
             this.usingPin = usingPin;
             this.client = client;
             this.acceptedTenants = acceptedTenants;
-            this.scope = scope == null ? DEFAULT_SCOPE : scope;
+            this.scope = scope;
+        }
 
-            this.authCall = usingPin
-                    ? auth().loginWithPin(MojioAuthApi.GRANT_TYPE_PHONE, id, password, client.getKey(), client.getSecret(), this.scope)
-                    : auth().login(MojioAuthApi.GRANT_TYPE_PASSWORD, id, password, client.getKey(), client.getSecret(), this.scope);
+        @Override
+        public Call<User> clone() {
+            return new LoginCall(id, password, usingPin, client, acceptedTenants, scope);
+        }
+    }
+
+    /**
+     * Wrapper for an authentication call that stores the access token in this client's
+     * {@link io.moj.java.sdk.auth.Authenticator} and then follows with a call to get the current User.
+     */
+    private class ThirdPartyLoginCall extends BaseLoginCall {
+        private static final String DEFAULT_SCOPE = "full offline_access";
+
+        private String provider;
+        private String token;
+        private List<String> acceptedTenants;
+        private String scope;
+        private Client client;
+
+        public ThirdPartyLoginCall(String provider, String token, Client client, List<String> acceptedTenants, String scope) {
+            super(acceptedTenants, auth().loginToThirdParty(MojioAuthApi.GRANT_TYPE_THIRD_PARTY, provider, token, client.getKey(), client.getSecret(), scope == null ? DEFAULT_SCOPE : scope));
+            this.provider = provider;
+            this.token = token;
+            this.client = client;
+            this.scope = scope;
+            this.acceptedTenants = acceptedTenants;
+        }
+
+        @Override
+        public Call<User> clone() {
+            return new ThirdPartyLoginCall(provider, token, client, acceptedTenants, scope);
+        }
+    }
+
+    public abstract class BaseLoginCall implements Call<User> {
+        private List<String> acceptedTenants;
+        private Call<User> userCall;
+        private Call<AuthResponse> authCall;
+
+        public BaseLoginCall(List<String> acceptedTenants, Call<AuthResponse> authCall) {
+            this.acceptedTenants = acceptedTenants;
+            this.authCall = authCall;
         }
 
         @Override
@@ -520,7 +582,7 @@ public class MojioClient {
                 @Override
                 public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
                     if (!passesTenancyTest(response)) {
-                        callback.onResponse(LoginCall.this, getInvalidTenantErrorResponse());
+                        callback.onResponse(BaseLoginCall.this, getInvalidTenantErrorResponse());
                         return;
                     }
                     try {
@@ -528,7 +590,7 @@ public class MojioClient {
                             userCall = rest().getUser();
                             userCall.enqueue(callback);
                         } else {
-                            callback.onResponse(LoginCall.this, (Response) response);
+                            callback.onResponse(BaseLoginCall.this, (Response) response);
                         }
                     } catch (IOException e) {
                         onFailure(call, e);
@@ -537,7 +599,7 @@ public class MojioClient {
 
                 @Override
                 public void onFailure(Call<AuthResponse> call, Throwable t) {
-                    callback.onFailure(LoginCall.this, t);
+                    callback.onFailure(BaseLoginCall.this, t);
                 }
             });
         }
@@ -558,13 +620,13 @@ public class MojioClient {
         }
 
         @Override
-        public Call<User> clone() {
-            return new LoginCall(id, password, usingPin, client, acceptedTenants, scope);
+        public Request request() {
+            return getCurrentCall().request();
         }
 
         @Override
-        public Request request() {
-            return getCurrentCall().request();
+        public Call<User> clone() {
+            return null;
         }
 
         private Call getCurrentCall() {
@@ -623,7 +685,8 @@ public class MojioClient {
                 return null;
 
             try {
-                Type type = new TypeToken<Map<String, Object>>(){}.getType();
+                Type type = new TypeToken<Map<String, Object>>() {
+                }.getType();
                 Map<String, Object> jwtPayload = gson.fromJson(decoded, type);
                 return (String) jwtPayload.get("tenant");
             } catch (JsonSyntaxException ignored) {
