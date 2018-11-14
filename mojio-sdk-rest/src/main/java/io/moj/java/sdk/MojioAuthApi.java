@@ -76,7 +76,10 @@ public interface MojioAuthApi {
                              @Field("token") String token,
                              @Field("client_id") String clientId,
                              @Field("client_secret") String clientSecret,
-                             @Field("scope") String scope);
+                             @Field("scope") String scope,
+                             @Field("first_name") String firstName,
+                             @Field("last_name") String lastName,
+                             @Field("email") String email);
 
     /**
      * Endpoint for requesting an access token. Constructs the request body as follows:

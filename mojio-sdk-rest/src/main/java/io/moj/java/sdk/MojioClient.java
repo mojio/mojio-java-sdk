@@ -14,6 +14,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import com.sun.istack.internal.Nullable;
 import io.moj.java.sdk.auth.AccessToken;
 import io.moj.java.sdk.auth.AuthInterceptor;
 import io.moj.java.sdk.auth.Authenticator;
@@ -179,8 +180,8 @@ public class MojioClient {
      * @param token
      * @return
      */
-    public Call<User> loginToThirdParty(String provider, String token) {
-        return new ThirdPartyLoginCall(provider, token, client, acceptedTenants, null);
+    public Call<User> loginToThirdParty(String provider, String token, @Nullable String firstName, @Nullable String lastName, @Nullable String email) {
+        return new ThirdPartyLoginCall(provider, token, firstName, lastName, email, client, acceptedTenants, null);
     }
 
     /**
@@ -190,8 +191,8 @@ public class MojioClient {
      * @param token
      * @return
      */
-    public Call<User> loginToThirdParty(String provider, String token, String scope) {
-        return new ThirdPartyLoginCall(provider, token, client, acceptedTenants, scope);
+    public Call<User> loginToThirdParty(String provider, String token, @Nullable String firstName, @Nullable String lastName, @Nullable String email, String scope) {
+        return new ThirdPartyLoginCall(provider, token, firstName, lastName, email, client, acceptedTenants, scope);
     }
 
     /**
@@ -531,14 +532,20 @@ public class MojioClient {
 
         private String provider;
         private String token;
+        private String firstName;
+        private String lastName;
+        private String email;
         private List<String> acceptedTenants;
         private String scope;
         private Client client;
 
-        public ThirdPartyLoginCall(String provider, String token, Client client, List<String> acceptedTenants, String scope) {
-            super(acceptedTenants, auth().loginToThirdParty(MojioAuthApi.GRANT_TYPE_THIRD_PARTY, provider, token, client.getKey(), client.getSecret(), scope == null ? DEFAULT_SCOPE : scope));
+        public ThirdPartyLoginCall(String provider, String token, @Nullable String firstName, @Nullable String lastName, @Nullable String email, Client client, List<String> acceptedTenants, String scope) {
+            super(acceptedTenants, auth().loginToThirdParty(MojioAuthApi.GRANT_TYPE_THIRD_PARTY, provider, token, client.getKey(), client.getSecret(), scope == null ? DEFAULT_SCOPE : scope, firstName, lastName, email));
             this.provider = provider;
             this.token = token;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.email = email;
             this.client = client;
             this.scope = scope;
             this.acceptedTenants = acceptedTenants;
@@ -546,7 +553,7 @@ public class MojioClient {
 
         @Override
         public Call<User> clone() {
-            return new ThirdPartyLoginCall(provider, token, client, acceptedTenants, scope);
+            return new ThirdPartyLoginCall(provider, token, firstName, lastName, email, client, acceptedTenants, scope);
         }
     }
 
