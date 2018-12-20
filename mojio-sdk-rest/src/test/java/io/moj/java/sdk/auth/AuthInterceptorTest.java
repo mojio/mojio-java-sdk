@@ -17,9 +17,7 @@ import java.util.Locale;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.powermock.api.mockito.PowerMockito.*;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by skidson on 16-03-04.
@@ -97,7 +95,7 @@ public class AuthInterceptorTest {
         Response actualResponse = interceptor.intercept(mock.chain);
         assertThat(actualResponse).isEqualTo(mock.response);
 
-        verify(mockBody).close();
+        verify(mockBody, times(3)).close();
         verify(authenticator).invalidateAccessToken(token);
         verify(listener).onAccessTokenExpired();
     }
