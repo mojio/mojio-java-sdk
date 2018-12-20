@@ -23,11 +23,10 @@ public class AuthInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-        return doIntercept(chain, 3);
+        return doIntercept(chain, true);
     }
 
-    private Response doIntercept(Chain chain, int retryCount) throws IOException {
-        retryCount--;
+    private Response doIntercept(Chain chain, boolean retry) throws IOException {
         Request request = chain.request();
 
         // set the access token in the header if we have it
@@ -44,14 +43,14 @@ public class AuthInterceptor implements Interceptor {
         if (response.code() == HttpURLConnection.HTTP_UNAUTHORIZED) {
             // we got a 401 - Unauthorized, first try forcing the token to refresh, if that doesn't
             // work, then broadcast that this access token is no longer valid
-            if (retryCount >= 0) {
+            if (retry) {
                 ResponseBody responseBody = response.body();
                 if (responseBody != null) {
                     responseBody.close();
                 }
 
                 authenticator.invalidateAccessToken(accessToken);
-                response = doIntercept(chain, retryCount);
+                response = doIntercept(chain, false);
             } else {
                 if (listener != null) {
                     listener.onAccessTokenExpired();
