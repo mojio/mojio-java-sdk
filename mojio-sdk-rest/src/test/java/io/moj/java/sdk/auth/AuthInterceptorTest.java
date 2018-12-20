@@ -96,7 +96,7 @@ public class AuthInterceptorTest {
         assertThat(actualResponse).isEqualTo(mock.response);
 
         verify(mockBody, times(3)).close();
-        verify(authenticator, times(3)).invalidateAccessToken(token);
+        verify(authenticator).invalidateAccessToken(token);
         verify(listener).onAccessTokenExpired();
     }
 
