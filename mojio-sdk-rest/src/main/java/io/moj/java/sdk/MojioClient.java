@@ -19,6 +19,7 @@ import io.moj.java.sdk.auth.AuthInterceptor;
 import io.moj.java.sdk.auth.Authenticator;
 import io.moj.java.sdk.auth.Client;
 import io.moj.java.sdk.auth.DefaultAuthenticator;
+import io.moj.java.sdk.auth.DeviceIdProvider;
 import io.moj.java.sdk.auth.OnAccessTokenExpiredListener;
 import io.moj.java.sdk.logging.LoggingInterceptor;
 import io.moj.java.sdk.model.User;
@@ -57,6 +58,7 @@ public class MojioClient {
     private final boolean loggingEnabled;
     private final Integer timeout;
     private final List<String> acceptedTenants;
+    private final DeviceIdProvider deviceIdProvider;
 
     private MojioRestApi restApi;
     private MojioAuthApi authApi;
@@ -71,7 +73,8 @@ public class MojioClient {
 
     protected MojioClient(Environment environment, Client client, Gson gson, Base64Decoder base64Decoder, Authenticator authenticator,
                           Interceptor interceptor, ExecutorService requestExecutor, Executor callbackExecutor,
-                          boolean logging, Integer timeout, List<String> acceptedTenants, String userAgent) {
+                          boolean logging, Integer timeout, List<String> acceptedTenants, String userAgent,
+                          DeviceIdProvider deviceIdProvider) {
         this.environment = environment == null ? MojioEnvironment.getDefault() : environment;
         this.gson = gson == null ? new Gson() : gson;
         this.base64Decoder = base64Decoder == null ? new DefaultBase64Decoder() : base64Decoder;
@@ -82,6 +85,7 @@ public class MojioClient {
         this.timeout = timeout;
         this.acceptedTenants = acceptedTenants;
         this.clientInterceptor = interceptor;
+        this.deviceIdProvider = deviceIdProvider;
 
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
         GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create(this.gson);
@@ -122,7 +126,7 @@ public class MojioClient {
 
         // configure subsequent clients with the AuthInterceptor
         if (authenticator == null) {
-            authenticator = new DefaultAuthenticator(authApi, client);
+            authenticator = new DefaultAuthenticator(authApi, client, deviceIdProvider);
         }
         this.authenticator = authenticator;
         authInterceptor = new AuthInterceptor(authenticator);
@@ -350,6 +354,7 @@ public class MojioClient {
         protected boolean logging = false;
         protected List<String> acceptedTenants = new ArrayList<>();
         protected String userAgent;
+        protected DeviceIdProvider deviceIdProvider;
 
         public Builder(String clientKey, String clientSecret) {
             if (clientKey == null || clientKey.isEmpty()) {
@@ -476,13 +481,19 @@ public class MojioClient {
             return this;
         }
 
+        public Builder deviceIdProvider(DeviceIdProvider deviceIdProvider) {
+            this.deviceIdProvider = deviceIdProvider;
+            return this;
+        }
+
         /**
          * Constructs a {@link io.moj.java.sdk.MojioClient} instance with the provided configuration.
          * @return
          */
         public MojioClient build() {
             return new MojioClient(environment, client, gson, base64Decoder, authenticator, interceptor,
-                    requestExecutor, callbackExecutor, logging, timeout, acceptedTenants, userAgent);
+                    requestExecutor, callbackExecutor, logging, timeout, acceptedTenants, userAgent,
+                    deviceIdProvider);
         }
     }
 
