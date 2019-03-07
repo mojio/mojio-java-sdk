@@ -115,6 +115,9 @@ public interface MojioAuthApi {
      * @param refreshToken the refresh token that was granted with the original access token
      * @param clientId
      * @param clientSecret
+     * @param device unique device id. It allows to implement two-factor authentication which
+     *               permits certain API calls to the specific device. All attempts to use such API
+     *               calls without an auth token with a device claim will lead to 403 error.
      * @return
      */
     @POST("oauth2/token")
