@@ -122,7 +122,8 @@ public interface MojioAuthApi {
     Call<AuthResponse> refresh(@Field("grant_type") String grantType,
                                @Field("refresh_token") String refreshToken,
                                @Field("client_id") String clientId,
-                               @Field("client_secret") String clientSecret);
+                               @Field("client_secret") String clientSecret,
+                               @Field("device") String device);
 
     /**
      * Endpoint for registering a user via phone number. Calling this endpoint will send a 4-digit PIN to the specified
