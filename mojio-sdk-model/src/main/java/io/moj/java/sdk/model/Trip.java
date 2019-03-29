@@ -46,6 +46,8 @@ public class Trip extends AbstractMojioObject {
     public static final String IDLING_COUNT = "IdlingCount";
     public static final String HARSH_ACCL_COUNT = "HarshAcclCount";
     public static final String HARSH_DECEL_COUNT = "HarshDecelCount";
+    public static final String DRIVER_SCORE = "DriverScore";
+    public static final String AVERAGE_DRIVER_SCORE = "AverageDriverScore";
 
     @SerializedName(value = "VehicleId", alternate = "vehicleId")
     private String VehicleId;
@@ -99,6 +101,10 @@ public class Trip extends AbstractMojioObject {
     private HarshEvent[] HarshEvents;
     @SerializedName(value = "IdleEvents", alternate = "idleEvents")
     private IdleEvent[] IdleEvents;
+    @SerializedName(value = "DriverScore", alternate = "driverScore")
+    private Integer DriverScore;
+    @SerializedName(value = "AverageDriverScore", alternate = "averageDriverScore")
+    private Integer AverageDriverScore;
 
     public Boolean getCompleted() {
         return Completed;
@@ -337,6 +343,8 @@ public class Trip extends AbstractMojioObject {
                 ", HarshDecelCount=" + HarshDecelCount +
                 ", HarshEvents=" + Arrays.toString(HarshEvents) +
                 ", IdleEvents=" + Arrays.toString(IdleEvents) +
+                ", DriverScore=" + DriverScore +
+                ", AverageDriverScore=" + AverageDriverScore +
                 "} " + super.toString();
     }
 }
