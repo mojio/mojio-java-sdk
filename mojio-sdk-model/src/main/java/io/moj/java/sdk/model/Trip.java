@@ -102,9 +102,9 @@ public class Trip extends AbstractMojioObject {
     @SerializedName(value = "IdleEvents", alternate = "idleEvents")
     private IdleEvent[] IdleEvents;
     @SerializedName(value = "DriverScore", alternate = "driverScore")
-    private Integer DriverScore;
+    private Float DriverScore;
     @SerializedName(value = "AverageDriverScore", alternate = "averageDriverScore")
-    private Integer AverageDriverScore;
+    private Float AverageDriverScore;
 
     public Boolean getCompleted() {
         return Completed;
@@ -314,19 +314,19 @@ public class Trip extends AbstractMojioObject {
         IdleEvents = idleEvents;
     }
 
-    public Integer getDriverScore() {
+    public Float getDriverScore() {
         return DriverScore;
     }
 
-    public void setDriverScore(Integer driverScore) {
+    public void setDriverScore(Float driverScore) {
         DriverScore = driverScore;
     }
 
-    public Integer getAverageDriverScore() {
+    public Float getAverageDriverScore() {
         return AverageDriverScore;
     }
 
-    public void setAverageDriverScore(Integer averageDriverScore) {
+    public void setAverageDriverScore(Float averageDriverScore) {
         AverageDriverScore = averageDriverScore;
     }
 
