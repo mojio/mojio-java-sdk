@@ -314,6 +314,22 @@ public class Trip extends AbstractMojioObject {
         IdleEvents = idleEvents;
     }
 
+    public Integer getDriverScore() {
+        return DriverScore;
+    }
+
+    public void setDriverScore(Integer driverScore) {
+        DriverScore = driverScore;
+    }
+
+    public Integer getAverageDriverScore() {
+        return AverageDriverScore;
+    }
+
+    public void setAverageDriverScore(Integer averageDriverScore) {
+        AverageDriverScore = averageDriverScore;
+    }
+
     @Override
     public String toString() {
         return "Trip{" +
