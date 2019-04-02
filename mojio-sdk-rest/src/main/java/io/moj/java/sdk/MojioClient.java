@@ -139,7 +139,7 @@ public class MojioClient {
 
     protected void initAuthenticatedApis(Retrofit.Builder retrofitBuilder) {
         restApi = retrofitBuilder
-                .baseUrl("http://13.77.141.27:51752/")
+                .baseUrl(this.environment.getApiUrl() + "/")
                 .build()
                 .create(MojioRestApi.class);
         pushApi = retrofitBuilder
