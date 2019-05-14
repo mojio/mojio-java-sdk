@@ -153,7 +153,7 @@ public interface MojioAuthApi {
             "Content-Type: application/json",
             "Accept: application/json"
     })
-    Call<RegistrationResponse> forgotPassword(@Body ForgotPasswordRequest request);
+    Call<RegistrationResponse> forgotPassword(@Header("Authorization") String auth, @Body ForgotPasswordRequest request);
 
     /**
      * Endpoint for resetting the password
