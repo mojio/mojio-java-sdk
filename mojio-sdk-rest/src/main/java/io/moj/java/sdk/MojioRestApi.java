@@ -366,6 +366,12 @@ public interface MojioRestApi {
     @GET("users/activities")
     Call<ListResponse<ActivityObject>> getUserActivityStream(@QueryMap Map<String, String> params);
 
+    @GET("Vehicles/activities")
+    Call<ListResponse<ActivityObject>> getVehicleActivityStream();
+
+    @GET("Vehicles/activities")
+    Call<ListResponse<ActivityObject>> getVehicleActivityStream(@QueryMap Map<String, String> params);
+
     @GET("vehicles/{id}/activities/settings")
     Call<Settings> getVehicleActivitySettings(@Path("id") String vehicleId);
 
