@@ -1,5 +1,7 @@
 package io.moj.java.sdk.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Arrays;
 
 import io.moj.java.sdk.model.values.Acceleration;
@@ -44,33 +46,65 @@ public class Trip extends AbstractMojioObject {
     public static final String IDLING_COUNT = "IdlingCount";
     public static final String HARSH_ACCL_COUNT = "HarshAcclCount";
     public static final String HARSH_DECEL_COUNT = "HarshDecelCount";
+    public static final String DRIVER_SCORE = "DriverScore";
+    public static final String AVERAGE_DRIVER_SCORE = "AverageDriverScore";
 
+    @SerializedName(value = "VehicleId", alternate = "vehicleId")
     private String VehicleId;
+    @SerializedName(value = "Name", alternate = "name")
     private String Name;
+    @SerializedName(value = "Tags", alternate = "tags")
     private String[] Tags;
+    @SerializedName(value = "MojioId", alternate = "mojioId")
     private String MojioId;
+    @SerializedName(value = "Completed", alternate = "completed")
     private Boolean Completed;
+    @SerializedName(value = "Distance", alternate = "distance")
     private Distance Distance;
+    @SerializedName(value = "Duration", alternate = "duration")
     private String Duration;
+    @SerializedName(value = "StartTimestamp", alternate = "startTimestamp")
     private String StartTimestamp;
+    @SerializedName(value = "EndTimestamp", alternate = "endTimestamp")
     private String EndTimestamp;
+    @SerializedName(value = "StartOdometer", alternate = "startOdometer")
     private Odometer StartOdometer;
+    @SerializedName(value = "EndOdometer", alternate = "endOdometer")
     private Odometer EndOdometer;
+    @SerializedName(value = "StartLocation", alternate = "startLocation")
     private Location StartLocation;
+    @SerializedName(value = "EndLocation", alternate = "endLocation")
     private Location EndLocation;
+    @SerializedName(value = "MaxSpeed", alternate = "maxSpeed")
     private Speed MaxSpeed;
+    @SerializedName(value = "MaxRPM", alternate = "maxRPM")
     private Rpm MaxRPM;
+    @SerializedName(value = "MaxAcceleration", alternate = "maxAcceleration")
     private Acceleration MaxAcceleration;
+    @SerializedName(value = "MaxDeceleration", alternate = "maxDeceleration")
     private Acceleration MaxDeceleration;
+    @SerializedName(value = "Polyline", alternate = "polyline")
     private String Polyline;
+    @SerializedName(value = "FuelEfficiency", alternate = "fuelEfficiency")
     private FuelEfficiency FuelEfficiency;
+    @SerializedName(value = "StartFuelLevel", alternate = "startFuelLevel")
     private FuelLevel StartFuelLevel;
+    @SerializedName(value = "EndFuelLevel", alternate = "endFuelLevel")
     private FuelLevel EndFuelLevel;
+    @SerializedName(value = "IdlingCount", alternate = "idlingCount")
     private Integer IdlingCount;
+    @SerializedName(value = "HarshAcclCount", alternate = "harshAcclCount")
     private Integer HarshAcclCount;
+    @SerializedName(value = "HarshDecelCount", alternate = "harshDecelCount")
     private Integer HarshDecelCount;
+    @SerializedName(value = "HarshEvents", alternate = "harshEvents")
     private HarshEvent[] HarshEvents;
+    @SerializedName(value = "IdleEvents", alternate = "idleEvents")
     private IdleEvent[] IdleEvents;
+    @SerializedName(value = "DriverScore", alternate = "driverScore")
+    private Float DriverScore;
+    @SerializedName(value = "AverageDriverScore", alternate = "averageDriverScore")
+    private Float AverageDriverScore;
 
     public Boolean getCompleted() {
         return Completed;
@@ -280,6 +314,22 @@ public class Trip extends AbstractMojioObject {
         IdleEvents = idleEvents;
     }
 
+    public Float getDriverScore() {
+        return DriverScore;
+    }
+
+    public void setDriverScore(Float driverScore) {
+        DriverScore = driverScore;
+    }
+
+    public Float getAverageDriverScore() {
+        return AverageDriverScore;
+    }
+
+    public void setAverageDriverScore(Float averageDriverScore) {
+        AverageDriverScore = averageDriverScore;
+    }
+
     @Override
     public String toString() {
         return "Trip{" +
@@ -309,6 +359,8 @@ public class Trip extends AbstractMojioObject {
                 ", HarshDecelCount=" + HarshDecelCount +
                 ", HarshEvents=" + Arrays.toString(HarshEvents) +
                 ", IdleEvents=" + Arrays.toString(IdleEvents) +
+                ", DriverScore=" + DriverScore +
+                ", AverageDriverScore=" + AverageDriverScore +
                 "} " + super.toString();
     }
 }

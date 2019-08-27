@@ -1,21 +1,34 @@
 package io.moj.java.sdk.model.values;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Model object for an Address value.
  * Created by mhorie on 2016-01-12.
  */
 public class Address {
 
+    @SerializedName(value = "HouseNumber", alternate = "houseNumber")
     private String HouseNumber;
+    @SerializedName(value = "Road", alternate = "road")
     private String Road;
+    @SerializedName(value = "Neighbourhood", alternate = "neighbourhood")
     private String Neighbourhood;
+    @SerializedName(value = "Suburb", alternate = "suburb")
     private String Suburb;
+    @SerializedName(value = "City", alternate = "city")
     private String City;
+    @SerializedName(value = "County", alternate = "county")
     private String County;
+    @SerializedName(value = "State", alternate = "state")
     private String State;
+    @SerializedName(value = "PostCode", alternate = "postCode")
     private String PostCode;
+    @SerializedName(value = "Country", alternate = "country")
     private String Country;
+    @SerializedName(value = "CountryCode", alternate = "countryCode")
     private String CountryCode;
+    @SerializedName(value = "FormattedAddress", alternate = "formattedAddress")
     private String FormattedAddress;
 
     public String getCity() {

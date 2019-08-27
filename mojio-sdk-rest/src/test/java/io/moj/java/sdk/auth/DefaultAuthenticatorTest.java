@@ -34,7 +34,7 @@ public class DefaultAuthenticatorTest {
     public void setup() {
         client = new Client("clientKey", "clientSecret");
         authApi = mock(MojioAuthApi.class);
-        authenticator = new DefaultAuthenticator(authApi, client);
+        authenticator = new DefaultAuthenticator(authApi, client, null);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class DefaultAuthenticatorTest {
         authenticator.invalidateAccessToken(null);
         AccessToken refreshedToken = authenticator.getAccessToken();
         verify(authApi, never()).refresh(MojioAuthApi.GRANT_TYPE_REFRESH, expectedRefreshedRefreshToken,
-                client.getKey(), client.getSecret());
+                client.getKey(), client.getSecret(), null);
         assertThat(refreshedToken).isEqualTo(token);
 
         // invalidating with a different token should do nothing (e.g. caller was using an old token that was already
@@ -69,7 +69,7 @@ public class DefaultAuthenticatorTest {
         authenticator.invalidateAccessToken(new AccessToken("different", 1234L));
         refreshedToken = authenticator.getAccessToken();
         verify(authApi, never()).refresh(MojioAuthApi.GRANT_TYPE_REFRESH, expectedRefreshedRefreshToken,
-                client.getKey(), client.getSecret());
+                client.getKey(), client.getSecret(), null);
         assertThat(refreshedToken).isEqualTo(token);
     }
 
@@ -87,14 +87,14 @@ public class DefaultAuthenticatorTest {
         long expectedExpirationTimestamp = System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(expectedExpiresIn);
         AccessToken refreshedToken = authenticator.getAccessToken();
         verify(authApi).refresh(MojioAuthApi.GRANT_TYPE_REFRESH, oldToken.getRefreshToken(), client.getKey(),
-                client.getSecret());
+                client.getSecret(), null);
         assertAccessToken(refreshedToken, expectedRefreshedAccessToken, expectedRefreshedRefreshToken,
                 expectedExpirationTimestamp);
 
         // verify the next call doesn't refresh (not still invalidated)
         refreshedToken = authenticator.getAccessToken();
         verify(authApi, never()).refresh(MojioAuthApi.GRANT_TYPE_REFRESH, expectedRefreshedRefreshToken,
-                client.getKey(), client.getSecret());
+                client.getKey(), client.getSecret(), null);
         assertAccessToken(refreshedToken, expectedRefreshedAccessToken, expectedRefreshedRefreshToken,
                 expectedExpirationTimestamp);
     }
@@ -112,7 +112,7 @@ public class DefaultAuthenticatorTest {
         long expectedExpirationTimestamp = System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(expectedExpiresIn);
         AccessToken refreshedToken = authenticator.getAccessToken();
         verify(authApi).refresh(MojioAuthApi.GRANT_TYPE_REFRESH, oldToken.getRefreshToken(), client.getKey(),
-                client.getSecret());
+                client.getSecret(), null);
         assertAccessToken(refreshedToken, expectedRefreshedAccessToken, expectedRefreshedRefreshToken,
                 expectedExpirationTimestamp);
     }
@@ -137,7 +137,7 @@ public class DefaultAuthenticatorTest {
         Call<AuthResponse> refreshCall = mock(Call.class);
         Response<AuthResponse> refreshResponse = mock(Response.class);
         AuthResponse refreshAuthResponse = mock(AuthResponse.class);
-        when(authApi.refresh(anyString(), anyString(), anyString(), anyString())).thenReturn(refreshCall);
+        when(authApi.refresh(anyString(), anyString(), anyString(), anyString(), anyString())).thenReturn(refreshCall);
         when(refreshCall.execute()).thenReturn(refreshResponse);
         when(refreshResponse.isSuccessful()).thenReturn(true);
         when(refreshResponse.body()).thenReturn(refreshAuthResponse);

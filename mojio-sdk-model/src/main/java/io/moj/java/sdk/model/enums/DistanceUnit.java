@@ -11,22 +11,25 @@ import io.moj.java.sdk.math.UnitConverter;
 public enum DistanceUnit {
 
     @SerializedName("Kilometers")
-    KILOMETERS("Kilometers", new float[] { 1f, 0.621371f, 0.539957f, 1000f, 100000f, 1000000f }),
+    KILOMETERS("Kilometers", new float[] { 1f, 0.621371f, 0.539957f, 1000f, 100000f, 1000000f, 3280.84f }),
 
     @SerializedName("Miles")
-    MILES("Miles", new float[] { 1.60934f, 1f, 0.868976f, 1609.34f, 160934f, 1609340f }),
+    MILES("Miles", new float[] { 1.60934f, 1f, 0.868976f, 1609.34f, 160934f, 1609340f, 5280f }),
 
     @SerializedName("NauticalMiles")
-    NAUTICAL_MILES("NauticalMiles", new float[] { 1.852f, 1.15078f, 1f, 1852f, 185200f, 1852000f }),
+    NAUTICAL_MILES("NauticalMiles", new float[] { 1.852f, 1.15078f, 1f, 1852f, 185200f, 1852000f, 6076.12f }),
 
     @SerializedName("Meters")
-    METERS("Meters", new float[] { 0.001f, 0.000621371f, 0.000539957f, 1f, 100f, 1000f }),
+    METERS("Meters", new float[] { 0.001f, 0.000621371f, 0.000539957f, 1f, 100f, 1000f, 3.28084f }),
 
     @SerializedName("CentiMeter")
-    CENTIMETERS("CentiMeter", new float[] { 0.00001f, 0.00000621371f, 0.00000539957f, 0.01f, 1f, 10f }),
+    CENTIMETERS("CentiMeter", new float[] { 0.00001f, 0.00000621371f, 0.00000539957f, 0.01f, 1f, 10f, 0.0328084f }),
 
     @SerializedName("MilliMeter")
-    MILLIMETERS("MilliMeter", new float[] { 1000000f, 0.000000621371f, 0.000000539957f, 0.001f, 0.1f, 1f });
+    MILLIMETERS("MilliMeter", new float[] { 0.000001f, 0.000000621371f, 0.000000539957f, 0.001f, 0.1f, 1f, 0.00328084f }),
+
+    @SerializedName("Feet")
+    FEET("Feet", new float[] { 0.0003048f, 0.000189394f, 0.000164579f, 0.3048f, 30.48f, 304.8f, 1f });
 
     private final String key;
     private final float[] conversions;

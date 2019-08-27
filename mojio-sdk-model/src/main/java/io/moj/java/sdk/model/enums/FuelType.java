@@ -8,16 +8,16 @@ import com.google.gson.annotations.SerializedName;
  */
 public enum FuelType {
 
-    @SerializedName("Query")
+    @SerializedName(value = "Query", alternate = "query")
     QUERY("Query"),
 
-    @SerializedName("Gasoline")
+    @SerializedName(value = "Gasoline", alternate = "gasoline")
     GASOLINE("Gasoline"),
 
-    @SerializedName("Diesel")
+    @SerializedName(value = "Diesel", alternate = "diesel")
     DIESEL("Diesel"),
 
-    @SerializedName("Electric")
+    @SerializedName(value = "Electric", alternate = "electric")
     ELECTRIC("Electric");
 
     private String key;

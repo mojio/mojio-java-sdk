@@ -13,7 +13,8 @@ public enum ResourceType {
     PARKING_STARTING_SOON("ParkingStartingSoon"),
     PARKING_STARTED("ParkingStarted"),
     PARKING_ENDING_SOON("ParkingEndingSoon"),
-    PARKING_ENDED("ParkingEnded");
+    PARKING_ENDED("ParkingEnded"),
+    ROADSIDE_SERVICE("Roadside");
 
     private String key;
 

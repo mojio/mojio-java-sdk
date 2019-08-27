@@ -1,5 +1,7 @@
 package io.moj.java.sdk.model.values;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,13 +23,21 @@ public class Location {
     public static final String ALTITUDE = "Altitude";
     public static final String GEOHASH = "GeoHash";
 
+    @SerializedName(value = "Address", alternate = "address")
     private Address Address;
+    @SerializedName(value = "Timestamp", alternate = "timestamp")
     private String Timestamp;
+    @SerializedName(value = "Lat", alternate = "lat")
     private Float Lat;
+    @SerializedName(value = "Lng", alternate = "lng")
     private Float Lng;
+    @SerializedName(value = "Status", alternate = "status")
     private String Status;
+    @SerializedName(value = "Dilution", alternate = "dilution")
     private Float Dilution;
+    @SerializedName(value = "Altitude", alternate = "altitude")
     private Float Altitude;
+    @SerializedName(value = "GeoHash", alternate = "geoHash")
     private String GeoHash;
 
     public Address getAddress() {
