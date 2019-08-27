@@ -10,6 +10,7 @@ import io.moj.java.sdk.model.values.Battery;
 import io.moj.java.sdk.model.values.BooleanState;
 import io.moj.java.sdk.model.values.CompatDetails;
 import io.moj.java.sdk.model.values.DiagnosticCode;
+import io.moj.java.sdk.model.values.EngineOil;
 import io.moj.java.sdk.model.values.FuelEfficiency;
 import io.moj.java.sdk.model.values.FuelLevel;
 import io.moj.java.sdk.model.values.HarshEventState;
@@ -62,6 +63,7 @@ public class Vehicle extends AbstractMojioObject {
     public static final String VIN_DETAILS = "VinDetails";
     public static final String TOW_STATE = "TowState";
     public static final String PARKED_STATE = "ParkedState";
+    public static final String ENGINE_OIL = "EngineOil";
     public static final String TAGS = "Tags";
     public static final String DELETED = "Deleted";
 
@@ -99,6 +101,7 @@ public class Vehicle extends AbstractMojioObject {
     private VehicleDetails VinDetails;
     private BooleanState TowState;
     private BooleanState ParkedState;
+    private EngineOil EngineOil;
     private String[] Tags;
     private Boolean Deleted;
 
@@ -311,6 +314,12 @@ public class Vehicle extends AbstractMojioObject {
 
     public void setParkedState(BooleanState parkedState) {
         ParkedState = parkedState;
+    }
+
+    public EngineOil getEngineOil() { return EngineOil; }
+
+    public void setEngineOil(EngineOil engineOil) {
+        EngineOil = engineOil;
     }
 
     public Rpm getRPM() {
