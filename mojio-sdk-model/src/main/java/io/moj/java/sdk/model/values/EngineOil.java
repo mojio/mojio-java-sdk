@@ -34,11 +34,11 @@ public class EngineOil {
         EngineOilPressureLowWarning = engineOilPressureLowWarning;
     }
 
-    public io.moj.java.sdk.model.values.EngineOilTemperature getEngineOilTemperature() {
+    public EngineOilTemperature getEngineOilTemperature() {
         return EngineOilTemperature;
     }
 
-    public void setEngineOilTemperature(io.moj.java.sdk.model.values.EngineOilTemperature engineOilTemperature) {
+    public void setEngineOilTemperature(EngineOilTemperature engineOilTemperature) {
         EngineOilTemperature = engineOilTemperature;
     }
 
