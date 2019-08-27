@@ -4,7 +4,7 @@ package io.moj.java.sdk.model.values;
  * Model object for vehicle EngineOilTemperature.
  * Created by oleksii borys on 2019-08-22.
  */
-class EngineOilTemperature {
+public class EngineOilTemperature {
 
     public static final String BASEUNIT = "BaseUnit";
     public static final String TIMESTAMP = "Timestamp";
