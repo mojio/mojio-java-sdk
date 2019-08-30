@@ -8,8 +8,6 @@ import retrofit2.Response;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import javax.annotation.Nullable;
-
 /**
  * Default {@link io.moj.java.sdk.auth.Authenticator} implementation that performs basic fetching, catching, and
  * refreshing of Mojio access tokens.
@@ -41,7 +39,6 @@ public class DefaultAuthenticator implements Authenticator {
     }
 
     @Override
-    @Nullable
     public AccessToken getAccessToken() {
         synchronized (lock) {
             if (accessToken == null) {
@@ -70,7 +67,6 @@ public class DefaultAuthenticator implements Authenticator {
         }
     }
 
-    @Nullable
     private AccessToken refreshAccessToken(AccessToken accessToken) {
         if (accessToken.getRefreshToken() == null || accessToken.getRefreshToken().isEmpty()) {
             return accessToken;
