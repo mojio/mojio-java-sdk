@@ -6,6 +6,9 @@ variables:
     value: gradlew
   - name: GRADLE_OPTIONS
     value: -Xmx4096m
-      javaHomeOption: 'JDKVersion'
-      jdkVersionOption: '1.8'
-      jdkArchitectureOption: 'x64'
+  - name: JAVA_HOME_OPTION
+      value: JDKVersion
+  - name: JDK_VERSION_OPTION
+      value: 1.8
+  - name: JDK_ARCH_OPTION
+      value: x64
