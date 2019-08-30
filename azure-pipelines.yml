@@ -14,9 +14,6 @@ trigger:
     include:
       - '*'
 
-# Load Variables
-variables:
-  - template: build-variables.yml
 
 # Define Stages & Jobs
 stages:
@@ -24,53 +21,58 @@ stages:
     jobs:
       - job: GradleClean
         pool:
-          vmImage: ${{ variables.VM_IMAGE }}
+          vmImage: 'ubuntu-latest'
         steps:
           - task: Gradle@2
             inputs:
-              gradleWrapperFile: ${{ variables.GRADLE_WRAPPER_FILE }}
-              gradleOptions: ${{ variables.GRADLE_OPTIONS }}
+              gradleWrapperFile: 'gradlew'
+              gradleOptions: '-Xmx3072m'
+              jdkVersionOption: '1.8'
+              jdkArchitectureOption: 'x64'
               tasks: 'clean'
 
   - stage: Build
     jobs:
       - job: GradleAssemble
         pool:
-          vmImage: ${{ variables.VM_IMAGE }}
+          vmImage: 'ubuntu-latest'
         steps:
           - task: Gradle@2
             enabled: true
             inputs:
-              gradleWrapperFile: ${{ variables.GRADLE_WRAPPER_FILE }}
-              gradleOptions: ${{ variables.GRADLE_OPTIONS }}
+              gradleWrapperFile: 'gradlew'
+              gradleOptions: '-Xmx3072m'
+              jdkVersionOption: '1.8'
+              jdkArchitectureOption: 'x64'
               tasks: 'assemble'
 
   - stage: Lint
     jobs:
       - job: GradleLint
         pool:
-          vmImage: ${{ variables.VM_IMAGE }}
+          vmImage: 'ubuntu-latest'
         steps:
           - task: Gradle@2
             enabled: true
             inputs:
-              gradleWrapperFile: ${{ variables.GRADLE_WRAPPER_FILE }}
-              gradleOptions: ${{ variables.GRADLE_OPTIONS }}
-              checkStyleRunAnalysis: true
-              findBugsRunAnalysis: true
-              pmdRunAnalysis: true
+              gradleWrapperFile: 'gradlew'
+              gradleOptions: '-Xmx3072m'
+              jdkVersionOption: '1.8'
+              jdkArchitectureOption: 'x64'
               tasks: 'lint'
 
   - stage: Test
     jobs:
       - job: GradleTest
         pool:
-          vmImage: ${{ variables.VM_IMAGE }}
+          vmImage: 'ubuntu-latest'
         steps:
           - task: Gradle@2
             inputs:
-              gradleWrapperFile: ${{ variables.GRADLE_WRAPPER_FILE }}
-              gradleOptions: ${{ variables.GRADLE_OPTIONS }}
+              gradleWrapperFile: 'gradlew'
+              gradleOptions: '-Xmx3072m'
+              jdkVersionOption: '1.8'
+              jdkArchitectureOption: 'x64'
               publishJUnitResults: true
               tasks: 'test'
 
