@@ -79,7 +79,7 @@ public class DefaultAuthenticator implements Authenticator {
                 accessToken = new AccessToken(authResponse.getAccessToken(), authResponse.getRefreshToken(),
                         requestTimestamp + TimeUnit.SECONDS.toMillis(authResponse.getExpiresIn()));
             } else {
-                // TODO log failure here?
+                Log.e(TAG, "Error trying to requests access token -- " + response.errorBody());
                 return null;
             }
         } catch (IOException e) {
