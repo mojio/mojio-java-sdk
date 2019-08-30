@@ -1,0 +1,11 @@
+# Variables to use across Pipeline Steps
+variables:
+  - name: VM_IMAGE
+    value: ubuntu-latest
+  - name: GRADLE_WRAPPER_FILE
+    value: gradlew
+  - name: GRADLE_OPTIONS
+    value: -Xmx4096m
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.8'
+      jdkArchitectureOption: 'x64'

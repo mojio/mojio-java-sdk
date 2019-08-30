@@ -1,23 +1,76 @@
 # Gradle
+
 # Build your Java project and run tests with Gradle using a Gradle wrapper script.
 # Add steps that analyze code, save build artifacts, deploy, and more:
+
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
+# https://docs.microsoft.com/azure/devops/pipelines/languages/android
+# https://docs.microsoft.com/en-au/azure/devops/pipelines/?view=azure-devops
 
+# Triggers
 trigger:
-- master
+  batch: true
+  branches:
+    include:
+      - '*'
 
-pool:
-  vmImage: 'ubuntu-latest'
+# Load Variables
+variables:
+  - template: build-variables.yml
 
-steps:
-- task: Gradle@2
-  inputs:
-    workingDirectory: ''
-    gradleWrapperFile: 'gradlew'
-    gradleOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: false
-    testResultsFiles: '**/TEST-*.xml'
-    tasks: 'build'
+# Define Stages & Jobs
+stages:
+  - stage: Pre
+    jobs:
+      - job: GradleClean
+        pool:
+          vmImage: ${{ variables.VM_IMAGE }}
+        steps:
+          - task: Gradle@2
+            inputs:
+              gradleWrapperFile: ${{ variables.GRADLE_WRAPPER_FILE }}
+              gradleOptions: ${{ variables.GRADLE_OPTIONS }}
+              tasks: 'clean'
+
+  - stage: Build
+    jobs:
+      - job: GradleAssemble
+        pool:
+          vmImage: ${{ variables.VM_IMAGE }}
+        steps:
+          - task: Gradle@2
+            enabled: true
+            inputs:
+              gradleWrapperFile: ${{ variables.GRADLE_WRAPPER_FILE }}
+              gradleOptions: ${{ variables.GRADLE_OPTIONS }}
+              tasks: 'assemble'
+
+  - stage: Lint
+    jobs:
+      - job: GradleLint
+        pool:
+          vmImage: ${{ variables.VM_IMAGE }}
+        steps:
+          - task: Gradle@2
+            enabled: true
+            inputs:
+              gradleWrapperFile: ${{ variables.GRADLE_WRAPPER_FILE }}
+              gradleOptions: ${{ variables.GRADLE_OPTIONS }}
+              checkStyleRunAnalysis: true
+              findBugsRunAnalysis: true
+              pmdRunAnalysis: true
+              tasks: 'lint'
+
+  - stage: Test
+    jobs:
+      - job: GradleTest
+        pool:
+          vmImage: ${{ variables.VM_IMAGE }}
+        steps:
+          - task: Gradle@2
+            inputs:
+              gradleWrapperFile: ${{ variables.GRADLE_WRAPPER_FILE }}
+              gradleOptions: ${{ variables.GRADLE_OPTIONS }}
+              publishJUnitResults: true
+              tasks: 'test'
+
