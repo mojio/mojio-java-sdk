@@ -1,5 +1,7 @@
 package io.moj.java.sdk.model.values;
 
+import com.google.gson.annotations.SerializedName;
+
 import io.moj.java.sdk.model.enums.CompatLevel;
 
 /**
@@ -9,8 +11,11 @@ import io.moj.java.sdk.model.enums.CompatLevel;
 
 public class CompatDetails {
 
+    @SerializedName(value = "Level", alternate = "level")
     private CompatLevel Level;
+    @SerializedName(value = "LastChecked", alternate = "lastChecked")
     private String LastChecked;
+    @SerializedName(value = "Changed", alternate = "changed")
     private boolean Changed;
 
     public CompatLevel getLevel() {

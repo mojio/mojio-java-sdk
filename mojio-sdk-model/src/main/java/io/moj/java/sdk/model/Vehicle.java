@@ -1,5 +1,7 @@
 package io.moj.java.sdk.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Arrays;
 
 import io.moj.java.sdk.model.enums.FuelEfficiencyCalculationMethod;
@@ -10,6 +12,7 @@ import io.moj.java.sdk.model.values.Battery;
 import io.moj.java.sdk.model.values.BooleanState;
 import io.moj.java.sdk.model.values.CompatDetails;
 import io.moj.java.sdk.model.values.DiagnosticCode;
+import io.moj.java.sdk.model.values.EngineOil;
 import io.moj.java.sdk.model.values.FuelEfficiency;
 import io.moj.java.sdk.model.values.FuelLevel;
 import io.moj.java.sdk.model.values.HarshEventState;
@@ -20,6 +23,7 @@ import io.moj.java.sdk.model.values.Odometer;
 import io.moj.java.sdk.model.values.Rpm;
 import io.moj.java.sdk.model.values.Speed;
 import io.moj.java.sdk.model.values.VehicleDetails;
+import io.moj.java.sdk.model.values.VehicleProperties;
 import io.moj.java.sdk.utils.TimeUtils;
 
 /**
@@ -62,43 +66,86 @@ public class Vehicle extends AbstractMojioObject {
     public static final String VIN_DETAILS = "VinDetails";
     public static final String TOW_STATE = "TowState";
     public static final String PARKED_STATE = "ParkedState";
+    public static final String ENGINE_OIL = "EngineOil";
     public static final String TAGS = "Tags";
+    public static final String DELETED = "Deleted";
 
+    @SerializedName(value = "Name", alternate = "name")
     private String Name;
+    @SerializedName(value = "LicensePlate", alternate = "licensePlate")
     private String LicensePlate;
+    @SerializedName(value = "VIN", alternate = "vin")
     private String VIN;
+    @SerializedName(value = "DetectedVIN", alternate = "detectedVIN")
     private String DetectedVIN;
+    @SerializedName(value = "OverrideVIN", alternate = "overrideVIN")
     private String OverrideVIN;
+    @SerializedName(value = "CompatDetails", alternate = "compatDetails")
     private CompatDetails CompatDetails;
+    @SerializedName(value = "CurrentTrip", alternate = "currentTrip")
     private String CurrentTrip;
+    @SerializedName(value = "MojioId", alternate = "mojioId")
     private String MojioId;
+    @SerializedName(value = "Image", alternate = "image")
     private Image Image;
+    @SerializedName(value = "MilStatus", alternate = "milStatus")
     private Boolean MilStatus;
+    @SerializedName(value = "LastContactTime", alternate = "lastContactTime")
     private String LastContactTime;
+    @SerializedName(value = "DiagnosticCodes", alternate = "diagnosticCodes")
     private DiagnosticCode[] DiagnosticCodes;
+    @SerializedName(value = "Accelerometer", alternate = "accelerometer")
     private Accelerometer Accelerometer;
+    @SerializedName(value = "Acceleration", alternate = "acceleration")
     private Acceleration Acceleration;
+    @SerializedName(value = "Deceleration", alternate = "deceleration")
     private Acceleration Deceleration;
+    @SerializedName(value = "Speed", alternate = "speed")
     private Speed Speed;
+    @SerializedName(value = "Odometer", alternate = "odometer")
     private Odometer Odometer;
+    @SerializedName(value = "VirtualOdometer", alternate = "virtualOdometer")
     private Odometer VirtualOdometer;
+    @SerializedName(value = "RPM", alternate = "rpm")
     private Rpm RPM;
+    @SerializedName(value = "FuelEfficiency", alternate = "fuelEfficiency")
     private FuelEfficiency FuelEfficiency;
+    @SerializedName(value = "FuelEfficiencyCalculationMethod", alternate = "fuelEfficiencyCalculationMethod")
     private FuelEfficiencyCalculationMethod FuelEfficiencyCalculationMethod;
+    @SerializedName(value = "FuelLevel", alternate = "fuelLevel")
     private FuelLevel FuelLevel;
+    @SerializedName(value = "FuelType", alternate = "fuelType")
     private FuelType FuelType;
+    @SerializedName(value = "GatewayTime", alternate = "gatewayTime")
     private String GatewayTime;
+    @SerializedName(value = "HarshEventState", alternate = "harshEventState")
     private HarshEventState HarshEventState;
+    @SerializedName(value = "IdleState", alternate = "idleState")
     private BooleanState IdleState;
+    @SerializedName(value = "IgnitionState", alternate = "ignitionState")
     private BooleanState IgnitionState;
+    @SerializedName(value = "Battery", alternate = "battery")
     private Battery Battery;
+    @SerializedName(value = "Heading", alternate = "heading")
     private Heading Heading;
+    @SerializedName(value = "Location", alternate = "location")
     private Location Location;
+    @SerializedName(value = "AccidentState", alternate = "accidentState")
     private BooleanState AccidentState;
+    @SerializedName(value = "VinDetails", alternate = "vinDetails")
     private VehicleDetails VinDetails;
+    @SerializedName(value = "TowState", alternate = "towState")
     private BooleanState TowState;
+    @SerializedName(value = "ParkedState", alternate = "parkedState")
     private BooleanState ParkedState;
+    @SerializedName(value = "Tags", alternate = "tags")
     private String[] Tags;
+    @SerializedName(value = "EngineOil", alternate = "engineoil")
+    private EngineOil EngineOil;
+    @SerializedName(value = "Deleted", alternate = "deleted")
+    private Boolean Deleted;
+    @SerializedName(value = "properties", alternate = "Properties")
+    private VehicleProperties Properties;
 
     public Acceleration getAcceleration() {
         return Acceleration;
@@ -311,6 +358,12 @@ public class Vehicle extends AbstractMojioObject {
         ParkedState = parkedState;
     }
 
+    public EngineOil getEngineOil() { return EngineOil; }
+
+    public void setEngineOil(EngineOil engineOil) {
+        EngineOil = engineOil;
+    }
+
     public Rpm getRPM() {
         return RPM;
     }
@@ -383,6 +436,22 @@ public class Vehicle extends AbstractMojioObject {
         CompatDetails = compatDetails;
     }
 
+    public Boolean getDeleted() {
+        return Deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        Deleted = deleted;
+    }
+
+    public VehicleProperties getProperties() {
+        return Properties;
+    }
+
+    public void setProperties(VehicleProperties properties) {
+        Properties = properties;
+    }
+
     @Override
     public String toString() {
         return "Vehicle{" +
@@ -420,7 +489,10 @@ public class Vehicle extends AbstractMojioObject {
                 ", VinDetails=" + VinDetails +
                 ", TowState=" + TowState +
                 ", ParkedState=" + ParkedState +
+                ", EngineOil=" + EngineOil +
                 ", Tags=" + Arrays.toString(Tags) +
+                ", Deleted=" + Deleted +
+                ", Properties=" + Properties +
                 "} " + super.toString();
     }
 }

@@ -1,5 +1,7 @@
 package io.moj.java.sdk.model.response;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
@@ -8,6 +10,7 @@ import java.util.List;
  */
 public class DataResponse<T> extends MessageResponse {
 
+    @SerializedName(value = "data", alternate = "Data")
     private List<T> Data;
 
     public List<T> getData() {

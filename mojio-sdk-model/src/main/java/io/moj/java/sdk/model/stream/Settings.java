@@ -1,8 +1,10 @@
 package io.moj.java.sdk.model.stream;
 
-import io.moj.java.sdk.model.values.Speed;
-
 import java.util.Arrays;
+
+import com.google.gson.annotations.SerializedName;
+
+import io.moj.java.sdk.model.values.Speed;
 
 /**
  * Activity stream settings model.
@@ -23,30 +25,80 @@ public class Settings {
     public static final String ENABLE_RECALL = "EnableRecallActivity";
     public static final String ENABLE_SERVICE_BULLETIN = "EnableServiceBulletinActivity";
     public static final String ENABLE_DISTURBANCE = "EnableDisturbanceActivity";
+    public static final String DISTURBANCE_THRESHOLD = "DisturbanceThreshold";
     public static final String ENABLE_ACCIDENT = "EnableAccidentActivity";
     public static final String ENABLE_DEVICE_UNPLUGGED = "EnableDeviceUnpluggedActivity";
     public static final String ENABLE_VEHICLE_CONNECTED = "EnableVehicleConnectedActivity";
     public static final String ENABLE_GEOFENCE = "EnableGeofenceActivity";
     public static final String GEOFENCES = "Geofences";
+    public static final String ENABLE_ACCIDENT_E911 = "EnableAccidentE911Activity";
+    public static final String ENABLE_ACCIDENT_SOS = "EnableAccidentSOSActivity";
+    public static final String ENABLE_DEVICE_UPDATED = "EnableDeviceUpdatedActivity";
+    public static final String ENABLE_SMS = "EnableSMSActivity";
+    public static final String ENABLE_VEHICLE_COMPATIBILITY = "EnableVehicleCompatibilityActivity";
+    public static final String ENABLE_MAIN_FIRMWARE_COMPATIBILITY = "EnableMainFirmwareCompatibilityActivity";
+    public static final String ENABLE_HARDWARE_VERSION_COMPATIBILITY = "EnableHardwareVersionCompatibilityActivity";
+    public static final String ENABLE_SERVICE_SCHEDULE = "EnableServiceScheduleActivity";
 
+    // V2 + V3 fields
+    @SerializedName(value = "EnableTripStartActivity", alternate = "enableTripStartActivity")
     private Boolean EnableTripStartActivity;
+    @SerializedName(value = "EnableTripCompletedActivity", alternate = "enableTripCompletedActivity")
     private Boolean EnableTripCompletedActivity;
+    @SerializedName(value = "EnableLowFuelActivity", alternate = "enableLowFuelActivity")
     private Boolean EnableLowFuelActivity;
+    @SerializedName(value = "EnableLowBatteryActivity", alternate = "enableLowBatteryActivity")
     private Boolean EnableLowBatteryActivity;
+    @SerializedName(value = "EnableSpeedActivity", alternate = "enableSpeedActivity")
     private Boolean EnableSpeedActivity;
+    @SerializedName(value = "SpeedThreshold", alternate = "speedThreshold")
     private Speed SpeedThreshold;
+    @SerializedName(value = "EnableDtcActivity", alternate = "enableDtcActivity")
     private Boolean EnableDtcActivity;
+    @SerializedName(value = "EnableCheckEngineActivity", alternate = "enableCheckEngineActivity")
     private Boolean EnableCheckEngineActivity;
+    @SerializedName(value = "EnableTowActivity", alternate = "enableTowActivity")
     private Boolean EnableTowActivity;
+    @SerializedName(value = "EnableMaintenanceActivity", alternate = "enableMaintenanceActivity")
     private Boolean EnableMaintenanceActivity;
+    @SerializedName(value = "EnableRecallActivity", alternate = "enableRecallActivity")
     private Boolean EnableRecallActivity;
+    @SerializedName(value = "EnableServiceBulletinActivity", alternate = "enableServiceBulletinActivity")
     private Boolean EnableServiceBulletinActivity;
+    @SerializedName(value = "EnableDisturbanceActivity", alternate = "enableDisturbanceActivity")
     private Boolean EnableDisturbanceActivity;
+    @SerializedName(value = "DisturbanceThreshold", alternate = "disturbanceThreshold")
+    private String DisturbanceThreshold;
+    @SerializedName(value = "EnableAccidentActivity", alternate = "enableAccidentActivity")
     private Boolean EnableAccidentActivity;
+    @SerializedName(value = "EnableDeviceUnpluggedActivity", alternate = "enableDeviceUnpluggedActivity")
     private Boolean EnableDeviceUnpluggedActivity;
+    @SerializedName(value = "EnableVehicleConnectedActivity", alternate = "enableVehicleConnectedActivity")
     private Boolean EnableVehicleConnectedActivity;
+
+    // V2 only fields
+    @SerializedName(value = "EnableGeofenceActivity", alternate = "enableGeofenceActivity")
     private Boolean EnableGeofenceActivity;
+    @SerializedName(value = "Geofences", alternate = "geofences")
     private Geofence[] Geofences;
+
+    // V3 only fields
+    @SerializedName(value = "EnableAccidentE911Activity", alternate = "enableAccidentE911Activity")
+    private Boolean EnableAccidentE911Activity;
+    @SerializedName(value = "EnableAccidentSOSActivity", alternate = "enableAccidentSOSActivity")
+    private Boolean EnableAccidentSOSActivity;
+    @SerializedName(value = "EnableDeviceUpdatedActivity", alternate = "enableDeviceUpdatedActivity")
+    private Boolean EnableDeviceUpdatedActivity;
+    @SerializedName(value = "EnableSMSActivity", alternate = "enableSMSActivity")
+    private Boolean EnableSMSActivity;
+    @SerializedName(value = "EnableVehicleCompatibilityActivity", alternate = "enableVehicleCompatibilityActivity")
+    private Boolean EnableVehicleCompatibilityActivity;
+    @SerializedName(value = "EnableMainFirmwareCompatibilityActivity", alternate = "enableMainFirmwareCompatibilityActivity")
+    private Boolean EnableMainFirmwareCompatibilityActivity;
+    @SerializedName(value = "EnableHardwareVersionCompatibilityActivity", alternate = "enableHardwareVersionCompatibilityActivity")
+    private Boolean EnableHardwareVersionCompatibilityActivity;
+    @SerializedName(value = "EnableServiceScheduleActivity", alternate = "enableServiceScheduleActivity")
+    private Boolean EnableServiceScheduleActivity;
 
     public Boolean getEnableGeofenceActivity() {
         return EnableGeofenceActivity;
@@ -160,6 +212,14 @@ public class Settings {
         EnableDisturbanceActivity = enableDisturbanceActivity;
     }
 
+    public DisturbanceSensitivity getDisturbanceThreshold() {
+        return DisturbanceSensitivity.fromKey(DisturbanceThreshold);
+    }
+
+    public void setDisturbanceThreshold(DisturbanceSensitivity disturbanceThreshold) {
+        DisturbanceThreshold = disturbanceThreshold == null ? null : disturbanceThreshold.getKey();
+    }
+
     public Boolean getEnableAccidentActivity() {
         return EnableAccidentActivity;
     }
@@ -192,6 +252,70 @@ public class Settings {
         Geofences = geofences;
     }
 
+    public Boolean getEnableAccidentE911Activity() {
+        return EnableAccidentE911Activity;
+    }
+
+    public void setEnableAccidentE911Activity(Boolean enableAccidentE911Activity) {
+        EnableAccidentE911Activity = enableAccidentE911Activity;
+    }
+
+    public Boolean getEnableAccidentSOSActivity() {
+        return EnableAccidentSOSActivity;
+    }
+
+    public void setEnableAccidentSOSActivity(Boolean enableAccidentSOSActivity) {
+        EnableAccidentSOSActivity = enableAccidentSOSActivity;
+    }
+
+    public Boolean getEnableDeviceUpdatedActivity() {
+        return EnableDeviceUpdatedActivity;
+    }
+
+    public void setEnableDeviceUpdatedActivity(Boolean enableDeviceUpdatedActivity) {
+        EnableDeviceUpdatedActivity = enableDeviceUpdatedActivity;
+    }
+
+    public Boolean getEnableSMSActivity() {
+        return EnableSMSActivity;
+    }
+
+    public void setEnableSMSActivity(Boolean enableSMSActivity) {
+        EnableSMSActivity = enableSMSActivity;
+    }
+
+    public Boolean getEnableVehicleCompatibilityActivity() {
+        return EnableVehicleCompatibilityActivity;
+    }
+
+    public void setEnableVehicleCompatibilityActivity(Boolean enableVehicleCompatibilityActivity) {
+        EnableVehicleCompatibilityActivity = enableVehicleCompatibilityActivity;
+    }
+
+    public Boolean getEnableMainFirmwareCompatibilityActivity() {
+        return EnableMainFirmwareCompatibilityActivity;
+    }
+
+    public void setEnableMainFirmwareCompatibilityActivity(Boolean enableMainFirmwareCompatibilityActivity) {
+        EnableMainFirmwareCompatibilityActivity = enableMainFirmwareCompatibilityActivity;
+    }
+
+    public Boolean getEnableHardwareVersionCompatibilityActivity() {
+        return EnableHardwareVersionCompatibilityActivity;
+    }
+
+    public void setEnableHardwareVersionCompatibilityActivity(Boolean enableHardwareVersionCompatibilityActivity) {
+        EnableHardwareVersionCompatibilityActivity = enableHardwareVersionCompatibilityActivity;
+    }
+
+    public Boolean getEnableServiceScheduleActivity() {
+        return EnableServiceScheduleActivity;
+    }
+
+    public void setEnableServiceScheduleActivity(Boolean enableServiceScheduleActivity) {
+        EnableServiceScheduleActivity = enableServiceScheduleActivity;
+    }
+
     @Override
     public String toString() {
         return "Settings{" +
@@ -208,11 +332,20 @@ public class Settings {
                 ", EnableRecallActivity=" + EnableRecallActivity +
                 ", EnableServiceBulletinActivity=" + EnableServiceBulletinActivity +
                 ", EnableDisturbanceActivity=" + EnableDisturbanceActivity +
+                ", DisturbanceThreshold='" + DisturbanceThreshold + '\'' +
                 ", EnableAccidentActivity=" + EnableAccidentActivity +
                 ", EnableDeviceUnpluggedActivity=" + EnableDeviceUnpluggedActivity +
                 ", EnableVehicleConnectedActivity=" + EnableVehicleConnectedActivity +
                 ", EnableGeofenceActivity=" + EnableGeofenceActivity +
                 ", Geofences=" + Arrays.toString(Geofences) +
+                ", EnableAccidentE911Activity=" + EnableAccidentE911Activity +
+                ", EnableAccidentSOSActivity=" + EnableAccidentSOSActivity +
+                ", EnableDeviceUpdatedActivity=" + EnableDeviceUpdatedActivity +
+                ", EnableSMSActivity=" + EnableSMSActivity +
+                ", EnableVehicleCompatibilityActivity=" + EnableVehicleCompatibilityActivity +
+                ", EnableMainFirmwareCompatibilityActivity=" + EnableMainFirmwareCompatibilityActivity +
+                ", EnableHardwareVersionCompatibilityActivity=" + EnableHardwareVersionCompatibilityActivity +
+                ", EnableServiceScheduleActivity=" + EnableServiceScheduleActivity +
                 '}';
     }
 
@@ -258,6 +391,31 @@ public class Settings {
                     ", EnableEnterActivity=" + EnableEnterActivity +
                     ", EnableExitActivity=" + EnableExitActivity +
                     '}';
+        }
+    }
+
+    public enum DisturbanceSensitivity {
+        LOW("Low"),
+        MEDIUM("Medium"),
+        HIGH("High");
+
+        private String key;
+
+        DisturbanceSensitivity(String key) {
+            this.key = key;
+        }
+
+        public String getKey() {
+            return key;
+        }
+
+        public static DisturbanceSensitivity fromKey(String key) {
+            for (DisturbanceSensitivity disturbanceSensitivity : values()) {
+                if (disturbanceSensitivity.getKey().equals(key)) {
+                    return disturbanceSensitivity;
+                }
+            }
+            return null;
         }
     }
 }

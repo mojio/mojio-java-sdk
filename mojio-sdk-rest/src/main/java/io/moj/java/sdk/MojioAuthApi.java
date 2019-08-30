@@ -26,6 +26,7 @@ public interface MojioAuthApi {
     String GRANT_TYPE_PASSWORD = "password";
     String GRANT_TYPE_REFRESH = "refresh_token";
     String GRANT_TYPE_PHONE = "phone";
+    String GRANT_TYPE_THIRD_PARTY = "ext_idp";
 
     /**
      * Endpoint for requesting an access token. Constructs the request body as follows:
@@ -40,6 +41,7 @@ public interface MojioAuthApi {
      * @param password
      * @param clientId
      * @param clientSecret
+     * @param scope
      * @return
      */
     @POST("oauth2/token")
@@ -48,7 +50,36 @@ public interface MojioAuthApi {
                              @Field("username") String username,
                              @Field("password") String password,
                              @Field("client_id") String clientId,
-                             @Field("client_secret") String clientSecret);
+                             @Field("client_secret") String clientSecret,
+                             @Field("scope") String scope);
+
+    /**
+     * Endpoint for requesting an access token. Constructs the request body as follows:
+     * "grant_type=password&password={password}&username={username}&client_id={client_id}&secret_key={secret_key}&scope=full",
+     * see <a href="http://tools.ietf.org/html/rfc6749#section-4.3.2">RFC6749 - Section 4.3.2</a>
+     * <br><br>
+     * For refreshing: "grant_type=refresh_token&refresh_token={refresh_token}",
+     * see <a href="http://tools.ietf.org/html/rfc6749#section-62">RFC6749 - Section 6</a>
+     * @param grantType should be "password", use {@link #GRANT_TYPE_PASSWORD}. Only required
+     *                  because https://github.com/square/retrofit/issues/951 hasn't been implemented
+     * @param provider
+     * @param token
+     * @param clientId
+     * @param clientSecret
+     * @param scope
+     * @return
+     */
+    @POST("oauth2/token")
+    @FormUrlEncoded
+    Call<AuthResponse> loginToThirdParty(@Field("grant_type") String grantType,
+                             @Field("provider") String provider,
+                             @Field("token") String token,
+                             @Field("client_id") String clientId,
+                             @Field("client_secret") String clientSecret,
+                             @Field("scope") String scope,
+                             @Field("first_name") String firstName,
+                             @Field("last_name") String lastName,
+                             @Field("email") String email);
 
     /**
      * Endpoint for requesting an access token. Constructs the request body as follows:
@@ -72,7 +103,8 @@ public interface MojioAuthApi {
                                     @Field("phone_number") String phoneNumber,
                                     @Field("pin") String pin,
                                     @Field("client_id") String clientId,
-                                    @Field("client_secret") String clientSecret);
+                                    @Field("client_secret") String clientSecret,
+                                    @Field("scope") String scope);
 
     /**
      * Endpoint for refreshing an access token. Constructs the request body as follows:
@@ -83,6 +115,9 @@ public interface MojioAuthApi {
      * @param refreshToken the refresh token that was granted with the original access token
      * @param clientId
      * @param clientSecret
+     * @param device unique device id. It allows to implement two-factor authentication which
+     *               permits certain API calls to the specific device. All attempts to use such API
+     *               calls without an auth token with a device claim will lead to 403 error.
      * @return
      */
     @POST("oauth2/token")
@@ -90,7 +125,8 @@ public interface MojioAuthApi {
     Call<AuthResponse> refresh(@Field("grant_type") String grantType,
                                @Field("refresh_token") String refreshToken,
                                @Field("client_id") String clientId,
-                               @Field("client_secret") String clientSecret);
+                               @Field("client_secret") String clientSecret,
+                               @Field("device") String device);
 
     /**
      * Endpoint for registering a user via phone number. Calling this endpoint will send a 4-digit PIN to the specified
@@ -117,7 +153,7 @@ public interface MojioAuthApi {
             "Content-Type: application/json",
             "Accept: application/json"
     })
-    Call<RegistrationResponse> forgotPassword(@Body ForgotPasswordRequest request);
+    Call<RegistrationResponse> forgotPassword(@Header("Authorization") String auth, @Body ForgotPasswordRequest request);
 
     /**
      * Endpoint for resetting the password

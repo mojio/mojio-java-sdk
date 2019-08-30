@@ -18,6 +18,7 @@ import io.moj.java.sdk.model.stream.ActivityObject;
 import io.moj.java.sdk.model.stream.Settings;
 import io.moj.java.sdk.model.values.AccessModel;
 import io.moj.java.sdk.model.values.Aggregate;
+import io.moj.java.sdk.model.values.DeviceConfiguration;
 import io.moj.java.sdk.model.values.DiagnosticCode;
 import io.moj.java.sdk.model.values.DtcStatusUpdate;
 import io.moj.java.sdk.model.values.Email;
@@ -120,47 +121,11 @@ public interface MojioRestApi {
     // endregion
 
     // region History
-    @GET("trips/{id}/history/states")
-    Call<ListResponse<VehicleMeasure>> getTripStates(@Path("id") String tripId);
-
-    @GET("trips/{id}/history/states")
-    Call<ListResponse<VehicleMeasure>> getTripStates(@Path("id") String tripId, @QueryMap Map<String, String> params);
-
-    @GET("trips/{id}/history/states/{stateId}")
-    Call<VehicleMeasure> getTripState(@Path("id") String tripId, @Path("stateId") String stateId);
-
-    @GET("trips/{id}/history/states/{stateId}")
-    Call<VehicleMeasure> getTripState(@Path("id") String tripId, @Path("stateId") String stateId, @QueryMap Map<String, String> params);
-
-    @GET("trips/{id}/history/locations")
-    Call<ListResponse<Location>> getTripLocations(@Path("id") String tripId);
-
-    @GET("trips/{id}/history/locations")
-    Call<ListResponse<Location>> getTripLocations(@Path("id") String tripId, @QueryMap Map<String, String> params);
-
-    @GET("trips/{id}/history/locations/polyline")
-    Call<Polyline> getTripPolyline(@Path("id") String tripId);
-
-    @GET("trips/{id}/history/locations/polyline")
-    Call<Polyline> getTripPolyline(@Path("id") String tripId, @QueryMap Map<String, String> params);
-
-    @GET("vehicles/{id}/history/states")
-    Call<ListResponse<VehicleMeasure>> getVehicleStates(@Path("id") String vehicleId);
-
-    @GET("vehicles/{id}/history/states")
-    Call<ListResponse<VehicleMeasure>> getVehicleStates(@Path("id") String vehicleId, @QueryMap Map<String, String> params);
+    @GET("vehicles/{vehicleId}/trips/{id}/history/locations/polyline")
+    Call<Polyline> getTripPolyline(@Path("vehicleId") String vehicleId, @Path("id") String tripId);
 
     @GET("vehicles/{id}/history/states/{stateId}")
     Call<VehicleMeasure> getVehicleState(@Path("id") String vehicleId, @Path("stateId") String stateId);
-
-    @GET("vehicles/{id}/history/states/{stateId}")
-    Call<VehicleMeasure> getVehicleState(@Path("id") String vehicleId, @Path("stateId") String stateId, @QueryMap Map<String, String> params);
-
-    @GET("vehicles/{id}/history/locations")
-    Call<ListResponse<Location>> getVehicleLocations(@Path("id") String vehicleId);
-
-    @GET("vehicles/{id}/history/locations")
-    Call<ListResponse<Location>> getVehicleLocations(@Path("id") String vehicleId, @QueryMap Map<String, String> params);
     // endregion
 
     // region Images
@@ -208,13 +173,19 @@ public interface MojioRestApi {
     Call<Mojio> claimMojio(@Body Mojio mojio);
 
     @PUT("mojios/{id}")
-    Call<Mojio> updateMojio(@Body Mojio mojio);
+    Call<Mojio> updateMojio(@Path("id") String mojioId, @Body Mojio mojio);
 
     @DELETE("mojios/{id}")
     Call<Mojio> unclaimMojio(@Path("id") String mojioId);
 
+    @GET("mojios/{id}/deviceconfiguration")
+    Call<DeviceConfiguration> getDeviceConfiguration(@Path("id") String mojioId);
+
     @PUT("mojios/{id}/wifiradio")
     Call<TransactionResponse> updateMojioWifi(@Path("id") String mojioId, @Body WifiRadio wifiRadio);
+
+    @PUT("mojios/{id}/deviceconfiguration")
+    Call<TransactionResponse> updateDeviceConfiguration(@Path("id") String mojioId, @Body DeviceConfiguration deviceConfiguration);
 
     @GET("mojios/{id}/transactions/{transactionId}")
     Call<Transaction> getMojioTransaction(@Path("id") String mojioId, @Path("transactionId") String transactionId);
@@ -246,6 +217,14 @@ public interface MojioRestApi {
 
     @DELETE("{resource}/{id}/tags/{tag}")
     Call<MessageResponse> deleteTag(@Path("resource") String resource, @Path("id") String id, @Path("tag") String tag);
+
+    @POST("{resource}/{id}/{subResource}/{subId}/tags/{tag}")
+    Call<String[]> addTag(@Path("resource") String resource, @Path("id") String id,
+                          @Path("subResource") String subResource, @Path("subId") String subId, @Path("tag") String tag);
+
+    @DELETE("{resource}/{id}/{subResource}/{subId}/tags/{tag}")
+    Call<MessageResponse> deleteTag(@Path("resource") String resource, @Path("id") String id,
+                                    @Path("subResource") String subResource, @Path("subId") String subId, @Path("tag") String tag);
     // endregion
 
     // region Trips
@@ -386,6 +365,12 @@ public interface MojioRestApi {
 
     @GET("users/activities")
     Call<ListResponse<ActivityObject>> getUserActivityStream(@QueryMap Map<String, String> params);
+
+    @GET("Vehicles/activities")
+    Call<ListResponse<ActivityObject>> getVehicleActivityStream();
+
+    @GET("Vehicles/activities")
+    Call<ListResponse<ActivityObject>> getVehicleActivityStream(@QueryMap Map<String, String> params);
 
     @GET("vehicles/{id}/activities/settings")
     Call<Settings> getVehicleActivitySettings(@Path("id") String vehicleId);

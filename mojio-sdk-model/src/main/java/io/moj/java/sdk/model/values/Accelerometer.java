@@ -1,15 +1,22 @@
 package io.moj.java.sdk.model.values;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Model object for an Accelerometer value.
  * Created by mhorie on 2016-01-12.
  */
 public class Accelerometer {
 
+    @SerializedName(value = "X", alternate = "x")
     private ProperAcceleration X;
+    @SerializedName(value = "Y", alternate = "y")
     private ProperAcceleration Y;
+    @SerializedName(value = "Z", alternate = "z")
     private ProperAcceleration Z;
+    @SerializedName(value = "Magnitude", alternate = "magnitude")
     private ProperAcceleration Magnitude;
+    @SerializedName(value = "SamplingInterval", alternate = "samplingInterval")
     private Duration SamplingInterval;
 
     public ProperAcceleration getMagnitude() {

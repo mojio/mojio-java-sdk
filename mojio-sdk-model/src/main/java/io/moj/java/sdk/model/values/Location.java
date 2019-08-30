@@ -1,10 +1,12 @@
 package io.moj.java.sdk.model.values;
 
-import io.moj.java.sdk.model.enums.GPSStatus;
-import io.moj.java.sdk.utils.TimeUtils;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.moj.java.sdk.model.enums.GPSStatus;
+import io.moj.java.sdk.utils.TimeUtils;
 
 /**
  * Model object for a Location.
@@ -21,13 +23,21 @@ public class Location {
     public static final String ALTITUDE = "Altitude";
     public static final String GEOHASH = "GeoHash";
 
+    @SerializedName(value = "Address", alternate = "address")
     private Address Address;
+    @SerializedName(value = "Timestamp", alternate = "timestamp")
     private String Timestamp;
+    @SerializedName(value = "Lat", alternate = "lat")
     private Float Lat;
+    @SerializedName(value = "Lng", alternate = "lng")
     private Float Lng;
+    @SerializedName(value = "Status", alternate = "status")
     private String Status;
+    @SerializedName(value = "Dilution", alternate = "dilution")
     private Float Dilution;
+    @SerializedName(value = "Altitude", alternate = "altitude")
     private Float Altitude;
+    @SerializedName(value = "GeoHash", alternate = "geoHash")
     private String GeoHash;
 
     public Address getAddress() {
@@ -90,11 +100,16 @@ public class Location {
         if (Status == null || Status.isEmpty()) {
             return null;
         }
+        String[] statusList = Status.split(",");
 
         List<GPSStatus> statuses = new ArrayList<>();
+
         for (GPSStatus status : GPSStatus.values()) {
-            if (Status.contains(status.getKey())) {
-                statuses.add(status);
+            for (String s : statusList) {
+                if (s != null && s.trim().equals(status.getKey())) {
+                    statuses.add(status);
+                    break;
+                }
             }
         }
         return statuses;

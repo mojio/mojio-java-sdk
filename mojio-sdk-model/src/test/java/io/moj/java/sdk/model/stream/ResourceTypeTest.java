@@ -1,11 +1,13 @@
 package io.moj.java.sdk.model.stream;
 
 import com.google.common.collect.ImmutableMap;
-import io.moj.java.sdk.model.enums.EnumTest;
+
 import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
+
+import io.moj.java.sdk.model.enums.EnumTest;
 
 /**
  * Created by skidson on 2016-07-08.
@@ -20,6 +22,11 @@ public class ResourceTypeTest extends EnumTest<ResourceType> {
                 .put("Mojio", ResourceType.MOJIO)
                 .put("Trip", ResourceType.TRIP)
                 .put("VehicleState", ResourceType.VEHICLE_STATE)
+                .put("ParkingStartingSoon", ResourceType.PARKING_STARTING_SOON)
+                .put("ParkingStarted", ResourceType.PARKING_STARTED)
+                .put("ParkingEndingSoon", ResourceType.PARKING_ENDING_SOON)
+                .put("ParkingEnded", ResourceType.PARKING_ENDED)
+                .put("Roadside", ResourceType.ROADSIDE_SERVICE)
                 .build();
     }
 

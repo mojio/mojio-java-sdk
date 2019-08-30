@@ -18,9 +18,15 @@ public class LoggingInterceptor implements Interceptor {
     private static final Charset UTF_8 = Charset.forName("UTF-8");
 
     private String tag;
+    private boolean logBody;
 
     public LoggingInterceptor(String tag) {
+        this(tag, true);
+    }
+
+    public LoggingInterceptor(String tag, boolean logBody) {
         this.tag = tag;
+        this.logBody = logBody;
     }
 
     @Override
@@ -36,7 +42,7 @@ public class LoggingInterceptor implements Interceptor {
 
         String endpointSignature = "[" + request.method() + " " + request.url().encodedPath() + query + "]";
         String requestMessage = "Request " + endpointSignature;
-        if (request.body() != null) {
+        if (request.body() != null && logBody) {
             try {
                 Buffer buffer = new Buffer();
                 request.body().writeTo(buffer);
@@ -51,7 +57,7 @@ public class LoggingInterceptor implements Interceptor {
         String responseMessage = "Response " + endpointSignature;
         if (response != null) {
             responseMessage += " - " + response.code() + " " + response.message();
-            if (response.body() != null && response.body().contentLength() != 0) {
+            if (response.body() != null && response.body().contentLength() != 0 && logBody) {
                 try {
                     BufferedSource source = response.body().source();
                     source.request(Long.MAX_VALUE);

@@ -1,5 +1,7 @@
 package io.moj.java.sdk.model.values;
 
+import com.google.gson.annotations.SerializedName;
+
 import io.moj.java.sdk.model.enums.FuelEfficiencyUnit;
 
 /**
@@ -8,8 +10,11 @@ import io.moj.java.sdk.model.enums.FuelEfficiencyUnit;
  */
 public class FuelEfficiency extends DeviceMeasurement {
 
+    @SerializedName(value = "Statistics", alternate = "statistics")
     private MeasurementStatistics Statistics;
+    @SerializedName(value = "BenchmarkTime", alternate = "benchmarkTime")
     private String BenchmarkTime;
+    @SerializedName(value = "BenchmarkStatistics", alternate = "benchmarkStatistics")
     private MeasurementStatistics BenchmarkStatistics;
 
     public FuelEfficiencyUnit getBaseFuelEfficiencyUnit() {
