@@ -1,5 +1,7 @@
 package io.moj.java.sdk.model.values;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Model object for vehicle EngineOilTemperature.
  * Created by oleksii borys on 2019-08-22.
@@ -12,10 +14,15 @@ public class EngineOilTemperature {
     public static final String UNIT = "Unit";
     public static final String VALUE = "Value";
 
+    @SerializedName(value = "BaseUnit", alternate = {"baseunit", "baseUnit"})
     private String BaseUnit;
+    @SerializedName(value = "TimeStamp", alternate = {"timestamp", "Timestamp"})
     private String Timestamp;
+    @SerializedName(value = "BaseValue", alternate = {"basevalue", "baseValue"})
     private Float BaseValue;
+    @SerializedName(value = "Unit", alternate = "unit")
     private String Unit;
+    @SerializedName(value = "Value", alternate = "value")
     private Float Value;
 
     public String getBaseUnit() { return BaseUnit; }

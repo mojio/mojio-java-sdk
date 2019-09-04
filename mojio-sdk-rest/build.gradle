@@ -3,7 +3,6 @@ ext {
 }
 
 apply plugin: 'java'
-apply plugin: 'jacoco'
 apply from: project.rootProject.file('maven.gradle')
 
 sourceCompatibility = SOURCE_COMPATIBILITY
@@ -12,7 +11,7 @@ targetCompatibility = SOURCE_COMPATIBILITY
 dependencies {
     compile project(":mojio-sdk-model")
 
-    def retrofitVersion = '2.1.0'
+    def retrofitVersion = '2.4.0'
     compile "com.squareup.retrofit2:retrofit:${retrofitVersion}"
     compile "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
     compile 'com.neovisionaries:nv-websocket-client:1.31'
