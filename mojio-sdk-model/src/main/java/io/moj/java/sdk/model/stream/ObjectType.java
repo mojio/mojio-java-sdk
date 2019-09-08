@@ -13,7 +13,9 @@ public enum ObjectType {
     FUEL_LEVEL("FuelLevel"),
     GEOFENCE("Geofence"),
     RECALL("Recall"),
-    NOTE("Note");
+    NOTE("Note"),
+    OIL_LEVEL("OilLevel"),
+    OIL_PRESSURE("OilPressure");
 
     private String key;
 
