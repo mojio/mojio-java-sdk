@@ -11,14 +11,14 @@ public class EngineOil {
     public static final String ENGINE_OIL_PRESSURE_LOW_WARNING = "EngineOilPressureLowWarning";
     public static final String ENGINE_OIL_TEMPERATURE = "EngineOilTemperature";
 
-    private String TimeStamp;
+    private String Timestamp;
     private String EngineOilLevelWarning;
     private Boolean EngineOilPressureLowWarning;
     private EngineOilTemperature EngineOilTemperature;
 
-    public String getTimeStamp() { return TimeStamp; }
+    public String getTimeStamp() { return Timestamp; }
 
-    public void setTimeStamp(String timeStamp) { TimeStamp = timeStamp; }
+    public void setTimeStamp(String timeStamp) { Timestamp = timeStamp; }
 
     public String getEngineOilLevelWarning() { return EngineOilLevelWarning; }
 
@@ -45,7 +45,7 @@ public class EngineOil {
     @Override
     public String toString() {
         return "EngineOil{" +
-                "TimeStamp='" + TimeStamp + '\'' +
+                "Timestamp='" + Timestamp + '\'' +
                 ", EngineOilLevelWarning='" + EngineOilLevelWarning + '\'' +
                 ", EngineOilPressureLowWarning=" + EngineOilPressureLowWarning +
                 ", EngineOilTemperature=" + EngineOilTemperature +
