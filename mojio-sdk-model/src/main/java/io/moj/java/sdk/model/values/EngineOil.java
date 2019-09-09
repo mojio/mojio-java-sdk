@@ -16,9 +16,9 @@ public class EngineOil {
     private Boolean EngineOilPressureLowWarning;
     private EngineOilTemperature EngineOilTemperature;
 
-    public String getTimeStamp() { return Timestamp; }
+    public String getTimestamp() { return Timestamp; }
 
-    public void setTimeStamp(String timeStamp) { Timestamp = timeStamp; }
+    public void setTimestamp(String timestamp) { Timestamp = timestamp; }
 
     public String getEngineOilLevelWarning() { return EngineOilLevelWarning; }
 
