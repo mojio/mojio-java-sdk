@@ -23,10 +23,12 @@ public class DefaultAuthenticator implements Authenticator {
     private Client client;
     private AccessToken accessToken;
     private boolean invalidated = false;
+    private DeviceIdProvider deviceIdProvider;
 
-    public DefaultAuthenticator(MojioAuthApi api, Client client) {
+    public DefaultAuthenticator(MojioAuthApi api, Client client, DeviceIdProvider deviceIdProvider) {
         this.api = api;
         this.client = client;
+        this.deviceIdProvider = deviceIdProvider;
     }
 
     @Override
@@ -72,12 +74,17 @@ public class DefaultAuthenticator implements Authenticator {
 
         try {
             long requestTimestamp = System.currentTimeMillis();
+            String deviceId = deviceIdProvider != null ? deviceIdProvider.getId() : null;
             Response<AuthResponse> response = api.refresh(MojioAuthApi.GRANT_TYPE_REFRESH,
-                    accessToken.getRefreshToken(), client.getKey(), client.getSecret()).execute();
+                    accessToken.getRefreshToken(), client.getKey(), client.getSecret(),
+                    deviceId).execute();
             if (response.isSuccessful()) {
                 AuthResponse authResponse = response.body();
                 accessToken = new AccessToken(authResponse.getAccessToken(), authResponse.getRefreshToken(),
                         requestTimestamp + TimeUnit.SECONDS.toMillis(authResponse.getExpiresIn()));
+            } else {
+                Log.e(TAG, "Error trying to requests access token -- " + response.errorBody());
+                return null;
             }
         } catch (IOException e) {
             Log.e(TAG, "Error trying to refresh access token", e);

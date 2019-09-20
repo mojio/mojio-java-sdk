@@ -1,5 +1,7 @@
 package io.moj.java.sdk.model.values;
 
+import com.google.gson.annotations.SerializedName;
+
 import io.moj.java.sdk.model.enums.HarshEventType;
 import io.moj.java.sdk.model.enums.TurnType;
 
@@ -9,7 +11,9 @@ import io.moj.java.sdk.model.enums.TurnType;
  */
 public class HarshEventState extends BooleanState {
 
+    @SerializedName(value = "EventType", alternate = "eventType")
     private HarshEventType EventType;
+    @SerializedName(value = "TurnType", alternate = "turnType")
     private TurnType TurnType;
 
     public HarshEventType getEventType() {

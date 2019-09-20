@@ -1,5 +1,7 @@
 package io.moj.java.sdk.model.values;
 
+import com.google.gson.annotations.SerializedName;
+
 import io.moj.java.sdk.model.enums.RiskSeverity;
 import io.moj.java.sdk.utils.TimeUtils;
 
@@ -9,10 +11,15 @@ import io.moj.java.sdk.utils.TimeUtils;
  */
 public class Battery extends Voltage {
 
+    @SerializedName(value = "Connected", alternate = "connected")
     private Boolean Connected;
+    @SerializedName(value = "RiskSeverity", alternate = "riskSeverity")
     private RiskSeverity RiskSeverity;
+    @SerializedName(value = "LowVoltageDuration", alternate = "lowVoltageDuration")
     private Duration LowVoltageDuration;
+    @SerializedName(value = "HighVoltageDuration", alternate = "highVoltageDuration")
     private Duration HighVoltageDuration;
+    @SerializedName(value = "Timestamp", alternate = "timestamp")
     private String Timestamp;
 
     public Boolean getConnected() {

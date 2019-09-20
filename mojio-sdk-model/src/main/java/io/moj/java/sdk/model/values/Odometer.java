@@ -1,11 +1,14 @@
 package io.moj.java.sdk.model.values;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Model object for a Odometer object.
  * Created by mhorie on 2016-01-14.
  */
 public class Odometer extends Distance {
 
+    @SerializedName(value = "RolloverValue", alternate = "rolloverValue")
     private float RolloverValue;
 
     public float getRolloverValue() {

@@ -1,5 +1,7 @@
 package io.moj.java.sdk.model.values;
 
+import com.google.gson.annotations.SerializedName;
+
 import io.moj.java.sdk.utils.TimeUtils;
 
 /**
@@ -7,7 +9,9 @@ import io.moj.java.sdk.utils.TimeUtils;
  * Created by Mauro on 2017-06-26.
  */
 public class IdleEventState {
+    @SerializedName(value = "StartTime", alternate = "startTime")
     private String StartTime;
+    @SerializedName(value = "Duration", alternate = "duration")
     private Duration Duration;
 
     public Long getStartTime() {

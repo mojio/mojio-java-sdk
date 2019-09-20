@@ -1,5 +1,7 @@
 package io.moj.java.sdk.model.values;
 
+import com.google.gson.annotations.SerializedName;
+
 import io.moj.java.sdk.model.enums.FuelLevelUnit;
 import io.moj.java.sdk.model.enums.RiskSeverity;
 
@@ -9,6 +11,7 @@ import io.moj.java.sdk.model.enums.RiskSeverity;
  */
 public class FuelLevel extends DeviceMeasurement {
 
+    @SerializedName(value = "RiskSeverity", alternate = "riskSeverity")
     private RiskSeverity RiskSeverity;
 
     public FuelLevelUnit getBaseFuelLevelUnit() {

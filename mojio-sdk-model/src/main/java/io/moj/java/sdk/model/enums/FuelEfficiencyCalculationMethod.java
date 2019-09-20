@@ -8,19 +8,19 @@ import com.google.gson.annotations.SerializedName;
  */
 public enum FuelEfficiencyCalculationMethod {
 
-    @SerializedName("Query")
+    @SerializedName(value = "Query", alternate = "query")
     QUERY("Query"),
 
-    @SerializedName("EngineFuelRate")
+    @SerializedName(value = "EngineFuelRate", alternate = "engineFuelRate")
     ENGINE_FUEL_RATE("EngineFuelRate"),
 
-    @SerializedName("MassAirFlow")
+    @SerializedName(value = "MassAirFlow", alternate = "massAirFlow")
     MASS_AIR_FLOW("MassAirFlow"),
 
-    @SerializedName("Calculated")
+    @SerializedName(value = "Calculated", alternate = "calculated")
     CALCULATED("Calculated"),
 
-    @SerializedName("None")
+    @SerializedName(value = "None", alternate = "none")
     NONE("None");
 
     private String key;

@@ -173,7 +173,7 @@ public interface MojioRestApi {
     Call<Mojio> claimMojio(@Body Mojio mojio);
 
     @PUT("mojios/{id}")
-    Call<Mojio> updateMojio(@Body Mojio mojio);
+    Call<Mojio> updateMojio(@Path("id") String mojioId, @Body Mojio mojio);
 
     @DELETE("mojios/{id}")
     Call<Mojio> unclaimMojio(@Path("id") String mojioId);
@@ -217,6 +217,14 @@ public interface MojioRestApi {
 
     @DELETE("{resource}/{id}/tags/{tag}")
     Call<MessageResponse> deleteTag(@Path("resource") String resource, @Path("id") String id, @Path("tag") String tag);
+
+    @POST("{resource}/{id}/{subResource}/{subId}/tags/{tag}")
+    Call<String[]> addTag(@Path("resource") String resource, @Path("id") String id,
+                          @Path("subResource") String subResource, @Path("subId") String subId, @Path("tag") String tag);
+
+    @DELETE("{resource}/{id}/{subResource}/{subId}/tags/{tag}")
+    Call<MessageResponse> deleteTag(@Path("resource") String resource, @Path("id") String id,
+                                    @Path("subResource") String subResource, @Path("subId") String subId, @Path("tag") String tag);
     // endregion
 
     // region Trips
@@ -357,6 +365,12 @@ public interface MojioRestApi {
 
     @GET("users/activities")
     Call<ListResponse<ActivityObject>> getUserActivityStream(@QueryMap Map<String, String> params);
+
+    @GET("Vehicles/activities")
+    Call<ListResponse<ActivityObject>> getVehicleActivityStream();
+
+    @GET("Vehicles/activities")
+    Call<ListResponse<ActivityObject>> getVehicleActivityStream(@QueryMap Map<String, String> params);
 
     @GET("vehicles/{id}/activities/settings")
     Call<Settings> getVehicleActivitySettings(@Path("id") String vehicleId);

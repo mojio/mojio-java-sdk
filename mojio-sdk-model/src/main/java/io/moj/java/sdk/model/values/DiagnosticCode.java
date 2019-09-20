@@ -1,5 +1,7 @@
 package io.moj.java.sdk.model.values;
 
+import com.google.gson.annotations.SerializedName;
+
 import io.moj.java.sdk.model.enums.RiskSeverity;
 
 /**
@@ -8,11 +10,17 @@ import io.moj.java.sdk.model.enums.RiskSeverity;
  */
 public class DiagnosticCode {
 
+    @SerializedName(value = "Code", alternate = "code")
     private String Code;
+    @SerializedName(value = "Description", alternate = "description")
     private String Description ;
+    @SerializedName(value = "Timestamp", alternate = "timestamp")
     private String Timestamp;
+    @SerializedName(value = "Severity", alternate = "severity")
     private RiskSeverity Severity;
+    @SerializedName(value = "Instructions", alternate = "instructions")
     private String Instructions;
+    @SerializedName(value = "Ignored", alternate = "ignored")
     private Boolean Ignored;
 
     public String getCode() {

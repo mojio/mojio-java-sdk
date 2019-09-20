@@ -1,5 +1,7 @@
 package io.moj.java.sdk.model.values;
 
+import com.google.gson.annotations.SerializedName;
+
 import io.moj.java.sdk.model.enums.FuelType;
 
 /**
@@ -8,18 +10,31 @@ import io.moj.java.sdk.model.enums.FuelType;
  */
 public class VehicleDetails {
 
+    @SerializedName(value = "Vin", alternate = "vin")
     private String Vin;
+    @SerializedName(value = "Timestamp", alternate = "timestamp")
     private String Timestamp;
+    @SerializedName(value = "Year", alternate = "year")
     private Integer Year;
+    @SerializedName(value = "Make", alternate = "make")
     private String Make;
+    @SerializedName(value = "Model", alternate = "model")
     private String Model;
+    @SerializedName(value = "Engine", alternate = "engine")
     private String Engine;
+    @SerializedName(value = "Cyclinders", alternate = "cyclinders")
     private Integer Cyclinders;
+    @SerializedName(value = "TotalFuelCapacity", alternate = "totalFuelCapacity")
     private Volume TotalFuelCapacity;
+    @SerializedName(value = "FuelType", alternate = "fuelType")
     private FuelType FuelType;
+    @SerializedName(value = "CityFuelEfficiency", alternate = "cityFuelEfficiency")
     private Double CityFuelEfficiency;
+    @SerializedName(value = "HighwayFuelEfficiency", alternate = "highwayFuelEfficiency")
     private Double HighwayFuelEfficiency;
+    @SerializedName(value = "CombinedFuelEfficiency", alternate = "combinedFuelEfficiency")
     private Double CombinedFuelEfficiency;
+    @SerializedName(value = "Transmission", alternate = "transmission")
     private String Transmission;
 
     public Double getCityFuelEfficiency() {

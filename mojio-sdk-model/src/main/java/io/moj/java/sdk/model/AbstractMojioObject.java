@@ -1,5 +1,7 @@
 package io.moj.java.sdk.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import io.moj.java.sdk.model.values.LinkInfo;
 import io.moj.java.sdk.utils.TimeUtils;
 
@@ -16,10 +18,14 @@ public abstract class AbstractMojioObject implements MojioObject {
     public static final String LAST_MODIFIED = "LastModified";
     public static final String LINKS = "Links";
 
-    private String Id;
     private Long _id;
+    @SerializedName(value = "Id", alternate = "id")
+    private String Id;
+    @SerializedName(value = "CreatedOn", alternate = "createdOn")
     private String CreatedOn;
+    @SerializedName(value = "LastModified", alternate = "lastModified")
     private String LastModified;
+    @SerializedName(value = "Links", alternate = "links")
     private LinkInfo Links;
 
     public Long getCreatedOn() {
