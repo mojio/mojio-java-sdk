@@ -15,7 +15,10 @@ public enum ObjectType {
     RECALL("Recall"),
     NOTE("Note"),
     OIL_LEVEL("OilLevel"),
-    OIL_PRESSURE("OilPressure");
+    OIL_PRESSURE("OilPressure"),
+    BATTERY_PREDICTION("BatteryPredictiveMaintenance"),
+    AIR_FILTER_PREDICTION("AirFilterPredictiveMaintenance");
+
 
     private String key;
 

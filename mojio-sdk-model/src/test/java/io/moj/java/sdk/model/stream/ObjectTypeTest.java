@@ -26,6 +26,8 @@ public class ObjectTypeTest extends EnumTest<ObjectType> {
                 .put("Note", ObjectType.NOTE)
                 .put("OilLevel", ObjectType.OIL_LEVEL)
                 .put("OilPressure", ObjectType.OIL_PRESSURE)
+                .put("BatteryPredictiveMaintenance", ObjectType.BATTERY_PREDICTION)
+                .put("AirFilterPredictiveMaintenance", ObjectType.AIR_FILTER_PREDICTION)
                 .build();
     }
 
