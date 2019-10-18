@@ -502,6 +502,7 @@ public class Vehicle extends AbstractMojioObject {
                 ", TowState=" + TowState +
                 ", ParkedState=" + ParkedState +
                 ", EngineOil=" + EngineOil +
+                ", TirePressure=" + TirePressure +
                 ", Tags=" + Arrays.toString(Tags) +
                 ", Deleted=" + Deleted +
                 ", Properties=" + Properties +
