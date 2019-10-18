@@ -14,6 +14,7 @@ public enum ObjectType {
     GEOFENCE("Geofence"),
     RECALL("Recall"),
     NOTE("Note"),
+    TIRE_PRESSURE("TirePressure"),
     OIL_LEVEL("OilLevel"),
     OIL_PRESSURE("OilPressure"),
     BATTERY_PREDICTION("BatteryPredictiveMaintenance"),

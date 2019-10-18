@@ -22,6 +22,7 @@ import io.moj.java.sdk.model.values.Location;
 import io.moj.java.sdk.model.values.Odometer;
 import io.moj.java.sdk.model.values.Rpm;
 import io.moj.java.sdk.model.values.Speed;
+import io.moj.java.sdk.model.values.TirePressure;
 import io.moj.java.sdk.model.values.VehicleDetails;
 import io.moj.java.sdk.model.values.VehicleProperties;
 import io.moj.java.sdk.utils.TimeUtils;
@@ -67,6 +68,7 @@ public class Vehicle extends AbstractMojioObject {
     public static final String TOW_STATE = "TowState";
     public static final String PARKED_STATE = "ParkedState";
     public static final String ENGINE_OIL = "EngineOil";
+    public static final String TIRE_PRESSURE = "TirePressure";
     public static final String TAGS = "Tags";
     public static final String DELETED = "Deleted";
 
@@ -142,6 +144,8 @@ public class Vehicle extends AbstractMojioObject {
     private String[] Tags;
     @SerializedName(value = "EngineOil", alternate = "engineoil")
     private EngineOil EngineOil;
+    @SerializedName(value = "TirePressure", alternate = "tirePressure")
+    private TirePressure TirePressure;
     @SerializedName(value = "Deleted", alternate = "deleted")
     private Boolean Deleted;
     @SerializedName(value = "properties", alternate = "Properties")
@@ -362,6 +366,14 @@ public class Vehicle extends AbstractMojioObject {
 
     public void setEngineOil(EngineOil engineOil) {
         EngineOil = engineOil;
+    }
+
+    public TirePressure getTirePressure() {
+        return TirePressure;
+    }
+
+    public void setTirePressure(TirePressure tirePressure) {
+        TirePressure = tirePressure;
     }
 
     public Rpm getRPM() {
