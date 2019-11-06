@@ -1,4 +1,4 @@
-package io.moj.java.sdk.model.values;
+package io.moj.java.sdk.model.enums;
 
 import com.google.gson.annotations.SerializedName;
 
