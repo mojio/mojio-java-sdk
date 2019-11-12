@@ -7,13 +7,13 @@ import java.util.Objects;
 public class Country {
 
     @SerializedName("name")
-    String name;
+    public String name;
 
     @SerializedName("telcc")
-    Integer code;
+    public Integer code;
 
     @SerializedName("alpha2")
-    String alpha2;
+    public String alpha2;
 
     @Override
     public int hashCode() {
