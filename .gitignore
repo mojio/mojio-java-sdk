@@ -9,6 +9,9 @@ captures/
 # Local configuration files
 local.properties
 
+# Test Runs
+*/out/*
+
 # User-specific IntelliJ files
 *.iml
 .idea/*
