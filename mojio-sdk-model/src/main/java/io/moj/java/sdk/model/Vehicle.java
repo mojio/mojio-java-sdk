@@ -20,6 +20,7 @@ import io.moj.java.sdk.model.values.Heading;
 import io.moj.java.sdk.model.values.Image;
 import io.moj.java.sdk.model.values.Location;
 import io.moj.java.sdk.model.values.Odometer;
+import io.moj.java.sdk.model.values.PredictiveMaintenance;
 import io.moj.java.sdk.model.values.Rpm;
 import io.moj.java.sdk.model.values.Speed;
 import io.moj.java.sdk.model.values.TirePressure;
@@ -71,6 +72,7 @@ public class Vehicle extends AbstractMojioObject {
     public static final String TIRE_PRESSURE = "TirePressure";
     public static final String TAGS = "Tags";
     public static final String DELETED = "Deleted";
+    public static final String PREDICTIVE_MAINTENANCE = "PredictiveMaintenance";
 
     @SerializedName(value = "Name", alternate = "name")
     private String Name;
@@ -150,6 +152,8 @@ public class Vehicle extends AbstractMojioObject {
     private Boolean Deleted;
     @SerializedName(value = "properties", alternate = "Properties")
     private VehicleProperties Properties;
+    @SerializedName(value = "PredictiveMaintenance", alternate = "predictiveMaintenance")
+    private PredictiveMaintenance PredictiveMaintenance;
 
     public Acceleration getAcceleration() {
         return Acceleration;
@@ -464,6 +468,10 @@ public class Vehicle extends AbstractMojioObject {
         Properties = properties;
     }
 
+    public PredictiveMaintenance getPredictiveMaintenance() { return PredictiveMaintenance; }
+
+    public void setPredictiveMaintenance(PredictiveMaintenance predictiveMaintenance) { PredictiveMaintenance = predictiveMaintenance; }
+
     @Override
     public String toString() {
         return "Vehicle{" +
@@ -506,6 +514,7 @@ public class Vehicle extends AbstractMojioObject {
                 ", Tags=" + Arrays.toString(Tags) +
                 ", Deleted=" + Deleted +
                 ", Properties=" + Properties +
+                ", PredictiveMaintenance=" + PredictiveMaintenance +
                 "} " + super.toString();
     }
 }
