@@ -52,6 +52,7 @@ public class Vehicle extends AbstractMojioObject {
     public static final String SPEED = "Speed";
     public static final String ODOMETER = "Odometer";
     public static final String VIRTUAL_ODOMETER = "VirtualOdometer";
+    public static final String REAL_ODOMETER = "RealOdometer";
     public static final String RPM_VALUE = "RPM";
     public static final String FUEL_EFFICIENCY = "FuelEfficiency";
     public static final String FUEL_EFFICIENCY_CALCULATION_METHOD = "FuelEfficiencyCalculationMethod";
@@ -110,6 +111,8 @@ public class Vehicle extends AbstractMojioObject {
     private Odometer Odometer;
     @SerializedName(value = "VirtualOdometer", alternate = "virtualOdometer")
     private Odometer VirtualOdometer;
+    @SerializedName(value = "RealOdometer", alternate = "realOdometer")
+    private Odometer RealOdometer;
     @SerializedName(value = "RPM", alternate = "rpm")
     private Rpm RPM;
     @SerializedName(value = "FuelEfficiency", alternate = "fuelEfficiency")
@@ -358,6 +361,14 @@ public class Vehicle extends AbstractMojioObject {
         VirtualOdometer = virtualOdometer;
     }
 
+    public Odometer getRealOdometer() {
+        return RealOdometer;
+    }
+
+    public void setRealOdometer(Odometer realOdometer) {
+        RealOdometer = realOdometer;
+    }
+
     public BooleanState getParkedState() {
         return ParkedState;
     }
@@ -493,6 +504,7 @@ public class Vehicle extends AbstractMojioObject {
                 ", Speed=" + Speed +
                 ", Odometer=" + Odometer +
                 ", VirtualOdometer=" + VirtualOdometer +
+                ", RealOdometer=" + RealOdometer +
                 ", RPM=" + RPM +
                 ", FuelEfficiency=" + FuelEfficiency +
                 ", FuelEfficiencyCalculationMethod=" + FuelEfficiencyCalculationMethod +
