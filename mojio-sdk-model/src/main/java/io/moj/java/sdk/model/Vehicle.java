@@ -20,8 +20,10 @@ import io.moj.java.sdk.model.values.Heading;
 import io.moj.java.sdk.model.values.Image;
 import io.moj.java.sdk.model.values.Location;
 import io.moj.java.sdk.model.values.Odometer;
+import io.moj.java.sdk.model.values.PredictiveMaintenance;
 import io.moj.java.sdk.model.values.Rpm;
 import io.moj.java.sdk.model.values.Speed;
+import io.moj.java.sdk.model.values.TirePressure;
 import io.moj.java.sdk.model.values.VehicleDetails;
 import io.moj.java.sdk.model.values.VehicleProperties;
 import io.moj.java.sdk.utils.TimeUtils;
@@ -50,6 +52,7 @@ public class Vehicle extends AbstractMojioObject {
     public static final String SPEED = "Speed";
     public static final String ODOMETER = "Odometer";
     public static final String VIRTUAL_ODOMETER = "VirtualOdometer";
+    public static final String REAL_ODOMETER = "RealOdometer";
     public static final String RPM_VALUE = "RPM";
     public static final String FUEL_EFFICIENCY = "FuelEfficiency";
     public static final String FUEL_EFFICIENCY_CALCULATION_METHOD = "FuelEfficiencyCalculationMethod";
@@ -67,8 +70,10 @@ public class Vehicle extends AbstractMojioObject {
     public static final String TOW_STATE = "TowState";
     public static final String PARKED_STATE = "ParkedState";
     public static final String ENGINE_OIL = "EngineOil";
+    public static final String TIRE_PRESSURE = "TirePressure";
     public static final String TAGS = "Tags";
     public static final String DELETED = "Deleted";
+    public static final String PREDICTIVE_MAINTENANCE = "PredictiveMaintenance";
 
     @SerializedName(value = "Name", alternate = "name")
     private String Name;
@@ -106,6 +111,8 @@ public class Vehicle extends AbstractMojioObject {
     private Odometer Odometer;
     @SerializedName(value = "VirtualOdometer", alternate = "virtualOdometer")
     private Odometer VirtualOdometer;
+    @SerializedName(value = "RealOdometer", alternate = "realOdometer")
+    private Odometer RealOdometer;
     @SerializedName(value = "RPM", alternate = "rpm")
     private Rpm RPM;
     @SerializedName(value = "FuelEfficiency", alternate = "fuelEfficiency")
@@ -142,10 +149,14 @@ public class Vehicle extends AbstractMojioObject {
     private String[] Tags;
     @SerializedName(value = "EngineOil", alternate = "engineoil")
     private EngineOil EngineOil;
+    @SerializedName(value = "TirePressure", alternate = "tirePressure")
+    private TirePressure TirePressure;
     @SerializedName(value = "Deleted", alternate = "deleted")
     private Boolean Deleted;
     @SerializedName(value = "properties", alternate = "Properties")
     private VehicleProperties Properties;
+    @SerializedName(value = "PredictiveMaintenance", alternate = "predictiveMaintenance")
+    private PredictiveMaintenance PredictiveMaintenance;
 
     public Acceleration getAcceleration() {
         return Acceleration;
@@ -350,6 +361,14 @@ public class Vehicle extends AbstractMojioObject {
         VirtualOdometer = virtualOdometer;
     }
 
+    public Odometer getRealOdometer() {
+        return RealOdometer;
+    }
+
+    public void setRealOdometer(Odometer realOdometer) {
+        RealOdometer = realOdometer;
+    }
+
     public BooleanState getParkedState() {
         return ParkedState;
     }
@@ -362,6 +381,14 @@ public class Vehicle extends AbstractMojioObject {
 
     public void setEngineOil(EngineOil engineOil) {
         EngineOil = engineOil;
+    }
+
+    public TirePressure getTirePressure() {
+        return TirePressure;
+    }
+
+    public void setTirePressure(TirePressure tirePressure) {
+        TirePressure = tirePressure;
     }
 
     public Rpm getRPM() {
@@ -452,6 +479,10 @@ public class Vehicle extends AbstractMojioObject {
         Properties = properties;
     }
 
+    public PredictiveMaintenance getPredictiveMaintenance() { return PredictiveMaintenance; }
+
+    public void setPredictiveMaintenance(PredictiveMaintenance predictiveMaintenance) { PredictiveMaintenance = predictiveMaintenance; }
+
     @Override
     public String toString() {
         return "Vehicle{" +
@@ -473,6 +504,7 @@ public class Vehicle extends AbstractMojioObject {
                 ", Speed=" + Speed +
                 ", Odometer=" + Odometer +
                 ", VirtualOdometer=" + VirtualOdometer +
+                ", RealOdometer=" + RealOdometer +
                 ", RPM=" + RPM +
                 ", FuelEfficiency=" + FuelEfficiency +
                 ", FuelEfficiencyCalculationMethod=" + FuelEfficiencyCalculationMethod +
@@ -490,9 +522,11 @@ public class Vehicle extends AbstractMojioObject {
                 ", TowState=" + TowState +
                 ", ParkedState=" + ParkedState +
                 ", EngineOil=" + EngineOil +
+                ", TirePressure=" + TirePressure +
                 ", Tags=" + Arrays.toString(Tags) +
                 ", Deleted=" + Deleted +
                 ", Properties=" + Properties +
+                ", PredictiveMaintenance=" + PredictiveMaintenance +
                 "} " + super.toString();
     }
 }

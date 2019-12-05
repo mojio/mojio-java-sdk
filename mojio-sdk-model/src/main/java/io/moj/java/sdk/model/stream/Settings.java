@@ -39,6 +39,8 @@ public class Settings {
     public static final String ENABLE_MAIN_FIRMWARE_COMPATIBILITY = "EnableMainFirmwareCompatibilityActivity";
     public static final String ENABLE_HARDWARE_VERSION_COMPATIBILITY = "EnableHardwareVersionCompatibilityActivity";
     public static final String ENABLE_SERVICE_SCHEDULE = "EnableServiceScheduleActivity";
+    public static final String ENABLE_TIRE_PRESSURE_WARNING = "EnableTirePressureWarningActivity";
+    public static final String ENABLE_AIR_FILTER_MAINTENANCE = "EnableAirFilterMaintenanceActivity";
 
     // V2 + V3 fields
     @SerializedName(value = "EnableTripStartActivity", alternate = "enableTripStartActivity")
@@ -99,6 +101,12 @@ public class Settings {
     private Boolean EnableHardwareVersionCompatibilityActivity;
     @SerializedName(value = "EnableServiceScheduleActivity", alternate = "enableServiceScheduleActivity")
     private Boolean EnableServiceScheduleActivity;
+
+    @SerializedName(value = "EnableTirePressureWarningActivity", alternate = "enableTirePressureWarningActivity")
+    private Boolean EnableTirePressureWarningActivity;
+
+    @SerializedName(value = "EnableAirFilterMaintenanceActivity", alternate = "enableAirFilterMaintenanceActivity")
+    private Boolean EnableAirFilterMaintenanceActivity;
 
     public Boolean getEnableGeofenceActivity() {
         return EnableGeofenceActivity;
@@ -316,6 +324,22 @@ public class Settings {
         EnableServiceScheduleActivity = enableServiceScheduleActivity;
     }
 
+    public Boolean getEnableTirePressureWarningActivity() {
+        return EnableTirePressureWarningActivity;
+    }
+
+    public void setEnableTirePressureWarningActivity(Boolean enableTirePressureWarningActivity) {
+        EnableTirePressureWarningActivity = enableTirePressureWarningActivity;
+    }
+
+    public Boolean getEnableAirFilterMaintenanceActivity() {
+        return EnableAirFilterMaintenanceActivity;
+    }
+
+    public void setEnableAirFilterMaintenanceActivity(Boolean enableAirFilterMaintenanceActivity) {
+        EnableAirFilterMaintenanceActivity = enableAirFilterMaintenanceActivity;
+    }
+
     @Override
     public String toString() {
         return "Settings{" +
@@ -346,6 +370,8 @@ public class Settings {
                 ", EnableMainFirmwareCompatibilityActivity=" + EnableMainFirmwareCompatibilityActivity +
                 ", EnableHardwareVersionCompatibilityActivity=" + EnableHardwareVersionCompatibilityActivity +
                 ", EnableServiceScheduleActivity=" + EnableServiceScheduleActivity +
+                ", EnableTirePressureWarningActivity=" + EnableTirePressureWarningActivity +
+                ", EnableEnableAirFilterMaintenanceActivity=" + EnableAirFilterMaintenanceActivity +
                 '}';
     }
 

@@ -9,6 +9,8 @@ import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import io.moj.java.sdk.model.enums.DurationUnit;
+
 /**
  * Static utilities for converting to and from server-based datetime formats.
  * Created by skidson on 2016-05-05.
@@ -223,6 +225,30 @@ public final class TimeUtils {
             return null;
 
         return DATE_FORMAT.get().format(new Date(timestamp));
+    }
+
+    /**
+     * Converts a duration of a certain unit to milliseconds
+     * @param duration the duration to transform
+     * @param durationUnit the current way the duration is represented
+     * @return a [Long] representing the duration in milliseconds
+     */
+    public static Long durationToMilliseconds(Long duration, DurationUnit durationUnit) {
+        switch (durationUnit) {
+            case TICKS:
+                return duration / 10_000;
+            case MINUTES:
+                return duration * 1_000;
+            case HOURS:
+                return duration * 1_000 * 60;
+            case DAYS:
+                return duration * 1_000 * 60 * 24;
+            case WEEKS:
+                return duration * 1_000 * 60 * 24 * 7;
+            case MILLISECONDS:
+            default:
+                return duration;
+        }
     }
 
 }
