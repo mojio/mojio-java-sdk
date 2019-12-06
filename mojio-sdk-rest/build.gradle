@@ -12,7 +12,7 @@ targetCompatibility = SOURCE_COMPATIBILITY
 jacocoTestReport {
     reports {
         xml.enabled true
-        html.enabled false
+        html.enabled true
         csv.enabled false
     }
 }

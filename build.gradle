@@ -40,8 +40,10 @@ jacocoTestReport {
     FileTree classTree = files().asFileTree
 
     subprojects.each {
-        sourceTree += it.sourceSets.main.allJava
-        classTree += it.sourceSets.main.output.asFileTree
+        if (it.name != "mojio-sdk-test") {
+            sourceTree += it.sourceSets.main.allJava
+            classTree += it.sourceSets.main.output.asFileTree
+        }
     }
 
     additionalSourceDirs = sourceTree
