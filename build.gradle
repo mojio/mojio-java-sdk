@@ -28,45 +28,49 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-task jacocoUnitedReport(type: JacocoReport, group: 'Reporting') {
-    description = "Creates a unified Jacoco code coverage report with the execution data for each sub-project"
+def allTestCoverageFile = "$buildDir/jacoco/allTestCoverage.exec"
 
-    def sourceDirs = []
-    def classDirs = []
-    def executionFiles = []
+subprojects.each {
+    // ensure other projects evaluated first so sourceSets are configured
+    evaluationDependsOn it.path
+}
 
-    subprojects.stream().filter {
-        it.name != "mojio-sdk-test"
-    }.each {
-        sourceDirs += "${it.projectDir}/src/main"
-        classDirs += "${it.buildDir}/classes/main"
-        executionFiles += "${it.buildDir}/jacoco/test.exec"
+jacocoTestReport {
+    FileTree sourceTree = files().asFileTree
+    FileTree classTree = files().asFileTree
+
+    subprojects.each {
+        sourceTree += it.sourceSets.main.allJava
+        classTree += it.sourceSets.main.output.asFileTree
     }
 
-    sourceDirectories = files(sourceDirs)
-    additionalSourceDirs = files(sourceDirs)
-    classDirectories = files(classDirs)
-    executionData = files(executionFiles)
+    additionalSourceDirs = sourceTree
+    additionalClassDirs = classTree
+
+    dependsOn("jacocoMergeExecutionData")
 
     reports {
         html.enabled = true
         xml.enabled = true
-        csv.enabled = false
+    }
+    executionData.setFrom(files(allTestCoverageFile))
+}
+
+task jacocoMergeExecutionData(type: JacocoMerge) {
+    subprojects.each {
+        dependsOn("${it.name}:test")
+    }
+    subprojects.each {
+        if (it.name != "mojio-sdk-test")
+            dependsOn("${it.name}:jacocoTestReport")
     }
 
-    onlyIf = {
-        true
-    }
-
-    doFirst {
-        executionData = files(executionData.findAll {
-            it.exists()
-        })
-    }
+    destinationFile = file(allTestCoverageFile)
+    executionData = project.fileTree(dir: '.', include: '**/build/jacoco/test.exec')
 }
 
 task performCiBuild(type: GradleBuild) {
     group "CI"
     description "Designed to encapsulte mutiple gradle tasks to run them on CI"
-    tasks = ["clean", "build", "test", "jacocoUnitedReport"]
+    tasks = ["clean", "build", "jacocoTestReport"]
 }
