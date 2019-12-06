@@ -68,5 +68,5 @@ task jacocoRootReport(type: JacocoReport, group: 'Reporting') {
 task performCiBuild(type: GradleBuild) {
     group "CI"
     description "Designed to encapsulte mutiple gradle tasks to run them on CI"
-    tasks = ["clean", "build", "test", "jacocoRootReport"]
+    tasks = ["clean", "build", "test"]
 }
