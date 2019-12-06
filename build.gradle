@@ -34,7 +34,10 @@ task jacocoRootReport(type: JacocoReport, group: 'Reporting') {
     def sourceDirs = []
     def classDirs = []
     def executionFiles = []
-    subprojects.each {
+
+    subprojects.stream().filter {
+        it.name != "mojio-sdk-test"
+    }.each {
         sourceDirs += "${it.projectDir}/src/main"
         classDirs += "${it.buildDir}/classes/main"
         executionFiles += "${it.buildDir}/jacoco/test.exec"
@@ -65,5 +68,5 @@ task jacocoRootReport(type: JacocoReport, group: 'Reporting') {
 task performCiBuild(type: GradleBuild) {
     group "CI"
     description "Designed to encapsulte mutiple gradle tasks to run them on CI"
-    tasks = ["cleanBuildCache", "clean", "build", "test", "jacocoRootReport"]
+    tasks = ["clean", "build", "test", "jacocoRootReport"]
 }
