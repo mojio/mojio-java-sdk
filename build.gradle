@@ -1,5 +1,4 @@
 apply plugin: 'java'
-apply plugin: 'jacoco'
 
 ext {
     PUBLISH_GROUP_ID = 'io.moj.java'
@@ -7,7 +6,7 @@ ext {
 
     if (project.hasProperty('publishVersion')) {
         println "Version ${publishVersion}"
-        PUBLISH_VERSION = publishVersion;
+        PUBLISH_VERSION = publishVersion
     } else {
         PUBLISH_VERSION = 'SNAPSHOT'
     }
@@ -24,55 +23,10 @@ allprojects {
     }
 }
 
-dependencies {
-    testCompile 'junit:junit:4.12'
-}
-
-def allTestCoverageFile = "$buildDir/jacoco/allTestCoverage.exec"
-
-subprojects.each {
-    // ensure other projects evaluated first so sourceSets are configured
-    evaluationDependsOn it.path
-}
-
-jacocoTestReport {
-    FileTree sourceTree = files().asFileTree
-    FileTree classTree = files().asFileTree
-
-    subprojects.each {
-        if (it.name != "mojio-sdk-test") {
-            sourceTree += it.sourceSets.main.allJava
-            classTree += it.sourceSets.main.output.asFileTree
-        }
-    }
-
-    additionalSourceDirs = sourceTree
-    additionalClassDirs = classTree
-
-    dependsOn("jacocoMergeExecutionData")
-
-    reports {
-        html.enabled = true
-        xml.enabled = true
-    }
-    executionData.setFrom(files(allTestCoverageFile))
-}
-
-task jacocoMergeExecutionData(type: JacocoMerge) {
-    subprojects.each {
-        dependsOn("${it.name}:test")
-    }
-    subprojects.each {
-        if (it.name != "mojio-sdk-test")
-            dependsOn("${it.name}:jacocoTestReport")
-    }
-
-    destinationFile = file(allTestCoverageFile)
-    executionData = project.fileTree(dir: '.', include: '**/build/jacoco/test.exec')
-}
-
 task performCiBuild(type: GradleBuild) {
     group "CI"
     description "Designed to encapsulte mutiple gradle tasks to run them on CI"
     tasks = ["clean", "build", "jacocoTestReport"]
 }
+
+apply from: 'jacoco.gradle'
