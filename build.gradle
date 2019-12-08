@@ -25,7 +25,7 @@ allprojects {
 
 task performCiBuild(type: GradleBuild) {
     group "CI"
-    description "Designed to encapsulte mutiple gradle tasks to run them on CI"
+    description "Designed to encapsulate multiple gradle tasks to run them on CI"
     tasks = ["clean", "build", "jacocoTestReport"]
 }
 
