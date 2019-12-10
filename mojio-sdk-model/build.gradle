@@ -4,10 +4,18 @@ ext {
 
 apply plugin: 'java'
 apply plugin: 'jacoco'
-apply from: project.rootProject.file('maven.gradle')
+apply from: '../maven.gradle'
 
 sourceCompatibility = SOURCE_COMPATIBILITY
 targetCompatibility = SOURCE_COMPATIBILITY
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled true
+        csv.enabled false
+    }
+}
 
 dependencies {
     compile 'com.google.code.gson:gson:2.7'

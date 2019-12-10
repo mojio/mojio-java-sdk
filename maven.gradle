@@ -4,6 +4,9 @@ apply plugin: 'maven'
 def BINTRAY_SUBJECT = "mojio"
 def BINTRAY_REPO = "maven"
 
+def bintrayUsername = System.env["BINTRAY_USERNAME"] ?: "DEVELOPMENT"
+def bintrayApiKey = System.env["BINTRAY_APIKEY"] ?: "DEVELOPMENT"
+
 def groupId = project.PUBLISH_GROUP_ID
 def artifactId = project.PUBLISH_ARTIFACT_ID
 def version = project.PUBLISH_VERSION
@@ -41,14 +44,10 @@ uploadArchives() {
     description = "Uploads all Maven artifacts to BinTray"
     group = "Maven"
 
-    Properties properties = new Properties()
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
     repositories {
         mavenDeployer {
             repository(url: "https://api.bintray.com/maven/${BINTRAY_SUBJECT}/${BINTRAY_REPO}/${groupId}:${artifactId}/;publish=1") {
-                authentication(userName: properties.getProperty('bintray.username'),
-                        password: properties.getProperty('bintray.apikey'))
+                authentication(userName: bintrayUsername, password: bintrayApiKey)
             }
 
             pom.groupId = groupId
