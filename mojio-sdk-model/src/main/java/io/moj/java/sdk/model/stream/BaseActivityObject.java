@@ -41,7 +41,7 @@ public class BaseActivityObject implements MojioObject {
     private Map<String, String> NameMap;
 
     @SerializedName(value = "tirePressureObject", alternate = {"TirePressureObject"})
-    private TirePressureObject tirePressureObject;
+    private TirePressureObject TirePressureObject;
 
     public String getId() {
         return Id;
@@ -148,11 +148,11 @@ public class BaseActivityObject implements MojioObject {
     }
 
     public TirePressureObject getTirePressureObject() {
-        return tirePressureObject;
+        return TirePressureObject;
     }
 
     public void setTirePressureObject(TirePressureObject tirePressureObject) {
-        this.tirePressureObject = tirePressureObject;
+        this.TirePressureObject = tirePressureObject;
     }
 
     @Override
@@ -171,7 +171,7 @@ public class BaseActivityObject implements MojioObject {
                 ", AttributedTo=" + AttributedTo +
                 ", SummaryMap=" + SummaryMap +
                 ", NameMap=" + NameMap +
-                ", tirePressureObject=" + tirePressureObject +
+                ", TirePressureObject=" + TirePressureObject +
                 '}';
     }
 }
