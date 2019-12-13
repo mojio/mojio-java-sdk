@@ -1,11 +1,8 @@
 package io.moj.java.sdk.model.stream;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.Map;
 
 import io.moj.java.sdk.model.MojioObject;
-import io.moj.java.sdk.model.TirePressureObject;
 import io.moj.java.sdk.utils.TimeUtils;
 
 /**
@@ -39,9 +36,6 @@ public class BaseActivityObject implements MojioObject {
     private BaseActivityObject AttributedTo;
     private Map<String, String> SummaryMap;
     private Map<String, String> NameMap;
-
-    @SerializedName(value = "tirePressureObject", alternate = {"TirePressureObject"})
-    private TirePressureObject TirePressureObject;
 
     public String getId() {
         return Id;
@@ -147,14 +141,6 @@ public class BaseActivityObject implements MojioObject {
         NameMap = nameMap;
     }
 
-    public TirePressureObject getTirePressureObject() {
-        return TirePressureObject;
-    }
-
-    public void setTirePressureObject(TirePressureObject tirePressureObject) {
-        this.TirePressureObject = tirePressureObject;
-    }
-
     @Override
     public String toString() {
         return "BaseActivityObject{" +
@@ -171,7 +157,6 @@ public class BaseActivityObject implements MojioObject {
                 ", AttributedTo=" + AttributedTo +
                 ", SummaryMap=" + SummaryMap +
                 ", NameMap=" + NameMap +
-                ", TirePressureObject=" + TirePressureObject +
                 '}';
     }
 }
