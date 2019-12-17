@@ -2,9 +2,10 @@ package io.moj.java.sdk.model.values;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Country {
+public class Country implements Serializable {
 
     @SerializedName("name")
     public String name;
@@ -14,6 +15,20 @@ public class Country {
 
     @SerializedName("alpha2")
     public String alpha2;
+
+    public Country() {
+        this("", 0, "");
+    }
+
+    public Country(Country country) {
+        this(country.name, country.code, country.alpha2);
+    }
+
+    public Country(String name, Integer code, String alpha2) {
+        this.name = name;
+        this.code = code;
+        this.alpha2 = alpha2;
+    }
 
     @Override
     public int hashCode() {
