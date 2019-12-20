@@ -18,7 +18,7 @@ jacocoTestReport {
 }
 
 dependencies {
-    compile 'com.google.code.gson:gson:2.7'
+    compile 'com.google.code.gson:gson:2.8.5'
     compile 'commons-codec:commons-codec:1.10'
 
     testCompile 'junit:junit:4.12'
