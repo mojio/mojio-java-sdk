@@ -1,3 +1,5 @@
+[ ![Download](https://api.bintray.com/packages/mojio/maven/io.moj.java%3Amojio-sdk-model/images/download.svg) ](https://bintray.com/mojio/maven/io.moj.java%3Amojio-sdk-model/_latestVersion)
+
 ## Disclaimer ##
 **UNDER ACTIVE DEVELOPMENT**
 

@@ -1,0 +1,45 @@
+apply plugin: 'jacoco'
+
+def allTestCoverageFile = "$buildDir/jacoco/allTestCoverage.exec"
+
+subprojects.each {
+    // ensure other projects evaluated first so sourceSets are configured
+    evaluationDependsOn it.path
+}
+
+jacocoTestReport {
+    def sourceTree = files()
+    def classTree = files()
+
+    subprojects.each {
+        if (it.name != "mojio-sdk-test") {
+            sourceTree += it.sourceSets.main.allJava
+            classTree += it.sourceSets.main.output.asFileTree
+        }
+    }
+
+    additionalSourceDirs.setFrom(sourceTree)
+    additionalClassDirs.setFrom(classTree)
+
+    dependsOn("jacocoMergeExecutionData")
+
+    reports {
+        html.enabled = true
+        xml.enabled = true
+    }
+
+    executionData.setFrom(files(allTestCoverageFile))
+}
+
+task jacocoMergeExecutionData(type: JacocoMerge) {
+    subprojects.each {
+        dependsOn("${it.name}:test")
+    }
+    subprojects.each {
+        if (it.name != "mojio-sdk-test")
+            dependsOn("${it.name}:jacocoTestReport")
+    }
+
+    destinationFile = file(allTestCoverageFile)
+    executionData = project.fileTree(dir: '.', include: '**/build/jacoco/test.exec')
+}

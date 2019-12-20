@@ -13,7 +13,13 @@ public enum ObjectType {
     FUEL_LEVEL("FuelLevel"),
     GEOFENCE("Geofence"),
     RECALL("Recall"),
-    NOTE("Note");
+    NOTE("Note"),
+    TIRE_PRESSURE("TirePressure"),
+    OIL_LEVEL("OilLevel"),
+    OIL_PRESSURE("OilPressure"),
+    BATTERY_PREDICTION("BatteryPredictiveMaintenance"),
+    AIR_FILTER_PREDICTION("AirFilterPredictiveMaintenance");
+
 
     private String key;
 
