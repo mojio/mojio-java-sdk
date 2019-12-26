@@ -33,6 +33,13 @@
       "baseUnit": "KilometersPerHour",
       "baseValue": 98.91148276886078
     },
+    "averageSpeedDelta": {
+      "timestamp": "2019-12-10T17:38:09.980Z",
+      "unit": "MilesPerHour",
+      "value": 3.0,
+      "baseUnit": "KilometersPerHour",
+      "baseValue": 4.8
+    },
     "speedingScore": 3234.8435639810104,
     "polyline": "_qanE~dppU_G|RxCdaA`AnUuCrsA^lPp[_lJ{g@jjBxQ~sHJhQAlf@KnQeChQnZozNuApBkVztCqF"
   },
@@ -69,6 +76,13 @@
       "value": 56.98910810810808,
       "baseUnit": "KilometersPerHour",
       "baseValue": 91.71485124270265
+    },
+    "averageSpeedDelta": {
+      "timestamp": "2019-12-10T17:38:09.980Z",
+      "unit": "MilesPerHour",
+      "value": 3.0,
+      "baseUnit": "KilometersPerHour",
+      "baseValue": 4.8
     },
     "speedingScore": 8257.486909250325,
     "polyline": "}nanEdgzpUi@rQiFza@CbMlCy_KaF`StBzkD\\xOfyB|mL?rLc{AqpXr@v@_X~_Ns@fQiFra@PdMVm~D"

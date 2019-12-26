@@ -36,7 +36,6 @@ public class GetTripSpeedingViolationTest {
         assertThat(response.code()).isEqualTo(200);
 
         List<SpeedingViolation> items = response.body();
-
         assertResponseIsCorrect(items);
     }
 
@@ -75,6 +74,12 @@ public class GetTripSpeedingViolationTest {
         assertThat(firstItem.getAverageSpeed().getValue()).isWithin(tolerance).of(61.46089873417723f);
         assertThat(firstItem.getAverageSpeed().getBaseSpeedUnit()).isEqualTo(SpeedUnit.KILOMETERS_PER_HOUR);
         assertThat(firstItem.getAverageSpeed().getBaseValue()).isWithin(tolerance).of(98.91148276886078f);
+
+        assertThat(firstItem.getAverageSpeedDelta().getTimestamp()).isEqualTo("2019-12-10T17:38:09.980Z");
+        assertThat(firstItem.getAverageSpeedDelta().getSpeedUnit()).isEqualTo(SpeedUnit.MILES_PER_HOUR);
+        assertThat(firstItem.getAverageSpeedDelta().getValue()).isWithin(tolerance).of(3.0f);
+        assertThat(firstItem.getAverageSpeedDelta().getBaseSpeedUnit()).isEqualTo(SpeedUnit.KILOMETERS_PER_HOUR);
+        assertThat(firstItem.getAverageSpeedDelta().getBaseValue()).isWithin(tolerance).of(4.8f);
 
         assertThat(firstItem.getSpeedingScore()).isWithin(tolerance).of(3234.8435639810104f);
 
