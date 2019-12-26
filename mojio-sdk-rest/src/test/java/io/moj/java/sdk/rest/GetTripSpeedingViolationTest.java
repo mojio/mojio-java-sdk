@@ -6,9 +6,7 @@ import io.moj.java.sdk.MojioRestApi;
 import io.moj.java.sdk.model.enums.SpeedUnit;
 import io.moj.java.sdk.model.values.SpeedingViolation;
 import okhttp3.HttpUrl;
-import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
-import okio.Buffer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,8 +14,6 @@ import org.mockito.Mockito;
 import retrofit2.Response;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.Enumeration;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
