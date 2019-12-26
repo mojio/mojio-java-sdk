@@ -1,0 +1,76 @@
+[
+  {
+    "startTimestamp": "2019-11-12T19:46:13.000Z",
+    "endTimestamp": "2019-11-12T19:47:47.000Z",
+    "startLocation": {
+      "lat": 33.92815,
+      "lng": -118.21655,
+      "timestamp": "2019-11-12T19:46:13.000Z"
+    },
+    "endLocation": {
+      "lat": 33.92418,
+      "lng": -118.19166,
+      "timestamp": "2019-11-12T19:47:47.000Z"
+    },
+    "maxSpeed": {
+      "timestamp": "2019-12-10T17:38:09.980Z",
+      "unit": "MilesPerHour",
+      "value": 101.905,
+      "baseUnit": "KilometersPerHour",
+      "baseValue": 163.9997927
+    },
+    "minSpeed": {
+      "timestamp": "2019-12-10T17:38:09.980Z",
+      "unit": "MilesPerHour",
+      "value": 8.078,
+      "baseUnit": "KilometersPerHour",
+      "baseValue": 13.00024852
+    },
+    "averageSpeed": {
+      "timestamp": "2019-12-10T17:38:09.980Z",
+      "unit": "MilesPerHour",
+      "value": 61.46089873417723,
+      "baseUnit": "KilometersPerHour",
+      "baseValue": 98.91148276886078
+    },
+    "speedingScore": 3234.8435639810104,
+    "polyline": "_qanE~dppU_G|RxCdaA`AnUuCrsA^lPp[_lJ{g@jjBxQ~sHJhQAlf@KnQeChQnZozNuApBkVztCqF"
+  },
+  {
+    "startTimestamp": "2019-11-12T19:47:56.000Z",
+    "endTimestamp": "2019-11-12T19:52:14.000Z",
+    "startLocation": {
+      "lat": 33.92783,
+      "lng": -118.26819,
+      "timestamp": "2019-11-12T19:47:56.000Z"
+    },
+    "endLocation": {
+      "lat": 33.92984,
+      "lng": -118.22242,
+      "timestamp": "2019-11-12T19:52:14.000Z"
+    },
+    "maxSpeed": {
+      "timestamp": "2019-12-10T17:38:09.980Z",
+      "unit": "MilesPerHour",
+      "value": 106.255,
+      "baseUnit": "KilometersPerHour",
+      "baseValue": 171.0004217
+    },
+    "minSpeed": {
+      "timestamp": "2019-12-10T17:38:09.980Z",
+      "unit": "MilesPerHour",
+      "value": 0,
+      "baseUnit": "KilometersPerHour",
+      "baseValue": 0
+    },
+    "averageSpeed": {
+      "timestamp": "2019-12-10T17:38:09.980Z",
+      "unit": "MilesPerHour",
+      "value": 56.98910810810808,
+      "baseUnit": "KilometersPerHour",
+      "baseValue": 91.71485124270265
+    },
+    "speedingScore": 8257.486909250325,
+    "polyline": "}nanEdgzpUi@rQiFza@CbMlCy_KaF`StBzkD\\xOfyB|mL?rLc{AqpXr@v@_X~_Ns@fQiFra@PdMVm~D"
+  }
+]
