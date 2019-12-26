@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
-import static io.moj.java.sdk.MockWebServerUtils.successFromFile;
+import static io.moj.java.sdk.test.utils.MockWebServerUtils.successFromFile;
 import static org.mockito.Mockito.when;
 
 public class GetTripSpeedingViolationTest {

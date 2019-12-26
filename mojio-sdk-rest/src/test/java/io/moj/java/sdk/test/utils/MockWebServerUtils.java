@@ -1,4 +1,4 @@
-package io.moj.java.sdk;
+package io.moj.java.sdk.test.utils;
 
 import okhttp3.mockwebserver.MockResponse;
 import okio.Buffer;
