@@ -1,7 +1,5 @@
 package io.moj.java.sdk;
 
-import java.util.Map;
-
 import io.moj.java.sdk.model.App;
 import io.moj.java.sdk.model.Geofence;
 import io.moj.java.sdk.model.Group;
@@ -28,6 +26,7 @@ import io.moj.java.sdk.model.values.NextServiceSchedule;
 import io.moj.java.sdk.model.values.PhoneNumber;
 import io.moj.java.sdk.model.values.Polyline;
 import io.moj.java.sdk.model.values.ServiceScheduleList;
+import io.moj.java.sdk.model.values.SpeedingViolation;
 import io.moj.java.sdk.model.values.VehicleStatistics;
 import io.moj.java.sdk.model.values.VinDetails;
 import io.moj.java.sdk.model.values.WifiRadio;
@@ -40,6 +39,9 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Retrofit interface for the Mojio REST API.
@@ -242,6 +244,9 @@ public interface MojioRestApi {
 
     @DELETE("trips/{id}")
     Call<MessageResponse> deleteTrip(@Path("id") String tripId);
+
+    @GET("vehicles/{vehicleId}/trips/{id}/speedingviolations")
+    Call<List<SpeedingViolation>> getTripSpeedingViolations(@Path("vehicleId") String vehicleId, @Path("id") String tripId);
     // endregion
 
     // region Users
