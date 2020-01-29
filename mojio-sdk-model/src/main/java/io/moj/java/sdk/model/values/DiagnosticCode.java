@@ -23,6 +23,8 @@ public class DiagnosticCode {
     @SerializedName(value = "Ignored", alternate = "ignored")
     private Boolean Ignored;
 
+    // This flag is used to specify DiagnosticCode generated from received warnings
+    // as they don't have a specific code (e.t. Tire Pressure, Engine Oil)
     private Boolean IsExtraCode = false;
 
     public String getCode() {
