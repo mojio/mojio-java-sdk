@@ -73,7 +73,7 @@ public class DiagnosticCode {
         Ignored = ignored;
     }
 
-    public Boolean isExtraCode() { return IsExtraCode; }
+    public Boolean getIsExtraCode() { return IsExtraCode; }
 
     public void setExtraCode(Boolean specialCode) { IsExtraCode = specialCode; }
 
