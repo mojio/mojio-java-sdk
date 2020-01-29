@@ -86,7 +86,7 @@ public class DiagnosticCode {
                 ", Severity=" + Severity +
                 ", Instructions='" + Instructions + '\'' +
                 ", Ignored=" + Ignored +
-                ", IsExtraCode=" + false +
+                ", IsExtraCode=" + IsExtraCode +
                 '}';
     }
 }
