@@ -75,7 +75,7 @@ public class DiagnosticCode {
 
     public Boolean getIsExtraCode() { return IsExtraCode; }
 
-    public void setExtraCode(Boolean specialCode) { IsExtraCode = specialCode; }
+    public void setIsExtraCode(Boolean specialCode) { IsExtraCode = specialCode; }
 
     @Override
     public String toString() {
