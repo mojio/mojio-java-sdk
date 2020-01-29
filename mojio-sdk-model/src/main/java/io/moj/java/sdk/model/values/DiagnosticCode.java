@@ -23,6 +23,8 @@ public class DiagnosticCode {
     @SerializedName(value = "Ignored", alternate = "ignored")
     private Boolean Ignored;
 
+    private Boolean IsExtraCode = false;
+
     public String getCode() {
         return Code;
     }
@@ -70,6 +72,10 @@ public class DiagnosticCode {
     public void setIgnored(Boolean ignored) {
         Ignored = ignored;
     }
+
+    public Boolean isExtraCode() { return IsExtraCode; }
+
+    public void setExtraCode(Boolean specialCode) { IsExtraCode = specialCode; }
 
     @Override
     public String toString() {
