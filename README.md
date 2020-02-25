@@ -19,10 +19,10 @@ For more information please see the [developer website](http://developer.moj.io/
 ## Download ##
 ```gradle
 // for full SDK:
-compile 'io.moj.java:mojio-sdk-rest:0.0.180'
+compile 'io.moj.java:mojio-sdk-rest:0.0.259'
 
 // model objects only:
-compile 'io.moj.java:mojio-sdk-model:0.0.180'
+compile 'io.moj.java:mojio-sdk-model:0.0.259'
 ```
 
 The latest version can be found in [Bintray](https://bintray.com/mojio/maven/io.moj.java%3Amojio-sdk-rest)
