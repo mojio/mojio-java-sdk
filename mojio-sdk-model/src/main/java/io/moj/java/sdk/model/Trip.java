@@ -357,7 +357,7 @@ public class Trip extends AbstractMojioObject {
                 ", StartFuelLevel=" + StartFuelLevel +
                 ", EndFuelLevel=" + EndFuelLevel +
                 ", IdlingCount=" + IdlingCount +
-                ", properties=" + Properties +
+                ", Properties=" + Properties +
                 ", HarshAcclCount=" + HarshAcclCount +
                 ", HarshDecelCount=" + HarshDecelCount +
                 ", HarshEvents=" + Arrays.toString(HarshEvents) +
