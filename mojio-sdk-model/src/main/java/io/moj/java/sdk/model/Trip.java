@@ -4,16 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Arrays;
 
-import io.moj.java.sdk.model.values.Acceleration;
-import io.moj.java.sdk.model.values.Distance;
-import io.moj.java.sdk.model.values.FuelEfficiency;
-import io.moj.java.sdk.model.values.FuelLevel;
-import io.moj.java.sdk.model.values.HarshEvent;
-import io.moj.java.sdk.model.values.IdleEvent;
-import io.moj.java.sdk.model.values.Location;
-import io.moj.java.sdk.model.values.Odometer;
-import io.moj.java.sdk.model.values.Rpm;
-import io.moj.java.sdk.model.values.Speed;
+import io.moj.java.sdk.model.values.*;
 import io.moj.java.sdk.utils.TimeUtils;
 
 /**
@@ -44,6 +35,7 @@ public class Trip extends AbstractMojioObject {
     public static final String START_FUEL_LEVEL = "StartFuelLevel";
     public static final String END_FUEL_LEVEL = "EndFuelLevel";
     public static final String IDLING_COUNT = "IdlingCount";
+    public static final String PROPERTIES = "Properties";
     public static final String HARSH_ACCL_COUNT = "HarshAcclCount";
     public static final String HARSH_DECEL_COUNT = "HarshDecelCount";
     public static final String DRIVER_SCORE = "DriverScore";
@@ -93,6 +85,8 @@ public class Trip extends AbstractMojioObject {
     private FuelLevel EndFuelLevel;
     @SerializedName(value = "IdlingCount", alternate = "idlingCount")
     private Integer IdlingCount;
+    @SerializedName(value = "properties", alternate = "Properties")
+    private Properties Properties;
     @SerializedName(value = "HarshAcclCount", alternate = "harshAcclCount")
     private Integer HarshAcclCount;
     @SerializedName(value = "HarshDecelCount", alternate = "harshDecelCount")
@@ -314,6 +308,14 @@ public class Trip extends AbstractMojioObject {
         IdleEvents = idleEvents;
     }
 
+    public Properties getProperties() {
+        return Properties;
+    }
+
+    public void setProperties(Properties properties) {
+        this.Properties = properties;
+    }
+
     public Float getDriverScore() {
         return DriverScore;
     }
@@ -355,12 +357,13 @@ public class Trip extends AbstractMojioObject {
                 ", StartFuelLevel=" + StartFuelLevel +
                 ", EndFuelLevel=" + EndFuelLevel +
                 ", IdlingCount=" + IdlingCount +
+                ", Properties=" + Properties +
                 ", HarshAcclCount=" + HarshAcclCount +
                 ", HarshDecelCount=" + HarshDecelCount +
                 ", HarshEvents=" + Arrays.toString(HarshEvents) +
                 ", IdleEvents=" + Arrays.toString(IdleEvents) +
                 ", DriverScore=" + DriverScore +
                 ", AverageDriverScore=" + AverageDriverScore +
-                "} " + super.toString();
+                '}' + super.toString();
     }
 }
