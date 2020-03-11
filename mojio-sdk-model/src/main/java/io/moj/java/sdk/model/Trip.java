@@ -85,7 +85,7 @@ public class Trip extends AbstractMojioObject {
     private FuelLevel EndFuelLevel;
     @SerializedName(value = "IdlingCount", alternate = "idlingCount")
     private Integer IdlingCount;
-    @SerializedName(value = "properties", alternate = "Properties")
+    @SerializedName(value = "Properties", alternate = "properties")
     private Properties Properties;
     @SerializedName(value = "HarshAcclCount", alternate = "harshAcclCount")
     private Integer HarshAcclCount;
@@ -357,7 +357,7 @@ public class Trip extends AbstractMojioObject {
                 ", StartFuelLevel=" + StartFuelLevel +
                 ", EndFuelLevel=" + EndFuelLevel +
                 ", IdlingCount=" + IdlingCount +
-                ", properties=" + Properties +
+                ", Properties=" + Properties +
                 ", HarshAcclCount=" + HarshAcclCount +
                 ", HarshDecelCount=" + HarshDecelCount +
                 ", HarshEvents=" + Arrays.toString(HarshEvents) +
