@@ -117,6 +117,8 @@ public class MojioClientTest {
         when(environment.getApiUrl(1)).thenReturn(serverUrl);
         when(environment.getPushUrl()).thenReturn(serverUrl);
         when(environment.getAccountsUrl()).thenReturn(serverUrl);
+        AccessToken token = new AccessToken("expectedAuthToken", null, System.currentTimeMillis() + 120_000);
+        when(mockAuthenticator.getAccessToken()).thenReturn(token);
 
         Interceptor mockInterceptor = mock(Interceptor.class);
         when(mockInterceptor.intercept((any(Interceptor.Chain.class)))).thenAnswer(new Answer<okhttp3.Response>() {

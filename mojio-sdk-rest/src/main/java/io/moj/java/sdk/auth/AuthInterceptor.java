@@ -30,11 +30,13 @@ public class AuthInterceptor implements Interceptor {
         Request request = chain.request();
 
         // set the access token in the header if we have it
-        AccessToken accessToken = authenticator.getAccessToken();
-        Request.Builder requestBuilder = request.newBuilder();
-        if (accessToken != null) {
-            requestBuilder.header("Authorization", "Bearer " + accessToken.getAccessToken());
+        AccessToken accessToken = authenticator.getAccessToken(); // this is a blocking call.
+        if (accessToken == null || accessToken.getAccessToken() == null) {
+            throw new IOException(new Throwable("No access token."));
         }
+
+        Request.Builder requestBuilder = request.newBuilder();
+        requestBuilder.header("Authorization", "Bearer " + accessToken.getAccessToken());
         requestBuilder.addHeader("Content-Type", "application/json");
         requestBuilder.addHeader("Accept", "application/json");
         request = requestBuilder.build();

@@ -96,7 +96,7 @@ public interface MojioPushApi {
      * @return
      */
     @DELETE("{resource}/{key}")
-    Call<MessageResponse> deleteObserver(@Path("resource") String resource, @Path("key") String key);
+    Call<Void> deleteObserver(@Path("resource") String resource, @Path("key") String key);
 
     /**
      * Deletes an observer.
