@@ -50,16 +50,12 @@ public class AuthInterceptorTest {
         Log.append(logger);
     }
 
-    @Test
+    @Test(expected = IOException.class)
     public void testIntercept_noAccount_ok() throws IOException {
         int expectedCode = 200;
         Mock mock = mockChain(expectedCode);
 
         Response actualResponse = interceptor.intercept(mock.chain);
-        assertThat(actualResponse).isEqualTo(mock.response);
-
-        // verify we did not trigger the OnAccessTokenExpiredListener
-        verify(listener, never()).onAccessTokenExpired();
     }
 
     @Test

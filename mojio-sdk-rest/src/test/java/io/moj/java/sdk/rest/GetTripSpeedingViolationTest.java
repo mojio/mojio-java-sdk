@@ -5,6 +5,8 @@ import io.moj.java.sdk.MojioClient;
 import io.moj.java.sdk.MojioRestApi;
 import io.moj.java.sdk.model.enums.SpeedUnit;
 import io.moj.java.sdk.model.values.SpeedingViolation;
+import io.moj.java.sdk.auth.AccessToken;
+import io.moj.java.sdk.auth.Authenticator;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockWebServer;
 import org.junit.After;
@@ -19,6 +21,7 @@ import java.util.List;
 import static com.google.common.truth.Truth.assertThat;
 import static io.moj.java.sdk.test.utils.MockWebServerUtils.successFromFile;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.mock;
 
 public class GetTripSpeedingViolationTest {
     private MockWebServer mockWebServer = new MockWebServer();
@@ -89,9 +92,13 @@ public class GetTripSpeedingViolationTest {
     @Before
     public void setUp() {
         Environment environment = getMockedEnvironment();
+        Authenticator mockAuthenticator = mock(Authenticator.class);
+        AccessToken token = new AccessToken("expectedAuthToken", null, System.currentTimeMillis() + 120_000);
+        when(mockAuthenticator.getAccessToken()).thenReturn(token);
 
         MojioClient client = new MojioClient.Builder("any", "any")
                 .environment(environment)
+                .authenticator(mockAuthenticator)
                 .build();
 
         restApi = client.rest();
