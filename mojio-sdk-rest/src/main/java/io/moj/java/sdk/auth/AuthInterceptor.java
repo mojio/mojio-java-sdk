@@ -32,7 +32,7 @@ public class AuthInterceptor implements Interceptor {
         // set the access token in the header if we have it
         AccessToken accessToken = authenticator.getAccessToken(); // this is a blocking call.
         if (accessToken == null || accessToken.getAccessToken() == null) {
-            throw new IOException(new Throwable("No access token."));
+            throw new IOException(new Throwable(NO_ACCESS_TOKEN_MSG));
         }
 
         Request.Builder requestBuilder = request.newBuilder();
@@ -65,4 +65,6 @@ public class AuthInterceptor implements Interceptor {
     public void setOnAccessTokenExpiredListener(OnAccessTokenExpiredListener listener) {
         this.listener = listener;
     }
+
+    public static String NO_ACCESS_TOKEN_MSG = "No access token.";
 }
