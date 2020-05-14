@@ -2,6 +2,8 @@ package io.moj.java.sdk.model.values;
 
 import com.google.gson.annotations.SerializedName;
 
+import io.moj.java.sdk.model.enums.UnnamedRoadTranslation;
+
 /**
  * Model object for an Address value.
  * Created by mhorie on 2016-01-12.
@@ -64,7 +66,7 @@ public class Address {
     }
 
     public String getFormattedAddress() {
-        return FormattedAddress;
+        return UnnamedRoadTranslation.replaceAnyUnnamedRoadWithLocalizedString(FormattedAddress);
     }
 
     public void setFormattedAddress(String formattedAddress) {
