@@ -21,7 +21,6 @@ public enum MojioEnvironment implements Environment {
     private static final String HTTPS = "https://";
     private static final String WSS = "wss://";
     private static final String FORMAT_ACCOUNTS_HOSTNAME = HTTPS + "%saccounts.moj.io";
-    private static final String FORMAT_MY_MOJIO_HOSTNAME = HTTPS + "%smy.moj.io";
     private static final String FORMAT_HTTPS_API_HOSTNAME = HTTPS + "%sapi.moj.io/v%d";
     private static final String FORMAT_WSS_API_HOSTNAME = WSS + "%sapi.moj.io/v%d";
     private static final String FORMAT_PUSH_HOSTNAME = HTTPS + "%spush.moj.io/v%d";
@@ -69,11 +68,6 @@ public enum MojioEnvironment implements Environment {
     @Override
     public String getPushUrl(int version) {
         return String.format(Locale.US, FORMAT_PUSH_HOSTNAME, buildUrlPrefix(), version);
-    }
-
-    @Override
-    public String getMyMojioUrl() {
-        return String.format(Locale.US, FORMAT_MY_MOJIO_HOSTNAME, buildUrlPrefix());
     }
 
     @Override

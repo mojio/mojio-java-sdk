@@ -23,7 +23,6 @@ public class MojioEnvironmentTest {
         String pushUrl = e.getPushUrl();
         String accountsUrl = e.getAccountsUrl();
         String passwordRecoveryUrl = e.getPasswordRecoveryUrl();
-        String myMojioUrl = e.getMyMojioUrl();
 
         // Turkey's Locale is known for affecting capitalization, ensure we aren't using the default
         Locale.setDefault(new Locale("tr-TR"));
@@ -31,7 +30,6 @@ public class MojioEnvironmentTest {
         assertThat(pushUrl).isEqualTo(e.getPushUrl());
         assertThat(accountsUrl).isEqualTo(e.getAccountsUrl());
         assertThat(passwordRecoveryUrl).isEqualTo(e.getPasswordRecoveryUrl());
-        assertThat(myMojioUrl).isEqualTo(e.getMyMojioUrl());
     }
 
     /**
@@ -44,7 +42,6 @@ public class MojioEnvironmentTest {
 
             String[] uris = new String[] {
                     environment.getAccountsUrl(),
-                    environment.getMyMojioUrl(),
                     environment.getPasswordRecoveryUrl(),
                     environment.getPushUrl(),
                     environment.getApiUrl()
