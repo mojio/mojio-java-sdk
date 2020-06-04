@@ -22,8 +22,6 @@ public interface Environment {
 
     String getWsUrl(int version);
 
-    String getMyMojioUrl();
-
     String getPrefix();
 
 }
