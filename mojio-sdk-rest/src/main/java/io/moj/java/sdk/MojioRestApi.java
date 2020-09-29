@@ -292,8 +292,8 @@ public interface MojioRestApi {
     @POST("users/{id}/emails")
     Call<Email> addUserEmail(@Path("id") String userId, @Body String email);
 
-    @PUT("users/{id}/emails/{email}")
-    Call<Email> updateEmail(@Path("id") String userId, @Path("email") String email);
+    @PUT("users/{id}/emails")
+    Call<Email> updateEmail(@Path("id") String userId, @Body String email);
 
     @DELETE("users/{id}/emails/{email}")
     Call<MessageResponse> deleteEmail(@Path("id") String userId, @Path("email") String email);
