@@ -1,14 +1,6 @@
 package io.moj.java.sdk;
 
-import io.moj.java.sdk.model.App;
-import io.moj.java.sdk.model.Geofence;
-import io.moj.java.sdk.model.Group;
-import io.moj.java.sdk.model.Mojio;
-import io.moj.java.sdk.model.Transaction;
-import io.moj.java.sdk.model.Trip;
-import io.moj.java.sdk.model.User;
-import io.moj.java.sdk.model.Vehicle;
-import io.moj.java.sdk.model.VehicleMeasure;
+import io.moj.java.sdk.model.*;
 import io.moj.java.sdk.model.response.ListResponse;
 import io.moj.java.sdk.model.response.MessageResponse;
 import io.moj.java.sdk.model.response.TransactionResponse;
@@ -293,7 +285,7 @@ public interface MojioRestApi {
     Call<Email> addUserEmail(@Path("id") String userId, @Body String email);
 
     @PUT("users/{id}/emails")
-    Call<Email> updateEmail(@Path("id") String userId, @Body String email);
+    Call<Email> updateEmail(@Path("id") String userId, @Body EmailRequest email);
 
     @DELETE("users/{id}/emails/{email}")
     Call<MessageResponse> deleteEmail(@Path("id") String userId, @Path("email") String email);
