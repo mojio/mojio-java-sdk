@@ -23,14 +23,8 @@ import io.moj.java.sdk.model.values.VehicleStatistics;
 import io.moj.java.sdk.model.values.VinDetails;
 import io.moj.java.sdk.model.values.WifiRadio;
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.DELETE;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.PUT;
-import retrofit2.http.Path;
+import retrofit2.http.*;
 import retrofit2.http.Query;
-import retrofit2.http.QueryMap;
 
 import java.util.List;
 import java.util.Map;
@@ -287,8 +281,8 @@ public interface MojioRestApi {
     @PUT("users/{id}/emails")
     Call<Email> updateEmail(@Path("id") String userId, @Body EmailRequest email);
 
-    @DELETE("users/{id}/emails/{email}")
-    Call<MessageResponse> deleteEmail(@Path("id") String userId, @Path("email") String email);
+    @HTTP(method = "DELETE", path = "users/{id}/emails", hasBody = true)
+    Call<Void> deleteEmail(@Path("id") String userId, @Body EmailRequest email);
 
     @PUT("users/{id}/phonenumbers/{phone}")
     Call<PhoneNumber> addUpdatePhone(@Path("id") String userId, @Path("phone") String phoneNumber,
