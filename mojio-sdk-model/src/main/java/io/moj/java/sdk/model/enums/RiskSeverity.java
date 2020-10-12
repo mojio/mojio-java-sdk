@@ -21,7 +21,10 @@ public enum RiskSeverity {
     MEDIUM("Medium"),
 
     @SerializedName("High")
-    HIGH("High");
+    HIGH("High"),
+
+    @SerializedName("Critical")
+    CRITICAL("Critical");
 
     private String key;
 
