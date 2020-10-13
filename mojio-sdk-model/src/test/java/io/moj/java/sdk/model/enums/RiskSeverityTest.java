@@ -17,6 +17,7 @@ public class RiskSeverityTest extends EnumTest<RiskSeverity> {
                 .put("Low", RiskSeverity.LOW)
                 .put("Medium", RiskSeverity.MEDIUM)
                 .put("High", RiskSeverity.HIGH)
+                .put("Critical", RiskSeverity.CRITICAL)
                 .put("None", RiskSeverity.NONE)
                 .build();
     }
