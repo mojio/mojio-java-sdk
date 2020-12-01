@@ -459,7 +459,7 @@ public class Settings {
 
     public enum LowFuelMode {
         LOW("Low"),
-        SMART("Smart");
+        SMART("Intelligent");
 
         private String key;
 
