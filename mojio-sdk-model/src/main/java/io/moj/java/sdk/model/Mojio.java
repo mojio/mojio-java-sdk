@@ -27,6 +27,7 @@ public class Mojio extends AbstractMojioObject {
     public static final String MCU_FIRMWARE_VERSION = "MainFirmware";
     public static final String VENDOR = "Vendor";
     public static final String DELETED = "Deleted";
+    public static final String MOJIO_TYPE = "MojioType";
 
     @SerializedName(value = "Name", alternate = "name")
     private String Name;
@@ -56,6 +57,8 @@ public class Mojio extends AbstractMojioObject {
     private String MainFirmwareVersion;
     @SerializedName(value = "Deleted", alternate = "deleted")
     private Boolean Deleted;
+    @SerializedName(value = "MojioType", alternate = "mojioType")
+    private String MojioType;
 
     public Mojio() {}
 
@@ -178,6 +181,14 @@ public class Mojio extends AbstractMojioObject {
         Deleted = deleted;
     }
 
+    public String getMojioType() {
+        return MojioType;
+    }
+
+    public void setMojioType(String mojioType) {
+        MojioType = mojioType;
+    }
+
     @Override
     public String toString() {
         return "Mojio{" +
@@ -195,6 +206,7 @@ public class Mojio extends AbstractMojioObject {
                 ", FirmwareVersion='" + FirmwareVersion + '\'' +
                 ", MainFirmwareVersion='" + MainFirmwareVersion + '\'' +
                 ", Deleted=" + Deleted +
+                ", MojioType='" + MojioType + '\'' +
                 "} " + super.toString();
     }
 }
