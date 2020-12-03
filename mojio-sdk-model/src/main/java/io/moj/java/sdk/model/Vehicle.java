@@ -74,6 +74,7 @@ public class Vehicle extends AbstractMojioObject {
     public static final String TAGS = "Tags";
     public static final String DELETED = "Deleted";
     public static final String PREDICTIVE_MAINTENANCE = "PredictiveMaintenance";
+    public static final String VEHICLE_TYPE = "VehicleType";
 
     @SerializedName(value = "Name", alternate = "name")
     private String Name;
@@ -157,6 +158,8 @@ public class Vehicle extends AbstractMojioObject {
     private VehicleProperties Properties;
     @SerializedName(value = "PredictiveMaintenance", alternate = "predictiveMaintenance")
     private PredictiveMaintenance PredictiveMaintenance;
+    @SerializedName(value = "VehicleType", alternate = "vehicleType")
+    private String VehicleType;
 
     public Acceleration getAcceleration() {
         return Acceleration;
@@ -483,6 +486,14 @@ public class Vehicle extends AbstractMojioObject {
 
     public void setPredictiveMaintenance(PredictiveMaintenance predictiveMaintenance) { PredictiveMaintenance = predictiveMaintenance; }
 
+    public String getVehicleType() {
+        return VehicleType;
+    }
+
+    public void setVehicleType(String vehicleType) {
+        VehicleType = vehicleType;
+    }
+
     @Override
     public String toString() {
         return "Vehicle{" +
@@ -527,6 +538,7 @@ public class Vehicle extends AbstractMojioObject {
                 ", Deleted=" + Deleted +
                 ", Properties=" + Properties +
                 ", PredictiveMaintenance=" + PredictiveMaintenance +
+                ", VehicleType='" + VehicleType + '\'' +
                 "} " + super.toString();
     }
 }
