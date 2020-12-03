@@ -15,6 +15,7 @@ public class Settings {
     public static final String ENABLE_TRIP_START = "EnableTripStartActivity";
     public static final String ENABLE_TRIP_COMPLETED = "EnableTripCompletedActivity";
     public static final String ENABLE_LOW_FUEL = "EnableLowFuelActivity";
+    public static final String LOW_FUEL_ACTIVITY_MODE = "LowFuelActivityMode";
     public static final String ENABLE_LOW_BATTERY = "EnableLowBatteryActivity";
     public static final String ENABLE_SPEED = "EnableSpeedActivity";
     public static final String SPEED_THRESHOLD = "SpeedThreshold";
@@ -49,6 +50,8 @@ public class Settings {
     private Boolean EnableTripCompletedActivity;
     @SerializedName(value = "EnableLowFuelActivity", alternate = "enableLowFuelActivity")
     private Boolean EnableLowFuelActivity;
+    @SerializedName(value = "lowFuelActivityMode", alternate = "LowFuelActivityMode")
+    private String LowFuelActivityMode;
     @SerializedName(value = "EnableLowBatteryActivity", alternate = "enableLowBatteryActivity")
     private Boolean EnableLowBatteryActivity;
     @SerializedName(value = "EnableSpeedActivity", alternate = "enableSpeedActivity")
@@ -138,6 +141,14 @@ public class Settings {
 
     public void setEnableLowFuelActivity(Boolean enableLowFuelActivity) {
         EnableLowFuelActivity = enableLowFuelActivity;
+    }
+
+    public LowFuelMode getLowFuelActivityMode() {
+        return LowFuelMode.fromKey(LowFuelActivityMode);
+    }
+
+    public void setLowFuelActivityMode(LowFuelMode lowFuelMode) {
+        LowFuelActivityMode = lowFuelMode == null ? null : lowFuelMode.getKey();
     }
 
     public Boolean getEnableLowBatteryActivity() {
@@ -346,6 +357,7 @@ public class Settings {
                 "EnableTripStartActivity=" + EnableTripStartActivity +
                 ", EnableTripCompletedActivity=" + EnableTripCompletedActivity +
                 ", EnableLowFuelActivity=" + EnableLowFuelActivity +
+                ", LowFuelActivityMode='" + LowFuelActivityMode + '\'' +
                 ", EnableLowBatteryActivity=" + EnableLowBatteryActivity +
                 ", EnableSpeedActivity=" + EnableSpeedActivity +
                 ", SpeedThreshold=" + SpeedThreshold +
@@ -439,6 +451,30 @@ public class Settings {
             for (DisturbanceSensitivity disturbanceSensitivity : values()) {
                 if (disturbanceSensitivity.getKey().equals(key)) {
                     return disturbanceSensitivity;
+                }
+            }
+            return null;
+        }
+    }
+
+    public enum LowFuelMode {
+        LOW("Low"),
+        SMART("Intelligent");
+
+        private String key;
+
+        LowFuelMode(String key) {
+            this.key = key;
+        }
+
+        public String getKey() {
+            return key;
+        }
+
+        public static LowFuelMode fromKey(String key) {
+            for (LowFuelMode lowFuelMode : values()) {
+                if (lowFuelMode.getKey().equals(key)) {
+                    return lowFuelMode;
                 }
             }
             return null;
