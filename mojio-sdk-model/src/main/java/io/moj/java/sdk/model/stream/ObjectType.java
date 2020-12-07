@@ -11,6 +11,7 @@ public enum ObjectType {
     BATTERY("Battery"),
     CHECK_ENGINE_LIGHT("CheckEngineLight"),
     FUEL_LEVEL("FuelLevel"),
+    FUEL_LEVEL_SMART("IntelligentFuelLevel"),
     GEOFENCE("Geofence"),
     RECALL("Recall"),
     NOTE("Note"),
