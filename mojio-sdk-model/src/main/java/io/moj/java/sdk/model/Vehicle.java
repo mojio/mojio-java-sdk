@@ -75,6 +75,8 @@ public class Vehicle extends AbstractMojioObject {
     public static final String DELETED = "Deleted";
     public static final String PREDICTIVE_MAINTENANCE = "PredictiveMaintenance";
     public static final String VEHICLE_TYPE = "VehicleType";
+    public static final String ALTERNATE_ID = "AlternateId";
+    public static final String DEVICE_EXTERNAL_ID = "DeviceExternalId";
 
     @SerializedName(value = "Name", alternate = "name")
     private String Name;
@@ -160,6 +162,10 @@ public class Vehicle extends AbstractMojioObject {
     private PredictiveMaintenance PredictiveMaintenance;
     @SerializedName(value = "VehicleType", alternate = "vehicleType")
     private String VehicleType;
+    @SerializedName(value = "AlternateId", alternate = "AlternateId")
+    private String AlternateId;
+    @SerializedName(value = "DeviceExternalId", alternate = "DeviceExternalId")
+    private String DeviceExternalId;
 
     public Acceleration getAcceleration() {
         return Acceleration;
@@ -494,6 +500,23 @@ public class Vehicle extends AbstractMojioObject {
         VehicleType = vehicleType;
     }
 
+    public String getAlternateId() {
+        return AlternateId;
+    }
+
+    public void setAlternateId(String alternateId) {
+        AlternateId = alternateId;
+    }
+
+    public String getDeviceExternalId() {
+        return DeviceExternalId;
+    }
+
+    public void setDeviceExternalId(String deviceExternalId) {
+        DeviceExternalId = deviceExternalId;
+    }
+
+
     @Override
     public String toString() {
         return "Vehicle{" +
@@ -539,6 +562,8 @@ public class Vehicle extends AbstractMojioObject {
                 ", Properties=" + Properties +
                 ", PredictiveMaintenance=" + PredictiveMaintenance +
                 ", VehicleType='" + VehicleType + '\'' +
+                ", AlternateId='" + AlternateId + '\'' +
+                ", DeviceExternalId='" + DeviceExternalId + '\'' +
                 "} " + super.toString();
     }
 }
