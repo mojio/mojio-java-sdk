@@ -162,9 +162,9 @@ public class Vehicle extends AbstractMojioObject {
     private PredictiveMaintenance PredictiveMaintenance;
     @SerializedName(value = "VehicleType", alternate = "vehicleType")
     private String VehicleType;
-    @SerializedName(value = "AlternateId", alternate = "AlternateId")
+    @SerializedName(value = "AlternateId", alternate = "alternateId")
     private String AlternateId;
-    @SerializedName(value = "DeviceExternalId", alternate = "DeviceExternalId")
+    @SerializedName(value = "DeviceExternalId", alternate = "deviceExternalId")
     private String DeviceExternalId;
 
     public Acceleration getAcceleration() {
