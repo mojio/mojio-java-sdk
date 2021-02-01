@@ -4,11 +4,13 @@ import com.google.gson.annotations.SerializedName;
 
 import io.moj.java.sdk.model.enums.UnnamedRoadTranslation;
 
+import java.io.Serializable;
+
 /**
  * Model object for an Address value.
  * Created by mhorie on 2016-01-12.
  */
-public class Address {
+public class Address implements Serializable {
 
     @SerializedName(value = "HouseNumber", alternate = "houseNumber")
     private String HouseNumber;

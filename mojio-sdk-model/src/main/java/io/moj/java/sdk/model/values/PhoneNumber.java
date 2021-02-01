@@ -2,11 +2,13 @@ package io.moj.java.sdk.model.values;
 
 import io.moj.java.sdk.model.enums.PhoneType;
 
+import java.io.Serializable;
+
 /**
  * Model object for a PhoneNumber value.
  * Created by mhorie on 2016-01-14.
  */
-public class PhoneNumber {
+public class PhoneNumber implements Serializable {
 
     private PhoneType Type;
     private Integer CountryCode;

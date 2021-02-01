@@ -2,11 +2,13 @@ package io.moj.java.sdk.model.values;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Model object for vehicle's PredictiveMaintenance value.
  * Created by Mykhaylo Tauzhnianskyi on 2019-11-11.
  */
-public class PredictiveMaintenance {
+public class PredictiveMaintenance implements Serializable {
 
     public static final String BATTERY_PREDICTIVE_MAINTENANCE = "Battery";
     public static final String AIR_FILTER_PREDICTIVE_MAINTENANCE = "AirFilter";

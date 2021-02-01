@@ -19,8 +19,11 @@ public enum ObjectType {
     OIL_LEVEL("OilLevel"),
     OIL_PRESSURE("OilPressure"),
     BATTERY_PREDICTION("BatteryPredictiveMaintenance"),
-    AIR_FILTER_PREDICTION("AirFilterPredictiveMaintenance");
-
+    AIR_FILTER_PREDICTION("AirFilterPredictiveMaintenance"),
+    SEATBELT("Seatbelt"),
+    LOW_BRAKE_FLUID_WARNING("LowBrakeFluidWarning"),
+    EMERGENCY_INCIDENT("EmergencyIncident"),
+    MAINTENANCE_REMINDER("MaintenanceReminder");
 
     private String key;
 

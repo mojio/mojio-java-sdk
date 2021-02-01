@@ -1,10 +1,12 @@
 package io.moj.java.sdk.model.values;
 
+import java.io.Serializable;
+
 /**
  * Model object for a Polyline.
  * Created by Mauro on 2017-03-20.
  */
-public class Polyline {
+public class Polyline implements Serializable {
     private String Polyline;
 
     public String getPolyline() {

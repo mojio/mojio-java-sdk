@@ -4,11 +4,13 @@ import com.google.gson.annotations.SerializedName;
 
 import io.moj.java.sdk.utils.TimeUtils;
 
+import java.io.Serializable;
+
 /**
  * Idle state object found in the Idle event object.
  * Created by Mauro on 2017-06-26.
  */
-public class IdleEventState {
+public class IdleEventState implements Serializable {
     @SerializedName(value = "StartTime", alternate = "startTime")
     private String StartTime;
     @SerializedName(value = "Duration", alternate = "duration")

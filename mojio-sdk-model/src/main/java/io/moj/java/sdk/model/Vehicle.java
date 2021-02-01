@@ -2,30 +2,12 @@ package io.moj.java.sdk.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 import io.moj.java.sdk.model.enums.FuelEfficiencyCalculationMethod;
 import io.moj.java.sdk.model.enums.FuelType;
-import io.moj.java.sdk.model.values.Acceleration;
-import io.moj.java.sdk.model.values.Accelerometer;
-import io.moj.java.sdk.model.values.Battery;
-import io.moj.java.sdk.model.values.BooleanState;
-import io.moj.java.sdk.model.values.CompatDetails;
-import io.moj.java.sdk.model.values.DiagnosticCode;
-import io.moj.java.sdk.model.values.EngineOil;
-import io.moj.java.sdk.model.values.FuelEfficiency;
-import io.moj.java.sdk.model.values.FuelLevel;
-import io.moj.java.sdk.model.values.HarshEventState;
-import io.moj.java.sdk.model.values.Heading;
-import io.moj.java.sdk.model.values.Image;
-import io.moj.java.sdk.model.values.Location;
-import io.moj.java.sdk.model.values.Odometer;
-import io.moj.java.sdk.model.values.PredictiveMaintenance;
-import io.moj.java.sdk.model.values.Rpm;
-import io.moj.java.sdk.model.values.Speed;
-import io.moj.java.sdk.model.values.TirePressure;
-import io.moj.java.sdk.model.values.VehicleDetails;
-import io.moj.java.sdk.model.values.VehicleProperties;
+import io.moj.java.sdk.model.values.*;
 import io.moj.java.sdk.utils.TimeUtils;
 
 /**
@@ -77,6 +59,12 @@ public class Vehicle extends AbstractMojioObject {
     public static final String VEHICLE_TYPE = "VehicleType";
     public static final String ALTERNATE_ID = "AlternateId";
     public static final String DEVICE_EXTERNAL_ID = "DeviceExternalId";
+    public static final String SEATBELT = "Seatbelt";
+    public static final String SEATS = "Seats";
+    public static final String BRAKE_FLUID = "BrakeFluid";
+    public static final String NEXT_SERVICE = "NextService";
+    public static final String HYBRID_BATTERY = "HybridBattery";
+    public static final String HYBRID_ENGINE = "HybridEngine";
 
     @SerializedName(value = "Name", alternate = "name")
     private String Name;
@@ -166,6 +154,18 @@ public class Vehicle extends AbstractMojioObject {
     private String AlternateId;
     @SerializedName(value = "DeviceExternalId", alternate = "deviceExternalId")
     private String DeviceExternalId;
+    @SerializedName(value = "Seatbelt", alternate = "seatbelt")
+    private Seatbelt Seatbelt;
+    @SerializedName(value = "Seats", alternate = "seats")
+    private Seats Seats;
+    @SerializedName(value = "BrakeFluid", alternate = "brakeFluid")
+    private BrakeFluid BrakeFluid;
+    @SerializedName(value = "NextService", alternate = "nextService")
+    private NextService NextService;
+    @SerializedName(value = "HybridBattery", alternate = "hybridBattery")
+    private HybridBattery HybridBattery;
+    @SerializedName(value = "HybridEngine", alternate = "hybridEngine")
+    private HybridEngine HybridEngine;
 
     public Acceleration getAcceleration() {
         return Acceleration;
@@ -516,6 +516,54 @@ public class Vehicle extends AbstractMojioObject {
         DeviceExternalId = deviceExternalId;
     }
 
+    public Seatbelt getSeatbelt() {
+        return Seatbelt;
+    }
+
+    public void setSeatbelt(Seatbelt seatbelt) {
+        Seatbelt = seatbelt;
+    }
+
+    public Seats getSeats() {
+        return Seats;
+    }
+
+    public void setSeats(Seats seats) {
+        Seats = seats;
+    }
+
+    public BrakeFluid getBrakeFluid() {
+        return BrakeFluid;
+    }
+
+    public void setBrakeFluid(BrakeFluid brakeFluid) {
+        BrakeFluid = brakeFluid;
+    }
+
+    public NextService getNextService() {
+        return NextService;
+    }
+
+    public void setNextService(NextService nextService) {
+        NextService = nextService;
+    }
+
+    public HybridBattery getHybridBattery() {
+        return HybridBattery;
+    }
+
+    public void setHybridBattery(HybridBattery hybridBattery) {
+        HybridBattery = hybridBattery;
+    }
+
+    public HybridEngine getHybridEngine() {
+        return HybridEngine;
+    }
+
+    public void setHybridEngine(HybridEngine hybridEngine) {
+        HybridEngine = hybridEngine;
+    }
+
 
     @Override
     public String toString() {
@@ -564,6 +612,12 @@ public class Vehicle extends AbstractMojioObject {
                 ", VehicleType='" + VehicleType + '\'' +
                 ", AlternateId='" + AlternateId + '\'' +
                 ", DeviceExternalId='" + DeviceExternalId + '\'' +
+                ", Seatbelt='" + Seatbelt + '\'' +
+                ", Seats='" + Seats + '\'' +
+                ", BrakeFluid='" + BrakeFluid + '\'' +
+                ", NextService='" + NextService + '\'' +
+                ", HybridBattery='" + HybridBattery + '\'' +
+                ", HybridEngine='" + HybridEngine + '\'' +
                 "} " + super.toString();
     }
 }

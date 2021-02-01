@@ -2,11 +2,13 @@ package io.moj.java.sdk.model.values;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Model object for an Accelerometer value.
  * Created by mhorie on 2016-01-12.
  */
-public class Accelerometer {
+public class Accelerometer implements Serializable {
 
     @SerializedName(value = "X", alternate = "x")
     private ProperAcceleration X;

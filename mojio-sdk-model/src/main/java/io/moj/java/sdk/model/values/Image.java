@@ -2,11 +2,13 @@ package io.moj.java.sdk.model.values;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Model object for an Image.
  * Created by mhorie on 2016-01-12.
  */
-public class Image {
+public class Image implements Serializable {
 
     public static final String SRC = "Src";
     public static final String NORMAL = "Normal";

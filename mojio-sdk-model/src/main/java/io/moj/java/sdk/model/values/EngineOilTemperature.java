@@ -2,11 +2,13 @@ package io.moj.java.sdk.model.values;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Model object for vehicle EngineOilTemperature.
  * Created by oleksii borys on 2019-08-22.
  */
-public class EngineOilTemperature {
+public class EngineOilTemperature implements Serializable {
 
     public static final String BASEUNIT = "BaseUnit";
     public static final String TIMESTAMP = "Timestamp";

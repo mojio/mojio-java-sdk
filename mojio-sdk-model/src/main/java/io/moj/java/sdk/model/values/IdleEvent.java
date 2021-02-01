@@ -2,11 +2,13 @@ package io.moj.java.sdk.model.values;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Idle event object found in the Trip object.
  * Created by Mauro on 2017-06-26.
  */
-public class IdleEvent {
+public class IdleEvent implements Serializable {
     @SerializedName(value = "IdleState", alternate = "idleState")
     private IdleEventState IdleState;
     @SerializedName(value = "Location", alternate = "location")

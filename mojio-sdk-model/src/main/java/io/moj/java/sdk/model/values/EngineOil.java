@@ -2,11 +2,13 @@ package io.moj.java.sdk.model.values;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Model object for vehicle EngineOil.
  * Created by oleksii borys on 2019-08-22.
  */
-public class EngineOil {
+public class EngineOil implements Serializable {
 
     public static final String TIMESTAMP = "Timestamp";
     public static final String ENGINE_OIL_LEVEL_WARNING = "EngineOilLevelWarning";

@@ -2,11 +2,13 @@ package io.moj.java.sdk.model.values;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Model object for Links.
  * Created by mhorie on 2016-01-13.
  */
-public class LinkInfo {
+public class LinkInfo implements Serializable {
 
     @SerializedName(value = "Self", alternate = "self")
     private String Self;
