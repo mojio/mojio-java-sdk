@@ -5,13 +5,13 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class HybridEngine implements Serializable {
-    @SerializedName(value = "Timestamp", alternate = {"timestamp", "TimeStamp"})
+    @SerializedName(value = "Timestamp", alternate = {"timestamp", "TimeStamp", "_ts"})
     private String Timestamp;
-    @SerializedName(value = "HybridEngineMode", alternate = {"hybridEngineMode", "hybridenginemode"})
+    @SerializedName(value = "HybridEngineMode", alternate = {"hybridEngineMode", "hybridenginemode", "mode"})
     private String HybridEngineMode;
-    @SerializedName(value = "HybridModeCombustionDuration", alternate = {"hybridModeCombustionDuration", "hybridmodecombustionduration"})
+    @SerializedName(value = "HybridModeCombustionDuration", alternate = {"hybridModeCombustionDuration", "hybridmodecombustionduration", "c_dur"})
     private VehicleSimplePropertyDataModel HybridModeCombustionDuration;
-    @SerializedName(value = "HybridModeElectricDuration", alternate = {"hybridModeElectricDuration", "hybridmodeelectricduration"})
+    @SerializedName(value = "HybridModeElectricDuration", alternate = {"hybridModeElectricDuration", "hybridmodeelectricduration", "e_dur"})
     private VehicleSimplePropertyDataModel HybridModeElectricDuration;
 
     public String getTimestamp() {

@@ -5,15 +5,15 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class HybridBattery implements Serializable {
-    @SerializedName(value = "Timestamp", alternate = {"timestamp", "TimeStamp"})
+    @SerializedName(value = "Timestamp", alternate = {"timestamp", "TimeStamp", "_ts"})
     private String Timestamp;
-    @SerializedName(value = "HybridBatteryVoltage", alternate = {"hybridBatteryVoltage", "hybridbatteryvoltage"})
+    @SerializedName(value = "HybridBatteryVoltage", alternate = {"hybridBatteryVoltage", "hybridbatteryvoltage", "hbat_vlt"})
     private VehicleSimplePropertyDataModel HybridBatteryVoltage;
-    @SerializedName(value = "HybridBatteryCurrent", alternate = {"hybridBatteryCurrent", "hybridbatterycurrent"})
+    @SerializedName(value = "HybridBatteryCurrent", alternate = {"hybridBatteryCurrent", "hybridbatterycurrent", "hbat_cur"})
     private VehicleSimplePropertyDataModel HybridBatteryCurrent;
-    @SerializedName(value = "HybridBatteryChargeLevel", alternate = {"hybridBatteryChargeLevel", "hybridbatterychargelevel"})
+    @SerializedName(value = "HybridBatteryChargeLevel", alternate = {"hybridBatteryChargeLevel", "hybridbatterychargelevel", "hbat_clvl"})
     private HybridBatteryChargeLevel HybridBatteryChargeLevel;
-    @SerializedName(value = "HybridBatteryChargingStatus", alternate = {"hybridBatteryChargingStatus", "hybridbatterychargingstatus"})
+    @SerializedName(value = "HybridBatteryChargingStatus", alternate = {"hybridBatteryChargingStatus", "hybridbatterychargingstatus", "hbat_csta"})
     private String HybridBatteryChargingStatus;
 
     public String getTimestamp() {
