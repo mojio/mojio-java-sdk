@@ -4,12 +4,14 @@ import com.google.gson.annotations.SerializedName;
 
 import io.moj.java.sdk.model.enums.CompatLevel;
 
+import java.io.Serializable;
+
 /**
  * Model object for vehicle compatibility.
  * Created by alexc on 2017-03-24.
  */
 
-public class CompatDetails {
+public class CompatDetails implements Serializable {
 
     @SerializedName(value = "Level", alternate = "level")
     private CompatLevel Level;

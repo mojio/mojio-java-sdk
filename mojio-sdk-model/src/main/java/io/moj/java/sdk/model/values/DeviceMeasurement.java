@@ -2,11 +2,13 @@ package io.moj.java.sdk.model.values;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Model object for an DeviceMeasurement value.
  * Created by mhorie on 2016-01-14.
  */
-public abstract class DeviceMeasurement {
+public abstract class DeviceMeasurement implements Serializable {
 
     public static final String BASE_UNIT = "BaseUnit";
     public static final String BASE_VALUE = "BaseUnit";

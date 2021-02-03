@@ -2,6 +2,7 @@ package io.moj.java.sdk.model.values;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import io.moj.java.sdk.utils.TimeUtils;
  * Model object for a Location.
  * Created by mhorie on 2016-01-12.
  */
-public class Location {
+public class Location implements Serializable {
 
     public static final String ADDRESS = "Address";
     public static final String TIMESTAMP = "Timestamp";

@@ -4,11 +4,13 @@ import com.google.gson.annotations.SerializedName;
 
 import io.moj.java.sdk.model.enums.FuelType;
 
+import java.io.Serializable;
+
 /**
  * Model object for vehicle details based on VIN.
  * Created by mhorie on 2016-01-14.
  */
-public class VehicleDetails {
+public class VehicleDetails implements Serializable {
 
     @SerializedName(value = "Vin", alternate = "vin")
     private String Vin;

@@ -1,5 +1,6 @@
 package io.moj.java.sdk.model.values;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +12,7 @@ import io.moj.java.sdk.utils.TimeUtils;
  * Model object for device configuration.
  * Created by mhorie on 2018-04-03.
  */
-public class DeviceConfiguration {
+public class DeviceConfiguration implements Serializable {
 
     private static final String KEY_DISTURBANCE_THRESHOLD = "AcclWakeupThreshold";
 

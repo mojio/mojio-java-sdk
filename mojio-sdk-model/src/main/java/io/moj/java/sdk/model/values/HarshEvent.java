@@ -2,11 +2,13 @@ package io.moj.java.sdk.model.values;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Harsh event object found in the Trip object
  * Created by Mauro on 2017-06-26.
  */
-public class HarshEvent {
+public class HarshEvent implements Serializable {
     @SerializedName(value = "HarshEventState", alternate = "harshEventState")
     private HarshEventState HarshEventState;
     @SerializedName(value = "Location", alternate = "location")

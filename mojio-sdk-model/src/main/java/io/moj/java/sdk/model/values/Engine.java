@@ -1,10 +1,12 @@
 package io.moj.java.sdk.model.values;
 
+import java.io.Serializable;
+
 /**
  * Model object for an Engine.
  * Created by skidson on 16-03-10.
  */
-public class Engine {
+public class Engine implements Serializable {
 
     private String Name;
     private String Cylinders;

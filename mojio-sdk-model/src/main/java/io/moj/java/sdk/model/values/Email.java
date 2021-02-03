@@ -1,10 +1,12 @@
 package io.moj.java.sdk.model.values;
 
+import java.io.Serializable;
+
 /**
  * Model object for a Email value.
  * Created by mhorie on 2016-01-14.
  */
-public class Email {
+public class Email implements Serializable {
 
     private Boolean Verified;
     private String Address;

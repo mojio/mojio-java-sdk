@@ -2,11 +2,13 @@ package io.moj.java.sdk.model.enums;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Enum for FuelType types.
  * Created by mhorie on 2016-01-14.
  */
-public enum FuelType {
+public enum FuelType implements Serializable {
 
     @SerializedName(value = "Query", alternate = "query")
     QUERY("Query"),

@@ -55,7 +55,8 @@ public final class TestUtils {
 
             boolean accessible = field.isAccessible();
             field.setAccessible(true);
-            assertThat(toString).contains(field.getName() + "=" + formatFieldValue(field, pojo));
+            assertThat(toString.contains(field.getName() + "=" + formatFieldValue(field, pojo))
+            || toString.contains(field.getName() + "='" + formatFieldValue(field, pojo)+"'"));
             field.setAccessible(accessible);
         }
     }

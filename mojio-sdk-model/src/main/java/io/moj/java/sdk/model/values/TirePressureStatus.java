@@ -2,7 +2,9 @@ package io.moj.java.sdk.model.values;
 
 import com.google.gson.annotations.SerializedName;
 
-public class TirePressureStatus {
+import java.io.Serializable;
+
+public class TirePressureStatus implements Serializable {
 
     public static final String TIMESTAMP = "Timestamp";
     public static final String TIRE_PRESSURE_STATUS_VAL = "TirePressureStatusVal";

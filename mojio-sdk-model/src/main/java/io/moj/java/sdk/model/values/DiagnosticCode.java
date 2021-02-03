@@ -4,11 +4,13 @@ import com.google.gson.annotations.SerializedName;
 
 import io.moj.java.sdk.model.enums.RiskSeverity;
 
+import java.io.Serializable;
+
 /**
  * Model object for an DiagnosticCode value.
  * Created by mhorie on 2016-01-12.
  */
-public class DiagnosticCode {
+public class DiagnosticCode implements Serializable {
 
     @SerializedName(value = "Code", alternate = "code")
     private String Code;

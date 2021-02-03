@@ -2,7 +2,9 @@ package io.moj.java.sdk.model.values;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Details {
+import java.io.Serializable;
+
+public class Details implements Serializable {
     @SerializedName(value = "purpose", alternate = "Purpose")
     private String Purpose;
     @SerializedName(value = "notes", alternate = "Notes")

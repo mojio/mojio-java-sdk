@@ -1,12 +1,13 @@
 package io.moj.java.sdk.model.values;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 /**
  * Model object for summary of service schedule items.
  * Created by skidson on 16-03-10.
  */
-public class NextServiceSchedule {
+public class NextServiceSchedule implements Serializable {
 
     private String TimeStamp;
     private Double Odometer;

@@ -2,12 +2,14 @@ package io.moj.java.sdk.model.values;
 
 import io.moj.java.sdk.utils.TimeUtils;
 
+import java.io.Serializable;
+
 /**
  * Model class for a data aggregate. This is essentially a "bucket" of data for a given
  * {@link io.moj.java.sdk.model.values.DeviceMeasurement} over time.
  * Created by skidson on 2016-09-06.
  */
-public class Aggregate {
+public class Aggregate implements Serializable {
 
     public static final String AVERAGE = "Average";
     public static final String MAX = "Max";

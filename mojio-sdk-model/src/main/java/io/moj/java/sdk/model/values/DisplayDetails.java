@@ -2,7 +2,9 @@ package io.moj.java.sdk.model.values;
 
 import com.google.gson.annotations.SerializedName;
 
-public class DisplayDetails {
+import java.io.Serializable;
+
+public class DisplayDetails implements Serializable {
 
     public static final String COLOR = "Color";
     public static final String ICON = "Icon";

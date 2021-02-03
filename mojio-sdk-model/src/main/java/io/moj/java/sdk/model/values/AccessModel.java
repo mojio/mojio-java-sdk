@@ -1,12 +1,13 @@
 package io.moj.java.sdk.model.values;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 /**
  * Model object for a AccessModel.
  * Created by mhorie on 2016-01-13.
  */
-public class AccessModel {
+public class AccessModel implements Serializable {
 
     public static final String GROUP_ID = "GroupId";
     public static final String PERMISSIONS = "Permissions";
