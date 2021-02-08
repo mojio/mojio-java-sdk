@@ -8,9 +8,9 @@ public class NextService implements Serializable {
     @SerializedName(value = "Timestamp", alternate = {"timestamp", "TimeStamp"})
     private String Timestamp;
     @SerializedName(value = "DistanceToNextService", alternate = {"distanceToNextService", "distancetonextservice"})
-    private VehicleSimplePropertyDataModel DistanceToNextService;
+    private DistanceToNextService DistanceToNextService;
     @SerializedName(value = "TimeToNextService", alternate = {"timeToNextService", "timetonextservice"})
-    private VehicleSimplePropertyDataModel TimeToNextService;
+    private TimeToNextService TimeToNextService;
 
 
     public String getTimestamp() {
@@ -21,19 +21,19 @@ public class NextService implements Serializable {
         Timestamp = timestamp;
     }
 
-    public VehicleSimplePropertyDataModel getDistanceToNextService() {
+    public DistanceToNextService getDistanceToNextService() {
         return DistanceToNextService;
     }
 
-    public void setDistanceToNextService(VehicleSimplePropertyDataModel distanceToNextService) {
+    public void setDistanceToNextService(DistanceToNextService distanceToNextService) {
         DistanceToNextService = distanceToNextService;
     }
 
-    public VehicleSimplePropertyDataModel getTimeToNextService() {
+    public TimeToNextService getTimeToNextService() {
         return TimeToNextService;
     }
 
-    public void setTimeToNextService(VehicleSimplePropertyDataModel timeToNextService) {
+    public void setTimeToNextService(TimeToNextService timeToNextService) {
         TimeToNextService = timeToNextService;
     }
 
