@@ -1,6 +1,7 @@
 package io.moj.java.sdk.model.values;
 
 import com.google.gson.annotations.SerializedName;
+import io.moj.java.sdk.model.enums.BrakeFluidLevelWarningType;
 
 import java.io.Serializable;
 
@@ -8,7 +9,7 @@ public class BrakeFluid implements Serializable {
     @SerializedName(value = "Timestamp", alternate = {"timestamp", "TimeStamp"})
     private String Timestamp;
     @SerializedName(value = "BrakeFluidLevelWarning", alternate = {"brakeFluidLevelWarning", "brakefluidlevelwarning"})
-    private String BrakeFluidLevelWarning;
+    private BrakeFluidLevelWarningType BrakeFluidLevelWarning;
 
     public String getTimestamp() {
         return Timestamp;
@@ -18,11 +19,11 @@ public class BrakeFluid implements Serializable {
         Timestamp = timestamp;
     }
 
-    public String getBrakeFluidLevelWarning() {
+    public BrakeFluidLevelWarningType getBrakeFluidLevelWarning() {
         return BrakeFluidLevelWarning;
     }
 
-    public void setBrakeFluidLevelWarning(String brakeFluidLevelWarning) {
+    public void setBrakeFluidLevelWarning(BrakeFluidLevelWarningType brakeFluidLevelWarning) {
         BrakeFluidLevelWarning = brakeFluidLevelWarning;
     }
 

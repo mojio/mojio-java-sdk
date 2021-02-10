@@ -42,6 +42,16 @@ public class Settings {
     public static final String ENABLE_SERVICE_SCHEDULE = "EnableServiceScheduleActivity";
     public static final String ENABLE_TIRE_PRESSURE_WARNING = "EnableTirePressureWarningActivity";
     public static final String ENABLE_AIR_FILTER_MAINTENANCE = "EnableAirFilterMaintenanceActivity";
+    public static final String ENABLE_SEATBELT_DISENGAGED_ACTIVITY = "EnableSeatbeltDisengagedActivity";
+    public static final String ENABLE_SEATBELT_ENGAGED_ACTIVITY = "EnableSeatbeltEngagedActivity";
+    public static final String ENABLE_DRIVER_SEATBELT_DISENGAGED_ACTIVITY = "EnableDriverSeatbeltDisengagedActivity";
+    public static final String ENABLE_DRIVER_SEATBELT_ENGAGED_ACTIVITY = "EnableDriverSeatbeltEngagedActivity";
+    public static final String ENABLE_PASSENGER_SEATBELT_DISENGAGED_ACTIVITY = "EnablePassengerSeatbeltDisengagedActivity";
+    public static final String ENABLE_PASSENGER_SEATBELT_ENGAGED_ACTIVITY = "EnablePassengerSeatbeltEngagedActivity";
+    public static final String ENABLE_ENGINE_OIL_LEVEL_WARNING_ACTIVITY = "EnableEngineOilLevelWarningActivity";
+    public static final String ENABLE_ENGINE_OIL_PRESSURE_LOW_WARNING_ACTIVITY = "EnableEngineOilPressureLowWarningActivity";
+    public static final String ENABLE_LOW_BRAKE_FLUID_WARNING_ACTIVITY = "EnableLowBrakeFluidWarningActivity";
+    public static final String ENABLE_MAINTENANCE_REMINDER_ACTIVITY = "EnableMaintenanceReminderActivity";
 
     // V2 + V3 fields
     @SerializedName(value = "EnableTripStartActivity", alternate = "enableTripStartActivity")
@@ -110,6 +120,27 @@ public class Settings {
 
     @SerializedName(value = "EnableAirFilterMaintenanceActivity", alternate = "enableAirFilterMaintenanceActivity")
     private Boolean EnableAirFilterMaintenanceActivity;
+
+    @SerializedName(value = ENABLE_SEATBELT_DISENGAGED_ACTIVITY, alternate = "enableSeatbeltDisengagedActivity")
+    private Boolean EnableSeatbeltDisengagedActivity;
+    @SerializedName(value = ENABLE_SEATBELT_ENGAGED_ACTIVITY, alternate = "enableSeatbeltEngagedActivity")
+    private Boolean EnableSeatbeltEngagedActivity;
+    @SerializedName(value = ENABLE_DRIVER_SEATBELT_DISENGAGED_ACTIVITY, alternate = "enableDriverSeatbeltDisengagedActivity")
+    private Boolean EnableDriverSeatbeltDisengagedActivity;
+    @SerializedName(value = ENABLE_DRIVER_SEATBELT_ENGAGED_ACTIVITY, alternate = "enableDriverSeatbeltEngagedActivity")
+    private Boolean EnableDriverSeatbeltEngagedActivity;
+    @SerializedName(value = ENABLE_PASSENGER_SEATBELT_DISENGAGED_ACTIVITY, alternate = "enablePassengerSeatbeltDisengagedActivity")
+    private Boolean EnablePassengerSeatbeltDisengagedActivity;
+    @SerializedName(value = ENABLE_PASSENGER_SEATBELT_ENGAGED_ACTIVITY, alternate = "enablePassengerSeatbeltEngagedActivity")
+    private Boolean EnablePassengerSeatbeltEngagedActivity;
+    @SerializedName(value = ENABLE_ENGINE_OIL_LEVEL_WARNING_ACTIVITY, alternate = "enableEngineOilLevelWarningActivity")
+    private Boolean EnableEngineOilLevelWarningActivity;
+    @SerializedName(value = ENABLE_ENGINE_OIL_PRESSURE_LOW_WARNING_ACTIVITY, alternate = "enableEngineOilPressureLowWarningActivity")
+    private Boolean EnableEngineOilPressureLowWarningActivity;
+    @SerializedName(value = ENABLE_LOW_BRAKE_FLUID_WARNING_ACTIVITY, alternate = "enableLowBrakeFluidWarningActivity")
+    private Boolean EnableLowBrakeFluidWarningActivity;
+    @SerializedName(value = ENABLE_MAINTENANCE_REMINDER_ACTIVITY, alternate = "enableMaintenanceReminderActivity")
+    private Boolean EnableMaintenanceReminderActivity;
 
     public Boolean getEnableGeofenceActivity() {
         return EnableGeofenceActivity;
@@ -351,6 +382,86 @@ public class Settings {
         EnableAirFilterMaintenanceActivity = enableAirFilterMaintenanceActivity;
     }
 
+    public Boolean getEnableSeatbeltDisengagedActivity() {
+        return EnableSeatbeltDisengagedActivity;
+    }
+
+    public void setEnableSeatbeltDisengagedActivity(Boolean enableSeatbeltDisengagedActivity) {
+        EnableSeatbeltDisengagedActivity = enableSeatbeltDisengagedActivity;
+    }
+
+    public Boolean getEnableSeatbeltEngagedActivity() {
+        return EnableSeatbeltEngagedActivity;
+    }
+
+    public void setEnableSeatbeltEngagedActivity(Boolean enableSeatbeltEngagedActivity) {
+        EnableSeatbeltEngagedActivity = enableSeatbeltEngagedActivity;
+    }
+
+    public Boolean getEnableDriverSeatbeltDisengagedActivity() {
+        return EnableDriverSeatbeltDisengagedActivity;
+    }
+
+    public void setEnableDriverSeatbeltDisengagedActivity(Boolean enableDriverSeatbeltDisengagedActivity) {
+        EnableDriverSeatbeltDisengagedActivity = enableDriverSeatbeltDisengagedActivity;
+    }
+
+    public Boolean getEnableDriverSeatbeltEngagedActivity() {
+        return EnableDriverSeatbeltEngagedActivity;
+    }
+
+    public void setEnableDriverSeatbeltEngagedActivity(Boolean enableDriverSeatbeltEngagedActivity) {
+        EnableDriverSeatbeltEngagedActivity = enableDriverSeatbeltEngagedActivity;
+    }
+
+    public Boolean getEnablePassengerSeatbeltDisengagedActivity() {
+        return EnablePassengerSeatbeltDisengagedActivity;
+    }
+
+    public void setEnablePassengerSeatbeltDisengagedActivity(Boolean enablePassengerSeatbeltDisengagedActivity) {
+        EnablePassengerSeatbeltDisengagedActivity = enablePassengerSeatbeltDisengagedActivity;
+    }
+
+    public Boolean getEnablePassengerSeatbeltEngagedActivity() {
+        return EnablePassengerSeatbeltEngagedActivity;
+    }
+
+    public void setEnablePassengerSeatbeltEngagedActivity(Boolean enablePassengerSeatbeltEngagedActivity) {
+        EnablePassengerSeatbeltEngagedActivity = enablePassengerSeatbeltEngagedActivity;
+    }
+
+    public Boolean getEnableEngineOilLevelWarningActivity() {
+        return EnableEngineOilLevelWarningActivity;
+    }
+
+    public void setEnableEngineOilLevelWarningActivity(Boolean enableEngineOilLevelWarningActivity) {
+        EnableEngineOilLevelWarningActivity = enableEngineOilLevelWarningActivity;
+    }
+
+    public Boolean getEnableEngineOilPressureLowWarningActivity() {
+        return EnableEngineOilPressureLowWarningActivity;
+    }
+
+    public void setEnableEngineOilPressureLowWarningActivity(Boolean enableEngineOilPressureLowWarningActivity) {
+        EnableEngineOilPressureLowWarningActivity = enableEngineOilPressureLowWarningActivity;
+    }
+
+    public Boolean getEnableLowBrakeFluidWarningActivity() {
+        return EnableLowBrakeFluidWarningActivity;
+    }
+
+    public void setEnableLowBrakeFluidWarningActivity(Boolean enableLowBrakeFluidWarningActivity) {
+        EnableLowBrakeFluidWarningActivity = enableLowBrakeFluidWarningActivity;
+    }
+
+    public Boolean getEnableMaintenanceReminderActivity() {
+        return EnableMaintenanceReminderActivity;
+    }
+
+    public void setEnableMaintenanceReminderActivity(Boolean enableMaintenanceReminderActivity) {
+        EnableMaintenanceReminderActivity = enableMaintenanceReminderActivity;
+    }
+
     @Override
     public String toString() {
         return "Settings{" +
@@ -383,7 +494,17 @@ public class Settings {
                 ", EnableHardwareVersionCompatibilityActivity=" + EnableHardwareVersionCompatibilityActivity +
                 ", EnableServiceScheduleActivity=" + EnableServiceScheduleActivity +
                 ", EnableTirePressureWarningActivity=" + EnableTirePressureWarningActivity +
-                ", EnableEnableAirFilterMaintenanceActivity=" + EnableAirFilterMaintenanceActivity +
+                ", EnableAirFilterMaintenanceActivity=" + EnableAirFilterMaintenanceActivity +
+                ", EnableSeatbeltDisengagedActivity=" + EnableSeatbeltDisengagedActivity +
+                ", EnableSeatbeltEngagedActivity=" + EnableSeatbeltEngagedActivity +
+                ", EnableDriverSeatbeltDisengagedActivity=" + EnableDriverSeatbeltDisengagedActivity +
+                ", EnableDriverSeatbeltEngagedActivity=" + EnableDriverSeatbeltEngagedActivity +
+                ", EnablePassengerSeatbeltDisengagedActivity=" + EnablePassengerSeatbeltDisengagedActivity +
+                ", EnablePassengerSeatbeltEngagedActivity=" + EnablePassengerSeatbeltEngagedActivity +
+                ", EnableEngineOilLevelWarningActivity=" + EnableEngineOilLevelWarningActivity +
+                ", EnableEngineOilPressureLowWarningActivity=" + EnableEngineOilPressureLowWarningActivity +
+                ", EnableLowBrakeFluidWarningActivity=" + EnableLowBrakeFluidWarningActivity +
+                ", EnableMaintenanceReminderActivity=" + EnableMaintenanceReminderActivity +
                 '}';
     }
 
