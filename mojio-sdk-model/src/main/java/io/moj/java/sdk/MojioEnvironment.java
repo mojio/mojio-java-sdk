@@ -15,6 +15,7 @@ public enum MojioEnvironment implements Environment {
     PREPROD("preprod"),
     STAGING("staging"),
     DEVELOP("develop"),
+    BETA("beta"),
     CUSTOM("custom");
 
     private static final int DEFAULT_VERSION = 2;
