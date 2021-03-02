@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import com.google.gson.annotations.SerializedName;
 import io.moj.java.sdk.model.values.Location;
+import io.moj.java.sdk.model.values.MojioCapability;
 import io.moj.java.sdk.model.values.WifiRadio;
 import io.moj.java.sdk.utils.TimeUtils;
 
@@ -28,6 +29,7 @@ public class Mojio extends AbstractMojioObject {
     public static final String VENDOR = "Vendor";
     public static final String DELETED = "Deleted";
     public static final String MOJIO_TYPE = "MojioType";
+    public static final String MOJIO_CAPABILITY = "MojioCapability";
 
     @SerializedName(value = "Name", alternate = "name")
     private String Name;
@@ -59,6 +61,15 @@ public class Mojio extends AbstractMojioObject {
     private Boolean Deleted;
     @SerializedName(value = "MojioType", alternate = "mojioType")
     private String MojioType;
+    private MojioCapability mojioCapability;
+
+    public MojioCapability getMojioCapability() {
+        return mojioCapability;
+    }
+
+    public void setMojioCapability(MojioCapability mojioCapability) {
+        this.mojioCapability = mojioCapability;
+    }
 
     public Mojio() {}
 
