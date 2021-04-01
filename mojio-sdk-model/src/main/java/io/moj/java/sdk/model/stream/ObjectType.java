@@ -23,7 +23,10 @@ public enum ObjectType {
     SEATBELT("Seatbelt"),
     LOW_BRAKE_FLUID_WARNING("LowBrakeFluidWarning"),
     EMERGENCY_INCIDENT("EmergencyIncident"),
-    MAINTENANCE_REMINDER("MaintenanceReminder");
+    MAINTENANCE_REMINDER("MaintenanceReminder"),
+    INTELLIGENT_FUEL_SAVED_AND_RECOMMENDED_FILLUP("IntelligentFuelSavedAndRecommendedFillup"),
+    INTELLIGENT_FUEL_RECOMMENDED_FILLUP("IntelligentFuelRecommendedFillup"),
+    INTELLIGENT_FUEL_NOT_RECOMMENDED_FILLUP("IntelligentFuelNotRecommendedFillup");
 
     private String key;
 

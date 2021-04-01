@@ -34,6 +34,9 @@ public class ObjectTypeTest extends EnumTest<ObjectType> {
                 .put("LowBrakeFluidWarning", ObjectType.LOW_BRAKE_FLUID_WARNING)
                 .put("EmergencyIncident", ObjectType.EMERGENCY_INCIDENT)
                 .put("MaintenanceReminder", ObjectType.MAINTENANCE_REMINDER)
+                .put("IntelligentFuelSavedAndRecommendedFillup", ObjectType.INTELLIGENT_FUEL_SAVED_AND_RECOMMENDED_FILLUP)
+                .put("IntelligentFuelRecommendedFillup", ObjectType.INTELLIGENT_FUEL_RECOMMENDED_FILLUP)
+                .put("IntelligentFuelNotRecommendedFillup", ObjectType.INTELLIGENT_FUEL_NOT_RECOMMENDED_FILLUP)
                 .build();
     }
 
