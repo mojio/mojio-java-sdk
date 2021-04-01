@@ -281,6 +281,12 @@ public class ValueTests {
     }
 
     @Test
+    public void testFuelCapacity() throws IllegalAccessException {
+        assertToStringContainsAllFields(new FuelCapacity());
+        assertAccess(new FuelCapacity());
+    }
+
+    @Test
     public void testWarranty() throws IllegalAccessException {
         assertToStringContainsAllFields(new Warranty());
         assertAccess(new Warranty());
