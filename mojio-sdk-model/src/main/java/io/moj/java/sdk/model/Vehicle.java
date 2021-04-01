@@ -628,7 +628,7 @@ public class Vehicle extends AbstractMojioObject {
                 ", NextService='" + NextService + '\'' +
                 ", HybridBattery='" + HybridBattery + '\'' +
                 ", HybridEngine='" + HybridEngine + '\'' +
-                ", FuelCapacity='" + FuelCapacity +
+                ", FuelCapacity='" + FuelCapacity + '\'' +
                 "} " + super.toString();
     }
 }
