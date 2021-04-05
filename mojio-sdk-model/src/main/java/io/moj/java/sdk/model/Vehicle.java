@@ -65,6 +65,7 @@ public class Vehicle extends AbstractMojioObject {
     public static final String NEXT_SERVICE = "NextService";
     public static final String HYBRID_BATTERY = "HybridBattery";
     public static final String HYBRID_ENGINE = "HybridEngine";
+    public static final String FUEL_CAPACITY = "FuelCapacity";
 
     @SerializedName(value = "Name", alternate = "name")
     private String Name;
