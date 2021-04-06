@@ -65,8 +65,8 @@ public class Vehicle extends AbstractMojioObject {
     public static final String NEXT_SERVICE = "NextService";
     public static final String HYBRID_BATTERY = "HybridBattery";
     public static final String HYBRID_ENGINE = "HybridEngine";
+    public static final String FUEL_CAPACITY = "FuelCapacity";
     public static final String VEHICLE_STATUS= "VehicleStatus";
-
 
     @SerializedName(value = "Name", alternate = "name")
     private String Name;
@@ -168,6 +168,8 @@ public class Vehicle extends AbstractMojioObject {
     private HybridBattery HybridBattery;
     @SerializedName(value = "HybridEngine", alternate = "hybridEngine")
     private HybridEngine HybridEngine;
+    @SerializedName(value = "FuelCapacity", alternate = "fuelCapacity")
+    private FuelCapacity FuelCapacity;
     @SerializedName(value = "VehicleStatus", alternate = "vehicleStatus")
     private VehicleStatus VehicleStatus;
 
@@ -568,6 +570,14 @@ public class Vehicle extends AbstractMojioObject {
         HybridEngine = hybridEngine;
     }
 
+    public FuelCapacity getFuelCapacity() {
+        return FuelCapacity;
+    }
+
+    public void setFuelCapacity(FuelCapacity fuelCapacity) {
+        FuelCapacity = fuelCapacity;
+    }
+
     public VehicleStatus getVehicleStatus() { return VehicleStatus; }
 
     public void setVehicleStatus(VehicleStatus vehicleStatus) { VehicleStatus = vehicleStatus; }
@@ -625,6 +635,7 @@ public class Vehicle extends AbstractMojioObject {
                 ", NextService='" + NextService + '\'' +
                 ", HybridBattery='" + HybridBattery + '\'' +
                 ", HybridEngine='" + HybridEngine + '\'' +
+                ", FuelCapacity='" + FuelCapacity + '\'' +
                 ", VehicleStatus='" + VehicleStatus + '\'' +
                 "} " + super.toString();
     }
