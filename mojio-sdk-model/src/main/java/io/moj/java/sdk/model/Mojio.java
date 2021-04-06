@@ -1,11 +1,11 @@
 package io.moj.java.sdk.model;
 
-import java.util.Arrays;
-
 import com.google.gson.annotations.SerializedName;
-import io.moj.java.sdk.model.values.Location;
-import io.moj.java.sdk.model.values.WifiRadio;
+import io.moj.java.sdk.model.values.*;
+import io.moj.java.sdk.model.values.CellularRadio;
 import io.moj.java.sdk.utils.TimeUtils;
+
+import java.util.Arrays;
 
 /**
  * Model object for an Mojio.
@@ -28,6 +28,8 @@ public class Mojio extends AbstractMojioObject {
     public static final String VENDOR = "Vendor";
     public static final String DELETED = "Deleted";
     public static final String MOJIO_TYPE = "MojioType";
+    public static final String CELLULAR_RADIO = "CellularRadio";
+    public static final String GPS_RADIO = "GpsRadio";
 
     @SerializedName(value = "Name", alternate = "name")
     private String Name;
@@ -59,6 +61,10 @@ public class Mojio extends AbstractMojioObject {
     private Boolean Deleted;
     @SerializedName(value = "MojioType", alternate = "mojioType")
     private String MojioType;
+    @SerializedName(value = "CellularRadio", alternate = "cellularRadio")
+    private CellularRadio CellularRadio;
+    @SerializedName(value = "GpsRadio", alternate = "gpsRadio")
+    private GpsRadio GpsRadio;
 
     public Mojio() {}
 
@@ -189,6 +195,14 @@ public class Mojio extends AbstractMojioObject {
         MojioType = mojioType;
     }
 
+    public CellularRadio getCellularRadio() { return CellularRadio; }
+
+    public void setCellularRadio(CellularRadio cellularRadio) { CellularRadio = cellularRadio; }
+
+    public GpsRadio getGpsRadio() { return GpsRadio; }
+
+    public void setGpsRadio(GpsRadio gpsRadio) { GpsRadio = gpsRadio; }
+
     @Override
     public String toString() {
         return "Mojio{" +
@@ -207,6 +221,8 @@ public class Mojio extends AbstractMojioObject {
                 ", MainFirmwareVersion='" + MainFirmwareVersion + '\'' +
                 ", Deleted=" + Deleted +
                 ", MojioType='" + MojioType + '\'' +
+                ", CellularRadio='" + CellularRadio + '\'' +
+                ", GpsRadio='" + GpsRadio + '\'' +
                 "} " + super.toString();
     }
 }
