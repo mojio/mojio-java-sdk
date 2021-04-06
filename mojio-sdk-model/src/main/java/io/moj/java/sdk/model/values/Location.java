@@ -23,6 +23,7 @@ public class Location implements Serializable {
     public static final String DILUTION = "Dilution";
     public static final String ALTITUDE = "Altitude";
     public static final String GEOHASH = "GeoHash";
+    public static final String ACCURACY= "Accuracy";
 
     @SerializedName(value = "Address", alternate = "address")
     private Address Address;
@@ -40,6 +41,8 @@ public class Location implements Serializable {
     private Float Altitude;
     @SerializedName(value = "GeoHash", alternate = "geoHash")
     private String GeoHash;
+    @SerializedName(value = "Accuracy", alternate = "accuracy")
+    private Distance Accuracy;
 
     public Address getAddress() {
         return Address;
@@ -97,6 +100,10 @@ public class Location implements Serializable {
         Timestamp = TimeUtils.convertMillisToTimestamp(timestamp);
     }
 
+    public Distance getAccuracy() { return Accuracy; }
+
+    public void setAccuracy(Distance accuracy) { Accuracy = accuracy; }
+
     public List<GPSStatus> getStatus() {
         if (Status == null || Status.isEmpty()) {
             return null;
@@ -143,6 +150,7 @@ public class Location implements Serializable {
                 ", Dilution=" + Dilution +
                 ", Altitude=" + Altitude +
                 ", GeoHash='" + GeoHash + '\'' +
+                ", Accuracy='" + Accuracy + '\'' +
                 '}';
     }
 }
