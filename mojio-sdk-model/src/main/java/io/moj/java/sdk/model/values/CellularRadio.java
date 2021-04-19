@@ -2,7 +2,7 @@ package io.moj.java.sdk.model.values;
 
 public class CellularRadio {
     private String Timestamp;
-    private double ReceiveSignalBars;
+    private Double ReceiveSignalBars;
 
     public String getTimestamp() {
         return Timestamp;
@@ -12,9 +12,9 @@ public class CellularRadio {
         Timestamp = timestamp;
     }
 
-    public double getReceiveSignalBars() { return ReceiveSignalBars; }
+    public Double getReceiveSignalBars() { return ReceiveSignalBars; }
 
-    public void setReceiveSignalBars(double receiveSignalBars) { ReceiveSignalBars = receiveSignalBars; }
+    public void setReceiveSignalBars(Double receiveSignalBars) { ReceiveSignalBars = receiveSignalBars; }
 
     @Override
     public String toString() {
