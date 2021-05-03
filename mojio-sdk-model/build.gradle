@@ -4,7 +4,6 @@ ext {
 
 apply plugin: 'java'
 apply plugin: 'jacoco'
-apply from: '../maven.gradle'
 
 sourceCompatibility = SOURCE_COMPATIBILITY
 targetCompatibility = SOURCE_COMPATIBILITY
