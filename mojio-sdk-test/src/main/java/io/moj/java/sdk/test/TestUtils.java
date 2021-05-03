@@ -5,19 +5,9 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-
 import javax.annotation.Nullable;
-
+import java.lang.reflect.*;
+import java.util.*;
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 import static org.powermock.api.mockito.PowerMockito.mock;
@@ -28,7 +18,8 @@ import static org.powermock.api.mockito.PowerMockito.mock;
  */
 public final class TestUtils {
 
-    private TestUtils() {}
+    private TestUtils() {
+    }
 
     private static final Function<Method, String> FUNCTION_EXTRACT_METHOD_NAMES =
             new Function<Method, String>() {
@@ -156,6 +147,7 @@ public final class TestUtils {
 
     /**
      * Returns all fields of an object and all it's superclasses.
+     *
      * @param pojo
      * @return
      */
@@ -173,6 +165,7 @@ public final class TestUtils {
 
     /**
      * Returns fields on the object that match the given class.
+     *
      * @param object
      * @param type
      * @return
@@ -188,6 +181,7 @@ public final class TestUtils {
 
     /**
      * Returns all methods of an object and all it's superclasses.
+     *
      * @param pojo
      * @return
      */
@@ -224,7 +218,8 @@ public final class TestUtils {
             try {
                 Method valuesMethod = clazz.getMethod("values");
                 arg = ((Object[]) valuesMethod.invoke(null))[0];
-            } catch (Exception e) { }
+            } catch (Exception e) {
+            }
         } else {
             arg = mock(clazz);
         }
