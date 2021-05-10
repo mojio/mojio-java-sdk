@@ -2,7 +2,9 @@ package io.moj.java.sdk.model.values;
 
 import com.google.gson.annotations.SerializedName;
 
-public class VehicleProperties {
+import java.io.Serializable;
+
+public class VehicleProperties implements Serializable {
 
     public static final String DISPLAY_DETAILS = "DisplayDetails";
 
