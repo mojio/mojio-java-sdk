@@ -2,6 +2,7 @@ apply plugin: 'java'
 
 ext {
     PUBLISH_GROUP_ID = 'io.moj.java'
+    PUBLISH_VERSION = '1.0.1'
     SOURCE_COMPATIBILITY = 1.7
 
     if (project.hasProperty('publishVersion')) {
