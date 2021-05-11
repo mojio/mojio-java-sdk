@@ -1,5 +1,6 @@
 ext {
     PUBLISH_ARTIFACT_ID = 'mojio-sdk-model'
+    version PUBLISH_VERSION
 }
 
 apply plugin: 'java'
