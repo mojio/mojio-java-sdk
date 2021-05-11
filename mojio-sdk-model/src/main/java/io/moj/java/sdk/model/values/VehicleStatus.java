@@ -2,7 +2,9 @@ package io.moj.java.sdk.model.values;
 
 import com.google.gson.annotations.SerializedName;
 
-public class VehicleStatus {
+import java.io.Serializable;
+
+public class VehicleStatus implements Serializable {
     private String Timestamp;
     @SerializedName(value = "Value", alternate = "value")
     private Status Status;
