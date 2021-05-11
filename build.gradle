@@ -1,14 +1,26 @@
 apply plugin: 'java'
 
 ext {
+    PUBLISH_GROUP_ID = 'io.moj.java'
     SOURCE_COMPATIBILITY = 1.7
+
+    if (project.hasProperty('publishVersion')) {
+        println "Version ${publishVersion}"
+        PUBLISH_VERSION = publishVersion
+    } else {
+        PUBLISH_VERSION = 'SNAPSHOT'
+    }
 }
 
 allprojects {
+    group PUBLISH_GROUP_ID
+    version PUBLISH_VERSION
 
     repositories {
         jcenter()
         maven { url 'https://jitpack.io' }
+        mavenCentral()
+        mavenLocal()
     }
 }
 
