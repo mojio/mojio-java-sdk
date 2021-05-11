@@ -1,12 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 
-def BINTRAY_SUBJECT = "mojio"
-def BINTRAY_REPO = "maven"
-
-def bintrayUsername = System.env["BINTRAY_USERNAME"] ?: "DEVELOPMENT"
-def bintrayApiKey = System.env["BINTRAY_APIKEY"] ?: "DEVELOPMENT"
-
 def groupId = project.PUBLISH_GROUP_ID
 def artifactId = project.PUBLISH_ARTIFACT_ID
 def version = project.PUBLISH_VERSION
@@ -39,23 +33,6 @@ install {
         pom.version = version
     }
 }
-
-/*uploadArchives() {
-    description = "Uploads all Maven artifacts to BinTray"
-    group = "Maven"
-
-    repositories {
-        mavenDeployer {
-            repository(url: "https://api.bintray.com/maven/${BINTRAY_SUBJECT}/${BINTRAY_REPO}/${groupId}:${artifactId}/;publish=1") {
-                authentication(userName: bintrayUsername, password: bintrayApiKey)
-            }
-
-            pom.groupId = groupId
-            pom.artifactId = artifactId
-            pom.version = version
-        }
-    }
-}*/
 
 task generateRelease(type: Zip, group: 'Maven') {
     description = "Generates a .zip file containing jars and poms for hosting on a Maven repo"
